@@ -99,11 +99,13 @@ ymaps.ready(init);
 
 
 
-        const createHomeDot = ({coords, kostTitle, discription, zoom}) => new ymaps.Circle([
+        const createHomeDot = ({coords, kostTitle, archives, discription, fsLinks}) => new ymaps.Circle([
             [+coords[1], +coords[0]],
             200
         ], {
-            balloonContent: discription || kostTitle,
+            balloonContentHeader: kostTitle,
+            balloonContentBody: archives ? `${archives.map((a = '') => a.replace ? a.replace('Национальный исторический архив Беларуси', 'НИАБ') : a).join('<br>')}${fsLinks ? '<br><br>' + fsLinks.map(({href}) => `<a href="${href}">familysearch.org</a>`).join('<br>') : ''}` : '',
+            balloonContentFooter: `<a href="https://t.me/uezdy">Уезды Беларуси<a>`,
             open: true,
             hintContent: kostTitle
         }, optionsHata);
