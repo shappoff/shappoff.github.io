@@ -16,4 +16,12 @@
             text-align: center;
             border-top: 1px solid;
             border-right: 1px solid;
-        }</style></head><body><div><input id="input"/></div><div>О рождении</div><table><thead><tr><td>год</td><td>месяц</td><td>день</td><td>Имя</td><td>Родители</td><td>Попечители</td></tr></thead><tbody id="list-of-res"></tbody></table><div id="root"></div><script src="appce83a91bf871c5b7e801.js"></script></body></html>
+        }</style></head><body><div id="root"></div><script>function copyContent($this) {
+        try {
+            $this.parentElement.parentElement.focus();
+            navigator.clipboard.writeText($this.parentElement.parentElement.innerText.replace($this.innerText, '').trim());
+            console.log('Content copied to clipboard');
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }</script><script src="appa8020229c4af31f6928b.js"></script></body></html>
