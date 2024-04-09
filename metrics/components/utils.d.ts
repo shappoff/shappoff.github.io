@@ -1,1 +1,1 @@
-export declare const getNickName: () => string;
+export declare const getNickName: (email?: string) => string;

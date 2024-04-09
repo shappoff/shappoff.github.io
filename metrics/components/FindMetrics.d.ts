@@ -9,5 +9,5 @@ export interface GroupedOption {
     readonly label: string;
     readonly options: readonly ItemOption[];
 }
-declare const FindMetrics: ({ analytics }: any) => React.JSX.Element;
+declare const FindMetrics: ({ analytics, userNickName }: any) => React.JSX.Element;
 export default FindMetrics;
