@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        summary, .page-nmb {
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+    const root = document.getElementById('root');
+    fetch('./fodPages.json')
+    .then((r) => r.json())
+    .then((res) => {
+
+        for (const fod in res) {
+            const details = document.createElement('details');
+            details.innerHTML =
+`
+<summary>${fod}</summary>
+<div>${Object.keys(res[fod]).map((ll) => {
+    let title = '';
+    for (const pageStats in res[fod][ll]) {
+        title += `${pageStats}: ${res[fod][ll][pageStats]}\n`;
+    }
+    return `<span class="page-nmb" title="${title}">${ll}</span>`
+}).join(', ')}</div>
+`;
+            root.appendChild(details);
+        }
+    })
+</script>
+</body>
+</html>
