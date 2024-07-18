@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><title>им. Глинники</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>#root {
+            position: relative;
+            height: 98vh;
+        }
+        #filter-bar {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            z-index: 999;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+        .typo-tolerance {
+            margin: 7px;
+        }
+        #input-id {
+            padding: 7px;
+            border-radius: 4px;
+        }
+        .result-list {
+            position: absolute;
+            bottom: 0;
+            z-index: 999;
+            background-color: white;
+            max-height: 94%;
+            overflow: auto;
+            width: 100vw;
+        }
+        .marker-div-icon b {
+            background-color: aliceblue;
+            width: max-content;
+            position: absolute;
+            border-radius: 0 5px 5px 5px;
+            padding: 0 2px;
+            border: 1px solid green;
+        }
+        .uezd-owner, .church-type {
+            display: flex;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+        .select-filter {
+            flex-grow: 1;
+        }
+        .panel-arrow-button {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        .tab-list-of-types {
+            flex-wrap: nowrap !important;
+        }
+        
+        #info-panel {
+            position: relative;
+        }
+
+        #info-panel > .info-panel {
+            position: absolute;
+            bottom: 0;
+            z-index: 1000;
+            background-color: white;
+            border: 3px solid;
+        }
+        .head-family {
+            cursor: pointer;
+        }
+        .laoding-box {
+            padding: 10px;
+        }
+        /* расширить Popup маркера */
+        .leaflet-popup-content {
+            width: auto !important;
+        }
+        @media (min-width: 767px) {
+            .white-space-nowrap {
+                white-space: nowrap;
+            }
+        }
+        .leaflet-retina .leaflet-draw-toolbar a {
+            background-image: linear-gradient(transparent, transparent), url(https://react-component-depot.netlify.app/static/media/spritesheet.fd5728f2.svg) !important;
+        }</style><script defer="defer" src="48674894b62ba6fdd1c9724.js"></script><script defer="defer" src="map59543f2df078c04db728.js"></script></head><body><div id="filter-bar-anchor"></div><div id="root"></div><div id="result-list"></div><div id="info-panel"></div></body></html>
