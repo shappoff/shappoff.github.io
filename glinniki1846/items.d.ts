@@ -1,6 +1,12 @@
 export declare const items: ({
     title: string;
     _geoloc: number[];
+    info: string;
+    place: string;
+    value: string;
+} | {
+    title: string;
+    _geoloc: number[];
     info?: undefined;
     place?: undefined;
     value?: undefined;
@@ -10,10 +16,4 @@ export declare const items: ({
     info: string;
     place?: undefined;
     value?: undefined;
-} | {
-    title: string;
-    _geoloc: number[];
-    info: string;
-    place: string;
-    value: string;
 })[];
