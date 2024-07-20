@@ -16,10 +16,4 @@ export declare const items: ({
     info: string;
     place: string;
     value: string;
-} | {
-    title: string;
-    _geoloc: number[];
-    info: string;
-    place: string;
-    value?: undefined;
 })[];
