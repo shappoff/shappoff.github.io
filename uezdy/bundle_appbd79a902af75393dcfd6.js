@@ -71,8 +71,7 @@ var PlaceMarker_1 = __importDefault(__webpack_require__(7500));
 var useMarkersBounds_1 = __importDefault(__webpack_require__(9174));
 var BoundsToMapItems_1 = __importDefault(__webpack_require__(7757));
 var react_bootstrap_1 = __webpack_require__(5583);
-var apiKey = (/* unused pure expression or super */ null && ('AIzaSyBQ4FbsvdwBZtZz93bTpB6Rpd7GSlAyjmk')), authDomain = (/* unused pure expression or super */ null && ('uezdy-bdda8.firebaseapp.com')), databaseURL = (/* unused pure expression or super */ null && ('https://uezdy-bdda8-default-rtdb.europe-west1.firebasedatabase.app')), projectId = (/* unused pure expression or super */ null && ('uezdy-bdda8')), storageBucket = (/* unused pure expression or super */ null && ('uezdy-bdda8.appspot.com')), messagingSenderId = (/* unused pure expression or super */ null && ('519559632296')), appId = (/* unused pure expression or super */ null && ('1:519559632296:web:7a0e0f9f16af518ce8799d')), measurementId = (/* unused pure expression or super */ null && ('G-Z26KVJ6M88'));
-var applicationID = (/* unused pure expression or super */ null && ('0Z0CX04G3B')), searchOnlyAPIKey = (/* unused pure expression or super */ null && ('fa5e1533db6da6814c493bdcf83cb97c')), applicationID1 = '0Z0CX04G3B', searchOnlyAPIKey1 = 'fa5e1533db6da6814c493bdcf83cb97c', applicationID2 = 'JG19C3YKDI', searchOnlyAPIKey2 = env.searchOnlyAPIKey2, index_name = 'uezdy';
+var applicationID1 = '0Z0CX04G3B', searchOnlyAPIKey1 = 'fa5e1533db6da6814c493bdcf83cb97c', applicationID2 = 'JG19C3YKDI', searchOnlyAPIKey2 = '6fd8d3369279ccd237ecfddc10d5fe2e', index_name = 'uezdy';
 var HASH_MAP = {
     uezd: 'u',
     volost: 'v',
@@ -83,7 +82,7 @@ var HASH_MAP = {
 };
 var algoliasearch = __webpack_require__(4938);
 var client = algoliasearch(applicationID1, searchOnlyAPIKey1);
-var client2 = algoliasearch(applicationID2, 6fd8d3369279ccd237ecfddc10d5fe2e');
+var client2 = algoliasearch(applicationID2, searchOnlyAPIKey2);
 var currentAlgoliaIndex = client.initIndex(index_name);
 var currentAlgoliaIndex2 = client2.initIndex(index_name);
 var App = function () {
