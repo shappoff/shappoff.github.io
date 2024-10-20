@@ -1,0 +1,11 @@
+import React from "react";
+export declare const pinIcon: () => string;
+export declare const circleIcon: ({ iconColor }: any) => string;
+export declare const pilIcon: ({ iconColor }: any) => string;
+export declare const houseIcon: ({ iconColor }: any) => string;
+export declare const schoolIcon: ({ iconColor }: any) => string;
+export declare const arrowUpIcon: () => string;
+export declare const InfoIcon: () => React.JSX.Element;
+export declare const PersonInfo: () => React.JSX.Element;
+export declare const EditIcon: () => React.JSX.Element;
+export declare const getIcon: (type: string) => string | React.JSX.Element | (({ iconColor }: any) => string);
