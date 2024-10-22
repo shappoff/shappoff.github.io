@@ -5,15 +5,16 @@
         }
         .filter-bar {
             position: fixed;
-            z-index: 1;
+            z-index: 4;
             margin: 0 2vw;
             width: 94vw;
             display: flex;
             background-color: #fff;
-            align-items: center;
-            flex-direction: column;
+            flex-direction: row;
             border: 1px solid;
             border-radius: 4px;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
         .form-check-label {
             white-space: nowrap;
@@ -59,7 +60,7 @@
             }
 
         }
-        @media (max-width: 768px) {
+        @media (min-width: 621px) and (max-width: 768px) {
             .form-check-label {
                 display: none;
             }
@@ -77,14 +78,14 @@
         .filter-bar .first-raw {
             display: flex;
             justify-content: space-between;
-            width: 100%;
+            flex-grow: 10;
+            min-width: 270px;
         }
         .filter-bar .second-raw {
             display: flex;
             justify-content: flex-start;
-            width: 100%;
             flex-wrap: wrap;
-            align-items: baseline;
+            align-items: center;
         }
         .select-filter {
             min-width: 15rem;
@@ -113,4 +114,4 @@
         .copy-fond-icon {
             cursor: pointer;
             padding: 0 5px;
-        }</style><script defer="defer" src="959cf11f177e0f4a19fec51.js"></script><script defer="defer" src="mapd4e14f36cf29a8a23b8d.js"></script></head><body><div id="root"></div></body></html>
+        }</style><script defer="defer" src="959cf11f177e0f4a19fec51.js"></script><script defer="defer" src="map40f52a2d212f28ac18e4.js"></script></head><body><div id="root"></div></body></html>
