@@ -6,6 +6,7 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         <Link href="/zhigalo">Семен Жигало. Дневник.</Link>
+        <Link href="/copy">Копии документов.</Link>
       </main>
       <footer className={styles.footer}>
 
