@@ -9,6 +9,6 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-      <iframe id="iframe" src="https://docs.google.com/spreadsheets/d/1kME-rXLIM9DmOb_e0Z5wJiPKAH5u-5FIfKfgxTYzfjU/edit?rm=minimal"></iframe>
+      <iframe id="iframe" src="https://docs.google.com/spreadsheets/d/1kME-rXLIM9DmOb_e0Z5wJiPKAH5u-5FIfKfgxTYzfjU"></iframe>
   );
 }
