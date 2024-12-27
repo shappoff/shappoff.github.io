@@ -14,7 +14,7 @@ import {
 
 import {items} from "./items";
 
-export const MapApp = () => {
+const MapApp = () => {
 
     return <MapContainer
         attributionControl={false}
@@ -82,3 +82,5 @@ export const MapApp = () => {
         }
     </MapContainer>;
 };
+
+ export default MapApp;
