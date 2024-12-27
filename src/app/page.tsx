@@ -8,6 +8,7 @@ export default function Home() {
         <Link href="/zhigalo">Семен Жигало. Дневник.</Link>
         <Link href="/copy">Копии документов.</Link>
         <Link href="/fond">Документы для просмотра.</Link>
+        <Link href="/glinniki1846">План имения Глинники.</Link>
       </main>
       <footer className={styles.footer}>
 
