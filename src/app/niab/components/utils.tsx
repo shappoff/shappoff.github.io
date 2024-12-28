@@ -3,7 +3,7 @@ export const getNickName = (email?: string) => {
     if (email) {
         emailToParse = email;
     } else {
-        emailToParse = localStorage.getItem('user');
+        emailToParse = localStorage.getItem('user') || '';
     }
 
     const [nickname] = emailToParse ? emailToParse.split('@') : [];

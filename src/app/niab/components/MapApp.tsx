@@ -22,7 +22,7 @@ const plural = (number: number, titles: Array<string> = ['фонд', 'фонда
     const cases = [2, 0, 1, 1, 1, 2];
     return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
 }
-declare const process;
+declare const process: any;
 // grigorysh58@gmail.com
 const client = algoliasearch(
     process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID,
@@ -67,10 +67,10 @@ const MapApp = () => {
         setRoute(effRouter);
 
         var prevScrollpos = window.pageYOffset;
-        const navbar = document.getElementById("navbar");
+        const navbar: HTMLElement | null = document.getElementById("navbar");
         const controlNavbar = () => {
             var currentScrollPos = window.pageYOffset;
-            if (currentScrollPos > 100) {
+            if (currentScrollPos > 100 && navbar) {
                 if (prevScrollpos > currentScrollPos) {
                     navbar.classList.remove('down');
                     navbar.classList.add('up');
@@ -105,7 +105,7 @@ const MapApp = () => {
 
         setIsLoading(true);
 
-        let filters: string;
+        let filters: string = '';
 
         const dRange = facetsStats?.dRange;
         if (dRange && (yearsRangeFilter[0] === dRange.min && yearsRangeFilter[1] === dRange.max)) {
@@ -195,7 +195,7 @@ const MapApp = () => {
                                               searchHandler({target: {value: ''}});
                                           }
 
-                                          document.getElementById('input-id').focus({preventScroll: true});
+                                          document.getElementById('input-id')?.focus({preventScroll: true});
                                       }}
                                       aria-hidden="true">
                         <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" className="css-tj5bde-Svg">

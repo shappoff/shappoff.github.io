@@ -24,6 +24,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/gtag.js": "^0.0.20",
     "typescript": "^5"
   }
 }
