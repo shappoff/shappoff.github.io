@@ -9,6 +9,7 @@ export default function Home() {
         <Link href="/copy">Копии документов.</Link>
         <Link href="/fond">Документы для просмотра.</Link>
         <Link href="/glinniki1846">План имения Глинники.</Link>
+        <Link href="/niab">Фонды и описи НИАБ.</Link>
       </main>
       <footer className={styles.footer}>
 

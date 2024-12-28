@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "algoliasearch": "^4.24.0",
     "leaflet": "^1.9.4",
     "next": "15.1.2",
+    "rc-slider": "^11.1.7",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.7",
     "react-dom": "^19.0.0",
