@@ -83,7 +83,7 @@
         display: none;
     }
 }
-a, a.fond-link-src {
+a, a.fond-link-src, a.opis-link-src {
     color: #000000;
     font-weight: 400;
     text-decoration: none;

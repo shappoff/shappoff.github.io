@@ -4,6 +4,15 @@ import React from "react";
 import {Accordion, Badge, OverlayTrigger, Tooltip} from "react-bootstrap";
 import Link from "next/link";
 
+const openInNewTab = (url: string) => {
+    const newWindow: Window | null = window.open(url, '_blank', 'noopener,noreferrer,width=400,height=400');
+    if (newWindow) {
+        newWindow.opener = null;
+    }
+
+    return newWindow;
+}
+
 const FondCard = ({item, index, analytics}: any) => {
     const [currentAccordion, setCurrentAccordion] = React.useState<string>();
     const [isOpendSrcFond, setIsOpendSrcFond] = React.useState<boolean>(false);
@@ -46,13 +55,13 @@ const FondCard = ({item, index, analytics}: any) => {
                     href="#"
                     className="fond-link-src"
                     onClick={() => {
-                        const winPopup = window.open(item.fodlink, '', 'width=400, height=400');
-                        winPopup.focus();
+                        const winPopup: Window | null = openInNewTab(item.fodlink);
+                        if (winPopup) {
+                            winPopup.focus();
+                        }
                         setIsOpendSrcFond(true);
-                        winPopup.addEventListener('', () => {
-                        });
-                        var timer = setInterval(function () {
-                            if (winPopup.closed) {
+                        var timer: ReturnType<typeof setInterval> = setInterval(function () {
+                            if (winPopup && winPopup.closed) {
                                 clearInterval(timer);
                                 setIsOpendSrcFond(false);
                             }
@@ -91,13 +100,13 @@ const FondCard = ({item, index, analytics}: any) => {
         <Card.Body>
             <Accordion activeKey={currentAccordion} flush>
                 <Accordion.Item eventKey="0">
-                    <Accordion.Header onClick={() => setCurrentAccordion((v: string) => v === '0' ? void(0) : '0')}><i>Название фонда</i></Accordion.Header>
+                    <Accordion.Header onClick={() => setCurrentAccordion('0')}><i>Название фонда</i></Accordion.Header>
                     <Accordion.Body>
                         <div dangerouslySetInnerHTML={{__html: state.title}}/>
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
-                    <Accordion.Header onClick={() => setCurrentAccordion((v: string) => v === '1' ? void(0) : '1')}><i>Аннотация
+                    <Accordion.Header onClick={() => setCurrentAccordion('1')}><i>Аннотация
                         документов</i></Accordion.Header>
                     <Accordion.Body>
                         <div dangerouslySetInnerHTML={{__html: state.anotation}}/>
@@ -105,7 +114,7 @@ const FondCard = ({item, index, analytics}: any) => {
                 </Accordion.Item>
                 <Accordion.Item eventKey="2">
                     <Accordion.Header onClick={() => {
-                        setCurrentAccordion((v: string) => v === '2' ? void(0) : '2');
+                        setCurrentAccordion('2');
                         if (analytics && !analyticsSent) {
                             analytics(item.fod);
                             setAnalyticsSent(true);
@@ -126,8 +135,9 @@ const FondCard = ({item, index, analytics}: any) => {
                                         </td>
                                         <td>
                                             {
-                                                opis.docId ? <Link href="#" onClick={() => {
-                                                    window.open(`https://drive.google.com/file/d/${opis.docId}`, '', 'width=400, height=400').focus();
+                                                opis.docId ? <Link className="opis-link-src" href="#" onClick={() => {
+                                                    openInNewTab(`https://drive.google.com/file/d/${opis.docId}`);
+                                                    // window.open(, '', 'width=400, height=400').focus();
                                                 }}>{opis.op}</Link> : opis.op
 
                                             }
@@ -135,7 +145,8 @@ const FondCard = ({item, index, analytics}: any) => {
                                         <td>{opis.i?.split('|').map((int: string, index: number) => {
                                             const [title, src] = int.split('](');
                                             return <Link href="#" onClick={() => {
-                                                window.open(src.replace(')', ''), '', 'width=400, height=400').focus();
+                                                openInNewTab(src.replace(')', ''));
+                                                // window.open(src.replace(')', ''), '', 'width=400, height=400').focus();
                                             }}>{index ? ', ' : ''}{title.replace('[', '')}</Link>
                                         })}</td>
                                         <td>{opis.n}</td>

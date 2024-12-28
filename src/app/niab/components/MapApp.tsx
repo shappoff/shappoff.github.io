@@ -22,6 +22,7 @@ const plural = (number: number, titles: Array<string> = ['фонд', 'фонда
     const cases = [2, 0, 1, 1, 1, 2];
     return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
 }
+declare const process;
 // grigorysh58@gmail.com
 const client = algoliasearch(
     process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID,
