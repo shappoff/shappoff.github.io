@@ -25,8 +25,8 @@ const plural = (number: number, titles: Array<string> = ['фонд', 'фонда
 declare const process: any;
 // grigorysh58@gmail.com
 const client = algoliasearch(
-    process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID,
-    process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_ONLY_API_KEY);
+    process.env.NIAB_ALGOLIA_APPLICATION_ID,
+    process.env.NIAB_ALGOLIA_SEARCH_ONLY_API_KEY);
 
 const algoliaIndex = client.initIndex('foandyniab');
 
