@@ -78,7 +78,7 @@ jobs:
          touch .env.production
          echo NIAB_ALGOLIA_APPLICATION_ID=${{secrets.NIAB_ALGOLIA_APPLICATION_ID}} >> .env.production
          echo NIAB_ALGOLIA_SEARCH_ONLY_API_KEY=${{secrets.NIAB_ALGOLIA_SEARCH_ONLY_API_KEY}} >> .env.production
-         cmd
+         pwd
 
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
