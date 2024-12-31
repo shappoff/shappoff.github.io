@@ -80,6 +80,7 @@ jobs:
          echo "NIAB_ALGOLIA_SEARCH_ONLY_API_KEY=${{secrets.NIAB_ALGOLIA_SEARCH_ONLY_API_KEY}}" >> ./.env.production
          pwd
          ls
+         cat ./.env.production
 
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
