@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import React from "react";
-import {Accordion, Badge, OverlayTrigger, Tooltip} from "react-bootstrap";
+import {Accordion, Badge} from "react-bootstrap";
 import Link from "next/link";
 
 const openInNewTab = (url: string) => {
@@ -90,7 +90,7 @@ const FondCard = ({item, index, analytics}: any) => {
                 {item.storage ? <Badge bg="light" pill text="dark">Хранилище №{item.storage}</Badge> : <></>}
                 {item.count ? <Badge bg="light" pill text="dark">{item.count} ед. хр.</Badge> : <></>}
                 {
-                    item.lang?.map((ln: string) => <Badge bg="light" pill text="dark">
+                    item.lang?.map((ln: string) => <Badge key={ln} bg="light" pill text="dark">
                         {ln}
                     </Badge>)
                 }
@@ -144,7 +144,7 @@ const FondCard = ({item, index, analytics}: any) => {
                                         </td>
                                         <td>{opis.i?.split('|').map((int: string, index: number) => {
                                             const [title, src] = int.split('](');
-                                            return <Link href="#" onClick={() => {
+                                            return <Link key={index} href="#" onClick={() => {
                                                 openInNewTab(src.replace(')', ''));
                                                 // window.open(src.replace(')', ''), '', 'width=400, height=400').focus();
                                             }}>{index ? ', ' : ''}{title.replace('[', '')}</Link>
