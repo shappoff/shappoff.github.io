@@ -76,8 +76,8 @@ jobs:
       - name: Set Secrets and Change Dir
         run: | # Secrets needed on the server
          touch ./.env.production
-         echo "NIAB_ALGOLIA_APPLICATION_ID=${{secrets.NIAB_ALGOLIA_APPLICATION_ID}}" >> ./.env.production
-         echo "NIAB_ALGOLIA_SEARCH_ONLY_API_KEY=${{secrets.NIAB_ALGOLIA_SEARCH_ONLY_API_KEY}}" >> ./.env.production
+         echo "NEXT_PUBLIC_NIAB_ALGOLIA_APPLICATION_ID=${{secrets.NEXT_PUBLIC_NIAB_ALGOLIA_APPLICATION_ID}}" >> ./.env.production
+         echo "NEXT_PUBLIC_NIAB_ALGOLIA_SEARCH_ONLY_API_KEY=${{secrets.NEXT_PUBLIC_NIAB_ALGOLIA_SEARCH_ONLY_API_KEY}}" >> ./.env.production
          pwd
          ls
          cat ./.env.production

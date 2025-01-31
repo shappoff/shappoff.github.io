@@ -11,7 +11,7 @@ import {HashRoute} from "./HashRoute";
 
 import Slider from 'rc-slider';
 import SliderTooltip from "./SliderTooltip";
-import {useGAnalytics} from "./useGAnalytics";
+// import {useGAnalytics} from "./useGAnalytics";
 // import {algoliasearch} from "algoliasearch";
 import algoliasearch from 'algoliasearch/lite';
 
@@ -25,8 +25,9 @@ const plural = (number: number, titles: Array<string> = ['фонд', 'фонда
 declare const process: any;
 // grigorysh58@gmail.com
 const client = algoliasearch(
-    process.env.NIAB_ALGOLIA_APPLICATION_ID,
-    process.env.NIAB_ALGOLIA_SEARCH_ONLY_API_KEY);
+    process.env.NEXT_PUBLIC_NIAB_ALGOLIA_APPLICATION_ID,
+    process.env.NEXT_PUBLIC_NIAB_ALGOLIA_SEARCH_ONLY_API_KEY
+);
 
 const algoliaIndex = client.initIndex('foandyniab');
 
@@ -47,7 +48,7 @@ const MapApp = () => {
 
     const debouncedSearchTerm = useDebounce(searchTerm, 1500);
 
-    useGAnalytics('G-BS71TCVL7J');
+    // useGAnalytics('G-BS71TCVL7J');
 
     const selectedFONDHandler = React.useCallback((fod: number) => {
         gtag('event', 'search', {
