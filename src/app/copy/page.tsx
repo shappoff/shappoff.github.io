@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-    const data = await getGoogleSheetsData('НИАБ!A1:E69', '1kME-rXLIM9DmOb_e0Z5wJiPKAH5u-5FIfKfgxTYzfjU');
-    const [header] = data;
+    const data = await getGoogleSheetsData('НИАБ!A1:E69', '1kME-rXLIM9DmOb_e0Z5wJiPKAH5u-5FIfKfgxTYzfjU') || [];
+    const [header]: any = data;
     return <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: '96vh' }}>
             <Table sx={{ minWidth: 650 }} size="small" stickyHeader aria-label="sticky table">
