@@ -24,7 +24,7 @@ const Glinniki1870 = () => {
         }}
     >
         <TileLayer
-            attribution="Деревня Глинники. Генеральное межевание, НИАБ-2192-1-55"
+            attribution="Деревня Глинники 1870 г., Генеральное межевание, НИАБ-2192-1-55"
             url={`https://raw.githubusercontent.com/shappoff/storage/glinniki1870/tiles/{z}/{y}/{x}.jpg`}
             maxZoom={6}
             minZoom={2}
