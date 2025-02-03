@@ -78,9 +78,12 @@ jobs:
          touch ./.env.production
          echo "NEXT_PUBLIC_NIAB_ALGOLIA_APPLICATION_ID=${{secrets.NEXT_PUBLIC_NIAB_ALGOLIA_APPLICATION_ID}}" >> ./.env.production
          echo "NEXT_PUBLIC_NIAB_ALGOLIA_SEARCH_ONLY_API_KEY=${{secrets.NEXT_PUBLIC_NIAB_ALGOLIA_SEARCH_ONLY_API_KEY}}" >> ./.env.production
-         pwd
-         ls
-         cat ./.env.production
+         echo "GAPI_PROJECT_ID=${{secrets.GAPI_PROJECT_ID}}" >> ./.env.production
+         echo "GAPI_CREDENTIALS_PRIVATE_KEY=${{secrets.GAPI_CREDENTIALS_PRIVATE_KEY}}" >> ./.env.production
+         echo "GAPI_CREDENTIALS_CLIENT_SECRET=${{secrets.GAPI_CREDENTIALS_CLIENT_SECRET}}" >> ./.env.production
+         echo "GAPI_CREDENTIALS_REFRESH_TOKEN=${{secrets.GAPI_CREDENTIALS_REFRESH_TOKEN}}" >> ./.env.production
+         echo "GAPI_CREDENTIALS_CLIENT_EMAIL=${{secrets.GAPI_CREDENTIALS_CLIENT_EMAIL}}" >> ./.env.production
+         echo "GAPI_CREDENTIALS_CLIENT_ID=${{secrets.GAPI_CREDENTIALS_CLIENT_ID}}" >> ./.env.production
 
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
