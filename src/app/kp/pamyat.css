@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    margin: auto;
+}
+ul {
+    list-style: none;
+}
+.font0 { font:4pt Arial, sans-serif; }
+.font1 { font:5pt Arial, sans-serif; }
+.font2 { font:6pt Arial, sans-serif; }
+.font3 { font:7pt Arial, sans-serif; }
+.font4 { font:8pt Arial, sans-serif; }
+.font5 { font:9pt Arial, sans-serif; }
+.font6 { font:10pt Cambria, serif; }
+.font7 { font:11pt Georgia, serif; }
+.font8 { font:12pt Times New Roman, serif; }
+.font9 { font:13pt Times New Roman, serif; }
+.font10 { font:14pt Times New Roman, serif; }
+.font11 { font:15pt Times New Roman, serif; }
+.font12 { font:16pt Times New Roman, serif; }
+.font13 { font:17pt Times New Roman; }
+.font14 { font:18pt Times New Roman, serif; }
+.font15 { font:19pt Times New Roman, serif; }
+.font16 { font:20pt Times New Roman, serif; }
+.font17 { font:22pt Times New Roman, serif; }
+.font18 { font:42pt Times New Roman, serif; }
+
+.page-number {
+    text-align: center;
+}
+tr, td {
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+}
+td {
+    width: 30%;
+    vertical-align: top;
+}
