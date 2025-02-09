@@ -11,6 +11,7 @@ export default function Home() {
         <Link href="/glinniki1870">План д. Глинники, 1870 г..</Link>
         <Link href="/glinniki1846">План имения Глинники, 1846 г.</Link>
         <Link href="/niab">Фонды и описи НИАБ.</Link>
+        <Link href="/kp">Книги Память</Link>
       </main>
       <footer className={styles.footer}>
 
