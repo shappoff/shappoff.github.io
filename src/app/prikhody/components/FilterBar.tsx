@@ -40,7 +40,6 @@ const FilterBar = ({
                                              }
                                          }
 
-                                         document.getElementById('input-id').focus({preventScroll: true});
                                  }}
                                  aria-hidden="true">
                                     <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" className="css-8mmkcg">

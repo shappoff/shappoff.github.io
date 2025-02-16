@@ -1,5 +1,5 @@
-export const getNickName = (email?: string) => {
-    let emailToParse = '';
+export const getNickName = (email?: string | null | undefined) => {
+    let emailToParse: string | null | undefined = '';
     if (email) {
         emailToParse = email;
     } else {

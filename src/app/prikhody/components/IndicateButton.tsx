@@ -8,7 +8,9 @@ const IndicateButton = ({item, setIsShowPanel, label = 'указать на ка
     return <Badge bg="secondary" className="indicate-button"
                  onClick={() => {
                      const mapElement = document.getElementById('map');
-                     L.DomUtil.addClass(mapElement,'crosshair-cursor-enabled');
+                     if (mapElement) {
+                         L.DomUtil.addClass(mapElement,'crosshair-cursor-enabled');
+                     }
                      const clichHandler = async (e: any) => {
                          var coord = e.latlng;
                          var lat = coord.lat;
@@ -19,15 +21,21 @@ const IndicateButton = ({item, setIsShowPanel, label = 'указать на ка
                          const parse_mode = 'Markdown';
                          const disable_web_page_preview = true;
                          sendTGMessage(text).then(() => {
-                             L.DomUtil.removeClass(mapElement,'crosshair-cursor-enabled');
+                             if (mapElement) {
+                                 L.DomUtil.removeClass(mapElement,'crosshair-cursor-enabled');
+                             }
                              map.off('click', clichHandler);
                              alert("Координаты отправлены!");
                          }, () => {
-                             L.DomUtil.removeClass(mapElement,'crosshair-cursor-enabled');
+                             if (mapElement) {
+                                 L.DomUtil.removeClass(mapElement,'crosshair-cursor-enabled');
+                             }
                              map.off('click', clichHandler);
                              alert("Координаты НЕ отправлены!");
                          }).catch(() => {
-                             L.DomUtil.removeClass(mapElement,'crosshair-cursor-enabled');
+                             if (mapElement) {
+                                 L.DomUtil.removeClass(mapElement,'crosshair-cursor-enabled');
+                             }
                              map.off('click', clichHandler);
                              alert("Координаты НЕ отправлены!");
                          });

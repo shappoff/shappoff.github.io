@@ -4,8 +4,8 @@ import {throttle} from "./throttle";
 export const useWindowSize = (ms: number = 200) => {
 
     const [windowSize, setWindowSize] = React.useState<{width: number; height: number}>({
-        width: undefined,
-        height: undefined,
+        width: 0,
+        height: 0,
     });
 
     React.useEffect(() => {

@@ -1,6 +1,6 @@
 import {useMap} from "react-leaflet";
 import React from "react";
-import {LayersControlEvent, LayersControlEventHandlerFn} from "leaflet";
+import {LayersControlEvent, LeafletEventHandlerFn} from "leaflet";
 
 const BoundsToMapItems = ({bounds, callback}: any) => {
     const map = useMap();
@@ -14,7 +14,7 @@ const BoundsToMapItems = ({bounds, callback}: any) => {
         };
     }, [bounds]);
 
-    const baselayerchangeHandler: LayersControlEventHandlerFn = (e: LayersControlEvent | any) => {
+    const baselayerchangeHandler: LeafletEventHandlerFn = (e: LayersControlEvent | any) => {
         callback && callback(e, map);
     }
 

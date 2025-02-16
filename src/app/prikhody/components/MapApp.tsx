@@ -30,11 +30,11 @@ import LayersControlComponent from "./LayersControlComponent";
 import algoliasearch from 'algoliasearch/lite';
 
 const client = algoliasearch(
-    process.env.NEXT_PUBLIC_PRIKHODY_APPLICATIONID,
-    process.env.NEXT_PUBLIC_PRIKHODY_SEARCHONLYAPIKEY
+    process.env.NEXT_PUBLIC_PRIKHODY_APPLICATIONID || '',
+    process.env.NEXT_PUBLIC_PRIKHODY_SEARCHONLYAPIKEY || ''
 );
 
-const locationsAlgoliaIndex = client.initIndex(process.env.NEXT_PUBLIC_PRIKHODY_INDEX_NAME_1);
+const locationsAlgoliaIndex = client.initIndex(process.env.NEXT_PUBLIC_PRIKHODY_INDEX_NAME_1 || '');
 
 import MapBounds from "./useMapBounds";
 
@@ -154,8 +154,8 @@ export const MapApp = () => {
     const [footerHeight, setFooterHeight] = React.useState(0);
 
     React.useEffect(() => {
-        const resultList = resultListRef ? resultListRef.current : null;
-        const filterBar = filterBarRef ? filterBarRef.current : null;
+        const resultList: any = resultListRef ? resultListRef.current : null;
+        const filterBar: any = filterBarRef ? filterBarRef.current : null;
         const root = document.querySelector('body');
         if (filterBar) {
             setFilterBarHeight(filterBar.clientHeight);
