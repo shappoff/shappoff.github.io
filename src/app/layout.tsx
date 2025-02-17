@@ -19,6 +19,10 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  verification: {
+    google: "WcZLxrvNHupEwOXBZ_xza8RMaDFrJ_7Nc_Ax_vyo0zw",
+    yandex: "cd605c554612fb41"
+  }
 };
 
 export default function RootLayout({
