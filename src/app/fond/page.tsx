@@ -2,8 +2,8 @@ import './frame.css';
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-    title: "Документы для просмотра.",
-    description: "Документы для просмотра.",
+    title: "Документы для просмотра в архивах.",
+    description: "Документы для просмотра в архивах.",
 };
 
 

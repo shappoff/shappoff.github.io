@@ -11,7 +11,8 @@ import Paper from '@mui/material/Paper';
 
 export const metadata: Metadata = {
     title: "Копии документов",
-    description: "Копии документов, что есть у меня на руках из НИАБ",
+    description: "Копии документов з архивов, что есть у меня на руках из НИАБ",
+    keywords: ['НИАБ', 'цифровые копии', ' Национальный исторический архив Беларуси', 'генеалогия'],
 };
 
 export default async function Home() {

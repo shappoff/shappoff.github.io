@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import '../pamyat.css';
+import {Metadata} from "next";
 
 const books = [
     'tolochinskiy',
@@ -20,6 +21,13 @@ export async function generateStaticParams() {
     return stPropsArr;
 }
 
+export async function generateMetadata({ params, searchParams }: any, parent: any): Promise<Metadata> {
+    const {kpId} = await params;
+    const metadataPath = path.resolve(`public/kp/${kpId}/metadata.json`);
+    return JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
+
+
+}
 
 export default async function KPDistrict({params}: any) {
     const {kpId} = await params;

@@ -1,5 +1,12 @@
 import styles from "../page.module.css";
 import Link from "next/link";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Книги Память. Беларусь",
+    description: "Книги Память. Поиск. Найти в книге Память",
+};
+
 
 export default function KP() {
     return (
