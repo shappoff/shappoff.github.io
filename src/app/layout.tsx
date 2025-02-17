@@ -22,7 +22,11 @@ export const metadata: Metadata = {
   verification: {
     google: "WcZLxrvNHupEwOXBZ_xza8RMaDFrJ_7Nc_Ax_vyo0zw",
     yandex: "cd605c554612fb41"
-  }
+  },
+  other: {
+    robots: "index, follow",
+    charset: "UTF-8",
+  },
 };
 
 export default function RootLayout({
