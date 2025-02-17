@@ -2,7 +2,6 @@
 
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import L from "leaflet";
 import Accordion from 'react-bootstrap/Accordion';
 import ListGroup from 'react-bootstrap/ListGroup';
 import CloseButton from 'react-bootstrap/CloseButton';
@@ -228,10 +227,10 @@ const PrikhodyMapApp = () => {
     return <>
         {
             isLoading ? <>
-                <Spinner animation="border" />
+                <Spinner key="spinner" animation="border" />
             </> : <></>
         }
-        <div id="filter-bar" ref={filterBarRef}>
+        <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
             <FilterBar
                 {
                     ...{

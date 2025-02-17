@@ -11,5 +11,5 @@ export default function PrikhodyMapPage() {
         ssr: false
       }
   ), [])
-  return <MapApp />;
+  return <MapApp key="map-page" />;
 }
