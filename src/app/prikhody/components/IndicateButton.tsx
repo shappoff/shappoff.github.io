@@ -51,7 +51,7 @@ const IndicateButton = ({item, setIsShowPanel, label = 'указать на ка
 const sendTGMessage = (text: string) => {
     const parse_mode = 'Markdown';
     const disable_web_page_preview = true;
-    return fetch(`https://api.telegram.org/bot1292036998:AAFkWJVt6GuU3-pyreWE-Xa8LMp4y9d0WgE/sendMessage?chat_id=162676802&parse_mode=${parse_mode}&disable_web_page_preview=${disable_web_page_preview}&text=${encodeURIComponent(text)}`)
+    return fetch(`https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=162676802&parse_mode=${parse_mode}&disable_web_page_preview=${disable_web_page_preview}&text=${encodeURIComponent(text)}`)
 };
 
 export {sendTGMessage};
