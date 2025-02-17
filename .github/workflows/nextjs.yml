@@ -84,6 +84,17 @@ jobs:
          echo "GAPI_CREDENTIALS_REFRESH_TOKEN=${{secrets.GAPI_CREDENTIALS_REFRESH_TOKEN}}" >> ./.env.production
          echo "GAPI_CREDENTIALS_CLIENT_EMAIL=${{secrets.GAPI_CREDENTIALS_CLIENT_EMAIL}}" >> ./.env.production
          echo "GAPI_CREDENTIALS_CLIENT_ID=${{secrets.GAPI_CREDENTIALS_CLIENT_ID}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PRIKHODY_APPLICATIONID=${{secrets.NEXT_PUBLIC_PRIKHODY_APPLICATIONID}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PRIKHODY_SEARCHONLYAPIKEY=${{secrets.NEXT_PUBLIC_PRIKHODY_SEARCHONLYAPIKEY}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PRIKHODY_INDEX_NAME_1=${{secrets.NEXT_PUBLIC_PRIKHODY_INDEX_NAME_1}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PRIKHODY_APIKEY=${{secrets.NEXT_PUBLIC_PRIKHODY_APIKEY}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PRIKHODY_AUTHDOMAIN=${{secrets.NEXT_PUBLIC_PRIKHODY_AUTHDOMAIN}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PRIKHODY_DATABASEURL=${{secrets.NEXT_PUBLIC_PRIKHODY_DATABASEURL}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PRIKHODY_PROJECTID=${{secrets.NEXT_PUBLIC_PRIKHODY_PROJECTID}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PRIKHODY_STORAGEBUCKET=${{secrets.NEXT_PUBLIC_PRIKHODY_STORAGEBUCKET}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PRIKHODY_MESSAGINGSENDERID=${{secrets.NEXT_PUBLIC_PRIKHODY_MESSAGINGSENDERID}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PRIKHODY_APPID=${{secrets.NEXT_PUBLIC_PRIKHODY_APPID}}" >> ./.env.production
+         echo "NEXT_PUBLIC_TELEGRAM_BOT_TOKEN=${{secrets.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN}}" >> ./.env.production
 
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
