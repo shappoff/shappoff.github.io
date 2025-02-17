@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
                 destination: 'https://indexby.github.io/novosady/',
                 permanent: true,
             },
+            {
+                source: '/nextff/novosady',
+                destination: 'https://indexby.github.io/novosady/',
+                permanent: true,
+            },
         ]
     },
 };
