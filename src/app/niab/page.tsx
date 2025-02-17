@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import MapApp from "@/app/niab/components/MapApp";
+import FondyNIABApp from "@/components/niab/FondyNIABApp";
 import './NIAB.css';
 
 export const metadata: Metadata = {
@@ -27,6 +27,6 @@ export default function NIAB() {
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
           crossOrigin="anonymous"
       />
-      <MapApp/>
+      <FondyNIABApp/>
   </>;
 }

@@ -10,14 +10,14 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import '../prikhody.css';
+import '../../app/prikhody/prikhody.css';
 
 
 import {
     MapContainer
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import useDebounce from "./useDebounce";
+import useDebounce from "../useDebounce";
 import {useWindowSize} from "./useWindowSize";
 import SetMapSizeOnChange from "./SetMapSizeOnChange";
 import PrikhodPlaceMarker from "./PrikhodPlaceMarker";
@@ -45,11 +45,11 @@ import Select from "react-select";
 import useMarkersBounds from "./useMarkersBounds";
 import BoundsToMapItems from "./BoundsToMapItems";
 import NoFoundPrikhod from "./NoFoundPrikhod";
-import {useGAnalytics} from "./useGAnalytics";
+import {useGAnalytics} from "../useGAnalytics";
 import useFirebaseAuth from "./useFirebaseAuth";
 import {useList} from "react-firebase-hooks/database";
 
-const MapApp = () => {
+const PrikhodyMapApp = () => {
     const filterBarRef = React.useRef(null);
     const resultListRef = React.useRef(null);
     const app = useFirebaseAuth();
@@ -468,5 +468,5 @@ const MapApp = () => {
     </>;
 };
 
-export default MapApp;
+export default PrikhodyMapApp;
 

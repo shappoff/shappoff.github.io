@@ -2,7 +2,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Select from "react-select";
-import useDebounce from "./useDebounce";
+import useDebounce from "../useDebounce";
 import Spinner from 'react-bootstrap/Spinner';
 import Pagination from 'react-bootstrap/Pagination';
 
@@ -11,7 +11,7 @@ import {HashRoute} from "./HashRoute";
 
 import Slider from 'rc-slider';
 import SliderTooltip from "./SliderTooltip";
-// import {useGAnalytics} from "./useGAnalytics";
+import {useGAnalytics} from "../useGAnalytics";
 // import {algoliasearch} from "algoliasearch";
 import algoliasearch from 'algoliasearch/lite';
 
@@ -31,7 +31,7 @@ const client = algoliasearch(
 
 const algoliaIndex = client.initIndex('foandyniab');
 
-const MapApp = () => {
+const FondyNIABApp = () => {
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [searchTerm, setSearchTerm] = React.useState<string>('');
     const [isTypoTolerance, setIsTypoTolerance] = React.useState<boolean>(true);
@@ -48,7 +48,7 @@ const MapApp = () => {
 
     const debouncedSearchTerm = useDebounce(searchTerm, 1500);
 
-    // useGAnalytics('G-BS71TCVL7J');
+    useGAnalytics('G-BS71TCVL7J');
 
     const selectedFONDHandler = React.useCallback((fod: number) => {
         gtag('event', 'search', {
@@ -282,7 +282,7 @@ const MapApp = () => {
     </div>;
 };
 
-export default MapApp;
+export default FondyNIABApp;
 
 function normalazePageNumb(page: string) {
     let additional = '';

@@ -5,7 +5,7 @@ import React from "react";
 
 export default function PrikhodyMapPage() {
   const MapApp = React.useMemo(() => dynamic(
-      () => import('@/app/prikhody/components/MapApp'),
+      () => import('@/components/prikhody/PrikhodyMapApp'),
       {
         loading: () => <p>A map is loading</p>,
         ssr: false
