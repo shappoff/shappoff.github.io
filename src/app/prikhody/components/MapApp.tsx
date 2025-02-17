@@ -49,7 +49,7 @@ import {useGAnalytics} from "./useGAnalytics";
 import useFirebaseAuth from "./useFirebaseAuth";
 import {useList} from "react-firebase-hooks/database";
 
-export const MapApp = () => {
+const MapApp = () => {
     const filterBarRef = React.useRef(null);
     const resultListRef = React.useRef(null);
     const app = useFirebaseAuth();
@@ -467,4 +467,6 @@ export const MapApp = () => {
         </MapContainer>
     </>;
 };
+
+export default MapApp;
 
