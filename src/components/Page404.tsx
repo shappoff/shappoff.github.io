@@ -1,5 +1,5 @@
 'use client'
-
+import Error from 'next/error'
 import React from "react";
 
 const Page404 = () => {
@@ -8,7 +8,7 @@ const Page404 = () => {
             history.replaceState({}, '', `${location.origin}${location.pathname.slice(0, -1)}${location.search}`)
         }
     }, []);
-    return <h1>404 - Page Not Found </h1>
+    return <Error statusCode={404} />;
 
 };
 
