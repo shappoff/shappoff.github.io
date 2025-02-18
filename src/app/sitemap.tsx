@@ -5,7 +5,7 @@ export default async function sitemap() {
 
     return [
         {
-            url: 'shappoff.github.io',
+            url: 'https://shappoff.github.io',
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.5,
