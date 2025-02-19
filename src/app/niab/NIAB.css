@@ -40,6 +40,9 @@
 .badge.rounded-pill {
     font-size: 10px;
 }
+.badge.rounded-pill a {
+    color: #ffffff;
+}
 .card > .card-title {
     margin: 16px;
     display: flex;
