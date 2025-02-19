@@ -243,10 +243,11 @@ body.loading #input-id {
 .leaflet-container.crosshair-cursor-enabled {
     cursor:crosshair;
 }
-.indicate-button {
+.indicate-button.badge.bg-secondary {
     padding: 5px;
     font-size: 10px;
     color: red;
+    background-color: #f4f4f4 !important;
     cursor: pointer;
 }
 
