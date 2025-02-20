@@ -1,4 +1,8 @@
 import { google } from "googleapis";
+import fs from "fs";
+import path from "path";
+
+const targetNIAB = path.resolve(`public/niab/data.json`);
 
 export async function getGoogleSheetsData(range: string, spreadsheetId: string) {
     const auth = await google.auth.getClient({
@@ -22,6 +26,6 @@ export async function getGoogleSheetsData(range: string, spreadsheetId: string) 
         spreadsheetId,
         range,
     });
-
+    fs.writeFileSync(targetNIAB, JSON.stringify(data.data.values, null, 4), {encoding: 'utf8', flag: 'w'});
     return data.data.values;
 }

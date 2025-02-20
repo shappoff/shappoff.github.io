@@ -1,45 +1,28 @@
-import {getGoogleSheetsData} from "@/components/gsheets";
 import Link from "next/link";
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import FondTabs from "@/components/niab/FondTabs";
-// import { unstable_cache } from 'next/cache';
-// import { cache } from 'react';
+import path from "path";
+import fs from "fs";
 
-/*
-export const getNIABFonds = cache(
-    async () => {
-        return await getGoogleSheetsData('main!A2:O', '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE') || [];
-    });
-*/
-
-/*
-export const getNIABFonds = unstable_cache(
-    async () => {
-        return await getGoogleSheetsData('main!A2:O', '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE') || [];
-    },
-    ['posts'],
-    { revalidate: 10, tags: ['posts'] }
-);
-
-*/
+const targetNIAB = path.resolve(`public/niab/data.json`);
 
 export async function generateStaticParams() {
     const stPropsArr: Array<any> = [];
-
-    for (let i = 1; i <= 3472; i++) {
-        stPropsArr.push({fond: `${1}`});
-    }
-
+    const allPosts = JSON.parse(fs.readFileSync(targetNIAB, 'utf8'));
+    allPosts.forEach(([fond]: any) => {
+        if (fond && !isNaN(+fond)) {
+            stPropsArr.push({fond: `${fond}`});
+        }
+    })
 
     return stPropsArr;
 }
 
-/*
 export async function generateMetadata({ params }: any) {
     const {fond} = await params;
-    const allPosts = await getGoogleSheetsData('main!A2:O', '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE') || [];
+    const allPosts = JSON.parse(fs.readFileSync(targetNIAB, 'utf8'));
     const currentFOND = [];
     let currentFONDAbout: any = {};
     for (const row of allPosts) {
@@ -61,11 +44,10 @@ export async function generateMetadata({ params }: any) {
         description: currentFONDAbout.anotation,
     }
 }
-*/
 
 const FondPage = async ({params}: any) => {
     const {fond} = await params;
-    const allPosts = await getGoogleSheetsData('main!A2:O', '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE') || [];
+    const allPosts = JSON.parse(fs.readFileSync(targetNIAB, 'utf8'));
 
     const currentFOND = [];
     let currentFONDAbout: any = {};
