@@ -25,8 +25,6 @@ export async function generateMetadata({ params, searchParams }: any, parent: an
     const {kpId} = await params;
     const metadataPath = path.resolve(`public/kp/${kpId}/metadata.json`);
     return JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
-
-
 }
 
 export default async function KPDistrict({params}: any) {
