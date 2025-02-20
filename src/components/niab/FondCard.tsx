@@ -52,7 +52,7 @@ const FondCard = ({item, index, analytics}: any) => {
             <h5>
 
                 <Link
-                    href="@/components/niab/FondCard#"
+                    href="#"
                     className="fond-link-src"
                     onClick={() => {
                         const winPopup: Window | null = openInNewTab(item.fodlink);
@@ -129,13 +129,13 @@ const FondCard = ({item, index, analytics}: any) => {
                                         <td style={{position: 'relative'}}>
                                             {
                                                 opis.s ? <>
-                                                    <Link href="@/components/niab/FondCard#" title={`Проиндексированно ${opis.s} %`} style={{fontSize: "xx-small"}}>{opis.s} %</Link>
+                                                    <Link href="#" title={`Проиндексированно ${opis.s} %`} style={{fontSize: "xx-small"}}>{opis.s} %</Link>
                                                 </> : <></>
                                             }
                                         </td>
                                         <td>
                                             {
-                                                opis.docId ? <Link className="opis-link-src" href="@/components/niab/FondCard#" onClick={() => {
+                                                opis.docId ? <Link className="opis-link-src" href="#" onClick={() => {
                                                     openInNewTab(`https://drive.google.com/file/d/${opis.docId}`);
                                                     // window.open(, '', 'width=400, height=400').focus();
                                                 }}>{opis.op}</Link> : opis.op
@@ -144,7 +144,7 @@ const FondCard = ({item, index, analytics}: any) => {
                                         </td>
                                         <td>{opis.i?.split('|').map((int: string, index: number) => {
                                             const [title, src] = int.split('](');
-                                            return <Link key={index} href="@/components/niab/FondCard#" onClick={() => {
+                                            return <Link key={index} href="#" onClick={() => {
                                                 openInNewTab(src.replace(')', ''));
                                                 // window.open(src.replace(')', ''), '', 'width=400, height=400').focus();
                                             }}>{index ? ', ' : ''}{title.replace('[', '')}</Link>
