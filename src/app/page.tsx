@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Link href="/zhigalo">Семен Жигало. Дневник.</Link>
+        <Link href="/zhigalo">Дневник Семёна Жигало, д. Скакуновщина, Бешенковичский район.</Link>
         <Link href="/copy">Копии документов что есть у меня.</Link>
         <Link href="/fond">Документы, которые я планирую смотреть в архивах.</Link>
         <Link href="/glinniki1870">План д. Глинники, 1870 г., Могилевская губерния, Могилевский уезд, Павловичская волость</Link>
