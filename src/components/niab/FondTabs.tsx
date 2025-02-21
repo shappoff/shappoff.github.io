@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react';
-import Box from '@mui/material/Box';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -46,7 +45,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                        <TableContainer sx={{ maxHeight: '96vh' }}>
+                        <TableContainer>
                             <Table sx={{ minWidth: 650 }} size="small" stickyHeader aria-label="sticky table">
                                 <TableHead>
                                     <TableRow>
@@ -67,7 +66,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                                             <TableCell align="center">{row[0]}</TableCell>
                                             <TableCell align="center">{row[1]}</TableCell>
                                             <TableCell align="center">{row[2]}</TableCell>
-                                            <TableCell align="center">{row[3]}</TableCell>
+                                            <TableCell align="left">{row[3]}</TableCell>
                                             <TableCell align="center">{row[6]}</TableCell>
                                             <TableCell align="center">{row[9]}</TableCell>
                                         </TableRow>
@@ -104,14 +103,14 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Paper sx={{width: '100%', overflow: 'hidden'}}>
-                        <TableContainer sx={{maxHeight: '96vh'}}>
+                        <TableContainer>
                             <Table sx={{minWidth: 650}} size="small" stickyHeader aria-label="sticky table">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="center">Фонд</TableCell>
                                         <TableCell align="center">Опись</TableCell>
                                         <TableCell align="center">№ Дела</TableCell>
-                                        <TableCell align="left">Примичание</TableCell>
+                                        <TableCell align="center">Примичание</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
