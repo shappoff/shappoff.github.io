@@ -2,9 +2,9 @@ import {Metadata} from "next";
 import FondyNIABApp from "@/components/niab/FondyNIABApp";
 import './NIAB.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {getGoogleSheetsData} from "@/components/gsheets";
-import fs from "fs";
-import path from "path";
+// import {getGoogleSheetsData} from "@/components/gsheets";
+// import fs from "fs";
+// import path from "path";
 
 export const metadata: Metadata = {
     title: "Фонды и описи НИАБ",
@@ -23,10 +23,12 @@ export const metadata: Metadata = {
 
 };
 
+/*
 async function saveData(range: string, spreadsheetId: string, path: string) {
     const dataDataValues = await getGoogleSheetsData(range, spreadsheetId) || [];
     fs.writeFileSync(path, JSON.stringify(dataDataValues.filter((v: any) => v.length), null, 4), {encoding: 'utf8', flag: 'w'});
 }
+*/
 
 export default async function NIAB() {
 /*

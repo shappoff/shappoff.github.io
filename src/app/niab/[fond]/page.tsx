@@ -82,7 +82,7 @@ const FondPage = async ({params}: any) => {
                     Фонды НИАБ
                 </Link>
                 <Link href={`/niab/${fond}`}>
-                    {fond}
+                    ф.{fond}
                 </Link>
             </Breadcrumbs>
             <Accordion defaultExpanded>
