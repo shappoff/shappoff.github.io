@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Link from "next/link";
 
 export default function OpisCard({info}: any) {
-    const {op, count, lang, oplink, internal, note, years, opNmb, store, storeNote} = info;
     return (
         <Card sx={{
             margin: '1rem',
@@ -21,11 +20,11 @@ export default function OpisCard({info}: any) {
             },
         }}>
             <CardContent>
-                <Typography variant="h6" component="div">{op}</Typography>
-                {note ? <Typography sx={{color: 'text.secondary', mb: 1.5}}>{note}</Typography> : <></>}
+                <Typography variant="h6" component="div">{info?.op}</Typography>
+                {info?.note ? <Typography sx={{color: 'text.secondary', mb: 1.5}}>{info?.note}</Typography> : <></>}
             </CardContent>
             <CardActions>
-                <Button size="small"><Link target="_blank" href={oplink}>Открыть</Link></Button>
+                {info?.oplink ? <Button size="small"><Link target="_blank" href={info?.oplink}>Открыть</Link></Button> : <></>}
             </CardActions>
         </Card>
     );
