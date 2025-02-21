@@ -24,7 +24,7 @@ interface TabPanelProps {
 }
 
 function compareNumbers(a: string, b: string) {
-    return +a[1] - +b[1];
+    return +a[1] - +b[1] || +a[2] - +b[2];
 }
 export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
     const [expanded, setExpanded] = React.useState<string | false>('');
@@ -36,7 +36,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
 
     return (
         <>
-            <Accordion expanded={expanded === 'panel1'} onChange={handleExpand('panel1')}>
+            { rejectedItems.length ? <Accordion expanded={expanded === 'panel1'} onChange={handleExpand('panel1')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel3-content"
@@ -59,17 +59,17 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {rejectedItems.map((row: any, index:  number) => index ? (
+                                    {rejectedItems.sort(compareNumbers).map((row: any, index:  number) => index ? (
                                         <TableRow
                                             key={index}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
-                                            <TableCell component="th" scope="row">{row[0]}</TableCell>
+                                            <TableCell align="center">{row[0]}</TableCell>
                                             <TableCell align="center">{row[1]}</TableCell>
                                             <TableCell align="center">{row[2]}</TableCell>
-                                            <TableCell align="left">{row[3]}</TableCell>
-                                            <TableCell align="left">{row[6]}</TableCell>
-                                            <TableCell align="left">{row[9]}</TableCell>
+                                            <TableCell align="center">{row[3]}</TableCell>
+                                            <TableCell align="center">{row[6]}</TableCell>
+                                            <TableCell align="center">{row[9]}</TableCell>
                                         </TableRow>
                                     ) : '')}
                                 </TableBody>
@@ -77,7 +77,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                         </TableContainer>
                     </Paper>
                 </AccordionDetails>
-                </Accordion>
+                </Accordion> : <></>}
             <Accordion expanded={expanded === 'panel2'} onChange={handleExpand('panel2')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -94,33 +94,33 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                     }
                 </AccordionDetails>
             </Accordion>
-            <Accordion expanded={expanded === 'panel3'} onChange={handleExpand('panel3')}>
+            { digitedPosts.length ? <Accordion expanded={expanded === 'panel3'} onChange={handleExpand('panel3')}>
                 <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
+                    expandIcon={<ExpandMoreIcon/>}
                     aria-controls="panel3-content"
                     id="panel3-header"
                 >
                     <h3>Оцифрованные дела фонда</h3>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                        <TableContainer sx={{ maxHeight: '96vh' }}>
-                            <Table sx={{ minWidth: 650 }} size="small" stickyHeader aria-label="sticky table">
+                    <Paper sx={{width: '100%', overflow: 'hidden'}}>
+                        <TableContainer sx={{maxHeight: '96vh'}}>
+                            <Table sx={{minWidth: 650}} size="small" stickyHeader aria-label="sticky table">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="center">Фонд</TableCell>
                                         <TableCell align="center">Опись</TableCell>
                                         <TableCell align="center">№ Дела</TableCell>
-                                        <TableCell align="center">Примичание</TableCell>
+                                        <TableCell align="left">Примичание</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {digitedPosts?.sort(compareNumbers).map((row: any, index:  number) => index ? (
+                                    {digitedPosts?.sort(compareNumbers).map((row: any, index: number) => index ? (
                                         <TableRow
                                             key={index}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                         >
-                                            <TableCell component="th" scope="row">{row[0]}</TableCell>
+                                            <TableCell align="center">{row[0]}</TableCell>
                                             <TableCell align="center">{row[1]}</TableCell>
                                             <TableCell align="center">{row[2]}</TableCell>
                                             <TableCell align="left">{row[3]}</TableCell>
@@ -131,7 +131,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                         </TableContainer>
                     </Paper>
                 </AccordionDetails>
-            </Accordion>
+            </Accordion> : <></>}
 
         </>
 

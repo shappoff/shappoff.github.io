@@ -91,18 +91,10 @@ const FondPage = async ({params}: any) => {
                     aria-controls="panel2-content"
                     id="panel2-header"
                 >
-                    <h3>{currentFONDAbout.fodFull} {currentFONDAbout.title}</h3>
+                    <h1>{currentFONDAbout.fodFull} {currentFONDAbout.title}</h1>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Grid container spacing={2}>
-                        <Grid size={{xs: 4, md: 3}}>
-                            <h1>
-                                <Link target="_blank" href={currentFONDAbout.fodlink}>{currentFONDAbout.fodFull}</Link>
-                            </h1>
-                        </Grid>
-                        <Grid size={{xs: 8, md: 9}}>
-                            <h2>{currentFONDAbout.title}</h2>
-                        </Grid>
                         <Grid size={{xs: 12, md: 12}}>
                             <p>{currentFONDAbout.anotation}</p>
                         </Grid>
