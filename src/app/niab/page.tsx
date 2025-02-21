@@ -29,8 +29,10 @@ async function saveData(range: string, spreadsheetId: string, path: string) {
 }
 
 export default async function NIAB() {
+/*
     await saveData('main!A2:O', '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE', path.resolve(`public/niab/data.json`));
     await saveData('main!A1:L', '1iFNV_EWdeMKjYhz-So3a6dv2v64K8VpgDajag-mJIY8', path.resolve(`public/niab/rejected.json`));
+*/
 
     return <>
         <FondyNIABApp/>
