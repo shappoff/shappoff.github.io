@@ -4,6 +4,7 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import Link from "next/link";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -47,15 +48,15 @@ export default function FondTabs({opisi}: any) {
                 <Tabs value={value} onChange={handleChange} aria-label="Описи фонда" variant="scrollable" allowScrollButtonsMobile={true}>
                     {
                         opisi.map(({op, count, lang, oplink, internal, note, years, opNmb, store, storeNote}: any, index: number) => {
-                            return <Tab label={op} {...a11yProps(index)} />
+                            return <Tab key={index} label={op} {...a11yProps(index)} />
                         })
                     }
                 </Tabs>
             </Box>
             {
                 opisi.map(({op, count, lang, oplink, internal, note, years, opNmb, store, storeNote}: any, index: number) => {
-                    return <CustomTabPanel value={value} index={index}>
-                        {op}
+                    return <CustomTabPanel key={index} value={value} index={index}>
+                        <Link href={oplink}>{op}</Link>
                     </CustomTabPanel>
                 })
             }
