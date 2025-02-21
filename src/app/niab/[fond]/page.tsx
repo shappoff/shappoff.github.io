@@ -6,7 +6,16 @@ import FondTabs from "@/components/niab/FondTabs";
 import path from "path";
 import fs from "fs";
 
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Button from '@mui/material/Button';
+
 const targetNIAB = path.resolve(`public/niab/data.json`);
+const rejectedPath = path.resolve(`public/niab/rejected.json`);
 
 export async function generateStaticParams() {
     const stPropsArr: Array<any> = [];
@@ -48,7 +57,8 @@ export async function generateMetadata({ params }: any) {
 const FondPage = async ({params}: any) => {
     const {fond} = await params;
     const allPosts = JSON.parse(fs.readFileSync(targetNIAB, 'utf8'));
-
+    const rejectedPosts = JSON.parse(fs.readFileSync(rejectedPath, 'utf8'));
+    const rejectedItems = rejectedPosts.filter((rejected: any) => +rejected[0] === +fond);
     const currentFOND = [];
     let currentFONDAbout: any = {};
     for (const row of allPosts) {
@@ -75,20 +85,33 @@ const FondPage = async ({params}: any) => {
                     {fond}
                 </Link>
             </Breadcrumbs>
-            <Grid container spacing={2}>
-                <Grid size={{xs: 4, md: 3}}>
-                    <h1>
-                        <Link target="_blank" href={currentFONDAbout.fodlink}>{currentFONDAbout.fodFull}</Link>
-                    </h1>
-                </Grid>
-                <Grid size={{xs: 8, md: 9}}>
-                    <h2>{currentFONDAbout.title}</h2>
-                </Grid>
-                <Grid size={{xs: 12, md: 12}}>
-                    <p>{currentFONDAbout.anotation}</p>
-                </Grid>
-            </Grid>
-            <FondTabs opisi={currentFOND} />
+            <Accordion defaultExpanded>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2-content"
+                    id="panel2-header"
+                >
+                    <h3>{currentFONDAbout.fodFull} {currentFONDAbout.title}</h3>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Grid container spacing={2}>
+                        <Grid size={{xs: 4, md: 3}}>
+                            <h1>
+                                <Link target="_blank" href={currentFONDAbout.fodlink}>{currentFONDAbout.fodFull}</Link>
+                            </h1>
+                        </Grid>
+                        <Grid size={{xs: 8, md: 9}}>
+                            <h2>{currentFONDAbout.title}</h2>
+                        </Grid>
+                        <Grid size={{xs: 12, md: 12}}>
+                            <p>{currentFONDAbout.anotation}</p>
+                        </Grid>
+                    </Grid>
+                </AccordionDetails>
+            </Accordion>
+
+
+            <FondTabs rejectedItems={rejectedItems} opisi={currentFOND} />
         </Box>
     </>
 };
