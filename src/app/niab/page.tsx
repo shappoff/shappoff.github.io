@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 async function saveData(range: string, spreadsheetId: string, path: string) {
-    const dataDataValues = await getGoogleSheetsData(range, spreadsheetId);
+    const dataDataValues = await getGoogleSheetsData(range, spreadsheetId) || [];
     fs.writeFileSync(path, JSON.stringify(dataDataValues.filter((v: any) => v.length), null, 4), {encoding: 'utf8', flag: 'w'});
 }
 
