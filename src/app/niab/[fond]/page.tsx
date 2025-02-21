@@ -7,15 +7,13 @@ import path from "path";
 import fs from "fs";
 
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Button from '@mui/material/Button';
 
 const targetNIAB = path.resolve(`public/niab/data.json`);
 const rejectedPath = path.resolve(`public/niab/rejected.json`);
+const digitedPath = path.resolve(`public/niab/digited.json`);
 
 export async function generateStaticParams() {
     const stPropsArr: Array<any> = [];
@@ -58,7 +56,9 @@ const FondPage = async ({params}: any) => {
     const {fond} = await params;
     const allPosts = JSON.parse(fs.readFileSync(targetNIAB, 'utf8'));
     const rejectedPosts = JSON.parse(fs.readFileSync(rejectedPath, 'utf8'));
+    const digitedPosts = JSON.parse(fs.readFileSync(digitedPath, 'utf8'));
     const rejectedItems = rejectedPosts.filter((rejected: any) => +rejected[0] === +fond);
+    const digitedItems = digitedPosts.filter((digited: any) => +digited[0] === +fond);
     const currentFOND = [];
     let currentFONDAbout: any = {};
     for (const row of allPosts) {
@@ -111,7 +111,7 @@ const FondPage = async ({params}: any) => {
             </Accordion>
 
 
-            <FondTabs rejectedItems={rejectedItems} opisi={currentFOND} />
+            <FondTabs digitedPosts={digitedItems} rejectedItems={rejectedItems} opisi={currentFOND} />
         </Box>
     </>
 };

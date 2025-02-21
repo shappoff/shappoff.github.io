@@ -50,8 +50,10 @@ function a11yProps(index: number) {
         'aria-controls': `simple-tabpanel-${index}`,
     };
 }
-
-export default function FondTabs({opisi, rejectedItems}: any) {
+function compareNumbers(a: string, b: string) {
+    return +a[1] - +b[1];
+}
+export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
     const [value, setValue] = React.useState(0);
     const [expanded, setExpanded] = React.useState<string | false>('');
 
@@ -142,6 +144,44 @@ export default function FondTabs({opisi, rejectedItems}: any) {
                         }
 
                     </Box>
+                </AccordionDetails>
+            </Accordion>
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel3-content"
+                    id="panel3-header"
+                >
+                    <h3>Оцифрованные дела фонда</h3>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                        <TableContainer sx={{ maxHeight: '96vh' }}>
+                            <Table sx={{ minWidth: 650 }} size="small" stickyHeader aria-label="sticky table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell align="center">Фонд</TableCell>
+                                        <TableCell align="center">Опись</TableCell>
+                                        <TableCell align="center">№ Дела</TableCell>
+                                        <TableCell align="center">Примичание</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {digitedPosts?.sort(compareNumbers).map((row: any, index:  number) => index ? (
+                                        <TableRow
+                                            key={index}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row">{row[0]}</TableCell>
+                                            <TableCell align="center">{row[1]}</TableCell>
+                                            <TableCell align="center">{row[2]}</TableCell>
+                                            <TableCell align="left">{row[3]}</TableCell>
+                                        </TableRow>
+                                    ) : '')}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Paper>
                 </AccordionDetails>
             </Accordion>
 
