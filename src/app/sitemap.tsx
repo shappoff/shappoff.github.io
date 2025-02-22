@@ -35,6 +35,12 @@ export default async function sitemap() {
             priority: 0.5,
         },
         {
+            url: 'https://shappoff.github.io/niab/all',
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 1,
+        },
+        {
             url: 'https://shappoff.github.io/kp',
             lastModified: new Date(),
             changeFrequency: 'weekly',
