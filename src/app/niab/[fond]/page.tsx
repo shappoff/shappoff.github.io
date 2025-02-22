@@ -85,7 +85,7 @@ const FondPage = async ({params}: any) => {
                     ф.{fond}
                 </Link>
             </Breadcrumbs>
-            <Accordion defaultExpanded>
+            <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2-content"
