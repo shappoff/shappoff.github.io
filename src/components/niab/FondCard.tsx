@@ -50,28 +50,15 @@ const FondCard = ({item, index, analytics}: any) => {
         }
         <Card.Title>
             <h5>
-
                 <Link
-                    href="#"
-                    className="fond-link-src"
-                    onClick={() => {
-                        const winPopup: Window | null = openInNewTab(item.fodlink);
-                        if (winPopup) {
-                            winPopup.focus();
-                        }
-                        setIsOpendSrcFond(true);
-                        var timer: ReturnType<typeof setInterval> = setInterval(function () {
-                            if (winPopup && winPopup.closed) {
-                                clearInterval(timer);
-                                setIsOpendSrcFond(false);
-                            }
-                        }, 500);
-                    }}>
+                    href={`/niab/${item.fod}`}
+                    target="_blank"
+                    className="fond-link-src">
                     Фонд {item.fod}
                 </Link>
 
                 <span className="copy-fond-icon" title="Скопировать ссылку на фонд" onClick={() => {
-                    const copyLink = `${location.origin}${location.pathname}?q=${item.fod}`;
+                    const copyLink = `${location.origin}${location.pathname}${item.fod}`;
                     try {
                         navigator.clipboard.writeText(copyLink);
                     } catch (err) {
