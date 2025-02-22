@@ -49,28 +49,24 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                             <Table sx={{ minWidth: 650 }} size="small" stickyHeader aria-label="sticky table">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center">Фонд</TableCell>
-                                        <TableCell align="center">Опись</TableCell>
-                                        <TableCell align="center">№ Дела</TableCell>
+                                        <TableCell align="center">Фонд-Опись-Дело</TableCell>
                                         <TableCell align="center">Заголовок дела</TableCell>
                                         <TableCell align="center">Причина</TableCell>
                                         <TableCell align="center">контактное лицо</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {rejectedItems.sort(compareNumbers).map((row: any, index:  number) => index ? (
+                                    {rejectedItems.sort(compareNumbers).map((row: any, index:  number) => (
                                         <TableRow
                                             key={index}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
-                                            <TableCell align="center">{row[0]}</TableCell>
-                                            <TableCell align="center">{row[1]}</TableCell>
-                                            <TableCell align="center">{row[2]}</TableCell>
+                                            <TableCell align="center">{row[0]}-{row[1]}-{row[2]}</TableCell>
                                             <TableCell align="left">{row[3]}</TableCell>
                                             <TableCell align="center">{row[6]}</TableCell>
                                             <TableCell align="center">{row[9]}</TableCell>
                                         </TableRow>
-                                    ) : '')}
+                                    ))}
                                 </TableBody>
                             </Table>
                         </TableContainer>
@@ -93,7 +89,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                     }
                 </AccordionDetails>
             </Accordion>
-            { digitedPosts.length ? <Accordion expanded={expanded === 'panel3'} onChange={handleExpand('panel3')}>
+            { digitedPosts.length > 0 ? <Accordion expanded={expanded === 'panel3'} onChange={handleExpand('panel3')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon/>}
                     aria-controls="panel3-content"
@@ -107,10 +103,8 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                             <Table sx={{minWidth: 650}} size="small" stickyHeader aria-label="sticky table">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center">Фонд</TableCell>
-                                        <TableCell align="center">Опись</TableCell>
-                                        <TableCell align="center">№ Дела</TableCell>
-                                        <TableCell align="center">Примичание</TableCell>
+                                        <TableCell align="left">Фонд-Опись-Дело</TableCell>
+                                        <TableCell align="left">Примичание</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -119,9 +113,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                                             key={index}
                                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                         >
-                                            <TableCell align="center">{row[0]}</TableCell>
-                                            <TableCell align="center">{row[1]}</TableCell>
-                                            <TableCell align="center">{row[2]}</TableCell>
+                                            <TableCell align="left">{row[0]}-{row[1]}-{row[2]}</TableCell>
                                             <TableCell align="left">{row[3]}</TableCell>
                                         </TableRow>
                                     ) : '')}
