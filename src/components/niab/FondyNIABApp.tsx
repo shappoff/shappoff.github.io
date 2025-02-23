@@ -60,6 +60,18 @@ const FondyNIABApp = () => {
         const effRouter = new HashRoute(window.location.href);
         const fond = effRouter.take(HASH_MAP.query);
         if (fond) {
+
+            const isID = isNaN(+fond);
+
+            if (!isID && fond.length) {
+                const url = new URL(location);
+                url.searchParams.delete('q');
+                url.pathname = `/niab/${fond}`;
+                location.href = url.href;
+                return;
+            }
+
+
             setIsLoading(true);
             setSearchTerm(fond);
             setCurrentPage(0);
@@ -104,6 +116,13 @@ const FondyNIABApp = () => {
         }
         const isID = isNaN(+debouncedSearchTerm);
 
+        if (!isID && debouncedSearchTerm.length) {
+            const url = new URL(location);
+            url.searchParams.delete('q');
+            url.pathname = `/niab/${debouncedSearchTerm}`;
+            location.href = url.href;
+            return;
+        }
         setIsLoading(true);
 
         let filters: string = '';

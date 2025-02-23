@@ -52,7 +52,6 @@ const FondCard = ({item, index, analytics}: any) => {
             <h5>
                 <Link
                     href={`/niab/${item.fod}`}
-                    target="_blank"
                     className="fond-link-src">
                     Фонд {item.fod}
                 </Link>
