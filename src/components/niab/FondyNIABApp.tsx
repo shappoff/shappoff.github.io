@@ -64,7 +64,7 @@ const FondyNIABApp = () => {
             const isID = isNaN(+fond);
 
             if (!isID && fond.length) {
-                const url = new URL(location);
+                const url = new URL(location.href);
                 url.searchParams.delete('q');
                 url.pathname = `/niab/${fond}`;
                 location.href = url.href;
@@ -117,7 +117,7 @@ const FondyNIABApp = () => {
         const isID = isNaN(+debouncedSearchTerm);
 
         if (!isID && debouncedSearchTerm.length) {
-            const url = new URL(location);
+            const url = new URL(location.href);
             url.searchParams.delete('q');
             url.pathname = `/niab/${debouncedSearchTerm}`;
             location.href = url.href;
