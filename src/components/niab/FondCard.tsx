@@ -50,11 +50,11 @@ const FondCard = ({item, index, analytics}: any) => {
         }
         <Card.Title>
             <h5>
-                <Link
+                <a
                     href={`/niab/${item.fod}`}
                     className="fond-link-src">
                     Фонд {item.fod}
-                </Link>
+                </a>
 
                 <span className="copy-fond-icon" title="Скопировать ссылку на фонд" onClick={() => {
                     const copyLink = `${location.origin}${location.pathname}${item.fod}`;
