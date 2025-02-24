@@ -46,7 +46,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                 <AccordionDetails>
                     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                         <TableContainer>
-                            <Table sx={{ minWidth: 650 }} size="small" stickyHeader aria-label="sticky table">
+                            <Table size="small" stickyHeader aria-label="sticky table">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="center">Фонд-Опись-Дело</TableCell>
@@ -100,7 +100,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                 <AccordionDetails>
                     <Paper sx={{width: '100%', overflow: 'hidden'}}>
                         <TableContainer>
-                            <Table sx={{minWidth: 650}} size="small" stickyHeader aria-label="sticky table">
+                            <Table size="small" stickyHeader aria-label="sticky table">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell align="left">Фонд-Опись-Дело</TableCell>
