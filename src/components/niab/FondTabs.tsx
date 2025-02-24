@@ -16,6 +16,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import OpisCard from "@/components/niab/OpisCard";
 import Link from "next/link";
+import {Alert} from "@mui/material";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -36,7 +37,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
 
     return (
         <>
-            { rejectedItems.length ? <Accordion expanded={expanded === 'panel1'} onChange={handleExpand('panel1')}>
+            <Accordion expanded={expanded === 'panel1'} onChange={handleExpand('panel1')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel3-content"
@@ -45,6 +46,10 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                     <h3>Дела фонда отказанные в выдаче</h3>
                 </AccordionSummary>
                 <AccordionDetails>
+                    <Alert severity="info">
+                        <b>Если вам отказали в выдаче дела, сообщите об этом пожалуйста - </b>
+                        <Link href={`mailto:ilasica@internet.ru`}>ilasica@internet.ru</Link>
+                    </Alert>
                     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                         <TableContainer>
                             <Table size="small" stickyHeader aria-label="sticky table">
@@ -73,7 +78,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                         </TableContainer>
                     </Paper>
                 </AccordionDetails>
-                </Accordion> : <></>}
+                </Accordion>
             <Accordion expanded={expanded === 'panel2'} onChange={handleExpand('panel2')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
