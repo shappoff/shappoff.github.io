@@ -25,7 +25,7 @@ interface TabPanelProps {
 }
 
 function compareNumbers(a: string, b: string) {
-    return +a[1] - +b[1] || +a[2] - +b[2];
+    return +a[1] - +b[1] || +a[2].replace(/\D/g,'') - +b[2].replace(/\D/g,'');
 }
 export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
     const [expanded, setExpanded] = React.useState<string | false>('');
@@ -114,7 +114,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {digitedPosts?.sort(compareNumbers).map((row: any, index: number) => index ? (
+                                    {digitedPosts?.sort(compareNumbers).map((row: any, index: number) => (
                                         <TableRow
                                             key={index}
                                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
@@ -122,7 +122,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                                             <TableCell align="left">{row[0]}-{row[1]}-{row[2]}</TableCell>
                                             <TableCell align="left">{row[3]}</TableCell>
                                         </TableRow>
-                                    ) : '')}
+                                    ))}
                                 </TableBody>
                             </Table>
                         </TableContainer>
