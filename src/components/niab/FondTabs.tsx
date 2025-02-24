@@ -15,6 +15,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import OpisCard from "@/components/niab/OpisCard";
+import Link from "next/link";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -64,7 +65,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                                             <TableCell align="center">{row[0]}-{row[1]}-{row[2]}</TableCell>
                                             <TableCell align="left">{row[3]}</TableCell>
                                             <TableCell align="center">{row[6]}</TableCell>
-                                            <TableCell align="center">{row[9]}</TableCell>
+                                            <TableCell align="center"><Link href={`mailto:${row[9]}`}>{row[9]}</Link></TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
