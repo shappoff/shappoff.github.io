@@ -116,13 +116,6 @@ const FondyNIABApp = () => {
         }
         const isID = isNaN(+debouncedSearchTerm);
 
-        if (!isID && debouncedSearchTerm.length) {
-            const url = new URL(location.href);
-            url.searchParams.delete('q');
-            url.pathname = `/niab/${debouncedSearchTerm}`;
-            location.href = url.href;
-            return;
-        }
         setIsLoading(true);
 
         let filters: string = '';
