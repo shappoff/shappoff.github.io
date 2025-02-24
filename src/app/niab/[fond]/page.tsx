@@ -49,6 +49,14 @@ export async function generateMetadata({ params }: any) {
     return {
         title: `${currentFONDAbout.fodFull} | ${currentFONDAbout.title}`,
         description: currentFONDAbout.anotation,
+        icons: [
+            {
+                url: '../favicon.ico',
+                type: 'image/x-icon',
+                sizes: 'any',
+                rel: 'icon'
+            }
+        ],
     }
 }
 

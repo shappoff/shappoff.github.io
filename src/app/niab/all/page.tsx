@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: "Удобный поиск описей по фондам НИАБ (Национальный исторический архив Беларуси).",
     icons: [
         {
-            url: 'niab/favicon.ico',
+            url: '../favicon.ico',
             type: 'image/x-icon',
             sizes: 'any',
             rel: 'icon'
