@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: any) {
         description: currentFONDAbout.anotation,
         icons: [
             {
-                url: '../favicon.ico',
+                url: 'niab/favicon.ico',
                 type: 'image/x-icon',
                 sizes: 'any',
                 rel: 'icon'
