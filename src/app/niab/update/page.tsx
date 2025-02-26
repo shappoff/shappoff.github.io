@@ -3381,7 +3381,7 @@ export default async function UpdatedPage() {
     // await saveData('main!A2:O', '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE', path.resolve(`public/niab/data.json`));
     // await saveData('main!A1:L', '1iFNV_EWdeMKjYhz-So3a6dv2v64K8VpgDajag-mJIY8', path.resolve(`public/niab/rejected.json`));
     // await saveData('Аркуш1!A2:D', '1068s-7o1XZavxaS7ODN1rEoXbswFkxy4174uEg9yPPY', path.resolve(`public/niab/digited.json`));
-    await saveData('Опись 333-9!A3:J', '1X-a2Xfm60fB6RvpTTO1XKqm7FvBNscrHjdXFVzSBgkQ', path.resolve(`public/niab/333-9.json`));
+    // await saveData('Опись 333-9!A3:J', '1X-a2Xfm60fB6RvpTTO1XKqm7FvBNscrHjdXFVzSBgkQ', path.resolve(`public/niab/333-9.json`));
 
     const [
         mainTableData,
