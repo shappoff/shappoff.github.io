@@ -14,10 +14,12 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import React from "react";
 import Tooltip from '@mui/material/Tooltip';
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 
 const targetNIAB = path.resolve(`public/niab/data.json`);
 const rejectedPath = path.resolve(`public/niab/rejected.json`);
 const digitedPath = path.resolve(`public/niab/digited.json`);
+const d333Path = path.resolve(`public/niab/333-9.json`);
 
 export async function generateStaticParams() {
     const stPropsArr: Array<any> = [];
@@ -54,6 +56,7 @@ const FondPage = async ({params}: any) => {
     const allPosts = JSON.parse(fs.readFileSync(targetNIAB, 'utf8'));
     const rejectedPosts = JSON.parse(fs.readFileSync(rejectedPath, 'utf8'));
     const digitedPosts = JSON.parse(fs.readFileSync(digitedPath, 'utf8'));
+    const d333Posts = JSON.parse(fs.readFileSync(d333Path, 'utf8'));
     const rejectedItems = rejectedPosts.filter((rejected: any) => +rejected[0] === +fond);
     const digitedItems = digitedPosts.filter((digited: any) => +digited[0] === +fond);
     const currentItem = allPosts.find((item: any) => +item.fod === +fond || item.fod === fond) || {};
@@ -123,7 +126,7 @@ const FondPage = async ({params}: any) => {
                     aria-controls="panel2-content"
                     id="panel2-header"
                 >
-                    <h1>{currentItem.fod} {currentItem.title}</h1>
+                    <h1>Фонд {currentItem.fod} {currentItem.title}</h1>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Grid container spacing={2}>
@@ -136,7 +139,57 @@ const FondPage = async ({params}: any) => {
 
 
             <FondTabs digitedPosts={digitedItems} rejectedItems={rejectedItems} opisi={currentItem.opisi || []} />
+            {
+                +fond === 333 ? <>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon/>}
+                            aria-controls="panel3-content"
+                            id="panel3-header"
+                        >
+                            <h3>Проект создания описи по 333</h3>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <u><Link href="https://forum.vgd.ru/post/45/93243/p2043735.htm#pp2043735" target="_blank">Описание проекта</Link></u>
+                            <Paper sx={{width: '100%', overflow: 'auto', height: 400}}>
+                                <TableContainer>
+                                    <Table sx={{ minWidth: 650 }} size="small" stickyHeader aria-label="sticky table">
+                                        <TableHead>
+                                            <TableRow>
+                                                {
+                                                    d333Posts[0].map((h: any, index: number) => {
+                                                        return <TableCell key={index} align="center">{h}</TableCell>
+                                                    })
+                                                }
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {d333Posts?.map((row: any, index: number) => index ? (
+                                                <TableRow
+                                                    key={index}
+                                                    sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                                >
+                                                    <TableCell align="center">{row[0]}</TableCell>
+                                                    <TableCell align="center">{row[1]}</TableCell>
+                                                    <TableCell align="center">{row[2]}</TableCell>
+                                                    <TableCell align="center">{row[3]}</TableCell>
+                                                    <TableCell align="center">{row[4]}</TableCell>
+                                                    <TableCell align="center">{row[5]}</TableCell>
+                                                    <TableCell align="center">{row[6]}</TableCell>
+                                                    <TableCell align="center">{row[7]}</TableCell>
+                                                    <TableCell align="center">{row[8]}</TableCell>
+                                                    <TableCell align="center">{row[9]}</TableCell>
+                                                </TableRow>
+                                            ) : '')}
+                                        </TableBody>
 
+                                    </Table>
+                                </TableContainer>
+                            </Paper>
+                        </AccordionDetails>
+                    </Accordion>
+                </> : <></>
+            }
         </Box>
     </>
 };
