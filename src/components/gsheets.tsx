@@ -32,7 +32,8 @@ export async function getGoogleSheetsDataArr(spreadsheets: Array<any>) {
         mainTableConfig,
         indexedConfig,
         rejectedConfig,
-        digitedConfig
+        digitedConfig,
+        stat333Data
     ] = spreadsheets;
 
     return [
@@ -40,5 +41,6 @@ export async function getGoogleSheetsDataArr(spreadsheets: Array<any>) {
         await sheets.spreadsheets.values.get(indexedConfig),
         await sheets.spreadsheets.values.get(rejectedConfig),
         await sheets.spreadsheets.values.get(digitedConfig),
+        await sheets.spreadsheets.values.get(stat333Data),
     ];
 }

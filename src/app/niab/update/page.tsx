@@ -3412,12 +3412,10 @@ export default async function UpdatedPage() {
         },
     ]);
 
-/*
     fs.writeFileSync(path.resolve(`public/niab/333-9.json`), JSON.stringify(stat333Data?.data?.values, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
-*/
     const indexedFormattedData: any = indexedData?.data?.values?.reduce((pool: any, [fond, opis, value]: any, index: number, arr: Array<any>) => {
 
         if (!pool[fond]) {

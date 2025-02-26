@@ -151,9 +151,9 @@ const FondPage = async ({params}: any) => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <u><Link href="https://forum.vgd.ru/post/45/93243/p2043735.htm#pp2043735" target="_blank">Описание проекта</Link></u>
-                            <Paper sx={{width: '100%', overflow: 'auto', height: 400}}>
-                                <TableContainer>
-                                    <Table sx={{ minWidth: 650 }} size="small" stickyHeader aria-label="sticky table">
+                            <Paper sx={{width: '100%', overflow: 'auto'}}>
+                                <TableContainer sx={{ maxHeight: 600 }}>
+                                    <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="sticky table">
                                         <TableHead>
                                             <TableRow>
                                                 {
