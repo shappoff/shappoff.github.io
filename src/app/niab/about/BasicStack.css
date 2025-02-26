@@ -1,0 +1,67 @@
+@property --num2 {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+}
+
+@property --num1 {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+}
+@property --num3 {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+}
+
+@property --num4 {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+}
+
+#niab-minsk-count {
+    counter-reset: num1 var(--num1);
+    animation: animate 2s forwards ease;
+}
+#niab-minsk-percent {
+    counter-reset: num2 var(--num2);
+    animation: animate 2s forwards ease;
+}
+#niab-grodno-count {
+    counter-reset: num3 var(--num3);
+    animation: animate 2s forwards ease;
+}
+#niab-grodno-percent {
+    counter-reset: num4 var(--num4);
+    animation: animate 2s forwards ease;
+}
+
+#niab-minsk-count:before {
+    content: counter(num1);
+}
+#niab-minsk-percent:before {
+    content: counter(num2);
+}
+#niab-grodno-count:before {
+    content: counter(num3);
+}
+#niab-grodno-percent:before {
+    content: counter(num4);
+}
+
+@keyframes animate {
+    from {
+        --num1: 0;
+        --num2: 0;
+        --num3: 0;
+        --num4: 0;
+    }
+    to {
+        --num1: var(--niab-minsk-count, 0);
+        --num2: var(--niab-minsk-percent, 0);
+        --num3: var(--niab-grodno-count, 0);
+        --num4: var(--niab-grodno-percent, 0);
+    }
+}

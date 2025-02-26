@@ -3,6 +3,7 @@
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import {styled} from '@mui/material/styles';
+import './BasicStack.css';
 
 const DemoPaper = styled(Paper)(({theme}) => ({
     width: 300,
@@ -15,17 +16,32 @@ const DemoPaper = styled(Paper)(({theme}) => ({
     justifyContent: 'space-between'
 }));
 export default function BasicStack() {
+    const niabMinsk = {
+        count: 806953,
+        percent: 80
+    };
+    const niabGrodno = {
+        count: 196073,
+        percent: 47
+    };
     return (
-        <Stack useFlexGap direction="row" spacing={2} sx={{justifyContent: 'space-around', margin: '2rem 0'}}>
-            <DemoPaper>
+        <Stack useFlexGap direction="row" spacing={2}
+               style={{
+                   "--niab-minsk-count": niabMinsk.count,
+                   "--niab-minsk-percent": niabMinsk.percent,
+                   "--niab-grodno-count": niabGrodno.count,
+                   "--niab-grodno-percent": niabGrodno.percent,
+               } as React.CSSProperties}
+               sx={{justifyContent: 'space-around', margin: '2rem 0'}}>
+            <DemoPaper >
                 <b>Минск</b>
-                <div>806 953 дел из 1 023 512</div>
-                <div>80 %</div>
+                <div><span id="niab-minsk-count" /> дел из 1 023 512</div>
+                <div><span id="niab-minsk-percent" /> %</div>
             </DemoPaper>
             <DemoPaper>
                 <b>Гродно</b>
-                <div>196 073 дел из 419 149</div>
-                <div>47 %</div>
+                <div><span id="niab-grodno-count" /> дел из 419 149</div>
+                <div><span id="niab-grodno-percent" /> %</div>
             </DemoPaper>
         </Stack>
     );
