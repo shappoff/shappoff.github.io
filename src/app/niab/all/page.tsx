@@ -29,11 +29,9 @@ export default async function NIAB() {
         <List>
             {
                 allPosts
-                    .filter(([fod]: any) => !!fod)
                     .map((row: any, index: number) => {
-                        const [fod, fodFull, fodlink, title, anotation, op, count, lang, oplink, internal, note, years, opNmb, store, storeNote] = row;
                         return <ListItem>
-                            <Link key={index} href={`/niab/${fod}`}>{fodFull} {title}</Link>
+                            <Link key={index} href={`/niab/${row.fod}`}>{row.fodFull} {row.title}</Link>
                         </ListItem>
                     })
             }

@@ -84,7 +84,9 @@ const FondPage = async ({params}: any) => {
                     currentItem.years ? <Chip label={currentItem.years} size="small" /> : <></>
                 }
                 {
-                    currentItem.lang ? <Chip label={currentItem.lang} size="small" /> : <></>
+                    currentItem.lang ?
+                        currentItem.lang.map((lang: string, index: number) => <Chip key={index} label={lang} size="small" />)
+                        : <></>
                 }
                 {
                     currentItem.storage ? <Chip label={'Хранилище № ' + currentItem.storage} size="small" /> : <></>

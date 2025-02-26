@@ -9,7 +9,7 @@ async function saveData(range: string, spreadsheetId: string, path: string) {
         flag: 'w'
     });
 }
-const firstStorage = {
+const firstStorage: any = {
     1297: true,
     2049: true,
     2097: true,
@@ -342,7 +342,7 @@ const firstStorage = {
     3291: true
 };
 
-const secondStorage = {
+const secondStorage: any = {
     1: true,
     164: true,
     266: true,
@@ -707,7 +707,7 @@ const secondStorage = {
     1682: true,
 };
 
-const thirdStorage = {
+const thirdStorage: any = {
     2: true,
     109: true,
     350: true,
@@ -1579,7 +1579,7 @@ const thirdStorage = {
     1910: true
 };
 
-const fourthStorage = {
+const fourthStorage: any = {
     11: true,
     79: true,
     434: true,
@@ -1757,7 +1757,7 @@ const fourthStorage = {
     2301: true
 };
 
-const fourthStorageMain = {
+const fourthStorageMain: any = {
     11: true,
     422: true,
     899: true,
@@ -2626,7 +2626,7 @@ const fourthStorageMain = {
     3391: true
 };
 
-const fiveStorage = {
+const fiveStorage: any = {
     3: true,
     177: true,
     208: true,
@@ -3345,7 +3345,7 @@ const fiveStorage = {
 
 };
 
-const getDocId =(url = '') => {
+const getDocId = (url = '') => {
     const idIndex = url.indexOf('id=');
     if (~idIndex) {
         return url.slice(idIndex + 3);
@@ -3373,7 +3373,7 @@ function normalazePageNumb(page = '') {
 }
 
 const handleNumber = (num = '') => {
-    return isNaN(num) ? num.length ? num : '' : +num;
+    return isNaN(+num) ? num.length ? num : '' : +num;
 }
 
 
@@ -3406,7 +3406,7 @@ export default async function UpdatedPage() {
         },
     ]);
 
-    const indexedFormattedData = indexedData.data.values.reduce((pool: any, [fond, opis, value]: any, index: number, arr: Array<any>) => {
+    const indexedFormattedData: any = indexedData?.data?.values?.reduce((pool: any, [fond, opis, value]: any, index: number, arr: Array<any>) => {
 
         if (!pool[fond]) {
             pool[fond] = {};
@@ -3418,7 +3418,7 @@ export default async function UpdatedPage() {
         return pool;
     }, {});
 
-    const rejectedFormattedData = rejectedData.data.values.reduce((pool: any, [fond, opis, value, ...other]: any, index: number, arr: Array<any>) => {
+    const rejectedFormattedData: any = rejectedData?.data?.values?.reduce((pool: any, [fond, opis, value, ...other]: any, index: number, arr: Array<any>) => {
 
         if (!pool[fond]) {
             pool[fond] = {};
@@ -3430,18 +3430,18 @@ export default async function UpdatedPage() {
         return pool;
     }, {});
 
-    const tabRangesData = [];
-    let titles;
-    let currentItem;
-    let currentFOD;
+    const tabRangesData: Array<any> = [];
+    let titles: any;
+    let currentItem: any;
+    let currentFOD: any;
     const opNmbPool = new Set();
-    mainTableData.data.values.forEach((row, rowIndex) => {
-        const res = {index: rowIndex};
+    mainTableData?.data?.values?.forEach((row: any, rowIndex: number) => {
+        const res: any = {index: rowIndex};
         if (rowIndex === 0) {
             titles = row;
         } else {
-            row.forEach((cell, cellIndex) => {
-                const fieldName = titles[cellIndex];
+            row.forEach((cell: any, cellIndex: number) => {
+                const fieldName: any = titles[cellIndex];
                 res[fieldName] = cell;
             });
         }
@@ -3510,7 +3510,7 @@ export default async function UpdatedPage() {
                 to,
                 to_formatted,
             };
-            let storage = 0;
+            let storage: number = 0;
             if (firstStorage[fod]) {
                 storage = 1;
             } else if (secondStorage[fod]) {
@@ -3528,7 +3528,7 @@ export default async function UpdatedPage() {
                 objectID: normalazePageNumb(fod),
                 fod: isNaN(+fod) ? fod : handleNumber(fod),
                 fodlink,
-                lang: lang ? lang.split(',').map((v) => v.trim()) : [],
+                lang: lang ? lang.split(',').map((v: string) => v.trim()) : [],
                 title,
                 years,
                 datesRange,
