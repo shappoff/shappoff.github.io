@@ -92,6 +92,15 @@ const FondPage = async ({params}: any) => {
                     currentItem.storage ? <Chip label={'Хранилище № ' + currentItem.storage} size="small" /> : <></>
                 }
                 {
+                    +fond === 333 ? <>
+                        <Link href="https://forum.vgd.ru/post/45/93243/p2043735.htm#pp2043735" target="_blank">
+                            <Tooltip title="Проект создания описи фонда 333">
+                                <Chip label="Опись 333-9" size="small" sx={{textDecoration: 'underline'}} />
+                            </Tooltip>
+                        </Link>
+                    </> : <></>
+                }
+                {
                     currentItem.s ? <>
                         <Link href="https://forum.vgd.ru/post/468/118798/p3690535.htm#pp3690535" target="_blank">
                             <Tooltip title="Индексация описей фондов НИАБ (Минск). Волонтерская инициатива. Присоединяйтесь к нашему проекту! Принять участие смогут все желающие">
