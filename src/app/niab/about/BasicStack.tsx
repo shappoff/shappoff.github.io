@@ -35,12 +35,12 @@ export default function BasicStack() {
                sx={{justifyContent: 'space-around', margin: '2rem 0'}}>
             <DemoPaper >
                 <b>Минск</b>
-                <div><span id="niab-minsk-count" /> дел из 1 023 512</div>
+                <div><span id="niab-minsk-count" /> дел из <span>1 023 512</span></div>
                 <div><span id="niab-minsk-percent" /> %</div>
             </DemoPaper>
             <DemoPaper>
                 <b>Гродно</b>
-                <div><span id="niab-grodno-count" /> дел из 419 149</div>
+                <div><span id="niab-grodno-count" /> дел из <span>419 149</span></div>
                 <div><span id="niab-grodno-percent" /> %</div>
             </DemoPaper>
         </Stack>

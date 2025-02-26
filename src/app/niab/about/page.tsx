@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description,
     icons: [
         {
-            url: '/niab/favicon.ico',
+            url: '/niab/about/favicon.ico',
             type: 'image/x-icon',
             sizes: 'any',
             rel: 'icon'
@@ -41,7 +41,7 @@ export default async function NIAB() {
             color: 'black',
             lineHeight: 1.5
         }}>
-            <h1 style={{  textAlign: 'center'}}>{title}</h1>
+            <h1 style={{ textAlign: 'center'}}>{title}</h1>
             <p style={{textIndent: '5%'}}>{description}</p>
 
             <BasicStack/>
