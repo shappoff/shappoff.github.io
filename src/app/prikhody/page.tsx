@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     },
     keywords: ['Карта', 'Беларусь', 'Церкви', 'Костелы', 'генеалогия', 'Сохранность'],
     robots: { index: true, follow: true },
+    icons: [
+        {
+            url: '/map-icon.svg',
+            type: 'image/svg+xml',
+            sizes: 'any',
+            rel: 'icon'
+        }
+    ],
 
 };
 
