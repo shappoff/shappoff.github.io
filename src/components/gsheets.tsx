@@ -1,11 +1,7 @@
 import { google } from "googleapis";
-import fs from "fs";
-import path from "path";
 
-
-
-export async function getGoogleSheetsData(range: string, spreadsheetId: string) {
-    const auth = await google.auth.getClient({
+const getAuthedSheets = async () => {
+    const auth: any = await google.auth.getClient({
         projectId: process.env.PROJECT_ID,
         credentials: {
             type: "authorized_user",
@@ -20,12 +16,29 @@ export async function getGoogleSheetsData(range: string, spreadsheetId: string) 
         scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
     });
 
-    const sheets = google.sheets({ version: "v4", auth });
+    return google.sheets({ version: "v4", auth });
+};
 
-    const data = await sheets.spreadsheets.values.get({
-        spreadsheetId,
-        range,
-    });
+export async function getGoogleSheetsData(range: string, spreadsheetId: string) {
+    const sheets = await getAuthedSheets();
+
+    const data = await sheets.spreadsheets.values.get({spreadsheetId, range});
 
     return data.data.values;
+}
+export async function getGoogleSheetsDataArr(spreadsheets: Array<any>) {
+    const sheets = await getAuthedSheets();
+    const [
+        mainTableConfig,
+        indexedConfig,
+        rejectedConfig,
+        digitedConfig
+    ] = spreadsheets;
+
+    return [
+        await sheets.spreadsheets.values.get(mainTableConfig),
+        await sheets.spreadsheets.values.get(indexedConfig),
+        await sheets.spreadsheets.values.get(rejectedConfig),
+        await sheets.spreadsheets.values.get(digitedConfig),
+    ];
 }
