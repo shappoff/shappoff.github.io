@@ -3465,7 +3465,6 @@ export default async function UpdatedPage() {
                 currentItem.s = Math.round(allLength/opNmbPool.size);
             }
 
-            console.log(allLength/opNmbPool.size);
             currentItem && tabRangesData.push(currentItem);
             currentItem = null;
             currentFOD = fod;
