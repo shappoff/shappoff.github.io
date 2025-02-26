@@ -30,8 +30,8 @@ export default async function NIAB() {
             {
                 allPosts
                     .map((row: any, index: number) => {
-                        return <ListItem>
-                            <Link key={index} href={`/niab/${row.fod}`}>{row.fodFull} {row.title}</Link>
+                        return <ListItem key={index}>
+                            <Link href={`/niab/${row.fod}`}>{row.fodFull} {row.title}</Link>
                         </ListItem>
                     })
             }
