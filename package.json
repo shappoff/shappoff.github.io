@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild": "tsx ./src/scripts/runner.ts",
     "start": "next start",
     "lint": "next lint"
   },
@@ -33,6 +34,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "tsx": "^4.19.3",
     "typescript": "^5"
   }
 }

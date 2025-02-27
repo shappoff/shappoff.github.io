@@ -11,7 +11,7 @@ export const getNickName = (email?: string | null | undefined) => {
 };
 
 
-function get(obj: any, propPath: string, defaultValue?: any) {
+export function get(obj: any, propPath: string, defaultValue?: any) {
     return getPropertyByPath(obj, propPath, defaultValue);
 }
 
