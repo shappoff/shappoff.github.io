@@ -97,7 +97,7 @@ jobs:
          echo "NEXT_PUBLIC_TELEGRAM_BOT_TOKEN=${{secrets.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN}}" >> ./.env.production
 
       - name: preBuild with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next prebuild
+        run: npm run prebuild
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
