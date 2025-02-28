@@ -1,7 +1,12 @@
 import fs from "fs";
-import path from "path";
 import {getGoogleSheetsDataArr} from "@/components/gsheets";
-import {get} from "@/components/utils";
+import {
+    get,
+    digitedPath,
+    mainDataPath,
+    rejectedPath,
+    stat333Path
+} from "@/components/utils";
 
 const firstStorage: any = {
     1297: true,
@@ -3404,12 +3409,12 @@ export default async function () {
     ]);
 
     const digitedFormattedData: any = get(digitedData, 'data.values', []).filter((v: any) => v.length);
-    fs.writeFileSync(path.resolve(`public/niab/digited.json`), JSON.stringify(digitedFormattedData, null, 4), {
+    fs.writeFileSync(digitedPath, JSON.stringify(digitedFormattedData, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
 
-    fs.writeFileSync(path.resolve(`public/niab/333-9.json`), JSON.stringify(get(stat333Data, 'data.values', []), null, 4), {
+    fs.writeFileSync(stat333Path, JSON.stringify(get(stat333Data, 'data.values', []), null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
@@ -3427,7 +3432,7 @@ export default async function () {
     }, {});
 
     const rejectedFormattedData: any = get(rejectedData, 'data.values', []).filter((v: any) => v.length);
-    fs.writeFileSync(path.resolve(`public/niab/rejected.json`), JSON.stringify(rejectedFormattedData, null, 4), {
+    fs.writeFileSync(rejectedPath, JSON.stringify(rejectedFormattedData, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
@@ -3452,7 +3457,9 @@ export default async function () {
             fod, fodlink, title, anotation = '', op, count, lang, oplink, internal, note, years, opNmb
         } = res;
         opNmbPool.add(opNmb);
-        if (!rowIndex) {return;}
+        if (!rowIndex) {
+            return;
+        }
 
         if (fod) {
             let allLength = Object.keys(indexedFormattedData[currentFOD] || {})
@@ -3465,7 +3472,7 @@ export default async function () {
                     }
                 }, 0);
             if (currentItem) {
-                currentItem.s = Math.round(allLength/opNmbPool.size);
+                currentItem.s = Math.round(allLength / opNmbPool.size);
             }
 
             currentItem && tabRangesData.push(currentItem);
@@ -3484,9 +3491,9 @@ export default async function () {
             currentItem.opisi.push({
                 op: op.replace('Опись ', ''),
                 docId,
-                i: internal ? internal : void(0),
-                n: note ? note : void(0),
-                s: indexedOpisStatus ? indexedOpisStatus.replace('%', '') : void(0)
+                i: internal ? internal : void (0),
+                n: note ? note : void (0),
+                s: indexedOpisStatus ? indexedOpisStatus.replace('%', '') : void (0)
             });
         } else {
             const dRange = [];
@@ -3539,9 +3546,9 @@ export default async function () {
                 opisi: [{
                     op: op.replace('Опись ', ''),
                     docId,
-                    i: internal ? internal : void(0),
-                    n: note ? note : void(0),
-                    s: indexedOpisStatus ? indexedOpisStatus.replace('%', '') : void(0)
+                    i: internal ? internal : void (0),
+                    n: note ? note : void (0),
+                    s: indexedOpisStatus ? indexedOpisStatus.replace('%', '') : void (0)
                 }]
             };
         }
@@ -3549,7 +3556,7 @@ export default async function () {
 
     currentItem && tabRangesData.push(currentItem);
 
-    fs.writeFileSync(path.resolve(`public/niab/data.json`), JSON.stringify(tabRangesData, null, 4), {
+    fs.writeFileSync(mainDataPath, JSON.stringify(tabRangesData, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });

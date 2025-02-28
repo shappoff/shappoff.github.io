@@ -15,15 +15,16 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import React from "react";
 import Tooltip from '@mui/material/Tooltip';
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-
-const targetNIAB = path.resolve(`public/niab/data.json`);
-const rejectedPath = path.resolve(`public/niab/rejected.json`);
-const digitedPath = path.resolve(`public/niab/digited.json`);
-const d333Path = path.resolve(`public/niab/333-9.json`);
+import {
+    digitedPath,
+    mainDataPath,
+    rejectedPath,
+    stat333Path
+} from "@/components/utils";
 
 export async function generateStaticParams() {
     const stPropsArr: Array<any> = [];
-    const allPosts = JSON.parse(fs.readFileSync(targetNIAB, 'utf8'));
+    const allPosts = JSON.parse(fs.readFileSync(mainDataPath, 'utf8'));
     allPosts.forEach(({fod}: any) => {
         stPropsArr.push({fond: `${fod}`});
     })
@@ -33,7 +34,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: any) {
     const {fond} = await params;
-    const allPosts = JSON.parse(fs.readFileSync(targetNIAB, 'utf8'));
+    const allPosts = JSON.parse(fs.readFileSync(mainDataPath, 'utf8'));
 
     const currentItem = allPosts.find((item: any) => +item.fod === +fond || item.fod === fond) || {};
 
@@ -53,10 +54,10 @@ export async function generateMetadata({ params }: any) {
 
 const FondPage = async ({params}: any) => {
     const {fond} = await params;
-    const allPosts = JSON.parse(fs.readFileSync(targetNIAB, 'utf8'));
+    const allPosts = JSON.parse(fs.readFileSync(mainDataPath, 'utf8'));
     const rejectedPosts = JSON.parse(fs.readFileSync(rejectedPath, 'utf8'));
     const digitedPosts = JSON.parse(fs.readFileSync(digitedPath, 'utf8'));
-    const d333Posts = JSON.parse(fs.readFileSync(d333Path, 'utf8'));
+    const d333Posts = JSON.parse(fs.readFileSync(stat333Path, 'utf8'));
     const rejectedItems = rejectedPosts.filter((rejected: any) => +rejected[0] === +fond);
     const digitedItems = digitedPosts.filter((digited: any) => +digited[0] === +fond);
     const currentItem = allPosts.find((item: any) => +item.fod === +fond || item.fod === fond) || {};
