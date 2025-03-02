@@ -13,6 +13,7 @@ export default function Home() {
         <Link href="/niab">Фонды и описи НИАБ. Удобный поиск описей по фондам НИАБ (Национальный исторический архив Беларуси).</Link>
         <Link href="/kp">Книги Память.</Link>
         <Link href="/prikhody">Приходы Беларуси. Карта церквей и костелов. Сохранность метрических записей.</Link>
+        <Link href="/catalogarchivesgov">Карта аэрофотосъемки Беларуси времен ВОВ.</Link>
       </main>
       <footer className={styles.footer}>
 

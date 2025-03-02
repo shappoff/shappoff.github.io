@@ -4,8 +4,8 @@ import fs from "fs";
 import {Belarus_full, smolensk_full} from "@/components/utils";
 
 export const metadata: Metadata = {
-    title: "Аэрофотосъемка Беларуси времен ВОВ 1943",
-    description: "Аэрофотосъемка Беларуси времен ВОВ 1943",
+    title: "Карта аэрофотосъемки Беларуси времен ВОВ",
+    description: "Карта аэрофотосъемки Беларуси времен ВОВ",
 };
 
 export default function CatalogarchivesgovPage() {
