@@ -3399,8 +3399,8 @@ export default async function () {
             range: 'main!A1:L'
         },
         {
-            spreadsheetId: '1068s-7o1XZavxaS7ODN1rEoXbswFkxy4174uEg9yPPY',
-            range: 'Аркуш1!A2:D'
+            spreadsheetId: '1uYH8uEomgtuDVVylEHwY3HLQ7BqMhVrFrZHg53HFwSA',
+            range: 'Лист1!A2:D'
         },
         {
             spreadsheetId: '1X-a2Xfm60fB6RvpTTO1XKqm7FvBNscrHjdXFVzSBgkQ',
@@ -3408,11 +3408,13 @@ export default async function () {
         },
     ]);
 
+/*
     const digitedFormattedData: any = get(digitedData, 'data.values', []).filter((v: any) => v.length);
     fs.writeFileSync(digitedPath, JSON.stringify(digitedFormattedData, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
+*/
 
     fs.writeFileSync(stat333Path, JSON.stringify(get(stat333Data, 'data.values', []), null, 4), {
         encoding: 'utf8',
