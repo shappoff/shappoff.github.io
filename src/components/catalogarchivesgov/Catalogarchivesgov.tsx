@@ -13,13 +13,21 @@ import PlaceMarker from "@/components/catalogarchivesgov/PlaceMarker";
 import React from "react";
 
 export default function Catalogarchivesgov({items}: any) {
-    const list = items.filter((item: any) => ~item.scopeAndContentNote.indexOf('-')).map((item: any) => {
-        const title1 = item.title;
-        const [coords, title2] = item.scopeAndContentNote.split('-');
-        const [lat, lng] = coords.trim().split(',');
-        const _geoloc = {lat: lat.trim(), lng: lng.trim()};
-        return {...item, _geoloc, title2}
-    })
+    const list = items
+        .filter((item: any) =>
+            item.scopeAndContentNote &&
+            ~item.scopeAndContentNote?.indexOf(',') &&
+            !~item.scopeAndContentNote?.indexOf('Latitude:') &&
+            ~item.scopeAndContentNote?.indexOf('-'))
+        .map((item: any) => {
+            const [coords, title2] = item.scopeAndContentNote.split('-');
+            const [lat, lng] = coords.trim().split(',');
+            if (!(lat && lng)) {
+                return null
+            }
+            const _geoloc = {lat: lat.trim(), lng: lng.trim()};
+            return {...item, _geoloc, title2}
+        })
     return <>
         <MapContainer
             attributionControl={false}
@@ -47,7 +55,7 @@ export default function Catalogarchivesgov({items}: any) {
             </LayersControl>
             <MarkerClusterGroup>
                 {
-                    list.map((hit: any, index: number) => {
+                    list.filter((item: any) => !!item).map((hit: any, index: number) => {
                         return <PlaceMarker key={index} hit={hit}/>
                     })
                 }
