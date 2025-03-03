@@ -20,7 +20,7 @@ export default async function Home() {
     const [header]: any = data;
     return <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: '96vh' }}>
-            <Table sx={{ minWidth: 650 }} size="small" stickyHeader aria-label="sticky table">
+            <Table size="small" stickyHeader aria-label="sticky table">
 {/*
                 <TableHead>
                     <TableRow>
@@ -45,9 +45,9 @@ export default async function Home() {
                             {/*<TableCell align="center">{row[2]}</TableCell>*/}
                             <TableCell align="center">{row[3]}</TableCell>
                             <TableCell align="center">{row[4]}</TableCell>
-                            <TableCell align="center">{row[5]}</TableCell>
+                            <TableCell sx={{minWidth: '20vw'}} align="center">{row[5]}</TableCell>
                             <TableCell align="center">{row[6]}</TableCell>
-                            <TableCell align="center">{row[7]}</TableCell>
+                            <TableCell sx={{minWidth: '40vw'}} align="center">{row[7]}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
