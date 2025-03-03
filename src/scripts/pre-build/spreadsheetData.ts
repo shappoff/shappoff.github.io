@@ -5,7 +5,8 @@ import {
     digitedPath,
     mainDataPath,
     rejectedPath,
-    stat333Path
+    stat333Path,
+    cgia_19_127Path
 } from "@/components/utils";
 
 const firstStorage: any = {
@@ -3384,7 +3385,8 @@ export default async function () {
         indexedData,
         rejectedData,
         digitedData,
-        stat333Data
+        stat333Data,
+        cgia_19_127Data,
     ] = await getGoogleSheetsDataArr([
         {
             spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
@@ -3406,8 +3408,17 @@ export default async function () {
             spreadsheetId: '1X-a2Xfm60fB6RvpTTO1XKqm7FvBNscrHjdXFVzSBgkQ',
             range: 'Опись 333-9!A3:J'
         },
+        {
+            spreadsheetId: '1ZPdTmzquF_qraM1pfQcjBox_KbDc20wDStCMv55wjJQ',
+            range: 'main!A1:H'
+        },
     ]);
 
+    const cgia_19_127FormattedData: any = get(cgia_19_127Data, 'data.values', []);
+    fs.writeFileSync(cgia_19_127Path, JSON.stringify(cgia_19_127FormattedData, null, 4), {
+        encoding: 'utf8',
+        flag: 'w'
+    });
 /*
     const digitedFormattedData: any = get(digitedData, 'data.values', []).filter((v: any) => v.length);
     fs.writeFileSync(digitedPath, JSON.stringify(digitedFormattedData, null, 4), {
@@ -3564,4 +3575,10 @@ export default async function () {
     });
 
 
+}
+
+function createDirIfNot(dir: any) {
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
 }
