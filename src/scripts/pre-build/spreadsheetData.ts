@@ -1,13 +1,13 @@
 import fs from "fs";
 import {getGoogleSheetsDataArr} from "@/components/gsheets";
 import {
-    get,
     digitedPath,
     mainDataPath,
     rejectedPath,
     stat333Path,
     cgia_19_127Path
-} from "@/components/utils";
+} from "@/components/paths";
+import {get} from "@/components/utils";
 
 const firstStorage: any = {
     1297: true,

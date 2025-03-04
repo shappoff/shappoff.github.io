@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {cgia_19_127Path} from "@/components/utils";
+import {cgia_19_127Path} from "@/components/paths";
 import fs from "fs";
 
 export const metadata: Metadata = {

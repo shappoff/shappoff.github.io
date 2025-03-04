@@ -1,7 +1,7 @@
 import {Metadata} from "next";
 import Dynamic from "@/components/catalogarchivesgov/Dynamic";
 import fs from "fs";
-import {Belarus_full, smolensk_full} from "@/components/utils";
+import {Belarus_full, smolensk_full} from "@/components/paths";
 
 export const metadata: Metadata = {
     title: "Карта аэрофотосъемки Беларуси времен ВОВ",

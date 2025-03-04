@@ -20,7 +20,7 @@ import {
     mainDataPath,
     rejectedPath,
     stat333Path
-} from "@/components/utils";
+} from "@/components/paths";
 
 export async function generateStaticParams() {
     const stPropsArr: Array<any> = [];
