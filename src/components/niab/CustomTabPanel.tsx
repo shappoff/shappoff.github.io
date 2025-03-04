@@ -46,7 +46,7 @@ export default function BasicTabs({digitedPosts}: any) {
                     opisi ? Object.keys(opisi)
                         .map((opNmb: string, index: number) => {
                             return <TabPanel key={index}
-                                             sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', padding: 0, minHeight: '5px'}}
+                                             sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', padding: 0}}
                                              value={index}>
                                 {
                                     opisi[opNmb] ? Object.values(opisi[opNmb])
