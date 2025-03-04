@@ -4,48 +4,23 @@ import * as React from 'react';
 import TabList from '@mui/lab/TabList';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import {Chip} from "@mui/material";
+import WrapToTooltip from "@/components/niab/BasicTooltip";
 
-interface TabPanelProps {
-    children?: React.ReactNode;
-    index: number;
-    value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-    const {children, value, index, ...other} = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && <Box sx={{p: 3}}>{children}</Box>}
-        </div>
-    );
-}
-
-function a11yProps(index: number) {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
+function compareDelaNumbers(a: any, b: any) {
+    return a.delo - b.delo;
 }
 
 export default function BasicTabs({digitedPosts}: any) {
     const opisi: any = {};
     digitedPosts.forEach((dItem: any) => {
-        const [fond, opis, delo] = dItem;
+        const [fond, opis, delo, comment] = dItem;
         if (opisi[opis]) {
-            opisi[opis].push(delo);
+            opisi[opis].push({delo, comment});
         } else {
-            opisi[opis] = [delo]
+            opisi[opis] = [{delo, comment}]
         }
     });
     const [value, setValue] = React.useState(0);
@@ -71,13 +46,16 @@ export default function BasicTabs({digitedPosts}: any) {
                     opisi ? Object.keys(opisi)
                         .map((opNmb: string, index: number) => {
                             return <TabPanel key={index}
-                                             sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', padding: 0}}
+                                             sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', padding: 0, minHeight: '5px'}}
                                              value={index}>
                                 {
                                     opisi[opNmb] ? Object.values(opisi[opNmb])
-                                        .map((delo: any, indexD: number) => {
+                                        .sort(compareDelaNumbers)
+                                        .map(({delo, comment}: any, indexD: number) => {
                                             return <div key={indexD} style={{margin: '0 10px'}}>
-                                                <Chip label={`№${delo}`} variant="outlined" />
+                                                <WrapToTooltip note={comment}>
+                                                    <Chip sx={{margin: 1, cursor: 'pointer', color: comment?'blue':'black'}} label={comment ? <u>№{delo}</u> : <span>№{delo}</span>} variant="outlined" />
+                                                </WrapToTooltip>
                                             </div>
                                         }) : <></>
                                 }
