@@ -29,12 +29,15 @@ const PlaceMarker = ({hit}: any) => {
                 <div>
                     <a href={`https://catalog.archives.gov/id/${hit.naId}`} target="_blank">https://catalog.archives.gov/id/{hit.naId}</a>
                 </div>
-
+                <br />
                 {
                     hit.digitalObjects.map((dOb: any, index: number) => {
                         return <div key={index}><a href={dOb.objectUrl} target="_blank">{dOb.objectFilename}</a></div>
                     })
                 }
+                <br />
+                <hr />
+                <footer>{hit.productionDates?.map(({day, month, year}: any, index: number) => <div key={index}>{day}.{month}.{year}</div>)}</footer>
             </div>
         </Popup>
     </Marker>
