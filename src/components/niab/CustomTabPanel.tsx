@@ -58,8 +58,7 @@ export default function BasicTabs({digitedPosts}: any) {
         <Box sx={{width: '100%'}}>
             <TabContext value={value}>
                 <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-                    <TabList value={value} onChange={handleChange} aria-label="Список описей" variant="scrollable"
-                             scrollButtons="auto">
+                    <TabList onChange={handleChange} aria-label="Список описей" variant="scrollable" scrollButtons="auto">
                         {
                             Object.keys(opisi)
                                 .map((opNmb: string, index: number) => {
@@ -76,7 +75,7 @@ export default function BasicTabs({digitedPosts}: any) {
                                              value={index}>
                                 {
                                     opisi[opNmb] ? Object.values(opisi[opNmb])
-                                        .map((delo: string, indexD: number) => {
+                                        .map((delo: any, indexD: number) => {
                                             return <div key={indexD} style={{margin: '0 10px'}}>
                                                 <Chip label={`№${delo}`} variant="outlined" />
                                             </div>
