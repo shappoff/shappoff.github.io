@@ -17,6 +17,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import OpisCard from "@/components/niab/OpisCard";
 import Link from "next/link";
 import {Alert} from "@mui/material";
+import BasicTabs from "@/components/niab/CustomTabPanel";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -104,29 +105,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                     <h3>Оцифрованные дела фонда</h3>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Paper sx={{width: '100%', overflow: 'hidden'}}>
-                        <TableContainer>
-                            <Table size="small" stickyHeader aria-label="sticky table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell align="left">Фонд-Опись-Дело</TableCell>
-                                        <TableCell align="left">Примичание</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {digitedPosts?.sort(compareNumbers).map((row: any, index: number) => (
-                                        <TableRow
-                                            key={index}
-                                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                                        >
-                                            <TableCell align="left">{row[0]}-{row[1]}-{row[2]}</TableCell>
-                                            <TableCell align="left">{row[3]}</TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Paper>
+                    <BasicTabs digitedPosts={digitedPosts} />
                 </AccordionDetails>
             </Accordion> : <></>}
 

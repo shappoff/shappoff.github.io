@@ -3,7 +3,6 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import FondTabs from "@/components/niab/FondTabs";
-import path from "path";
 import fs from "fs";
 
 import Stack from '@mui/material/Stack';
