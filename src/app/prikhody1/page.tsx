@@ -26,7 +26,5 @@ export const metadata: Metadata = {
 };
 
 export default function PrikhodyMapPage() {
-    const allPrikhods = JSON.parse(fs.readFileSync(algolia_prikhods, 'utf8'));
-    console.log('allPrikhods', allPrikhods.length);
     return <div id="sdfsdf" />
 }

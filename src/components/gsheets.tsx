@@ -34,7 +34,8 @@ export async function getGoogleSheetsDataArr(spreadsheets: Array<any>) {
         rejectedConfig,
         digitedConfig,
         stat333Data,
-        cgia_19_127Data
+        cgia_19_127Data,
+        prikhodyMain
     ] = spreadsheets;
 
     return [
@@ -44,5 +45,6 @@ export async function getGoogleSheetsDataArr(spreadsheets: Array<any>) {
         await sheets.spreadsheets.values.get(digitedConfig),
         await sheets.spreadsheets.values.get(stat333Data),
         await sheets.spreadsheets.values.get(cgia_19_127Data),
+        await sheets.spreadsheets.values.get(prikhodyMain),
     ];
 }

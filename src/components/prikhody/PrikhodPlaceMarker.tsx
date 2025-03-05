@@ -7,9 +7,9 @@ import React from "react";
 import {catholicCrossIcon, ortodoxCrossIcon} from "../icons";
 
 const PrikhodPlaceMarker = ({hit, popupclose, popupopen, setCurrentLocIdInPopUp, selectCallback, children}: any) => {
-
-    const isOrtodox = !!~hit.title.indexOf('церковь');
-    return <Marker title={`${hit.pType ? `${hit.pType} ` : ''}${hit.pTitle}, ${hit.title}`}
+    const [objectID, title, pTitle, pType, lat, lng, src, atd] = hit;
+    const isOrtodox = !!~title.indexOf('церковь');
+    return <Marker title={`${pType ? `${pType} ` : ''}${pTitle}, ${title}`}
                    eventHandlers={{
                        popupclose: (e: any) => popupclose && popupclose(e),
                        mouseover: (e: any) => {
@@ -22,12 +22,12 @@ const PrikhodPlaceMarker = ({hit, popupclose, popupopen, setCurrentLocIdInPopUp,
                    }}
                    icon={new DivIcon({
                        html: isOrtodox ? ortodoxCrossIcon : catholicCrossIcon,
-                       className: `marker-church-div-icon ${isOrtodox ? 'orthodox' : 'сatholic'} ${hit.src === 0 ? 'no-metrics' : ''}`
+                       className: `marker-church-div-icon ${isOrtodox ? 'orthodox' : 'сatholic'} ${+src === 0 ? 'no-metrics' : ''}`
                    })}
-                   position={[hit._geoloc.lat, hit._geoloc.lng]}>
+                   position={[parseFloat(lat.replace(',', '.')), parseFloat(lng.replace(',', '.'))]}>
         <Popup>
-            <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{hit.pType ? `${hit.pType} ` : ''}{hit.pTitle}</b>
-            <h6 style={{textTransform: 'capitalize'}}>{hit.title}</h6>
+            <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{pType ? `${pType} ` : ''}{pTitle}</b>
+            <h6 style={{textTransform: 'capitalize'}}>{title}</h6>
             {children}
             <p>
                 <a href="javascript:void(0)" onClick={() => {selectCallback(hit)}}><i>Подробнее</i></a>

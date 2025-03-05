@@ -54,7 +54,7 @@ const PrikhodyMapApp = ({items}: any) => {
     return <MapContainer
         attributionControl={false}
         id="map"
-        key="map"
+        key="map1"
         center={[53.902287, 27.561824]}
         zoom={7}
 
@@ -68,26 +68,16 @@ const PrikhodyMapApp = ({items}: any) => {
         <MarkerClusterGroup key="MarkerClusterGroup">
             {
                 items.map((hit: any, indexMarker: number) => {
-                    return hit._geoloc?.lat ? <PrikhodPlaceMarker
+                    const [objectID, title, pTitle, pType, lat, lng, src, atd] = hit;
+                    return lat && lng ? <PrikhodPlaceMarker
                         // popupclose={popupclose}
                         // popupopen={popupopen}
-                        key={hit.objectID}
+                        key={objectID + indexMarker}
                         hit={hit}
                         isMobile={rootWith < 800}
                         // setCurrentLocIdInPopUp={setCurrentLocIdInPopUp}
                         // selectCallback={selectCallback}
-                    >
-{/*
-                        <IndicateButton item={hit} setIsShowPanel={setIsShowPanel} label="Сменить местоположение" />
-                        {
-                            !!currentNotFoundPrikhodNPs?.length ? <div id="info-panel-label-button" onClick={() => setIsShowNotFoundPanel(true)}>
-                                <Badge bg="warning" text="dark">
-                                    Не найденные на карте<br/>населенные пункты прихода
-                                </Badge>
-                            </div> : <></>
-                        }
-*/}
-                    </PrikhodPlaceMarker> : <></>
+                    ></PrikhodPlaceMarker> : <></>
                 })
             }
         </MarkerClusterGroup>

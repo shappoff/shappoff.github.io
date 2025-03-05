@@ -5,7 +5,8 @@ import {
     mainDataPath,
     rejectedPath,
     stat333Path,
-    cgia_19_127Path
+    cgia_19_127Path,
+    prikhodyMainDataPath
 } from "@/components/paths";
 import {get} from "@/components/utils";
 
@@ -3387,6 +3388,7 @@ export default async function () {
         digitedData,
         stat333Data,
         cgia_19_127Data,
+        prikhodyMain,
     ] = await getGoogleSheetsDataArr([
         {
             spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
@@ -3412,10 +3414,19 @@ export default async function () {
             spreadsheetId: '1ZPdTmzquF_qraM1pfQcjBox_KbDc20wDStCMv55wjJQ',
             range: 'main!A1:H'
         },
+        {
+            spreadsheetId: '1A9dPH4ppRf5fWGYJzyKI9Z_82GKg-wq4HNLkDduY2r0',
+            range: 'main!A2:H'
+        },
     ]);
 
     const cgia_19_127FormattedData: any = get(cgia_19_127Data, 'data.values', []);
     fs.writeFileSync(cgia_19_127Path, JSON.stringify(cgia_19_127FormattedData, null, 4), {
+        encoding: 'utf8',
+        flag: 'w'
+    });
+    const prikhodyMainData: any = get(prikhodyMain, 'data.values', []);
+    fs.writeFileSync(prikhodyMainDataPath, JSON.stringify(prikhodyMainData, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
