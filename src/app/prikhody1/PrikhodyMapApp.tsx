@@ -21,10 +21,10 @@ const client = algoliasearch(
 
 import {useWindowSize} from "@/components/prikhody/useWindowSize";
 import LayersControlComponent from "@/components/prikhody/LayersControlComponent";
-import PrikhodPlaceMarker from "@/components/prikhody/PrikhodPlaceMarker";
 import SetMapSizeOnChange from "@/components/prikhody/SetMapSizeOnChange";
 import NPPlaceMarker from "@/components/prikhody/NPPlaceMarker";
 import IndicateButton from "@/components/prikhody/IndicateButton";
+import PrikhodPlaceMarker from "@/app/prikhody1/PrikhodPlaceMarker";
 
 const PrikhodyMapApp = ({items}: any) => {
     const filterBarRef = React.useRef(null);
