@@ -1,6 +1,7 @@
 import {Metadata} from "next";
 import fs from "fs";
-import {algolia_prikhods} from "@/components/paths";
+import {prikhodyMainDataPath} from "@/components/paths";
+import Markers from "@/app/prikhody1/MarkersList";
 
 export const metadata: Metadata = {
     title: 'Карта приходов',
@@ -26,5 +27,7 @@ export const metadata: Metadata = {
 };
 
 export default function PrikhodyMapPage() {
-    return <div id="sdfsdf" />
+    const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
+
+    return <Markers items={allPrikhods} />
 }

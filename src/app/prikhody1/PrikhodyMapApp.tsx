@@ -26,7 +26,7 @@ import NPPlaceMarker from "@/components/prikhody/NPPlaceMarker";
 import IndicateButton from "@/components/prikhody/IndicateButton";
 import PrikhodPlaceMarker from "@/app/prikhody1/PrikhodPlaceMarker";
 
-const PrikhodyMapApp = ({items}: any) => {
+const PrikhodyMapApp = ({children}: any) => {
     const filterBarRef = React.useRef(null);
     const resultListRef = React.useRef(null);
 
@@ -66,20 +66,7 @@ const PrikhodyMapApp = ({items}: any) => {
         <SetMapSizeOnChange key="SetMapSizeOnChange" top={`${filterBarHeight}px`} height={`calc(100vh - ${footerHeight + filterBarHeight}px)`}/>
         <LayersControlComponent key="LayersControlComponent" rootWith={rootWith}/>
         <MarkerClusterGroup key="MarkerClusterGroup">
-            {
-                items.map((hit: any, indexMarker: number) => {
-                    const [objectID, title, pTitle, pType, lat, lng, src, atd] = hit;
-                    return lat && lng ? <PrikhodPlaceMarker
-                        // popupclose={popupclose}
-                        // popupopen={popupopen}
-                        key={objectID + indexMarker}
-                        hit={hit}
-                        isMobile={rootWith < 800}
-                        // setCurrentLocIdInPopUp={setCurrentLocIdInPopUp}
-                        // selectCallback={selectCallback}
-                    ></PrikhodPlaceMarker> : <></>
-                })
-            }
+            {children}
         </MarkerClusterGroup>
     </MapContainer>;
 };

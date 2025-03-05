@@ -5,7 +5,7 @@ import React from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-const Prikhody = ({items}: any) => {
+const Prikhody = ({children}: any) => {
     const MapApp = React.useMemo(() => dynamic(
         () => import('./PrikhodyMapApp'),
         {
@@ -15,7 +15,7 @@ const Prikhody = ({items}: any) => {
             ssr: false
         }
     ), [])
-    return <MapApp items={items} key="map-page" />;
+    return <MapApp key="map-page">{children}</MapApp>;
 };
 
 export default Prikhody;
