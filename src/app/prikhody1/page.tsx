@@ -2,6 +2,8 @@ import {Metadata} from "next";
 import fs from "fs";
 import {prikhodyMainDataPath} from "@/components/paths";
 import Markers from "@/app/prikhody1/MarkersList";
+import MarkerClusterGroup from 'react-leaflet-markercluster';
+import 'react-leaflet-markercluster/styles';
 
 export const metadata: Metadata = {
     title: 'Карта приходов',
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
         type: 'website'
     },
     keywords: ['Карта', 'Беларусь', 'Церкви', 'Костелы', 'генеалогия', 'Сохранность'],
-    robots: { index: true, follow: true },
+    robots: {index: true, follow: true},
     icons: [
         {
             url: '/map-icon.svg',
@@ -29,5 +31,9 @@ export const metadata: Metadata = {
 export default function PrikhodyMapPage() {
     const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
 
-    return <Markers items={allPrikhods} />
+    return <>
+        <MarkerClusterGroup key="MarkerClusterGroup">
+            <Markers items={allPrikhods}/>
+        </MarkerClusterGroup>
+    </>
 }

@@ -65,9 +65,7 @@ const PrikhodyMapApp = ({children}: any) => {
     >
         <SetMapSizeOnChange key="SetMapSizeOnChange" top={`${filterBarHeight}px`} height={`calc(100vh - ${footerHeight + filterBarHeight}px)`}/>
         <LayersControlComponent key="LayersControlComponent" rootWith={rootWith}/>
-        <MarkerClusterGroup key="MarkerClusterGroup">
-            {children}
-        </MarkerClusterGroup>
+        {children}
     </MapContainer>;
 };
 
