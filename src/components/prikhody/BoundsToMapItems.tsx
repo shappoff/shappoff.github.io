@@ -7,7 +7,7 @@ const BoundsToMapItems = ({bounds, callback}: any) => {
 
     React.useEffect(() => {
         const ms = setTimeout(() => {
-            // bounds && map.fitBounds(bounds);
+            bounds && map.fitBounds(bounds);
         }, 100);
         return ()  => {
             ms && clearTimeout(ms);

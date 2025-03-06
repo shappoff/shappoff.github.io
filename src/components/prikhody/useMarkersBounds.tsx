@@ -9,12 +9,12 @@ const useMarkersBounds = (mapHits: Array<any>) => {
         const bounds = latLngBounds([])
 
         mapHits && mapHits.length && [...mapHits].forEach((item: any) => {
-            const {_geoloc} = item;
-            if (!_geoloc.lat) {
+            const lat = item[4];
+            const lng = item[5];
+            if (!lat || !lng) {
                 return;
             }
-            const {lat, lng} = _geoloc;
-            bounds.extend([lat, lng])
+            bounds.extend([lat, lng]);
         });
 
         setCurrentBounds(bounds);
