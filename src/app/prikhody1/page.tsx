@@ -2,6 +2,7 @@ import {Metadata} from "next";
 import fs from "fs";
 import {prikhodyMainDataPath} from "@/components/paths";
 import Markers from "@/app/prikhody1/MarkersList";
+import WrapToMarkerClusterGroup from "@/app/prikhody1/WrapToMarkerClusterGroup";
 
 export const metadata: Metadata = {
     title: 'Карта приходов',
@@ -29,5 +30,9 @@ export const metadata: Metadata = {
 export default function PrikhodyMapPage() {
     const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
 
-    return <Markers items={allPrikhods} />
+    return <>
+        <WrapToMarkerClusterGroup>
+            <Markers items={allPrikhods} />
+        </WrapToMarkerClusterGroup>
+    </>
 }
