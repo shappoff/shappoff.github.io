@@ -1,7 +1,7 @@
 import fs from "fs";
 import {prikhodyMainDataPath} from "@/components/paths";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
-import Markers from "@/app/prikhody1/MarkersList";
+import WrapToMarkerClusterGroup from "@/app/prikhody1/WrapToMarkerClusterGroup";
 const cyrillicToTranslit: any = new (CyrillicToTranslit as any);
 
 export async function generateStaticParams() {
@@ -72,7 +72,11 @@ const FondPage = async ({params}: any) => {
             });
         }
     });
-    return <Markers items={allPrikhods.filter(([,,,,,,,atdStr]: any) => atdStr && ~cyrillicToTranslit.transform(atdStr.trim(), '_').toLowerCase()?.indexOf(atd))} />
+    const items = allPrikhods.filter(([,,,,,,,atdStr]: any) => atdStr && ~cyrillicToTranslit.transform(atdStr.trim(), '_').toLowerCase()?.indexOf(atd));
+
+    return <>
+        <WrapToMarkerClusterGroup enable={false} items={items} />
+    </>
 };
 
 export default FondPage;
