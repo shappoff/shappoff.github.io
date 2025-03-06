@@ -17,6 +17,7 @@
     "@mui/material": "^6.4.2",
     "algoliasearch": "^4.24.0",
     "bootstrap": "^5.3.3",
+    "cyrillic-to-translit-js": "^3.2.1",
     "firebase": "^11.3.0",
     "googleapis": "^144.0.0",
     "leaflet": "^1.9.4",
