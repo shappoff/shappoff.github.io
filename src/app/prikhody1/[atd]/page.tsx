@@ -42,10 +42,11 @@ export async function generateMetadata({ params }: any) {
         }
     });
 
+    const title = atdObj[atd];
 
     return {
-        title: atdObj[atd],
-        description: atdObj[atd],
+        title: `${title} | Карта приходов`,
+        description: `Церкви и костелы ${title}, Карта приходов`,
         icons: [
             {
                 url: '/map-icon.svg',
