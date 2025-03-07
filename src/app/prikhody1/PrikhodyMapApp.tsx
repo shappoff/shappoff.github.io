@@ -5,32 +5,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './prikhody.css';
 
 
-import {
-    MapContainer, Marker, Popup
-} from "react-leaflet";
+import {MapContainer} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import 'react-leaflet-markercluster/styles'
-import MarkerClusterGroup from 'react-leaflet-markercluster';
-
-import algoliasearch from 'algoliasearch/lite';
-
-const client = algoliasearch(
-    process.env.NEXT_PUBLIC_PRIKHODY_APPLICATIONID || '',
-    process.env.NEXT_PUBLIC_PRIKHODY_SEARCHONLYAPIKEY || ''
-);
+import 'react-leaflet-markercluster/styles';
+import CyrillicToTranslit from 'cyrillic-to-translit-js';
+const cyrillicToTranslit: any = new (CyrillicToTranslit as any);
+import { useRouter } from 'next/navigation';
 
 import {useWindowSize} from "@/components/prikhody/useWindowSize";
 import LayersControlComponent from "@/components/prikhody/LayersControlComponent";
 import SetMapSizeOnChange from "@/components/prikhody/SetMapSizeOnChange";
-import NPPlaceMarker from "@/components/prikhody/NPPlaceMarker";
-import IndicateButton from "@/components/prikhody/IndicateButton";
-import PrikhodPlaceMarker from "@/app/prikhody1/PrikhodPlaceMarker";
+import FilterBar from "@/components/prikhody/FilterBar";
+import Select from "react-select";
 
-const PrikhodyMapApp = ({children}: any) => {
+const PrikhodyMapApp = ({children, items}: any) => {
     const filterBarRef = React.useRef(null);
     const resultListRef = React.useRef(null);
 
+    const [searchTerm, setSearchTerm] = React.useState<string>('');
+    const [isTypoTolerance, setIsTypoTolerance] = React.useState<boolean>(true);
+    const [uOptions, setuOptions] = React.useState<any>([]);
+
     const size = useWindowSize();
+    const router = useRouter();
 
     const [rootWith, setRootWith] = React.useState(0);
     const [filterBarHeight, setFilterBarHeight] = React.useState(0);
@@ -51,22 +48,81 @@ const PrikhodyMapApp = ({children}: any) => {
         }
     }, [size]);
 
-    return <MapContainer
-        attributionControl={false}
-        id="map"
-        key="map1"
-        center={[53.902287, 27.561824]}
-        zoom={7}
+    React.useEffect(() => {
+        const atdObj: any = {};
+        items.forEach(([,,,,,,,atdStr]: any) => {
+            if (atdStr) {
+                const atdList = atdStr.split('|');
+                atdList.forEach((atd: string) => {
+                    const converted = cyrillicToTranslit.transform(atd.trim(), '_').toLowerCase();
+                    if (!atdObj[converted]) {
+                        atdObj[converted] = atd.trim();
+                    }
+                });
+            }
+        });
+        const optionsItmes = Object.keys(atdObj).map((hit: any) => {
+            return ({
+                label: atdObj[hit],
+                value: hit
+            })
+        });
 
-        trackResize={true}
-        scrollWheelZoom={true}
-        zoomControl={false}
-        style={{position: 'relative'}}
-    >
-        <SetMapSizeOnChange key="SetMapSizeOnChange" top={`${filterBarHeight}px`} height={`calc(100vh - ${footerHeight + filterBarHeight}px)`}/>
-        <LayersControlComponent key="LayersControlComponent" rootWith={rootWith}/>
-        {children}
-    </MapContainer>;
+        setuOptions(optionsItmes);
+    }, [items]);
+
+    const searchHandler = ({target}: any) => {
+        setSearchTerm(target.value);
+    }
+
+    const keysHandler = (e: any) => {
+        if (e.which == 27) {
+            setSearchTerm('');
+        }
+    };
+
+    return <>
+        <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
+            <FilterBar
+                {
+                    ...{
+                        searchHandler,
+                        keysHandler,
+                        searchTerm,
+                        isTypoTolerance, setIsTypoTolerance,
+                    }
+                }
+            >
+                <Select className="select-filter white-space-nowrap"
+                        isClearable={true}
+                        isLoading={false}
+                        options={uOptions}
+                        placeholder={'Уезд/Район'}
+                        onChange={(e: any) => {
+                            router.push(`/prikhody1/${e.value}`)
+
+                        }}
+                />
+            </FilterBar>
+        </div>
+        <MapContainer
+            attributionControl={false}
+            id="map"
+            key="map1"
+            center={[53.902287, 27.561824]}
+            zoom={7}
+
+            trackResize={true}
+            scrollWheelZoom={true}
+            zoomControl={false}
+            style={{position: 'relative'}}
+        >
+            <SetMapSizeOnChange key="SetMapSizeOnChange" top={`${filterBarHeight}px`}
+                                height={`calc(100vh - ${footerHeight + filterBarHeight}px)`}/>
+            <LayersControlComponent key="LayersControlComponent" rootWith={rootWith}/>
+            {children}
+        </MapContainer>
+    </>;
 };
 
 export default PrikhodyMapApp;
