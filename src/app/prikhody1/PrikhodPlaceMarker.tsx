@@ -4,9 +4,6 @@ const {
 } = L;
 import {Marker, Popup, Tooltip} from "react-leaflet";
 import {catholicCrossIcon, ortodoxCrossIcon} from "@/components/icons";
-import CyrillicToTranslit from 'cyrillic-to-translit-js';
-import Link from "next/link";
-const cyrillicToTranslit: any = new (CyrillicToTranslit as any);
 
 const PrikhodPlaceMarker = ({hit, popupclose, popupopen, setCurrentLocIdInPopUp, selectCallback, children}: any) => {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = hit;

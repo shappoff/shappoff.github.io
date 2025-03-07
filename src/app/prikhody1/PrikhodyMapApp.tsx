@@ -11,6 +11,7 @@ import 'react-leaflet-markercluster/styles';
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 const cyrillicToTranslit: any = new (CyrillicToTranslit as any);
 import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import {useWindowSize} from "@/components/prikhody/useWindowSize";
 import LayersControlComponent from "@/components/prikhody/LayersControlComponent";
@@ -21,6 +22,7 @@ import Select from "react-select";
 const PrikhodyMapApp = ({children, items}: any) => {
     const filterBarRef = React.useRef(null);
     const resultListRef = React.useRef(null);
+    const pathname = usePathname();
 
     const [searchTerm, setSearchTerm] = React.useState<string>('');
     const [isTypoTolerance, setIsTypoTolerance] = React.useState<boolean>(true);
@@ -81,7 +83,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
         }
     };
 
-    return <>
+    return ~pathname.indexOf('atd') ? children : <>
         <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
             <FilterBar
                 {

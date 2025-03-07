@@ -61,18 +61,6 @@ export async function generateMetadata({ params }: any) {
 const FondPage = async ({params}: any) => {
     const {atd} = await params;
     const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
-    const atdObj: any = {};
-    allPrikhods.forEach(([,,,,,,,atdStr]: any) => {
-        if (atdStr) {
-            const atdList = atdStr.split('|');
-            atdList.forEach((atd: string) => {
-                const converted = cyrillicToTranslit.transform(atd.trim(), '_').toLowerCase();
-                if (!atdObj[converted]) {
-                    atdObj[converted] = atd.trim();
-                }
-            });
-        }
-    });
     const items = allPrikhods.filter(([,,,,,,,atdStr]: any) => atdStr && ~cyrillicToTranslit.transform(atdStr.trim(), '_').toLowerCase()?.indexOf(atd));
 
     return <>

@@ -7,17 +7,17 @@ const useMarkersBounds = (mapHits: Array<any>) => {
 
     React.useEffect(() => {
         const bounds = latLngBounds([])
-
         mapHits && mapHits.length && [...mapHits].forEach((item: any) => {
             const lat = item[4];
             const lng = item[5];
             if (!lat || !lng) {
                 return;
             }
+
             bounds.extend([lat, lng]);
         });
 
-        setCurrentBounds(bounds);
+        mapHits.length && setCurrentBounds(bounds);
     }, [mapHits, mapHits.length]);
 
     return currentBounds;
