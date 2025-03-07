@@ -17,6 +17,7 @@ const FilterBar = ({
                         children
                    }: any) => {
     return <>
+{/*
         <div className="input-typo-tolerance">
             <div className="input-with-cross">
                 <Form.Control id="input-id"
@@ -56,6 +57,7 @@ const FilterBar = ({
                 <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Точное совпадение</label>
             </div>
         </div>
+*/}
         {children}
     </>
 };
