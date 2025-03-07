@@ -100,7 +100,6 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         placeholder={'Уезд/Район'}
                         onChange={(e: any) => {
                             router.push(`/prikhody1/${e.value}`)
-
                         }}
                 />
             </FilterBar>

@@ -10,8 +10,7 @@ const cyrillicToTranslit: any = new (CyrillicToTranslit as any);
 
 const PrikhodPlaceMarker = ({hit, popupclose, popupopen, setCurrentLocIdInPopUp, selectCallback, children}: any) => {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = hit;
-    const linksID = atd?.split('|')
-        .map((value: string) => cyrillicToTranslit.transform(value.trim(), '_').toLowerCase())
+    const atdList = atd?.split('|');
     const isOrtodox = !!~title.indexOf('церковь');
     return <Marker title={`${pType ? `${pType} ` : ''}${pTitle}, ${title}`}
                    eventHandlers={{
@@ -34,7 +33,7 @@ const PrikhodPlaceMarker = ({hit, popupclose, popupopen, setCurrentLocIdInPopUp,
             <h6 style={{textTransform: 'capitalize'}}>{title}</h6>
             {children}
             {
-                linksID?.map((linkId: string) => <p><Link key={linkId} href={`/prikhody1/${linkId}`}>{linkId}</Link></p>)
+                atdList?.map((atdItem: string) => <div>{atdItem}</div>)
             }
         </Popup>
     </Marker>
