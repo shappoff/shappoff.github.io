@@ -68,7 +68,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
             })
         });
 
-        setuOptions(optionsItmes);
+        setuOptions(optionsItmes.sort((a: any, b: any) => a.label.localeCompare(b.label)));
     }, [items]);
 
     const searchHandler = ({target}: any) => {
@@ -97,6 +97,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         isClearable={true}
                         isLoading={false}
                         options={uOptions}
+                        value={uOptions.find((v: any) => ~location.href.indexOf(v.value))}
                         placeholder={'Уезд/Район'}
                         onChange={(e: any) => {
                             router.push(`/prikhody1/${e.value}`)

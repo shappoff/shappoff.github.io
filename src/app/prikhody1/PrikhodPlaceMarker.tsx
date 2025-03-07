@@ -30,11 +30,13 @@ const PrikhodPlaceMarker = ({hit, popupclose, popupopen, setCurrentLocIdInPopUp,
                    position={[parseFloat(lat.replace(',', '.')), parseFloat(lng.replace(',', '.'))]}>
         <Popup key="Popup">
             <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{pType ? `${pType} ` : ''}{pTitle}</b>
-            <h6 style={{textTransform: 'capitalize'}}>{title}</h6>
+            <h6 style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{title}</h6>
             {children}
-            {
-                atdList?.map((atdItem: string) => <div>{atdItem}</div>)
-            }
+            <footer style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'}}>
+                {
+                    atdList?.map((atdItem: string) => <div style={{whiteSpace: 'nowrap'}}><small>{atdItem}</small></div>)
+                }
+            </footer>
         </Popup>
     </Marker>
 };
