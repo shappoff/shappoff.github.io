@@ -52,7 +52,11 @@ export default function ATDPage() {
             Object.keys(atdObj).sort((a: any, b: any) => a.localeCompare(b)).map((atdItem: string, index: number) =>
                 <ListItem key={atdItem}>
                     <span>{index + 1}. </span>
-                    <a href={`/prikhody1/${atdItem}`}><ListItemText primary={`${atdObj[atdItem]}`} /></a>
+                    <a href={`/prikhody1/${atdItem}`}
+                       title={`${atdObj[atdItem]}, церкви и костелы`}
+                    >
+                        <ListItemText primary={`${atdObj[atdItem]}`} />
+                    </a>
                 </ListItem>
             )
         }
