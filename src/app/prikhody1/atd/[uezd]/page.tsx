@@ -27,22 +27,22 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: any) {
-    const {atd} = await params;
+    const {uezd} = await params;
     const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
     const atdObj: any = {};
     allPrikhods.forEach(([,,,,,,,atdStr]: any) => {
         if (atdStr) {
             const atdList = atdStr.split('|');
-            atdList.forEach((atd: string) => {
-                const converted = cyrillicToTranslit.transform(atd.trim(), '_').toLowerCase();
+            atdList.forEach((uezd: string) => {
+                const converted = cyrillicToTranslit.transform(uezd.trim(), '_').toLowerCase();
                 if (!atdObj[converted]) {
-                    atdObj[converted] = atd.trim();
+                    atdObj[converted] = uezd.trim();
                 }
             });
         }
     });
 
-    const title = atdObj[atd];
+    const title = atdObj[uezd];
 
     return {
         title: `${title} | Карта приходов`,
@@ -59,9 +59,9 @@ export async function generateMetadata({ params }: any) {
 }
 
 const FondPage = async ({params}: any) => {
-    const {atd} = await params;
+    const {uezd} = await params;
     const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
-    const items = allPrikhods.filter(([,,,,,,,atdStr]: any) => atdStr && ~cyrillicToTranslit.transform(atdStr.trim(), '_').toLowerCase()?.indexOf(atd));
+    const items = allPrikhods.filter(([,,,,,,,atdStr]: any) => atdStr && ~cyrillicToTranslit.transform(atdStr.trim(), '_').toLowerCase()?.indexOf(uezd));
 
     return <>
         <WrapToMarkerClusterGroup enable={false} items={items} />

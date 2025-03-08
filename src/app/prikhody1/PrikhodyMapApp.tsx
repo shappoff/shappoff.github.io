@@ -83,7 +83,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
         }
     };
 
-    return ~pathname.indexOf('atd') ? children : <>
+    return ~pathname.indexOf('atd') && pathname.split('/').filter((v: string) => !!v).length < 3 ? children : <>
         <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
             <FilterBar
                 {
@@ -102,7 +102,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         value={uOptions.find((v: any) => ~location.href.indexOf(v.value))}
                         placeholder={'Уезд/Район'}
                         onChange={(e: any) => {
-                            router.push(`/prikhody1/${e.value}`)
+                            router.push(`/prikhody1/atd/${e.value}`)
                         }}
                 />
             </FilterBar>
