@@ -4,8 +4,15 @@ import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import WrapToMarkerClusterGroup from "@/app/prikhody1/WrapToMarkerClusterGroup";
 const cyrillicToTranslit: any = new (CyrillicToTranslit as any);
 
-export async function generateStaticParams() {
+type Params = {
+    atd: string;
+}
+
+export async function generateStaticParams(): Promise<Params[]> {
     const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
+    if (!allPrikhods || allPrikhods.length === 0) {
+        return [{ atd: 'not-found' }];
+    }
     const atdObj: any = {};
     allPrikhods.forEach(([,,,,,,,atdStr]: any) => {
         if (atdStr) {
