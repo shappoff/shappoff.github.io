@@ -44,7 +44,7 @@ export default function PrikhodListPage() {
                         <a href={`/prikhody1/prkhd/${id}`}
                            title={`${title}`}
                         >
-                            <ListItemText primary={`${npType} ${np}, ${title}`}/>
+                            <ListItemText primary={`${npType} ${np}, ${title}, ${atdStr?.split('|').join(', ')}`}/>
                         </a>
                     </ListItem>
                 )
