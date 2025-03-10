@@ -8,10 +8,12 @@ import BoundsToMapItems from "@/components/prikhody/BoundsToMapItems";
 function WrapToMarkerClusterGroup({items, enable = true}: any) {
     const markersBounds = useMarkersBounds(items);
     return <>
-        <BoundsToMapItems
-            bounds={markersBounds}
-            callback={() => {}}
-        />
+        {
+            items.length === 1 ? <></> : <BoundsToMapItems
+                bounds={markersBounds}
+                callback={() => {}}
+            />
+        }
         {
             enable ?
                 <MarkerClusterGroup key="MarkerClusterGroup">
