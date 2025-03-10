@@ -102,7 +102,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         value={uOptions.find((v: any) => ~location.href.indexOf(v.value))}
                         placeholder={'Уезд/Район'}
                         onChange={(e: any) => {
-                            router.push(`/prikhody1/${e.value}`)
+                            router.push(`/prikhody1/atd/${e.value}`)
                         }}
                 />
             </FilterBar>
