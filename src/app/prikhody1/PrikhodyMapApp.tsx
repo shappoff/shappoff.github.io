@@ -83,7 +83,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
         }
     };
 
-    return ~pathname.indexOf('atd') ? children : <>
+    return ~pathname.indexOf('atd') && pathname.split('/').filter((v: string) => !!v).length < 3 ? children : <>
         <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
             <FilterBar
                 {
