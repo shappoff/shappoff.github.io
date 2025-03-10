@@ -1,6 +1,7 @@
 'use client'
 
 import PrikhodPlaceMarker from "@/app/prikhody1/PrikhodPlaceMarker";
+import Link from "next/link";
 
 const Markers = ({items}: any) => {
     return items.map((hit: any, indexMarker: number) => {
@@ -13,7 +14,9 @@ const Markers = ({items}: any) => {
             isMobile={true}
             // setCurrentLocIdInPopUp={setCurrentLocIdInPopUp}
             // selectCallback={selectCallback}
-        ></PrikhodPlaceMarker> : <></>
+        >
+            <Link href={`/prikhody1/prkhd/${objectID}`}>Подробнее</Link>
+        </PrikhodPlaceMarker> : <></>
     })
 };
 

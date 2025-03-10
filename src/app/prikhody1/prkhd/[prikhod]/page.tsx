@@ -1,0 +1,48 @@
+import fs from "fs";
+import {prikhodyMainDataPath} from "@/components/paths";
+import WrapToMarkerClusterGroup from "@/app/prikhody1/WrapToMarkerClusterGroup";
+
+type Params = {
+    prikhod: string;
+}
+
+export async function generateStaticParams(): Promise<Params[]> {
+    const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
+    if (!allPrikhods || allPrikhods.length === 0) {
+        return [{ prikhod: 'not-found' }];
+    }
+
+    return allPrikhods.map(([id]: any) => ({prikhod: id}));
+}
+
+export async function generateMetadata({ params }: any) {
+    const {prikhod} = await params;
+    const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
+
+    const currentItem = allPrikhods.find((prkhd: any) => prkhd[0] === prikhod);
+
+    return {
+        title: `${currentItem[1]} | Карта приходов`,
+        description: `Церкви и костелы ${currentItem[1]}, Карта приходов`,
+        icons: [
+            {
+                url: '/map-icon.svg',
+                type: 'image/svg+xml',
+                sizes: 'any',
+                rel: 'icon'
+            }
+        ],
+    }
+}
+
+const PrikhodPage = async ({params}: any) => {
+    const {prikhod} = await params;
+    const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
+    const currentItem = allPrikhods.find((prkhd: any) => prkhd[0] === prikhod);
+
+    return <>
+        <WrapToMarkerClusterGroup enable={false} items={[currentItem]} />
+    </>
+};
+
+export default PrikhodPage;
