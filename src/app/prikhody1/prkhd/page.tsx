@@ -38,7 +38,7 @@ export default function PrikhodListPage() {
         {
             allPrikhods
                 .sort((a: any, b: any) => a[2].localeCompare(b[2]))
-                .map(([id, title, np, npType, lat, lng, , atdStr], index: number) =>
+                .map(([id, title, np, npType, lat, lng, , atdStr]: any, index: number) =>
                     <ListItem key={id}>
                         <span>{index + 1}. </span>
                         <a href={`/prikhody1/prkhd/${id}`}
