@@ -1,9 +1,12 @@
 import {Metadata} from "next";
 import MapApp from "@/app/zalazje1943/MapApp";
 
+const title = "Залазье 1943г., Аэрофотосъемка.";
+const description = "Деревня Залазье 14 октября 1943 г., Толочинский район, Витебская область. Аэрофотосъемка, NCAP TUGX/0508";
+
 export const metadata: Metadata = {
-    title: "Залазье 1943г., Аэрофотосъемка.",
-    description: "Деревня Залазье 14 октября 1943 г., Толочинский район, Витебская область. Аэрофотосъемка, NCAP TUGX/0508",
+    title,
+    description,
     other: {
         robots: "index, follow",
         charset: "UTF-8",
@@ -21,6 +24,13 @@ export const metadata: Metadata = {
             rel: 'icon'
         }
     ],
+    openGraph: {
+        title,
+        description,
+        openGraph: {
+            images: ['https://shappoff.github.io/preview/zalazje1943.png'],
+        },
+    },
 };
 
 export default function Zalazje1943Page() {
