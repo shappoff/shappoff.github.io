@@ -3,6 +3,7 @@ import MapApp from "@/app/zalazje1943/MapApp";
 
 const title = "Залазье 1943г., Аэрофотосъемка.";
 const description = "Деревня Залазье 14 октября 1943 г., Толочинский район, Витебская область. Аэрофотосъемка, NCAP TUGX/0508";
+const url = 'https://shappoff.github.io/zalazje1943';
 
 export const metadata: Metadata = {
     title,
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     other: {
         robots: "index, follow",
         charset: "UTF-8",
-        url: 'https://shappoff.github.io/zalazje1943',
+        url,
         image: 'https://shappoff.github.io/preview/zalazje1943.png',
         type: 'website'
     },
@@ -27,7 +28,12 @@ export const metadata: Metadata = {
     openGraph: {
         title,
         description,
-        images: ['https://shappoff.github.io/preview/zalazje1943.png'],
+        site_name: title,
+        url,
+        images: [{
+            url: 'https://shappoff.github.io/preview/zalazje1943.png'
+        }],
+        type: 'website',
     },
 };
 
