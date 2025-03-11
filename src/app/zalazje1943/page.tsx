@@ -8,7 +8,7 @@ export const metadata: Metadata = {
         robots: "index, follow",
         charset: "UTF-8",
         url: 'https://shappoff.github.io/zalazje1943',
-        image: '/preview/zalazje1943.png',
+        image: 'https://shappoff.github.io/preview/zalazje1943.png',
         type: 'website'
     },
     keywords: ['Беларусь', 'Толочинский район', 'Аэрофотосъемка', 'Великая Отечественная война', 'Славное', 'Залазье'],
