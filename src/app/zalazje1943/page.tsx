@@ -28,7 +28,6 @@ export const metadata: Metadata = {
     openGraph: {
         title,
         description,
-        site_name: title,
         url,
         images: [{
             url: 'https://shappoff.github.io/preview/zalazje1943.png'
