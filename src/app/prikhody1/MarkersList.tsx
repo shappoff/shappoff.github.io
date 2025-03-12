@@ -4,12 +4,14 @@ import PrikhodPlaceMarker from "@/app/prikhody1/PrikhodPlaceMarker";
 import Link from "next/link";
 
 const Markers = ({items}: any) => {
+    const isDev = !!~location.search.indexOf('debug');
     return items.map((hit: any, indexMarker: number) => {
         const [objectID, title, pTitle, pType, lat, lng, src, atd] = hit;
         return lat && lng ? <PrikhodPlaceMarker
             key={objectID + indexMarker}
             hit={hit}
             isMobile={true}
+            isDev={isDev}
         >
             <Link href={`/prikhody1/prkhd/${objectID}`}><big>Подробнее</big></Link>
         </PrikhodPlaceMarker> : <></>
