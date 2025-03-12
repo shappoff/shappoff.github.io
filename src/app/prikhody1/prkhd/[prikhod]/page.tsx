@@ -1,5 +1,5 @@
 import fs from "fs";
-import {prikhodyMainDataPath} from "@/components/paths";
+import {prikhodyArchivesDataPath, prikhodyMainDataPath} from "@/components/paths";
 import WrapToMarkerClusterGroup from "@/app/prikhody1/WrapToMarkerClusterGroup";
 import InfoPage from "./InfoPage";
 
@@ -40,10 +40,11 @@ export async function generateMetadata({ params }: any) {
 const PrikhodPage = async ({params}: any) => {
     const {prikhod} = await params;
     const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
+    const prikhodyArchivesData = JSON.parse(fs.readFileSync(prikhodyArchivesDataPath, 'utf8'));
     const currentItem = allPrikhods.find((prkhd: any) => prkhd[0] === prikhod);
 
     return <>
-        <InfoPage />
+        <InfoPage archives={prikhodyArchivesData[prikhod]} />
         <WrapToMarkerClusterGroup enable={false} items={[currentItem]} />
     </>
 };

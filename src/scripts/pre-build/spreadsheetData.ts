@@ -6,7 +6,8 @@ import {
     rejectedPath,
     stat333Path,
     cgia_19_127Path,
-    prikhodyMainDataPath
+    prikhodyMainDataPath,
+    prikhodyArchivesDataPath
 } from "@/components/paths";
 import {get} from "@/components/utils";
 
@@ -3389,6 +3390,7 @@ export default async function () {
         stat333Data,
         cgia_19_127Data,
         prikhodyMain,
+        prikhodyArchivesData
     ] = await getGoogleSheetsDataArr([
         {
             spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
@@ -3418,6 +3420,10 @@ export default async function () {
             spreadsheetId: '1A9dPH4ppRf5fWGYJzyKI9Z_82GKg-wq4HNLkDduY2r0',
             range: 'main!A2:H'
         },
+        {
+            spreadsheetId: '1A9dPH4ppRf5fWGYJzyKI9Z_82GKg-wq4HNLkDduY2r0',
+            range: 'archives!A2:F'
+        },
     ]);
 
     const cgia_19_127FormattedData: any = get(cgia_19_127Data, 'data.values', []);
@@ -3425,11 +3431,27 @@ export default async function () {
         encoding: 'utf8',
         flag: 'w'
     });
+
     const prikhodyMainData: any = get(prikhodyMain, 'data.values', []);
     fs.writeFileSync(prikhodyMainDataPath, JSON.stringify(prikhodyMainData, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
+
+    let prikhodyArchivesDataObj: any = {};
+    const prikhodyArchivesDataVal: any = get(prikhodyArchivesData, 'data.values', [])
+        .map((data: any) => {
+            const objectID = data[0];
+            if (!prikhodyArchivesDataObj[objectID]) {
+                prikhodyArchivesDataObj[objectID] = [];
+            }
+
+            prikhodyArchivesDataObj[objectID].push(data.slice(1));
+
+            return data;
+        });
+    fs.writeFileSync(prikhodyArchivesDataPath, JSON.stringify(prikhodyArchivesDataObj, null, 4), {encoding: 'utf8',flag: 'w'});
+
 /*
     const digitedFormattedData: any = get(digitedData, 'data.values', []).filter((v: any) => v.length);
     fs.writeFileSync(digitedPath, JSON.stringify(digitedFormattedData, null, 4), {
