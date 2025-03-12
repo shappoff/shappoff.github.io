@@ -20,9 +20,14 @@ export const metadata: Metadata = {
         title,
         description,
         url,
-        images: [{
-            url: 'https://shappoff.github.io/preview/zalazje1943.jpg', width: 1200, height: 630, type: 'image/jpg',
-        }],
+        images: [
+            {
+                url: 'https://shappoff.github.io/preview/988_895_zalazje1943.jpg', width: 988, height: 895, type: 'image/jpg',
+            },
+            {
+                url: 'https://shappoff.github.io/preview/538_487_zalazje1943.jpg', width: 538, height: 487, type: 'image/jpg',
+            }
+        ],
         type: 'website',
     },
 };
