@@ -37,7 +37,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
     const [footerHeight, setFooterHeight] = React.useState(0);
 
     React.useEffect(() => {
-        const resultList: any = resultListRef ? resultListRef.current : null;
+        const resultList: any = document.getElementById('slide-panel-info') ? document.getElementById('slide-panel-info') : null;
         const filterBar: any = filterBarRef ? filterBarRef.current : null;
         const root = document.querySelector('body');
         if (filterBar) {
@@ -86,7 +86,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
 
     return (~pathname.indexOf('atd') || ~pathname.indexOf('prkhd')) && pathname.split('/').filter((v: string) => !!v).length < 3 ?
         children :
-        <>
+        <div>
             <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
                 <FilterBar
                     {
@@ -127,7 +127,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
                 <LayersControlComponent key="LayersControlComponent" rootWith={rootWith}/>
                 {children}
             </MapContainer>
-        </>;
+        </div>;
 };
 
 export default PrikhodyMapApp;

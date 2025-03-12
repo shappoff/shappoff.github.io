@@ -1,6 +1,8 @@
 import fs from "fs";
 import {prikhodyMainDataPath} from "@/components/paths";
 import WrapToMarkerClusterGroup from "@/app/prikhody1/WrapToMarkerClusterGroup";
+import InfoPage from "./InfoPage";
+
 
 type Params = {
     prikhod: string;
@@ -41,6 +43,7 @@ const PrikhodPage = async ({params}: any) => {
     const currentItem = allPrikhods.find((prkhd: any) => prkhd[0] === prikhod);
 
     return <>
+        <InfoPage />
         <WrapToMarkerClusterGroup enable={false} items={[currentItem]} />
     </>
 };

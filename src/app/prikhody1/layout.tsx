@@ -7,9 +7,10 @@ export default function Layout({ children }: any) {
 
     const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
 
-    return (
+    return <>
         <Prikhody items={allPrikhods}>
-                {children}
-            </Prikhody>
-    )
+            {children}
+        </Prikhody>
+        <div id="slide-panel-info" />
+    </>
 }
