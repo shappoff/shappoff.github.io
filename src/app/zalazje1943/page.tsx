@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         description,
         url,
         images: [{
-            url: 'https://shappoff.github.io/preview/zalazje1943.png', width: 1200, height: 630
+            url: 'https://shappoff.github.io/preview/zalazje1943.jpg', width: 1200, height: 630, type: 'image/jpg',
         }],
         type: 'website',
     },
