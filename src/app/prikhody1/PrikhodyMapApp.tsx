@@ -37,7 +37,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
     const [footerHeight, setFooterHeight] = React.useState(0);
 
     React.useEffect(() => {
-        const resultList: any = document.getElementById('slide-panel-info') ? document.getElementById('slide-panel-info') : null;
+        const resultList: any = document.getElementById('slide-panel-info1') ? document.getElementById('slide-panel-info1') : null;
         const filterBar: any = filterBarRef ? filterBarRef.current : null;
         const root = document.querySelector('body');
         if (filterBar) {

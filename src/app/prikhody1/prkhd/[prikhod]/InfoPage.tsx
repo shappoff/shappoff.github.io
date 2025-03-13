@@ -4,14 +4,20 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {useRouter} from 'next/navigation'
-import {Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {Button, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import LinkIcon from '@mui/icons-material/Link';
 import React from "react";
 import Link from "next/link";
 import CreatePortalWrapper from "@/components/CreatePortalWrapper";
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
 const InfoPage = ({archives}: any) => {
     const router = useRouter();
+    const [show, setShow] = React.useState<boolean>(false);
 
     const goBack = () => {
         if (history.length > 2) {
@@ -23,41 +29,56 @@ const InfoPage = ({archives}: any) => {
 
     return <>
         <CreatePortalWrapper id="slide-panel-info">
-            <Drawer open={true} variant="persistent" anchor="bottom">
-                <div>
-                    <IconButton aria-label="delete" onClick={goBack}>
-                        <CloseIcon/>
-                    </IconButton>
-                </div>
-                <Table stickyHeader>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="center">год</TableCell>
-                            <TableCell align="center">тип</TableCell>
-                            <TableCell align="center">архив</TableCell>
-                            <TableCell align="center">шифр</TableCell>
-                            <TableCell align="center">ссылка</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            archives?.map((aRow: any, indexItem: number) => <TableRow key={indexItem}>
+            <Box >
+                <Button
+                    sx={{zIndex: 400, backgroundColor: '#fff'}}
+                    variant="outlined"
+                    onClick={() => setShow(true)}
+                >Информация о приходе</Button>
+                <IconButton aria-label="delete" onClick={goBack} sx={{zIndex: 400, backgroundColor: '#fff'}}>
+                    <CloseIcon/>
+                </IconButton>
+            </Box>
+            {
+                show ? <>
+                    <Drawer open={true} variant="persistent" anchor="bottom">
+                        <div>
+                            <IconButton aria-label="delete" onClick={() => setShow(false)}>
+                                <CloseIcon/>
+                            </IconButton>
+                        </div>
+                        <Table stickyHeader>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="center">год</TableCell>
+                                    <TableCell align="center">тип</TableCell>
+                                    <TableCell align="center">архив</TableCell>
+                                    <TableCell align="center">шифр</TableCell>
+                                    <TableCell align="center">ссылка</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
                                 {
-                                    aRow.map((iCell: any) => {
-                                        if (iCell && ~iCell.indexOf('http')) {
-                                            return <TableCell align="center">
-                                                <Link target="_blank" href={iCell}>
-                                                    <LinkIcon />
-                                                </Link>
-                                            </TableCell>
+                                    archives?.map((aRow: any, indexItem: number) => <TableRow key={indexItem}>
+                                        {
+                                            aRow.map((iCell: any) => {
+                                                if (iCell && ~iCell.indexOf('http')) {
+                                                    return <TableCell align="center">
+                                                        <Link target="_blank" href={iCell}>
+                                                            <LinkIcon />
+                                                        </Link>
+                                                    </TableCell>
+                                                }
+                                                return <TableCell align="center">{iCell}</TableCell>
+                                            })
                                         }
-                                        return <TableCell align="center">{iCell}</TableCell>
-                                    })
-                                }
-                            </TableRow>)
-                        }</TableBody>
-                </Table>
-            </Drawer>
+                                    </TableRow>)
+                                }</TableBody>
+                        </Table>
+                    </Drawer>
+                </> : <></>
+            }
+
         </CreatePortalWrapper>
     </>
 };
