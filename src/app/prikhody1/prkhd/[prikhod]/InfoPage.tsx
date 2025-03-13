@@ -18,7 +18,7 @@ import TabPanel from '@mui/lab/TabPanel';
 
 const InfoPage = ({archives}: any) => {
     const router = useRouter();
-    const [show, setShow] = React.useState<boolean>(false);
+    const [show, setShow] = React.useState<boolean>(true);
 
     const goBack = () => {
         if (history.length > 2) {
@@ -42,7 +42,7 @@ const InfoPage = ({archives}: any) => {
             </Box>
             {
                 show ? <>
-                    <Drawer open={true} variant="persistent" anchor="bottom" sx={{height: '100vh'}}>
+                    <Drawer open={true} anchor="bottom" sx={{height: '100vh'}}>
                         <div>
                             <IconButton aria-label="delete" onClick={() => setShow(false)}>
                                 <CloseIcon/>
@@ -62,15 +62,15 @@ const InfoPage = ({archives}: any) => {
                                 {
                                     archives?.map((aRow: any, indexItem: number) => <TableRow key={indexItem}>
                                         {
-                                            aRow.map((iCell: any) => {
+                                            aRow.map((iCell: any, indexCell: number) => {
                                                 if (iCell && ~iCell.indexOf('http')) {
-                                                    return <TableCell align="center">
+                                                    return <TableCell key={indexCell} align="center">
                                                         <Link target="_blank" href={iCell}>
                                                             <LinkIcon />
                                                         </Link>
                                                     </TableCell>
                                                 }
-                                                return <TableCell align="center">{iCell}</TableCell>
+                                                return <TableCell key={indexCell} align="center">{iCell}</TableCell>
                                             })
                                         }
                                     </TableRow>)
