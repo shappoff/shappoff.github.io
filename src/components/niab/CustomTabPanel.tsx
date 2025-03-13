@@ -10,7 +10,7 @@ import {Chip} from "@mui/material";
 import WrapToTooltip from "@/components/niab/BasicTooltip";
 
 function compareDelaNumbers(a: any, b: any) {
-    return a.delo - b.delo;
+    return +a.delo.replace(/[^0-9]/g, '') - +b.delo.replace(/[^0-9]/g, '');
 }
 
 export default function BasicTabs({digitedPosts}: any) {
@@ -36,6 +36,7 @@ export default function BasicTabs({digitedPosts}: any) {
                     <TabList onChange={handleChange} aria-label="Список описей" variant="scrollable" scrollButtons="auto">
                         {
                             Object.keys(opisi)
+
                                 .map((opNmb: string, index: number) => {
                                     return <Tab key={index} label={`Опись ${opNmb}`} value={index}/>
                                 })
