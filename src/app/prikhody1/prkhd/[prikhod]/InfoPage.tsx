@@ -10,6 +10,7 @@ import React from "react";
 import Link from "next/link";
 import CreatePortalWrapper from "@/components/CreatePortalWrapper";
 import Box from '@mui/material/Box';
+import './InfoPage.css';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -41,7 +42,7 @@ const InfoPage = ({archives}: any) => {
             </Box>
             {
                 show ? <>
-                    <Drawer open={true} variant="persistent" anchor="bottom">
+                    <Drawer open={true} variant="persistent" anchor="bottom" sx={{height: '100vh'}}>
                         <div>
                             <IconButton aria-label="delete" onClick={() => setShow(false)}>
                                 <CloseIcon/>
