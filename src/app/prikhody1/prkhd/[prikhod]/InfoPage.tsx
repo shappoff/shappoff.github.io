@@ -6,7 +6,9 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {useRouter} from 'next/navigation'
 import {Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import LinkIcon from '@mui/icons-material/Link';
 import React from "react";
+import Link from "next/link";
 
 const InfoPage = ({archives}: any) => {
     const router = useRouter();
@@ -42,7 +44,16 @@ const InfoPage = ({archives}: any) => {
                                 {
                                     archives.map((aRow: any) => <TableRow>
                                         {
-                                            aRow.map((iCell: any) => <TableCell align="center">{iCell}</TableCell>)
+                                            aRow.map((iCell: any) => {
+                                                if (iCell && ~iCell.indexOf('http')) {
+                                                    return <TableCell align="center">
+                                                        <Link target="_blank" href={iCell}>
+                                                            <LinkIcon />
+                                                        </Link>
+                                                    </TableCell>
+                                                }
+                                                return <TableCell align="center">{iCell}</TableCell>
+                                            })
                                         }
                                     </TableRow>)
                                 }</TableBody>

@@ -3439,16 +3439,13 @@ export default async function () {
     });
 
     let prikhodyArchivesDataObj: any = {};
-    const prikhodyArchivesDataVal: any = get(prikhodyArchivesData, 'data.values', [])
-        .map((data: any) => {
-            const objectID = data[0];
+    get(prikhodyArchivesData, 'data.values', [])
+        .forEach(([objectID, year = '', type = '', archive = '', fod = '', link = '']: any) => {
             if (!prikhodyArchivesDataObj[objectID]) {
                 prikhodyArchivesDataObj[objectID] = [];
             }
 
-            prikhodyArchivesDataObj[objectID].push(data.slice(1));
-
-            return data;
+            prikhodyArchivesDataObj[objectID].push([year, type, archive, fod, link]);
         });
     fs.writeFileSync(prikhodyArchivesDataPath, JSON.stringify(prikhodyArchivesDataObj, null, 4), {encoding: 'utf8',flag: 'w'});
 
