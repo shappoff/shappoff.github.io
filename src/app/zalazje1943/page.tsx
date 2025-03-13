@@ -6,6 +6,8 @@ const description = "Деревня Залазье 14 октября 1943 г., �
 const url = 'https://shappoff.github.io/zalazje1943';
 
 export const metadata: Metadata = {
+    title,
+    description,
     keywords: ['Беларусь', 'Толочинский район', 'Аэрофотосъемка', 'Великая Отечественная война', 'Славное', 'Залазье'],
     robots: { index: true, follow: true },
     icons: [
