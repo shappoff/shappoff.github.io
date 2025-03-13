@@ -45,7 +45,7 @@ const PrikhodPage = async ({params}: any) => {
 
     return <>
         <InfoPage archives={prikhodyArchivesData[prikhod]} />
-        <WrapToMarkerClusterGroup enable={false} items={[currentItem]} />
+        <WrapToMarkerClusterGroup enable={false} items={[currentItem]} bounds={false} />
     </>
 };
 

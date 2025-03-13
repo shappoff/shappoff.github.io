@@ -71,7 +71,7 @@ const FondPage = async ({params}: any) => {
     const items = allPrikhods.filter(([,,,,,,,atdStr]: any) => atdStr && ~cyrillicToTranslit.transform(atdStr.trim(), '_').toLowerCase()?.indexOf(atd));
 
     return <>
-        <WrapToMarkerClusterGroup enable={false} items={items} />
+        <WrapToMarkerClusterGroup enable={false} items={items} bounds={true} />
     </>
 };
 

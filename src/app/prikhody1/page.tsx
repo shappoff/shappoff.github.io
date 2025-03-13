@@ -31,6 +31,6 @@ export default function PrikhodyMapPage() {
     const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
 
     return <>
-        <WrapToMarkerClusterGroup items={allPrikhods} />
+        <WrapToMarkerClusterGroup items={allPrikhods} bounds={false} />
     </>
 }
