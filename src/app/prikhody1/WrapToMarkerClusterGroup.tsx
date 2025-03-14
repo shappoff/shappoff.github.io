@@ -18,7 +18,7 @@ function WrapToMarkerClusterGroup({items, enable = true, bounds = false}: any) {
         {
             enable ?
                 <MarkerClusterGroup key="MarkerClusterGroup">
-                    <Markers items={items} />
+                    <Markers key="Markers-2" items={items} />
                 </MarkerClusterGroup>
                 :
                 <Markers key="Markers-1" items={items} />

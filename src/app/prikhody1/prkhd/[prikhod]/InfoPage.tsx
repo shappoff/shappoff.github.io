@@ -43,11 +43,9 @@ const InfoPage = ({archives}: any) => {
             {
                 show ? <>
                     <Drawer open={true} anchor="bottom" sx={{height: '100vh'}}>
-                        <div>
-                            <IconButton aria-label="delete" onClick={() => setShow(false)}>
-                                <CloseIcon/>
-                            </IconButton>
-                        </div>
+                        <IconButton className="close-button-card" aria-label="delete" onClick={() => setShow(false)}>
+                            <CloseIcon/>
+                        </IconButton>
                         <Table stickyHeader>
                             <TableHead>
                                 <TableRow>
