@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: any) {
     const currentItem = allPrikhods.find((prkhd: any) => prkhd[0] === prikhod);
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = currentItem;
     return {
-        title: `${pType}, ${pTitle}, ${title} | Карта приходов`,
+        title: `${pTitle}, ${title} | Карта приходов`,
         description: `${pType}, ${pTitle}, ${title}, ${atd.split('|').join(', ')}, Карта приходов`,
         icons: [
             {
