@@ -15,6 +15,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import Tooltip from '@mui/material/Tooltip';
 
 const InfoPage = ({archives}: any) => {
     const router = useRouter();
@@ -84,7 +85,7 @@ const InfoPage = ({archives}: any) => {
                                                     return <TableRow key={indexItem}>
                                                         <TableCell align="center">{year}</TableCell>
                                                         <TableCell align="center">{type}</TableCell>
-                                                        <TableCell align="center">{shifr}</TableCell>
+                                                        <TableCell align="center"><Tooltip arrow title={archiveTitle}><u>{shifr}</u></Tooltip></TableCell>
                                                         <TableCell align="center">{
                                                             link ? <Link target="_blank" href={link}>
                                                                 <LinkIcon/>
