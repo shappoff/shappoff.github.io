@@ -19,7 +19,11 @@ import TabPanel from '@mui/lab/TabPanel';
 const InfoPage = ({archives}: any) => {
     const router = useRouter();
     const [show, setShow] = React.useState<boolean>(true);
+    const [value, setValue] = React.useState<number>(1);
 
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
     const goBack = () => {
         if (history.length > 2) {
             router.back();
@@ -43,37 +47,56 @@ const InfoPage = ({archives}: any) => {
             {
                 show ? <>
                     <Drawer open={true} anchor="bottom" sx={{height: '100vh'}}>
-                        <IconButton className="close-button-card" aria-label="delete" onClick={() => setShow(false)}>
-                            <CloseIcon/>
-                        </IconButton>
-                        <Table stickyHeader>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell align="center">год</TableCell>
-                                    <TableCell align="center">тип</TableCell>
-                                    <TableCell align="center">архив</TableCell>
-                                    <TableCell align="center">шифр</TableCell>
-                                    <TableCell align="center">ссылка</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {
-                                    archives?.map((aRow: any, indexItem: number) => <TableRow key={indexItem}>
-                                        {
-                                            aRow.map((iCell: any, indexCell: number) => {
-                                                if (iCell && ~iCell.indexOf('http')) {
-                                                    return <TableCell key={indexCell} align="center">
-                                                        <Link target="_blank" href={iCell}>
-                                                            <LinkIcon />
-                                                        </Link>
-                                                    </TableCell>
-                                                }
-                                                return <TableCell key={indexCell} align="center">{iCell}</TableCell>
-                                            })
-                                        }
-                                    </TableRow>)
-                                }</TableBody>
-                        </Table>
+
+
+                        <Box sx={{ width: '100%', typography: 'body1' }}>
+                            <TabContext value={value}>
+                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                    <TabList
+                                        // wrapped
+                                        onChange={handleChange}
+                                        // variant="fullWidth"
+                                        // centered
+                                        aria-label="lab API tabs example"
+                                    >
+                                        <IconButton className="close-button-card" aria-label="delete" onClick={() => setShow(false)}>
+                                            <CloseIcon/>
+                                        </IconButton>
+                                        <Tab label="Список населенных пунктов" value={1} />
+                                        <Tab label="Сохранность документов" value={2} />
+                                    </TabList>
+                                </Box>
+                                <TabPanel value={1}>Item One</TabPanel>
+                                <TabPanel value={2}>
+                                    <Table stickyHeader>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell align="center">год</TableCell>
+                                                <TableCell align="center">тип</TableCell>
+                                                <TableCell align="center">шифр</TableCell>
+                                                <TableCell align="center">ссылка</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {
+                                                archives?.map((aRow: any, indexItem: number) => {
+                                                    const [year, type, archiveTitle, shifr, link] = aRow;
+                                                    return <TableRow key={indexItem}>
+                                                        <TableCell align="center">{year}</TableCell>
+                                                        <TableCell align="center">{type}</TableCell>
+                                                        <TableCell align="center">{shifr}</TableCell>
+                                                        <TableCell align="center">{
+                                                            link ? <Link target="_blank" href={link}>
+                                                                <LinkIcon/>
+                                                            </Link> : <></>}
+                                                        </TableCell>
+                                                    </TableRow>
+                                                })
+                                            }</TableBody>
+                                    </Table>
+                                </TabPanel>
+                            </TabContext>
+                        </Box>
                     </Drawer>
                 </> : <></>
             }
