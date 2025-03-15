@@ -22,10 +22,10 @@ export async function generateMetadata({ params }: any) {
     const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
 
     const currentItem = allPrikhods.find((prkhd: any) => prkhd[0] === prikhod);
-
+    const [objectID, title, pTitle, pType, lat, lng, src, atd] = currentItem;
     return {
-        title: `${currentItem[1]} | Карта приходов`,
-        description: `Церкви и костелы ${currentItem[1]}, Карта приходов`,
+        title: `${pType}, ${pTitle}, ${title} | Карта приходов`,
+        description: `${pType}, ${pTitle}, ${title}, ${atd.split('|').join(', ')}, Карта приходов`,
         icons: [
             {
                 url: '/map-icon.svg',
