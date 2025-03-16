@@ -45,6 +45,7 @@ export default function PrikhodListPage() {
                             <span>{index + 1}. </span>
                             <a href={`/prikhody1/prkhd/${id}`}
                                title={`${title}`}
+                               aria-label={`${title}`}
                             >
                                 <ListItemText primary={`${npType} ${np}, ${title}, ${atdStr?.split('|').join(', ')}`}/>
                             </a>

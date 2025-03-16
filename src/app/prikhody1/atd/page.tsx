@@ -54,6 +54,7 @@ export default function ATDPage() {
                     <span>{index + 1}. </span>
                     <a href={`/prikhody1/atd/${atdItem}`}
                        title={`${atdObj[atdItem]}, церкви и костелы`}
+                       aria-label={`${atdObj[atdItem]}, церкви и костелы`}
                     >
                         <ListItemText primary={`${atdObj[atdItem]}`} />
                     </a>

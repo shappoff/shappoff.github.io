@@ -52,10 +52,13 @@ const InfoPage = ({archives}: any) => {
 
                         <Box sx={{ width: '100%', typography: 'body1' }}>
                             <TabContext value={value}>
-                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <Box sx={{ borderBottom: 1, borderColor: 'divider', maxWidth: { xs: 480, sm: 520 }, bgcolor: 'background.paper' }}>
+
                                     <TabList
                                         // wrapped
                                         onChange={handleChange}
+                                        variant="scrollable"
+                                        scrollButtons="auto"
                                         // variant="fullWidth"
                                         // centered
                                         aria-label="lab API tabs example"
@@ -63,12 +66,12 @@ const InfoPage = ({archives}: any) => {
                                         <IconButton className="close-button-card" aria-label="delete" onClick={() => setShow(false)}>
                                             <CloseIcon/>
                                         </IconButton>
-                                        <Tab label="Список населенных пунктов" value={1} />
-                                        <Tab label="Сохранность документов" value={2} />
+                                        <Tab label="Сохранность документов" value={1} />
+                                        <Tab label="Список населенных пунктов" value={2} />
                                     </TabList>
                                 </Box>
-                                <TabPanel value={1}>Item One</TabPanel>
-                                <TabPanel value={2}>
+                                <TabPanel value={2}>Item One</TabPanel>
+                                <TabPanel value={1}>
                                     <Table stickyHeader>
                                         <TableHead>
                                             <TableRow>
