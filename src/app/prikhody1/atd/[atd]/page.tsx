@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: any) {
 
     return {
         title: `${title} | Карта приходов`,
-        description: `Церкви и костелы ${title}, Карта приходов`,
+        description: `${title}, церкви и костелы. Сохранность документов. Метрические книги, исповедные росписи, брачные обыски. Карта приходов.`,
         icons: [
             {
                 url: '/map-icon.svg',

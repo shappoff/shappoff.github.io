@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: any) {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = currentItem;
     return {
         title: `${pTitle}, ${title} | Карта приходов`,
-        description: `${pType}, ${pTitle}, ${title}, ${atd?.split('|').join(', ')}, Карта приходов`,
+        description: `${pType}, ${pTitle}, ${title}, ${atd?.split('|').join(', ')}. Сохранность документов. Метрические книги, исповедные росписи, брачные обыски. Карта приходов.`,
         icons: [
             {
                 url: '/map-icon.svg',
