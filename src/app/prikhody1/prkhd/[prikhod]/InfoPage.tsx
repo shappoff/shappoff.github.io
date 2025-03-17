@@ -52,20 +52,21 @@ const InfoPage = ({archives}: any) => {
 
                         <Box sx={{ width: '100%', typography: 'body1' }}>
                             <TabContext value={value}>
-                                <Box sx={{ borderBottom: 1, borderColor: 'divider', maxWidth: { xs: 480, sm: 520 }, bgcolor: 'background.paper' }}>
-
+                                <Box sx={{ borderBottom: 1, borderColor: 'divider', maxWidth: { sm: 320 }, bgcolor: 'background.paper' }}>
+                                    <IconButton className="close-button-card" aria-label="delete" onClick={() => setShow(false)}>
+                                        <CloseIcon/>
+                                    </IconButton>
                                     <TabList
                                         // wrapped
                                         onChange={handleChange}
                                         variant="scrollable"
-                                        scrollButtons="auto"
+                                        scrollButtons={true}
+                                        visibleScrollbar={false}
                                         // variant="fullWidth"
                                         // centered
                                         aria-label="lab API tabs example"
                                     >
-                                        <IconButton className="close-button-card" aria-label="delete" onClick={() => setShow(false)}>
-                                            <CloseIcon/>
-                                        </IconButton>
+
                                         <Tab label="Сохранность документов" value={1} />
                                         <Tab label="Список населенных пунктов" value={2} />
                                     </TabList>

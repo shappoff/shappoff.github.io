@@ -11,3 +11,8 @@
     margin: 5px 15px;
 }
 */
+
+.MuiBox-root > .MuiBox-root {
+    display: flex;
+    align-items: flex-end;
+}
