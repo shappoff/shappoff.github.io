@@ -127,10 +127,14 @@ const PrikhodyMapApp = ({children, items}: any) => {
                                 placeholder={'Уезд/Район'}
                                 onChange={(e: any) => {
                                     if (e) {
-                                        router.push(`/prikhody1/atd/${e.value}`)
+                                        router.push(`/prikhody1/atd/${e.value}`);
                                     } else {
-                                        setSelectedPrikhodItem(null);
-                                        goBack()
+                                        if (~pathname.indexOf('/p/')) {
+                                            setSelectedPrikhodItem(null);
+                                            goBack();
+                                        } else {
+                                            router.push(`/prikhody1`);
+                                        }
                                     }
                                 }}
                         />
