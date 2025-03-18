@@ -314,3 +314,6 @@ body.loading #input-id {
     fill: black;
     border: 1px solid black;
 }
+.badge-wrapper {
+    position: relative;
+}

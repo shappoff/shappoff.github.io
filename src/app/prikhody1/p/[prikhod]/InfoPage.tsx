@@ -162,7 +162,7 @@ const InfoPage = ({archives, prikhod}: any) => {
                 }
                 return <NPPlaceMarker key={np.objectID}
                                       hit={np}
-                                      color={src ? !!~title.toLowerCase().indexOf('церковь') ? 'red' : 'blue' : 'black'} />
+                                      color={+src ? !!~title.toLowerCase().indexOf('церковь') ? 'red' : 'blue' : 'black'} />
             })
         }
     </>

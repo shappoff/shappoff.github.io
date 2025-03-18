@@ -7,6 +7,7 @@ const cyrillicToTranslit: any = new (CyrillicToTranslit as any);
 
 import {Marker, Popup, Tooltip} from "react-leaflet";
 import {catholicCrossIcon, ortodoxCrossIcon} from "@/components/icons";
+import { renderToStaticMarkup } from "react-dom/server";
 import Link from "next/link";
 import Image from 'next/image';
 
@@ -23,7 +24,20 @@ const PrikhodPlaceMarker = ({hit, isDev, popupopen, setCurrentLocIdInPopUp, sele
                        popupopen: (e: any) => {},
                    }}
                    icon={new DivIcon({
-                       html: isOrtodox ? ortodoxCrossIcon : catholicCrossIcon,
+                       html: isDev ? renderToStaticMarkup(
+                           <div className="badge-wrapper"
+                                  style={{
+                                      fontSize: '10px',
+                                      display: 'flex',
+                                      flexDirection: 'column',
+                                      alignItems: 'center',
+                                      color: +src === 0 ? 'black' : isOrtodox ? 'red' : 'blue'
+                                  }}
+                           >
+                               <span dangerouslySetInnerHTML={{__html: isOrtodox ? ortodoxCrossIcon : catholicCrossIcon}} />
+                               <span>{src}</span>
+                           </div>
+                       ) : isOrtodox ? ortodoxCrossIcon : catholicCrossIcon,
                        className: `marker-church-div-icon ${isOrtodox ? 'orthodox' : 'сatholic'} ${+src === 0 ? 'no-metrics' : ''}`
                    })}
                    position={[parseFloat(lat.replace(',', '.')), parseFloat(lng.replace(',', '.'))]}>
