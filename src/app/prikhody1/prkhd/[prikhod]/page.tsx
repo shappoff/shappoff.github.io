@@ -44,7 +44,7 @@ const PrikhodPage = async ({params}: any) => {
     const currentItem = allPrikhods.find((prkhd: any) => prkhd[0] === prikhod);
 
     return <>
-        <InfoPage archives={prikhodyArchivesData[prikhod]} />
+        <InfoPage archives={prikhodyArchivesData[prikhod]} prikhod={currentItem} />
         <WrapToMarkerClusterGroup enable={false} items={[currentItem]} bounds={false} />
     </>
 };

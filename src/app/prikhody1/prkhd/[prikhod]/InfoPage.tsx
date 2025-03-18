@@ -16,11 +16,46 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Tooltip from '@mui/material/Tooltip';
+import useFirebaseAuth from "@/components/prikhody/useFirebaseAuth";
+import {getDatabase, ref} from "firebase/database";
+import {useList} from "react-firebase-hooks/database";
+import NPPlaceMarker from "@/components/prikhody/NPPlaceMarker";
 
-const InfoPage = ({archives}: any) => {
+const InfoPage = ({archives, prikhod}: any) => {
+    const [objectID, title, pTitle, pType, lat, lng, src, atd] = prikhod;
     const router = useRouter();
+    const app = useFirebaseAuth();
+    const [snapshots, loading, error] = useList(ref(getDatabase(app), `prikhods/${objectID}`));
     const [show, setShow] = React.useState<boolean>(true);
     const [value, setValue] = React.useState<number>(1);
+    const [currentDescriptionItem, setCurrentDescriptionItem] = React.useState<any>();
+    const [currentPrikhodNPs, setCurrentPrikhodNPs] = React.useState<any>([]);
+    const [currentNotFoundPrikhodNPs, setCurrentNotFoundPrikhodNPs] = React.useState<any>([]);
+
+    React.useEffect(() => {
+        const found: Array<any> = [];
+        const notFound: Array<any> = [];
+        currentDescriptionItem?.nps?.map((value: any) => {
+            if (value.coords?.length) {
+                found.push(value);
+            } else {
+                notFound.push(value);
+            }
+            return value;
+        });
+        setCurrentNotFoundPrikhodNPs(notFound);
+        setCurrentPrikhodNPs(found);
+
+    }, [currentDescriptionItem]);
+
+    React.useEffect(() => {
+        const vvv = snapshots?.reduce((previousValue: any, currentValue: any) => {
+            previousValue[currentValue.key] = currentValue.val();
+            return previousValue;
+        }, {});
+        setCurrentDescriptionItem(vvv);
+    }, [snapshots]);
+
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -48,11 +83,9 @@ const InfoPage = ({archives}: any) => {
             {
                 show ? <>
                     <Drawer open={true} anchor="bottom" sx={{height: '100vh'}}>
-
-
                         <Box sx={{ width: '100%', typography: 'body1' }}>
                             <TabContext value={value}>
-                                <Box sx={{ borderBottom: 1, borderColor: 'divider', maxWidth: { sm: 320 }, bgcolor: 'background.paper' }}>
+                                <Box sx={{ borderBottom: 1, borderColor: 'divider', bgcolor: 'background.paper' }}>
                                     <IconButton className="close-button-card" aria-label="delete" onClick={() => setShow(false)}>
                                         <CloseIcon/>
                                     </IconButton>
@@ -66,12 +99,10 @@ const InfoPage = ({archives}: any) => {
                                         // centered
                                         aria-label="lab API tabs example"
                                     >
-
                                         <Tab label="Сохранность документов" value={1} />
                                         <Tab label="Список населенных пунктов" value={2} />
                                     </TabList>
                                 </Box>
-                                <TabPanel value={2}>Item One</TabPanel>
                                 <TabPanel value={1}>
                                     <Table stickyHeader>
                                         <TableHead>
@@ -100,6 +131,23 @@ const InfoPage = ({archives}: any) => {
                                             }</TableBody>
                                     </Table>
                                 </TabPanel>
+                                <TabPanel value={2}>
+                                    <ol>
+                                        {[...currentNotFoundPrikhodNPs, ...currentPrikhodNPs].map((hit: any, index: number) => {
+                                            return (
+                                                <React.Fragment key={index}>
+                                                    <li>{hit.title}</li>
+                                                </React.Fragment>
+                                            )
+                                        })}
+                                    </ol>
+                                    <div>
+                                        {JSON.stringify(error)}
+                                    </div>
+                                    <div>
+                                        {loading}
+                                    </div>
+                                </TabPanel>
                             </TabContext>
                         </Box>
                     </Drawer>
@@ -107,6 +155,16 @@ const InfoPage = ({archives}: any) => {
             }
 
         </CreatePortalWrapper>
+        {
+            currentPrikhodNPs?.map((np: any) => {
+                if (~np.title.toLowerCase().indexOf(title.toLowerCase())) {
+                    return <></>
+                }
+                return <NPPlaceMarker key={np.objectID}
+                                      hit={np}
+                                      color={src ? !!~title.toLowerCase().indexOf('церковь') ? 'red' : 'blue' : 'black'} />
+            })
+        }
     </>
 };
 export default InfoPage;
