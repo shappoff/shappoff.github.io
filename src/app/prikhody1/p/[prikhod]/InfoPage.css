@@ -2,15 +2,13 @@
     height: 100vh;
 }
 
-/*
 .close-button-card {
     position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 3;
-    margin: 5px 15px;
+    background-color: #fff;
+    border: 1px solid gray;
+    top: 2px;
+    left: 2px;
 }
-*/
 
 .MuiBox-root > .MuiBox-root {
     display: flex;
