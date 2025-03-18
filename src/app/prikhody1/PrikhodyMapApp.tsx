@@ -22,9 +22,9 @@ import Select from "react-select";
 
 const PrikhodyMapApp = ({children, items}: any) => {
     const filterBarRef = React.useRef(null);
-    const resultListRef = React.useRef(null);
     const pathname = usePathname();
 
+    const [selectedPrikhodItem, setSelectedPrikhodItem] = React.useState<any>();
     const [searchTerm, setSearchTerm] = React.useState<string>('');
     const [isTypoTolerance, setIsTypoTolerance] = React.useState<boolean>(true);
     const [uOptions, setuOptions] = React.useState<any>([]);
@@ -50,6 +50,20 @@ const PrikhodyMapApp = ({children, items}: any) => {
             setRootWith(root.clientWidth);
         }
     }, [size]);
+
+    React.useEffect(() => {
+        if (~pathname.indexOf('/p/')) {
+            const selectedPathnameId = pathname.slice(pathname.indexOf('/p/')).replaceAll('/p/', '').replaceAll('/', '');
+            const selectedPrikhod = items.find((item: any) => {
+                return item[0] === selectedPathnameId
+            });
+
+            setSelectedPrikhodItem({
+                label: `${selectedPrikhod[3]} ${selectedPrikhod[2]}, ${selectedPrikhod[1]}`,
+                value: selectedPrikhod[0],
+            });
+        }
+    }, [pathname]);
 
     React.useEffect(() => {
         const atdObj: any = {};
@@ -83,32 +97,44 @@ const PrikhodyMapApp = ({children, items}: any) => {
             setSearchTerm('');
         }
     };
+    const goBack = () => {
+        if (history.length > 2) {
+            router.back();
+        } else {
+            router.push('/prikhody1')
+        }
+    };
 
     return (~pathname.indexOf('atd') || ~pathname.indexOf('/p/')) && pathname.split('/').filter((v: string) => !!v).length < 3 ?
         children :
         <div>
             <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
-                <FilterBar
-                    {
-                        ...{
-                            searchHandler,
-                            keysHandler,
-                            searchTerm,
-                            isTypoTolerance, setIsTypoTolerance,
+                    <FilterBar
+                        {
+                            ...{
+                                searchHandler,
+                                keysHandler,
+                                searchTerm,
+                                isTypoTolerance, setIsTypoTolerance,
+                            }
                         }
-                    }
-                >
-                    <Select className="select-filter white-space-nowrap"
-                            isClearable={true}
-                            isLoading={false}
-                            options={uOptions}
-                            value={uOptions.find((v: any) => ~location.href.indexOf(v.value))}
-                            placeholder={'Уезд/Район'}
-                            onChange={(e: any) => {
-                                router.push(`/prikhody1${e ? `/atd/${e.value}` : ''}`)
-                            }}
-                    />
-                </FilterBar>
+                    >
+                        <Select className="select-filter white-space-nowrap"
+                                isClearable={true}
+                                isLoading={false}
+                                options={uOptions}
+                                value={selectedPrikhodItem || uOptions.find((v: any) => ~location.href.indexOf(v.value))}
+                                placeholder={'Уезд/Район'}
+                                onChange={(e: any) => {
+                                    if (e) {
+                                        router.push(`/prikhody1/atd/${e.value}`)
+                                    } else {
+                                        setSelectedPrikhodItem(null);
+                                        goBack()
+                                    }
+                                }}
+                        />
+                    </FilterBar>
             </div>
             <MapContainer
                 attributionControl={false}
