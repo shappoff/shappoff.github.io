@@ -101,7 +101,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
         if (history.length > 2) {
             router.back();
         } else {
-            router.push('/prikhody1')
+            router.push('/prikhody')
         }
     };
 
@@ -127,13 +127,13 @@ const PrikhodyMapApp = ({children, items}: any) => {
                                 placeholder={'Уезд/Район'}
                                 onChange={(e: any) => {
                                     if (e) {
-                                        router.push(`/prikhody1/atd/${e.value}`);
+                                        router.push(`/prikhody/atd/${e.value}`);
                                     } else {
                                         if (~pathname.indexOf('/p/')) {
                                             setSelectedPrikhodItem(null);
                                             goBack();
                                         } else {
-                                            router.push(`/prikhody1`);
+                                            router.push(`/prikhody`);
                                         }
                                     }
                                 }}

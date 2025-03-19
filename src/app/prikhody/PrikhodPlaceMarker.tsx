@@ -49,7 +49,7 @@ const PrikhodPlaceMarker = ({hit, isDev, popupopen, setCurrentLocIdInPopUp, sele
                 {
                     isDev ? atdList?.map((atdItem: string, atdIndex: number) => {
                         const urlPath = cyrillicToTranslit.transform(atdItem.trim(), '_').toLowerCase()
-                        return <div key={atdIndex} style={{whiteSpace: 'nowrap'}}><Link href={`/prikhody1/atd/${urlPath}`}><small>{atdItem}</small></Link></div>
+                        return <div key={atdIndex} style={{whiteSpace: 'nowrap'}}><Link href={`/prikhody/atd/${urlPath}`}><small>{atdItem}</small></Link></div>
                     }) : <></>
                 }
 

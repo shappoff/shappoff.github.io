@@ -1,6 +1,6 @@
 import fs from "fs";
 import {prikhodyArchivesDataPath, prikhodyMainDataPath} from "@/components/paths";
-import WrapToMarkerClusterGroup from "@/app/prikhody1/WrapToMarkerClusterGroup";
+import WrapToMarkerClusterGroup from "@/app/prikhody/WrapToMarkerClusterGroup";
 import InfoPage from "./InfoPage";
 
 

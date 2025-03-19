@@ -43,7 +43,7 @@ export default function PrikhodListPage() {
                     .map(([id, title, np, npType, lat, lng, , atdStr]: any, index: number) =>
                         <ListItem key={id}>
                             <span>{index + 1}. </span>
-                            <a href={`/prikhody1/p/${id}`}
+                            <a href={`/prikhody/p/${id}`}
                                title={`${title}`}
                                aria-label={`${title}`}
                             >

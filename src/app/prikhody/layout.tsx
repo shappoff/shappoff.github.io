@@ -1,4 +1,4 @@
-import Prikhody from "@/app/prikhody1/Prikhody";
+import Prikhody from "@/app/prikhody/Prikhody";
 import fs from "fs";
 import {prikhodyMainDataPath} from "@/components/paths";
 

@@ -1,6 +1,6 @@
 'use client'
 
-import PrikhodPlaceMarker from "@/app/prikhody1/PrikhodPlaceMarker";
+import PrikhodPlaceMarker from "@/app/prikhody/PrikhodPlaceMarker";
 import Link from "next/link";
 
 const Markers = ({items}: any) => {
@@ -13,7 +13,7 @@ const Markers = ({items}: any) => {
             isMobile={true}
             isDev={isDev}
         >
-            <Link href={`/prikhody1/p/${objectID}`}><big>Подробнее</big></Link>
+            <Link href={`/prikhody/p/${objectID}`}><big>Подробнее</big></Link>
         </PrikhodPlaceMarker> : <></>
     })
 };

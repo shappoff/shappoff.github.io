@@ -20,10 +20,10 @@ import useFirebaseAuth from "@/components/prikhody/useFirebaseAuth";
 import {getDatabase, ref} from "firebase/database";
 import {useList} from "react-firebase-hooks/database";
 import NPPlaceMarker from "@/components/prikhody/NPPlaceMarker";
-import SendArchivesData from "@/app/prikhody1/p/[prikhod]/SendArchivesData";
+import SendArchivesData from "@/app/prikhody/p/[prikhod]/SendArchivesData";
 import useMarkersBounds from "@/components/prikhody/useMarkersBounds";
 import BoundsToMapItems from "@/components/prikhody/BoundsToMapItems";
-import CopyToClipboardData from "@/app/prikhody1/p/[prikhod]/CopyToClipboardData";
+import CopyToClipboardData from "@/app/prikhody/p/[prikhod]/CopyToClipboardData";
 
 const InfoPage = ({archives, prikhod}: any) => {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = prikhod;
@@ -69,7 +69,7 @@ const InfoPage = ({archives, prikhod}: any) => {
         if (history.length > 2) {
             router.back();
         } else {
-            router.push('/prikhody1')
+            router.push('/prikhody')
         }
     };
 
