@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import Prikhody from "@/app/prikhody/Prikhody";
+import Prikhody from "@/app/prikhody0/Prikhody";
 
 export const metadata: Metadata = {
     title: 'Карта приходов',

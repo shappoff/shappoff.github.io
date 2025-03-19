@@ -9,7 +9,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import '../../app/prikhody/prikhody.css';
+import '../../app/prikhody0/prikhody.css';
 
 
 import {
