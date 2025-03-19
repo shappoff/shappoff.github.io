@@ -23,6 +23,7 @@ import NPPlaceMarker from "@/components/prikhody/NPPlaceMarker";
 import SendArchivesData from "@/app/prikhody1/p/[prikhod]/SendArchivesData";
 import useMarkersBounds from "@/components/prikhody/useMarkersBounds";
 import BoundsToMapItems from "@/components/prikhody/BoundsToMapItems";
+import CopyToClipboardData from "@/app/prikhody1/p/[prikhod]/CopyToClipboardData";
 
 const InfoPage = ({archives, prikhod}: any) => {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = prikhod;
@@ -112,6 +113,7 @@ const InfoPage = ({archives, prikhod}: any) => {
                                     <Table stickyHeader>
                                         <TableHead>
                                             <TableRow>
+                                                <TableCell align="center"></TableCell>
                                                 <TableCell align="center">год</TableCell>
                                                 <TableCell align="center">тип</TableCell>
                                                 <TableCell align="center">шифр</TableCell>
@@ -123,6 +125,9 @@ const InfoPage = ({archives, prikhod}: any) => {
                                                 archives?.map((aRow: any, indexItem: number) => {
                                                     const [year, type, archiveTitle, shifr, link] = aRow;
                                                     return <TableRow key={indexItem}>
+                                                        <TableCell align="center">
+                                                            <CopyToClipboardData data={`${shifr} ${type}, ${year}`} />
+                                                        </TableCell>
                                                         <TableCell align="center">{year}</TableCell>
                                                         <TableCell align="center">{type}</TableCell>
                                                         <TableCell align="center"><Tooltip arrow title={archiveTitle}><u>{shifr}</u></Tooltip></TableCell>

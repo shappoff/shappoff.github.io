@@ -58,3 +58,11 @@ export function stringToColour(str: string) {
 export function timeout(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+export function copyToClipboard(data: string, callback: (value: void) => void | PromiseLike<void>) {
+    try {
+        navigator.clipboard.writeText(data.trim()).then(callback);
+    } catch (err) {
+        console.error('Failed to copy: ', err);
+    }
+}
