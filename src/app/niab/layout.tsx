@@ -4,7 +4,7 @@ import * as React from "react";
 export default function Layout({ children }: any) {
     return (
         <>
-            <AlertInfo severity="info" anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>Количество записей в базе: Минск 808053 Гродно 196073</AlertInfo>
+            <AlertInfo severity="info" anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>Количество записей в базе: Минск 812301 Гродно 197684</AlertInfo>
             <>{children}</>
         </>
     )
