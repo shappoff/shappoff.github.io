@@ -21,6 +21,8 @@ import {getDatabase, ref} from "firebase/database";
 import {useList} from "react-firebase-hooks/database";
 import NPPlaceMarker from "@/components/prikhody/NPPlaceMarker";
 import SendArchivesData from "@/app/prikhody1/p/[prikhod]/SendArchivesData";
+import useMarkersBounds from "@/components/prikhody/useMarkersBounds";
+import BoundsToMapItems from "@/components/prikhody/BoundsToMapItems";
 
 const InfoPage = ({archives, prikhod}: any) => {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = prikhod;
@@ -57,6 +59,7 @@ const InfoPage = ({archives, prikhod}: any) => {
         setCurrentDescriptionItem(vvv);
     }, [snapshots]);
 
+    const markersBounds = useMarkersBounds(currentPrikhodNPs);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -157,6 +160,11 @@ const InfoPage = ({archives, prikhod}: any) => {
             }
 
         </CreatePortalWrapper>
+        <BoundsToMapItems
+            key="BoundsToMapItems"
+            bounds={markersBounds}
+            callback={() => {}}
+        />
         {
             currentPrikhodNPs?.map((np: any) => {
                 if (~np.title.toLowerCase().indexOf(title.toLowerCase())) {

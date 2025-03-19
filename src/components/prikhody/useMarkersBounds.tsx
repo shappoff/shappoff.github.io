@@ -8,12 +8,11 @@ const useMarkersBounds = (mapHits: Array<any>) => {
     React.useEffect(() => {
         const bounds = latLngBounds([])
         mapHits && mapHits.length && [...mapHits].forEach((item: any) => {
-            const lat = item[4];
-            const lng = item[5];
+            const lat = +item[4] || +item.coords[0];
+            const lng = +item[5] || +item.coords[1];
             if (!lat || !lng) {
                 return;
             }
-
             bounds.extend([lat, lng]);
         });
 
