@@ -20,7 +20,9 @@ const PrikhodPlaceMarker = ({hit, isDev, popupopen, setCurrentLocIdInPopUp, sele
     return <Marker title={`${pType ? `${pType} ` : ''}${pTitle}, ${title}`}
                    eventHandlers={{
                        popupclose: (e: any) => {},
-                       mouseover: (e: any) => {},
+                       mouseover: (e: any) => {
+                           setCurrentLocIdInPopUp && setCurrentLocIdInPopUp(hit);
+                       },
                        popupopen: (e: any) => {},
                    }}
                    icon={new DivIcon({
