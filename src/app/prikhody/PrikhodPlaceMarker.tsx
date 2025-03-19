@@ -24,20 +24,20 @@ const PrikhodPlaceMarker = ({hit, isDev, popupopen, setCurrentLocIdInPopUp, sele
                        popupopen: (e: any) => {},
                    }}
                    icon={new DivIcon({
-                       html: isDev ? renderToStaticMarkup(
+                       html: renderToStaticMarkup(
                            <div className="badge-wrapper"
-                                  style={{
-                                      fontSize: '10px',
-                                      display: 'flex',
-                                      flexDirection: 'column',
-                                      alignItems: 'center',
-                                      color: +src === 0 ? 'black' : isOrtodox ? 'red' : 'blue'
-                                  }}
+                                style={{
+                                    fontSize: '10px',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    color: +src === 0 ? 'black' : isOrtodox ? 'red' : 'blue'
+                                }}
                            >
                                <span dangerouslySetInnerHTML={{__html: isOrtodox ? ortodoxCrossIcon : catholicCrossIcon}} />
                                <span>{src}</span>
                            </div>
-                       ) : isOrtodox ? ortodoxCrossIcon : catholicCrossIcon,
+                       ),
                        className: `marker-church-div-icon ${isOrtodox ? 'orthodox' : 'сatholic'} ${+src === 0 ? 'no-metrics' : ''}`
                    })}
                    position={[parseFloat(lat.replace(',', '.')), parseFloat(lng.replace(',', '.'))]}>
