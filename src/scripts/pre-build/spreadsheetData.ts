@@ -3422,7 +3422,7 @@ export default async function () {
         },
         {
             spreadsheetId: '1A9dPH4ppRf5fWGYJzyKI9Z_82GKg-wq4HNLkDduY2r0',
-            range: 'archives!A2:F'
+            range: 'archives!A2:I'
         },
     ]);
 
@@ -3440,12 +3440,12 @@ export default async function () {
 
     let prikhodyArchivesDataObj: any = {};
     get(prikhodyArchivesData, 'data.values', [])
-        .forEach(([objectID, year = '', type = '', archive = '', fod = '', link = '']: any) => {
+        .forEach(([objectID, year = '', type = '', short = '', fod = '', link = '', full = '', ]: any) => {
             if (!prikhodyArchivesDataObj[objectID]) {
                 prikhodyArchivesDataObj[objectID] = [];
             }
 
-            prikhodyArchivesDataObj[objectID].push([year, type, archive, fod, link]);
+            prikhodyArchivesDataObj[objectID].push([year, type, short, fod, link, full]);
         });
     fs.writeFileSync(prikhodyArchivesDataPath, JSON.stringify(prikhodyArchivesDataObj, null, 4), {encoding: 'utf8',flag: 'w'});
 

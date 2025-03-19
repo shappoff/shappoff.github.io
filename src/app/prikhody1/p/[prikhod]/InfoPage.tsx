@@ -114,6 +114,7 @@ const InfoPage = ({archives, prikhod}: any) => {
                                         <TableHead>
                                             <TableRow>
                                                 <TableCell align="center"></TableCell>
+                                                <TableCell align="center">архив</TableCell>
                                                 <TableCell align="center">год</TableCell>
                                                 <TableCell align="center">тип</TableCell>
                                                 <TableCell align="center">шифр</TableCell>
@@ -123,14 +124,17 @@ const InfoPage = ({archives, prikhod}: any) => {
                                         <TableBody>
                                             {
                                                 archives?.map((aRow: any, indexItem: number) => {
-                                                    const [year, type, archiveTitle, shifr, link] = aRow;
+                                                    const [year, type, short, fod, link, full] = aRow;
                                                     return <TableRow key={indexItem}>
                                                         <TableCell align="center">
-                                                            <CopyToClipboardData data={`${shifr} ${type}, ${year}`} />
+                                                            <CopyToClipboardData data={`${short} ${fod}, ${type}, ${year}`} />
+                                                        </TableCell>
+                                                        <TableCell align="center">
+                                                            <Tooltip arrow title={full}><u>{short}</u></Tooltip>
                                                         </TableCell>
                                                         <TableCell align="center">{year}</TableCell>
                                                         <TableCell align="center">{type}</TableCell>
-                                                        <TableCell align="center"><Tooltip arrow title={archiveTitle}><u>{shifr}</u></Tooltip></TableCell>
+                                                        <TableCell align="center">{fod}</TableCell>
                                                         <TableCell align="center">{
                                                             link ? <Link target="_blank" href={link}>
                                                                 <LinkIcon/>
