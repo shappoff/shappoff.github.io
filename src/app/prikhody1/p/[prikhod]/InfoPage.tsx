@@ -113,11 +113,11 @@ const InfoPage = ({archives, prikhod}: any) => {
                                     <Table stickyHeader>
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell align="center"></TableCell>
+                                                <TableCell align="center">скопировать</TableCell>
                                                 <TableCell align="center">архив</TableCell>
                                                 <TableCell align="center">год</TableCell>
                                                 <TableCell align="center">тип</TableCell>
-                                                <TableCell align="center">шифр</TableCell>
+                                                <TableCell align="center"><Tooltip arrow title="Фонд-Опись-Дело"><u>Ф-О-Д</u></Tooltip></TableCell>
                                                 <TableCell align="center">ссылка</TableCell>
                                             </TableRow>
                                         </TableHead>
@@ -125,6 +125,7 @@ const InfoPage = ({archives, prikhod}: any) => {
                                             {
                                                 archives?.map((aRow: any, indexItem: number) => {
                                                     const [year, type, short, fod, link, full] = aRow;
+                                                    const [fond, opis, delo] = fod.split('-');
                                                     return <TableRow key={indexItem}>
                                                         <TableCell align="center">
                                                             <CopyToClipboardData data={`${short} ${fod}, ${type}, ${year}`} />
@@ -134,7 +135,9 @@ const InfoPage = ({archives, prikhod}: any) => {
                                                         </TableCell>
                                                         <TableCell align="center">{year}</TableCell>
                                                         <TableCell align="center">{type}</TableCell>
-                                                        <TableCell align="center">{fod}</TableCell>
+                                                        <TableCell align="center">
+                                                            <Link target="_blank" href={`/niab/${fond}`}><u>{fond}</u></Link>-<u>{opis}</u>-<u>{delo}</u>
+                                                        </TableCell>
                                                         <TableCell align="center">{
                                                             link ? <Link target="_blank" href={link}>
                                                                 <LinkIcon/>
