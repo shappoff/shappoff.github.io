@@ -20,6 +20,7 @@ import useFirebaseAuth from "@/components/prikhody/useFirebaseAuth";
 import {getDatabase, ref} from "firebase/database";
 import {useList} from "react-firebase-hooks/database";
 import NPPlaceMarker from "@/components/prikhody/NPPlaceMarker";
+import SendArchivesData from "@/app/prikhody1/p/[prikhod]/SendArchivesData";
 
 const InfoPage = ({archives, prikhod}: any) => {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = prikhod;
@@ -104,6 +105,7 @@ const InfoPage = ({archives, prikhod}: any) => {
                                     </TabList>
                                 </Box>
                                 <TabPanel value={1}>
+                                    <SendArchivesData objectID={objectID} />
                                     <Table stickyHeader>
                                         <TableHead>
                                             <TableRow>
