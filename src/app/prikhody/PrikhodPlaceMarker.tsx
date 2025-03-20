@@ -44,6 +44,7 @@ const PrikhodPlaceMarker = ({hit, isDev, popupopen, setCurrentLocIdInPopUp, sele
         <Popup key="Popup">
             <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{pType ? `${pType} ` : ''}{pTitle}</b>
             <h6 style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{title}</h6>
+            <div><small>Сохранилось дел: {src}.</small></div>
             {children}
             <footer style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'}}>
                 {

@@ -13,7 +13,9 @@ const Markers = ({items}: any) => {
             isMobile={true}
             isDev={isDev}
         >
-            <Link href={`/prikhody/p/${objectID}`}><big>Подробнее</big></Link>
+            <div>
+                <Link href={`/prikhody/p/${objectID}`}><big>Подробнее</big></Link>
+            </div>
         </PrikhodPlaceMarker> : <></>
     })
 };
