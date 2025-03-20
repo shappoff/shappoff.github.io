@@ -67,7 +67,7 @@ export function copyToClipboard(data: string, callback: (value: void) => void | 
     }
 }
 
-export function getNestedArrayValue(digited, fond, opis, delo) {
+export function getNestedArrayValue(digited: any, fond: string, opis: string, delo: string) {
 
     if (!digited) {
         return null;

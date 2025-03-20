@@ -120,8 +120,7 @@ const InfoPage = ({archives, prikhod, digited}: any) => {
                                                 <TableCell align="center">год</TableCell>
                                                 <TableCell align="center">тип</TableCell>
                                                 <TableCell align="center"><Tooltip arrow title="Фонд-Опись-Дело"><u>Ф-О-Д</u></Tooltip></TableCell>
-                                                <TableCell align="center">ссылка</TableCell>
-                                                <TableCell align="center">заметка</TableCell>
+                                                <TableCell align="center">информация</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -141,14 +140,17 @@ const InfoPage = ({archives, prikhod, digited}: any) => {
                                                         <TableCell align="center">
                                                             <Link target="_blank" href={`/niab/${fond}`}><u>{fond}</u></Link>-<u>{opis}</u>-<u>{delo}</u>
                                                         </TableCell>
-                                                        <TableCell align="center">{
-                                                            link ? <Link target="_blank" href={link}>
-                                                                <LinkIcon/>
-                                                            </Link> : <></>}
-                                                        </TableCell>
                                                         <TableCell align="center">
                                                             {
-                                                                getNestedArrayValue(digited, +fond, +opis, +delo) ? <>
+                                                                link ? <>
+                                                                    <Tooltip arrow title="Ссылка на снимки">
+                                                                        <Link target="_blank" href={link}>
+                                                                            <LinkIcon/>
+                                                                        </Link>
+                                                                    </Tooltip>
+                                                                </> : <></>}
+                                                            {
+                                                                getNestedArrayValue(digited, fond, opis, delo) ? <>
                                                                     <Tooltip arrow title="Оцифрованно в НИАБ">
                                                                         <DocumentScannerOutlinedIcon sx={{ fontSize: 15, cursor: 'pointer' }} />
                                                                     </Tooltip>
