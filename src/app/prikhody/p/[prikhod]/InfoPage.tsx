@@ -118,7 +118,11 @@ const InfoPage = ({archives, prikhod, digited}: any) => {
                                                 <TableCell align="center">скопировать</TableCell>
                                                 <TableCell align="center">архив</TableCell>
                                                 <TableCell align="center">год</TableCell>
-                                                <TableCell align="center">тип</TableCell>
+                                                <TableCell align="center">
+                                                    <Tooltip arrow title="РБУ - Рождения, Браки, Умершие; ИВ - Исповедные Ведомости; БО - Брачные Обыски">
+                                                        <u>тип</u>
+                                                    </Tooltip>
+                                                    </TableCell>
                                                 <TableCell align="center"><Tooltip arrow title="Фонд-Опись-Дело"><u>Ф-О-Д</u></Tooltip></TableCell>
                                                 <TableCell align="center">информация</TableCell>
                                             </TableRow>
