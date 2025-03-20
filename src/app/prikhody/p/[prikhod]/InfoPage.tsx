@@ -171,7 +171,7 @@ const InfoPage = ({archives, prikhod, digited}: any) => {
                                         {[...currentNotFoundPrikhodNPs, ...currentPrikhodNPs].map((hit: any, index: number) => {
                                             return (
                                                 <React.Fragment key={index}>
-                                                    <li>{hit.title}</li>
+                                                    <li dangerouslySetInnerHTML={{__html: hit.title}} />
                                                 </React.Fragment>
                                             )
                                         })}
