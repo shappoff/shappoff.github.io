@@ -7,7 +7,8 @@ import {
     stat333Path,
     cgia_19_127Path,
     prikhodyMainDataPath,
-    prikhodyArchivesDataPath
+    prikhodyArchivesDataPath,
+    digitedFormattedDataPath
 } from "@/components/paths";
 import {get} from "@/components/utils";
 
@@ -3474,6 +3475,25 @@ export default async function () {
         return pool;
     }, {});
 
+    const digitedFormattedData: any = digitedData?.data?.values?.reduce((pool: any, [fond, opis, value]: any, index: number, arr: Array<any>) => {
+
+        if (!pool[fond]) {
+            pool[fond] = {};
+        }
+        if (!pool[fond][opis]) {
+            pool[fond][opis] = {};
+        }
+        if (!pool[fond][opis][value]) {
+            pool[fond][opis][value] = true;
+        }
+
+        return pool;
+    }, {});
+
+    fs.writeFileSync(digitedFormattedDataPath, JSON.stringify(digitedFormattedData, null, 4), {
+        encoding: 'utf8',
+        flag: 'w'
+    });
     const rejectedFormattedData: any = get(rejectedData, 'data.values', []).filter((v: any) => v.length);
     fs.writeFileSync(rejectedPath, JSON.stringify(rejectedFormattedData, null, 4), {
         encoding: 'utf8',

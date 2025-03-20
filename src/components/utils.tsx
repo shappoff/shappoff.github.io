@@ -66,3 +66,20 @@ export function copyToClipboard(data: string, callback: (value: void) => void | 
         console.error('Failed to copy: ', err);
     }
 }
+
+export function getNestedArrayValue(digited, fond, opis, delo) {
+
+    if (!digited) {
+        return null;
+    }
+    if (!digited[fond]) {
+        return null;
+    }
+    if (!digited[fond][opis]) {
+        return null;
+    }
+    if (!digited[fond][opis][delo]) {
+        return null;
+    }
+    return true;
+}

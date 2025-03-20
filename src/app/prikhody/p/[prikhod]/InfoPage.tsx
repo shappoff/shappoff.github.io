@@ -24,8 +24,10 @@ import SendArchivesData from "@/app/prikhody/p/[prikhod]/SendArchivesData";
 import useMarkersBounds from "@/components/prikhody/useMarkersBounds";
 import BoundsToMapItems from "@/components/prikhody/BoundsToMapItems";
 import CopyToClipboardData from "@/app/prikhody/p/[prikhod]/CopyToClipboardData";
+import {getNestedArrayValue} from "@/components/utils";
+import DocumentScannerOutlinedIcon from '@mui/icons-material/DocumentScannerOutlined';
 
-const InfoPage = ({archives, prikhod}: any) => {
+const InfoPage = ({archives, prikhod, digited}: any) => {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = prikhod;
     const router = useRouter();
     const app = useFirebaseAuth();
@@ -119,6 +121,7 @@ const InfoPage = ({archives, prikhod}: any) => {
                                                 <TableCell align="center">тип</TableCell>
                                                 <TableCell align="center"><Tooltip arrow title="Фонд-Опись-Дело"><u>Ф-О-Д</u></Tooltip></TableCell>
                                                 <TableCell align="center">ссылка</TableCell>
+                                                <TableCell align="center">заметка</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -142,6 +145,15 @@ const InfoPage = ({archives, prikhod}: any) => {
                                                             link ? <Link target="_blank" href={link}>
                                                                 <LinkIcon/>
                                                             </Link> : <></>}
+                                                        </TableCell>
+                                                        <TableCell align="center">
+                                                            {
+                                                                getNestedArrayValue(digited, +fond, +opis, +delo) ? <>
+                                                                    <Tooltip arrow title="Оцифрованно в НИАБ">
+                                                                        <DocumentScannerOutlinedIcon sx={{ fontSize: 15, cursor: 'pointer' }} />
+                                                                    </Tooltip>
+                                                                </> : ''
+                                                            }
                                                         </TableCell>
                                                     </TableRow>
                                                 })

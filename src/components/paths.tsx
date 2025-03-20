@@ -9,3 +9,4 @@ export const cgia_19_127Path = path.resolve(`public/cgia_19_127.json`);
 export const algolia_prikhods = path.resolve(`public/5_algolia_prikhods.json`);
 export const prikhodyMainDataPath = path.resolve(`public/prikhodyMainData.json`);
 export const prikhodyArchivesDataPath = path.resolve(`public/prikhodyArchivesData.json`);
+export const digitedFormattedDataPath = path.resolve(`public/digitedFormattedData.json`);
