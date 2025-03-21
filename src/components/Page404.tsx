@@ -4,10 +4,11 @@ import React from "react";
 
 const Page404 = () => {
     React.useEffect(() => {
-        if (location.pathname.endsWith('/')) {
-            location.href = `${location.origin}${location.pathname.slice(0, -1)}${location.search}`;
+        const {origin, pathname, href, search} = location;
+        if (pathname.endsWith('/')) {
+            location.href = `${origin}${pathname.slice(0, -1)}${search}`;
         }
-        if (location.pathname === '/novosady') {
+        if (pathname === '/novosady') {
             location.href = 'https://indexby.github.io/novosady/';
         }
     }, []);
