@@ -13,6 +13,7 @@ const paginationModel = { page: 0, pageSize: 10 };
 export default function DataTable({data, digited}: any) {
     const columns: GridColDef[] = [
         { field: 'copy', headerName: 'скопировать', width: 120,
+            sortable: false,
             renderCell: (params) => {
                 const {year, type, short, fod, link, full, fond, opis, delo, id} = params.row;
                 return <CopyToClipboardData data={`${short} ${fod}, ${type}, ${year}`} />;
