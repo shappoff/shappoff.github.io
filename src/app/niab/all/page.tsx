@@ -25,16 +25,17 @@ export const metadata: Metadata = {
 
 export default async function NIAB() {
     const allPosts = JSON.parse(fs.readFileSync(targetNIAB, 'utf8'));
-    return <>
-        <List>
-            {
-                allPosts
-                    .map((row: any, index: number) => {
-                        return <ListItem key={index}>
-                            <Link href={`/niab/${row.fod}`}>{row.fodFull} {row.title}</Link>
-                        </ListItem>
-                    })
-            }
-        </List>
-    </>;
+    return <List key="List-all">
+        {
+            allPosts
+                .map((row: any, index: number) => {
+                    const title = `${row.fodFull || `Фонд ${row.fod},`} ${row.title}`;
+                    return <ListItem key={index}>
+                        <Link href={`/niab/${row.fod}`}
+                              title={title}
+                              aria-label={title}>{title}</Link>
+                    </ListItem>
+                })
+        }
+    </List>
 }
