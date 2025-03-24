@@ -42,7 +42,12 @@ export default function DataTable({data, digited}: any) {
             width: 160,
             renderCell: (params) => {
                 const {year, type, short, fod, link, full, fond, opis, delo, id} = params.row;
-                return <React.Fragment><Link target="_blank" href={`/niab/${fond}`}><u>{fond}</u></Link>-<u>{opis}</u>-<u>{delo}</u></React.Fragment>;
+                return <React.Fragment>
+                    {
+                        short === 'НИАБ' ? <Link target="_blank" href={`/niab/${fond}`}><u>{fond}</u></Link> : fond
+                    }
+                    {opis ? `-${opis}` : ''}{delo ? `-${delo}` : ''}
+                </React.Fragment>;
             }
         },
         {
