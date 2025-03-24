@@ -14,5 +14,5 @@
 
 .MuiBox-root > .MuiBox-root {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
 }
