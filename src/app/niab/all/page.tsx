@@ -29,7 +29,7 @@ export default async function NIAB() {
         {
             allPosts
                 .map((row: any, index: number) => {
-                    const title = `${row.fodFull || `Фонд ${row.fod},`} ${row.title}`;
+                    const title = `НИАБ ${row.fodFull || `Фонд ${row.fod},`} ${row.title}`;
                     return <ListItem key={index}>
                         <Link href={`/niab/${row.fod}`}
                               title={title}
