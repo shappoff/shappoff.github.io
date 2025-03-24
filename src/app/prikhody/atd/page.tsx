@@ -47,19 +47,20 @@ export default function ATDPage() {
         }
     });
 
-    return <List key="prikhody-map">
+    return <ol key="prikhody-map">
         {
-            Object.keys(atdObj).sort((a: any, b: any) => a.localeCompare(b)).map((atdItem: string, index: number) =>
-                <ListItem key={atdItem}>
-                    <span>{index + 1}. </span>
-                    <a href={`/prikhody/atd/${atdItem}`}
-                       title={`${atdObj[atdItem]}, церкви и костелы`}
-                       aria-label={`${atdObj[atdItem]}, церкви и костелы`}
-                    >
-                        <ListItemText primary={`${atdObj[atdItem]}`} />
-                    </a>
-                </ListItem>
+            Object.keys(atdObj).sort((a: any, b: any) => a.localeCompare(b)).map((atdItem: string, index: number) =>{
+                const title = `Беларусь, ${atdObj[atdItem]}, церкви и костелы, сохранность метрическийх книг, исповедных ведомостей и брачных обысков`;
+                return <li key={atdItem}>
+                        <a href={`/prikhody/atd/${atdItem}`}
+                           title={title}
+                           aria-label={title}
+                        >
+                            {atdObj[atdItem]}
+                        </a>
+                    </li>
+                }
             )
         }
-    </List>
+    </ol>
 }
