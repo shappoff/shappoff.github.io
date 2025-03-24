@@ -52,5 +52,11 @@ export default async function sitemap() {
             changeFrequency: 'weekly',
             priority: 0.5,
         },
+        {
+            url: 'https://shappoff.github.io/prikhody/atd/',
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.5,
+        },
     ]
 }
