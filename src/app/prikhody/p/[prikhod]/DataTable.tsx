@@ -69,7 +69,7 @@ export default function DataTable({data, digited}: any) {
                     {
                         getNestedArrayValue(digited, fond, opis, delo) ? <>
                             <Tooltip arrow title="Оцифрованно в НИАБ согласно перечню цифровых копий, имеющихся в фонде пользования">
-                                <Link href="https://docs.google.com/spreadsheets/d/1CpcEoB-OkTR6W7bjeU3dhUPSKhH4enfm/">
+                                <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1CpcEoB-OkTR6W7bjeU3dhUPSKhH4enfm/">
                                     <DocumentScannerOutlinedIcon sx={{ fontSize: 15, cursor: 'pointer' }} />
                                 </Link>
                             </Tooltip>
