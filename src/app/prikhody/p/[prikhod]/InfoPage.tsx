@@ -144,7 +144,7 @@ const InfoPage = ({archives, prikhod, digited}: any) => {
         />
         {
             currentPrikhodNPs?.map((np: any) => {
-                if (~np.title.toLowerCase().indexOf(title.toLowerCase())) {
+                if (~np.title.toLowerCase().indexOf(pTitle.toLowerCase())) {
                     return <></>
                 }
                 return <NPPlaceMarker key={np.objectID}
