@@ -8,7 +8,8 @@ import {
     cgia_19_127Path,
     prikhodyMainDataPath,
     prikhodyArchivesDataPath,
-    digitedFormattedDataPath
+    digitedFormattedDataPath,
+    rejectedFormattedPath
 } from "@/components/paths";
 import {get} from "@/components/utils";
 
@@ -3441,22 +3442,25 @@ export default async function () {
 
     let prikhodyArchivesDataObj: any = {};
     get(prikhodyArchivesData, 'data.values', [])
-        .forEach(([objectID, year = '', type = '', short = '', fod = '', link = '', full = '', ]: any) => {
+        .forEach(([objectID, year = '', type = '', short = '', fod = '', link = '', full = '',]: any) => {
             if (!prikhodyArchivesDataObj[objectID]) {
                 prikhodyArchivesDataObj[objectID] = [];
             }
 
             prikhodyArchivesDataObj[objectID].push([year, type, short, fod, link, full]);
         });
-    fs.writeFileSync(prikhodyArchivesDataPath, JSON.stringify(prikhodyArchivesDataObj, null, 4), {encoding: 'utf8',flag: 'w'});
-
-/*
-    const digitedFormattedData: any = get(digitedData, 'data.values', []).filter((v: any) => v.length);
-    fs.writeFileSync(digitedPath, JSON.stringify(digitedFormattedData, null, 4), {
+    fs.writeFileSync(prikhodyArchivesDataPath, JSON.stringify(prikhodyArchivesDataObj, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
-*/
+
+    /*
+        const digitedFormattedData: any = get(digitedData, 'data.values', []).filter((v: any) => v.length);
+        fs.writeFileSync(digitedPath, JSON.stringify(digitedFormattedData, null, 4), {
+            encoding: 'utf8',
+            flag: 'w'
+        });
+    */
 
     fs.writeFileSync(stat333Path, JSON.stringify(get(stat333Data, 'data.values', []), null, 4), {
         encoding: 'utf8',
@@ -3494,8 +3498,28 @@ export default async function () {
         encoding: 'utf8',
         flag: 'w'
     });
-    const rejectedFormattedData: any = get(rejectedData, 'data.values', []).filter((v: any) => v.length);
-    fs.writeFileSync(rejectedPath, JSON.stringify(rejectedFormattedData, null, 4), {
+    const rejectedRawData: any = get(rejectedData, 'data.values', [])
+        .filter((v: any) => v.length);
+    fs.writeFileSync(rejectedPath, JSON.stringify(rejectedRawData, null, 4), {
+        encoding: 'utf8',
+        flag: 'w'
+    });
+
+    const rejectedFormattedData = rejectedRawData.reduce((pool: any, [fond, opis, delo]: any, index: number, arr: Array<any>) => {
+
+        if (!pool[fond]) {
+            pool[fond] = {};
+        }
+        if (!pool[fond][opis]) {
+            pool[fond][opis] = {};
+        }
+        if (!pool[fond][opis][delo]) {
+            pool[fond][opis][delo] = true;
+        }
+
+        return pool;
+    }, {});
+    fs.writeFileSync(rejectedFormattedPath, JSON.stringify(rejectedFormattedData, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
@@ -3628,7 +3652,7 @@ export default async function () {
 }
 
 function createDirIfNot(dir: any) {
-    if (!fs.existsSync(dir)){
+    if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
     }
 }

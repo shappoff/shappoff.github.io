@@ -6,11 +6,12 @@ import Tooltip from '@mui/material/Tooltip';
 import Link from "next/link";
 import {getNestedArrayValue} from "@/components/utils";
 import DocumentScannerOutlinedIcon from '@mui/icons-material/DocumentScannerOutlined';
+import DoNotTouchOutlinedIcon from '@mui/icons-material/DoNotTouchOutlined';
 import LinkIcon from '@mui/icons-material/Link';
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-export default function DataTable({data, digited}: any) {
+export default function DataTable({data, digited, rejected}: any) {
     const columns: GridColDef[] = [
         { field: 'copy', headerName: 'скопировать', width: 120,
             sortable: false,
@@ -71,6 +72,15 @@ export default function DataTable({data, digited}: any) {
                             <Tooltip arrow title="Оцифрованно в НИАБ согласно перечню цифровых копий, имеющихся в фонде пользования">
                                 <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1CpcEoB-OkTR6W7bjeU3dhUPSKhH4enfm/">
                                     <DocumentScannerOutlinedIcon sx={{ fontSize: 15, cursor: 'pointer' }} />
+                                </Link>
+                            </Tooltip>
+                        </> : ''
+                    }
+                    {
+                        getNestedArrayValue(rejected, fond, opis, delo) ? <>
+                            <Tooltip arrow title="Отказано в выдаче. Подробнее в таблице.">
+                                <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1ohjiRoVObt41N7oRhQb9b2Sq9UiBsUKTGbDQ7DQp9Zc/">
+                                    <DoNotTouchOutlinedIcon sx={{ fontSize: 15, cursor: 'pointer' }} />
                                 </Link>
                             </Tooltip>
                         </> : ''

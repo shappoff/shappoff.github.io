@@ -22,7 +22,7 @@ import useMarkersBounds from "@/components/prikhody/useMarkersBounds";
 import BoundsToMapItems from "@/components/prikhody/BoundsToMapItems";
 import DataTable from "@/app/prikhody/p/[prikhod]/DataTable";
 
-const InfoPage = ({archives, prikhod, digited}: any) => {
+const InfoPage = ({archives, prikhod, digited, rejected}: any) => {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = prikhod;
     const router = useRouter();
     const app = useFirebaseAuth();
@@ -107,7 +107,7 @@ const InfoPage = ({archives, prikhod, digited}: any) => {
                                 </Box>
                                 <TabPanel value={1}>
                                     <SendArchivesData objectID={objectID} />
-                                    <DataTable digited={digited} data={archives.map((aRow: Array<any>, index: number) => {
+                                    <DataTable digited={digited} rejected={rejected} data={archives.map((aRow: Array<any>, index: number) => {
                                         const [year, type, short, fod, link, full] = aRow;
                                         const [fond, opis, delo] = fod.split('-');
                                         return ({year, type, short, fod, link, full, fond, opis, delo, id: index});
