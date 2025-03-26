@@ -8,6 +8,7 @@ import {getNestedArrayValue} from "@/components/utils";
 import DocumentScannerOutlinedIcon from '@mui/icons-material/DocumentScannerOutlined';
 import DoNotTouchOutlinedIcon from '@mui/icons-material/DoNotTouchOutlined';
 import LinkIcon from '@mui/icons-material/Link';
+import Image from 'next/image';
 
 const paginationModel = { page: 0, pageSize: 10 };
 
@@ -62,8 +63,14 @@ export default function DataTable({data, digited, rejected}: any) {
                     {
                         link ? <>
                             <Tooltip arrow title="Ссылка на снимки">
-                                <Link target="_blank" href={link}>
-                                    <LinkIcon/>
+                                <Link target="_blank" href={link} areaLabel="familysearch.org">
+                                    {
+                                        ~link.indexOf('familysearch.org') ?
+                                            <Image src="/fs_logo_favicon_sq.png"
+                                            width={20}
+                                            height={20}
+                                            alt="Familysearch.org" /> : <LinkIcon/>
+                                    }
                                 </Link>
                             </Tooltip>
                         </> : <></>}
@@ -71,7 +78,7 @@ export default function DataTable({data, digited, rejected}: any) {
                         getNestedArrayValue(digited, fond, opis, delo) ? <>
                             <Tooltip arrow title="Оцифрованно в НИАБ согласно перечню цифровых копий, имеющихся в фонде пользования">
                                 <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1CpcEoB-OkTR6W7bjeU3dhUPSKhH4enfm/">
-                                    <DocumentScannerOutlinedIcon sx={{ fontSize: 15, cursor: 'pointer' }} />
+                                    <DocumentScannerOutlinedIcon sx={{ fontSize: 20, cursor: 'pointer' }} />
                                 </Link>
                             </Tooltip>
                         </> : ''
@@ -80,7 +87,7 @@ export default function DataTable({data, digited, rejected}: any) {
                         getNestedArrayValue(rejected, fond, opis, delo) ? <>
                             <Tooltip arrow title="Отказано в выдаче. Подробнее в таблице.">
                                 <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1ohjiRoVObt41N7oRhQb9b2Sq9UiBsUKTGbDQ7DQp9Zc/">
-                                    <DoNotTouchOutlinedIcon sx={{ fontSize: 15, cursor: 'pointer' }} />
+                                    <DoNotTouchOutlinedIcon sx={{ fontSize: 20, cursor: 'pointer' }} />
                                 </Link>
                             </Tooltip>
                         </> : ''
