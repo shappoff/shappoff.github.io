@@ -63,7 +63,7 @@ export default function DataTable({data, digited, rejected}: any) {
                     {
                         link ? <>
                             <Tooltip arrow title="Ссылка на снимки">
-                                <Link target="_blank" href={link} areaLabel="familysearch.org">
+                                <Link target="_blank" href={link}>
                                     {
                                         ~link.indexOf('familysearch.org') ?
                                             <Image src="/fs_logo_favicon_sq.png"
