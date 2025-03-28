@@ -75,7 +75,7 @@ export default function DataTable({data, digited, rejected}: any) {
                             </Tooltip>
                         </> : <></>}
                     {
-                        getNestedArrayValue(digited, fond, opis, delo) ? <>
+                        getNestedArrayValue(digited, fond, opis, delo) && short === 'НИАБ' ? <>
                             <Tooltip arrow title="Оцифрованно в НИАБ согласно перечню цифровых копий, имеющихся в фонде пользования">
                                 <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1CpcEoB-OkTR6W7bjeU3dhUPSKhH4enfm/">
                                     <DocumentScannerOutlinedIcon sx={{ fontSize: 20, cursor: 'pointer' }} />
@@ -84,7 +84,7 @@ export default function DataTable({data, digited, rejected}: any) {
                         </> : ''
                     }
                     {
-                        getNestedArrayValue(rejected, fond, opis, delo) ? <>
+                        getNestedArrayValue(rejected, fond, opis, delo) && short === 'НИАБ' ? <>
                             <Tooltip arrow title="Отказано в выдаче. Подробнее в таблице.">
                                 <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1ohjiRoVObt41N7oRhQb9b2Sq9UiBsUKTGbDQ7DQp9Zc/">
                                     <DoNotTouchOutlinedIcon sx={{ fontSize: 20, cursor: 'pointer' }} />
