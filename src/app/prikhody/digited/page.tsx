@@ -35,7 +35,7 @@ export default function PrikhodyMapPage() {
     const digitedFormattedData = JSON.parse(fs.readFileSync(digitedFormattedDataPath, 'utf8'));
     const prikhodyArchivesData = JSON.parse(fs.readFileSync(prikhodyArchivesDataPath, 'utf8'));
 
-    const digited = [];
+    const digited: Array<any> = [];
     allPrikhods.forEach((prikhodItem: any) => {
         let isDigited = false;
         let digitedCount = 0;
