@@ -35,9 +35,11 @@ export default function PrikhodyMapPage() {
     const digitedFormattedData = JSON.parse(fs.readFileSync(digitedFormattedDataPath, 'utf8'));
     const prikhodyArchivesData = JSON.parse(fs.readFileSync(prikhodyArchivesDataPath, 'utf8'));
 
-    const digited = allPrikhods.filter((prikhodItem: any) => {
+    const digited = [];
+    allPrikhods.forEach((prikhodItem: any) => {
         let isDigited = false;
-        const [id] = prikhodItem;
+        let digitedCount = 0;
+        const [id,title,np,type,lat,lng,count,atd] = prikhodItem;
 
         if (prikhodyArchivesData[id]) {
             const archivesArr = prikhodyArchivesData[id];
@@ -49,6 +51,7 @@ export default function PrikhodyMapPage() {
                         if (digitedFormattedData[f][o]) {
                             if (digitedFormattedData[f][o][d]) {
                                 isDigited = true;
+                                ++digitedCount;
                             }
                         }
                     }
@@ -56,8 +59,9 @@ export default function PrikhodyMapPage() {
                 }
             });
         }
-
-        return isDigited;
+        if (isDigited) {
+            digited.push([id,title,np,type,lat,lng,digitedCount,atd]);
+        }
     });
 
 
