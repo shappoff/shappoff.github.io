@@ -8,8 +8,8 @@ import {
 import WrapToMarkerClusterGroup from "@/app/prikhody/WrapToMarkerClusterGroup";
 
 export const metadata: Metadata = {
-    title: 'Оцифрованные дела | Карта приходов',
-    description: 'Оцифрованные дела церквей и костелов Беларуси. Генеалогия. Сохранность',
+    title: 'Оцифрованные дела НИАБ | Карта приходов',
+    description: 'Оцифрованные дела НИАБ церквей и костелов Беларуси. Генеалогия. Сохранность',
     other: {
         robots: "index, follow",
         charset: "UTF-8",
