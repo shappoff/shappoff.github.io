@@ -12,7 +12,7 @@ import Link from "next/link";
 import Image from 'next/image';
 import IndicateButton from "@/components/prikhody/IndicateButton";
 
-const PrikhodPlaceMarker = ({hit, isDev, popupopen, setCurrentLocIdInPopUp, selectCallback, children}: any) => {
+const PrikhodPlaceMarker = ({hit, isDev, markerLabel = 'Сохранилось дел:', setCurrentLocIdInPopUp, selectCallback, children}: any) => {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = hit;
     const [prtitle, type] = objectID.split('_');
     const redLink = `https://radzima.net/ru/${type}/${prtitle}.html`;
@@ -46,7 +46,7 @@ const PrikhodPlaceMarker = ({hit, isDev, popupopen, setCurrentLocIdInPopUp, sele
             <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{pType ? `${pType} ` : ''}{pTitle}</b>
             <h6 style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{title}</h6>
             <div>
-                <small>Сохранилось дел: {src}.</small>
+                <small>{markerLabel} {src}.</small>
                 <IndicateButton item={{title: `${pTitle}`, objectID}} label="Указать точное место" />
             </div>
             {children}

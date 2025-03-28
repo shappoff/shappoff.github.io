@@ -66,6 +66,6 @@ export default function PrikhodyMapPage() {
 
 
     return <>
-        <WrapToMarkerClusterGroup items={digited} bounds={false} />
+        <WrapToMarkerClusterGroup items={digited} bounds={false} markerLabel="Оцифровано дел:" />
     </>
 }
