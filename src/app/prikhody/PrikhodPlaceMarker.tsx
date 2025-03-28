@@ -10,6 +10,7 @@ import {catholicCrossIcon, ortodoxCrossIcon} from "@/components/icons";
 import { renderToStaticMarkup } from "react-dom/server";
 import Link from "next/link";
 import Image from 'next/image';
+import IndicateButton from "@/components/prikhody/IndicateButton";
 
 const PrikhodPlaceMarker = ({hit, isDev, popupopen, setCurrentLocIdInPopUp, selectCallback, children}: any) => {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = hit;
@@ -44,8 +45,12 @@ const PrikhodPlaceMarker = ({hit, isDev, popupopen, setCurrentLocIdInPopUp, sele
         <Popup key="Popup">
             <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{pType ? `${pType} ` : ''}{pTitle}</b>
             <h6 style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{title}</h6>
-            <div><small>Сохранилось дел: {src}.</small></div>
+            <div>
+                <small>Сохранилось дел: {src}.</small>
+                <IndicateButton item={{title: `${pTitle}`, objectID}} label="Указать точное место" />
+            </div>
             {children}
+
             <footer style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'}}>
                 {
                     isDev ? atdList?.map((atdItem: string, atdIndex: number) => {
