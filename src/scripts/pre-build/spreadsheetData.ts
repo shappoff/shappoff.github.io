@@ -3454,14 +3454,6 @@ export default async function () {
         flag: 'w'
     });
 
-    /*
-        const digitedFormattedData: any = get(digitedData, 'data.values', []).filter((v: any) => v.length);
-        fs.writeFileSync(digitedPath, JSON.stringify(digitedFormattedData, null, 4), {
-            encoding: 'utf8',
-            flag: 'w'
-        });
-    */
-
     fs.writeFileSync(stat333Path, JSON.stringify(get(stat333Data, 'data.values', []), null, 4), {
         encoding: 'utf8',
         flag: 'w'
@@ -3479,7 +3471,7 @@ export default async function () {
         return pool;
     }, {});
 
-    const digitedFormattedData: any = digitedData?.data?.values?.reduce((pool: any, [fond, opis, value]: any, index: number, arr: Array<any>) => {
+    const digitedFormattedData: any = digitedData?.data?.values?.reduce((pool: any, [fond, opis, value, comment]: any, index: number, arr: Array<any>) => {
 
         if (!pool[fond]) {
             pool[fond] = {};
@@ -3488,7 +3480,7 @@ export default async function () {
             pool[fond][opis] = {};
         }
         if (!pool[fond][opis][value]) {
-            pool[fond][opis][value] = true;
+            pool[fond][opis][value] = comment || true;
         }
 
         return pool;
