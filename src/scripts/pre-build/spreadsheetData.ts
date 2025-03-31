@@ -3577,6 +3577,7 @@ export default async function () {
         if (currentItem) {
             currentItem.opisi.push({
                 op: op.replace('Опись ', ''),
+                opNmb,
                 docId,
                 i: internal ? internal : void (0),
                 n: note ? note : void (0),
@@ -3632,6 +3633,7 @@ export default async function () {
                 anotation,
                 opisi: [{
                     op: op.replace('Опись ', ''),
+                    opNmb,
                     docId,
                     i: internal ? internal : void (0),
                     n: note ? note : void (0),
