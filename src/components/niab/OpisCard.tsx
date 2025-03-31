@@ -13,6 +13,7 @@ export default function OpisCard({info}: any) {
             margin: '1rem',
             height: 'auto',
             width: '10rem',
+            minWidth: '10rem',
             '&[data-active]': {
                 backgroundColor: 'action.selected',
                 '&:hover': {
