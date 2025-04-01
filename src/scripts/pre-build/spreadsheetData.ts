@@ -3497,7 +3497,7 @@ export default async function () {
         flag: 'w'
     });
 
-    const rejectedFormattedData = rejectedRawData.reduce((pool: any, [fond, opis, delo]: any, index: number, arr: Array<any>) => {
+    const rejectedFormattedData = rejectedRawData.reduce((pool: any, [fond, opis, delo, title, req, answer, reason, send, scan, contact, comment]: any, index: number, arr: Array<any>) => {
 
         if (!pool[fond]) {
             pool[fond] = {};
@@ -3506,7 +3506,7 @@ export default async function () {
             pool[fond][opis] = {};
         }
         if (!pool[fond][opis][delo]) {
-            pool[fond][opis][delo] = true;
+            pool[fond][opis][delo] = [title, reason, contact];
         }
 
         return pool;
