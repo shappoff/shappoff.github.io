@@ -1,7 +1,6 @@
 import fs from "fs";
 import {getGoogleSheetsDataArr} from "@/components/gsheets";
 import {
-    digitedPath,
     mainDataPath,
     rejectedPath,
     stat333Path,

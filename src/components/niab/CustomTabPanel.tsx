@@ -15,13 +15,16 @@ function compareDelaNumbers(a: any, b: any) {
 
 export default function BasicTabs({digitedPosts}: any) {
     const opisi: any = {};
-    digitedPosts.forEach((dItem: any) => {
-        const [fond, opis, delo, comment] = dItem;
-        if (opisi[opis]) {
-            opisi[opis].push({delo, comment});
-        } else {
-            opisi[opis] = [{delo, comment}]
-        }
+    Object.keys(digitedPosts || {}).forEach((opis: any) => {
+        const delaObj = digitedPosts[opis];
+        Object.keys(delaObj || {}).forEach((delo: string) => {
+            const comment = digitedPosts[opis][delo];
+            if (opisi[opis]) {
+                opisi[opis].push({delo, comment});
+            } else {
+                opisi[opis] = [{delo, comment}]
+            }
+        });
     });
     const [value, setValue] = React.useState(0);
 

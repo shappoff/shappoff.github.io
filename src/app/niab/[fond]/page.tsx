@@ -15,7 +15,7 @@ import React from "react";
 import Tooltip from '@mui/material/Tooltip';
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {
-    digitedPath,
+    digitedFormattedDataPath,
     mainDataPath,
     rejectedPath,
     stat333Path
@@ -55,10 +55,10 @@ const FondPage = async ({params}: any) => {
     const {fond} = await params;
     const allPosts = JSON.parse(fs.readFileSync(mainDataPath, 'utf8'));
     const rejectedPosts = JSON.parse(fs.readFileSync(rejectedPath, 'utf8'));
-    const digitedPosts = JSON.parse(fs.readFileSync(digitedPath, 'utf8'));
+    const digitedPosts = JSON.parse(fs.readFileSync(digitedFormattedDataPath, 'utf8'));
     const d333Posts = JSON.parse(fs.readFileSync(stat333Path, 'utf8'));
     const rejectedItems = rejectedPosts.filter((rejected: any) => +rejected[0] === +fond);
-    const digitedItems = digitedPosts.filter((digited: any) => +digited[0] === +fond);
+    const digitedItems = digitedPosts[fond];
     const currentItem = allPosts.find((item: any) => +item.fod === +fond || item.fod === fond) || {};
 // https://niab.by/newsite/ru/Priostanovka_hkranilische4
     const isntZal: any = !!fourthStorage[fond];

@@ -96,7 +96,7 @@ export default function FondTabs({opisi, rejectedItems, digitedPosts}: any) {
                     }
                 </AccordionDetails>
             </Accordion>
-            { digitedPosts.length > 0 ? <Accordion expanded={expanded === 'panel3'} onChange={handleExpand('panel3')}>
+            { Object.keys(digitedPosts || {}).length > 0 ? <Accordion expanded={expanded === 'panel3'} onChange={handleExpand('panel3')}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon/>}
                     aria-controls="panel3-content"
