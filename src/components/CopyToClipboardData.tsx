@@ -35,7 +35,6 @@ const CopyToClipboardData = ({data, callback, withSnackbar = false}: any) => {
         }
         {
             withSnackbar ? <Snackbar
-                absolute={true}
                 open={openSnackbar}
                 autoHideDuration={2000}
                 onClose={() => {setOpenSnackbar(false)}}
