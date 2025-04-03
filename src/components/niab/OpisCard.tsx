@@ -22,7 +22,7 @@ export default function OpisCard({info}: any) {
             },
         }}>
             <CardContent>
-                <Typography variant="h6" component="div">{info?.op}</Typography>
+                <Typography variant="h6" component="div" sx={{whiteSpace: 'nowrap'}}>Опись {info?.op}</Typography>
                 {
                     info.s ? <>
                         <Link href="https://forum.vgd.ru/post/468/118798/p3690535.htm#pp3690535" target="_blank">

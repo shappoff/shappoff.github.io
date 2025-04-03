@@ -108,9 +108,9 @@ const InfoPage = ({archives, prikhod, digited, rejected}: any) => {
                                 <TabPanel value={1}>
                                     <SendArchivesData objectID={objectID} />
                                     <DataTable digited={digited} rejected={rejected} data={archives.map((aRow: Array<any>, index: number) => {
-                                        const [year, type, short, fod, link, full] = aRow;
+                                        const [year, type, short, fod, link, full, pages, note] = aRow;
                                         const [fond, opis, delo] = fod.split('-');
-                                        return ({year, type, short, fod, link, full, fond, opis, delo, id: index});
+                                        return ({year, type, short, fod, link, full, fond, opis, delo, pages, note, id: index});
                                     })} />
                                 </TabPanel>
                                 <TabPanel value={2}>

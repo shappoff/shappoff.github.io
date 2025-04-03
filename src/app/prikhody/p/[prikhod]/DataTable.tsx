@@ -53,7 +53,7 @@ export default function DataTable({data, digited, rejected}: any) {
             }
         },
         {
-            field: 'note',
+            field: 'info',
             headerName: 'информация',
             sortable: false,
             width: 160,
@@ -95,6 +95,8 @@ export default function DataTable({data, digited, rejected}: any) {
                 </div>;
             }
         },
+        { field: 'pages', headerName: 'листы', description: 'Листы в деле', width: 130, sortable: false },
+        { field: 'note', headerName: 'заметки', width: 130 },
     ];
 
     return (

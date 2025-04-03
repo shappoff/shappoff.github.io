@@ -3442,12 +3442,12 @@ export default async function () {
 
     let prikhodyArchivesDataObj: any = {};
     get(prikhodyArchivesData, 'data.values', [])
-        .forEach(([objectID, year = '', type = '', short = '', fod = '', link = '', full = '',]: any) => {
+        .forEach(([objectID, year = '', type = '', short = '', fod = '', link = '', full = '', pages, note]: any) => {
             if (!prikhodyArchivesDataObj[objectID]) {
                 prikhodyArchivesDataObj[objectID] = [];
             }
 
-            prikhodyArchivesDataObj[objectID].push([year, type, short, fod, link, full]);
+            prikhodyArchivesDataObj[objectID].push([year, type, short, fod, link, full, pages, note]);
         });
     fs.writeFileSync(prikhodyArchivesDataPath, JSON.stringify(prikhodyArchivesDataObj, null, 4), {
         encoding: 'utf8',
