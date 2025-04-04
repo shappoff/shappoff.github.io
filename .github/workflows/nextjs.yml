@@ -94,6 +94,9 @@ jobs:
          echo "NEXT_PUBLIC_PRIKHODY_STORAGEBUCKET=${{secrets.NEXT_PUBLIC_PRIKHODY_STORAGEBUCKET}}" >> ./.env.production
          echo "NEXT_PUBLIC_PRIKHODY_MESSAGINGSENDERID=${{secrets.NEXT_PUBLIC_PRIKHODY_MESSAGINGSENDERID}}" >> ./.env.production
          echo "NEXT_PUBLIC_PRIKHODY_APPID=${{secrets.NEXT_PUBLIC_PRIKHODY_APPID}}" >> ./.env.production
+         echo "PPFF_ALGOLIA_ADMIN_API_KEY=${{secrets.PPFF_ALGOLIA_ADMIN_API_KEY}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PPFF_ALGOLIA_SEARCH_API_KEY=${{secrets.NEXT_PUBLIC_PPFF_ALGOLIA_SEARCH_API_KEY}}" >> ./.env.production
+         echo "NEXT_PUBLIC_PPFF_ALGOLIA_APPLICATION_ID=${{secrets.NEXT_PUBLIC_PPFF_ALGOLIA_APPLICATION_ID}}" >> ./.env.production
          echo "NEXT_PUBLIC_TELEGRAM_BOT_TOKEN=${{secrets.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN}}" >> ./.env.production
 
       - name: preBuild with Next.js
