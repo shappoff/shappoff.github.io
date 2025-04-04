@@ -83,3 +83,13 @@ export function getNestedArrayValue(digited: any, fond: string, opis: string, de
     }
     return true;
 }
+
+export function create_geoloc(lat: string, lng: string) {
+    let _geoloc;
+    if (lat && lng) {
+        _geoloc = {lat: +lat.trim(), lng: +lng.trim()};
+    } else {
+        _geoloc = {};
+    }
+    return _geoloc;
+}
