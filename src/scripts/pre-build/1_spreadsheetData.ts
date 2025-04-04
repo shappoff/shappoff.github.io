@@ -3381,7 +3381,7 @@ const handleNumber = (num = '') => {
 
 
 export default async function () {
-    console.log('pre-build run iddqd');
+    console.log('Google sheets pre-build data update');
 
     const [
         mainTableData,
