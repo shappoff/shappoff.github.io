@@ -6,7 +6,8 @@ import './prikhody.css';
 
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import {MapContainer} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import 'react-leaflet-markercluster/styles';
@@ -19,8 +20,6 @@ import {usePathname} from 'next/navigation';
 import {useWindowSize} from "@/components/prikhody/useWindowSize";
 import LayersControlComponent from "@/components/prikhody/LayersControlComponent";
 import SetMapSizeOnChange from "@/components/prikhody/SetMapSizeOnChange";
-import FilterBar from "@/components/prikhody/FilterBar";
-import Select from "react-select";
 import useDebounce from "@/components/useDebounce";
 
 import algoliasearch from 'algoliasearch/lite';
@@ -133,7 +132,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
         setuOptions(optionsItmes.sort((a: any, b: any) => a.label.localeCompare(b.label)));
     }, [items]);
 
-    const searchHandler = ({target}: any) => {
+    const searchHandler = ({target}: React.ChangeEvent<HTMLInputElement>) => {
         setIsLoading(true);
         setSearchTerm(target.value);
     }
@@ -155,36 +154,54 @@ const PrikhodyMapApp = ({children, items}: any) => {
         children :
         <div>
             <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
-                    <FilterBar
-                        {
-                            ...{
-                                searchHandler,
-                                keysHandler,
-                                searchTerm,
-                                isTypoTolerance, setIsTypoTolerance,
+                <Box
+                    component="form"
+                    sx={{ '& > :not(style)': { m: 1, width: '25ch' }, width: '100%', display: 'flex' }}
+                    noValidate
+                    autoComplete="off"
+                >
+                    <TextField
+                        sx={{flexGrow: 1}}
+                        size="small"
+                        value={searchTerm}
+                        onChange={searchHandler}
+                        onFocus={(e: any) => {
+                            e.target.parentNode.parentNode.style.flexGrow = 3;
+                        }}
+                        onBlur={(e: any) => {
+                            e.target.parentNode.parentNode.style.flexGrow = 1;
+                        }}
+                        id="search-church-input"
+                        label="Церковь / Костел"
+                        variant="outlined"
+                    />
+                    <Autocomplete
+                        size="small"
+                        id="search-atd-input"
+                        disablePortal
+                        onFocus={(e: any) => {
+                            e.target.parentNode.parentNode.parentNode.style.flexGrow = 3;
+                        }}
+                        onBlur={(e: any) => {
+                            e.target.parentNode.parentNode.parentNode.style.flexGrow = 1;
+                        }}
+                        options={uOptions}
+                        sx={{ flexGrow: 1 }}
+                        onChange={(event: any, newValueItem: any | null) => {
+                            if (newValueItem && newValueItem.value) {
+                                router.push(`/prikhody/atd/${newValueItem.value}`);
+                            } else {
+                                if (~pathname.indexOf('/p/')) {
+                                    setSelectedPrikhodItem(null);
+                                    goBack();
+                                } else {
+                                    router.push(`/prikhody`);
+                                }
                             }
-                        }
-                    >
-                        <Select className="select-filter white-space-nowrap"
-                                isClearable={true}
-                                isLoading={false}
-                                options={uOptions}
-                                value={selectedPrikhodItem || uOptions.find((v: any) => ~location.href.indexOf(v.value))}
-                                placeholder={'Уезд/Район'}
-                                onChange={(e: any) => {
-                                    if (e) {
-                                        router.push(`/prikhody/atd/${e.value}`);
-                                    } else {
-                                        if (~pathname.indexOf('/p/')) {
-                                            setSelectedPrikhodItem(null);
-                                            goBack();
-                                        } else {
-                                            router.push(`/prikhody`);
-                                        }
-                                    }
-                                }}
-                        />
-                    </FilterBar>
+                        }}
+                        renderInput={(params) => <TextField {...params} label="Уезд / Район" />}
+                    />
+                </Box>
             </div>
             {
                 isLoading ? <Box sx={{ position: 'absolute', top: '50%', right: '50%', zIndex: 1000 }}>
