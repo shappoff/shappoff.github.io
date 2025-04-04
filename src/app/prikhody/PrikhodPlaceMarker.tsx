@@ -41,7 +41,7 @@ const PrikhodPlaceMarker = ({hit, isDev, markerLabel = 'Сохранилось �
                        ),
                        className: `marker-church-div-icon ${isOrtodox ? 'orthodox' : 'сatholic'} ${+src === 0 ? 'no-metrics' : ''}`
                    })}
-                   position={[parseFloat(lat.replace(',', '.')), parseFloat(lng.replace(',', '.'))]}>
+                   position={[parseFloat(lat), parseFloat(lng)]}>
         <Popup key="Popup">
             <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{pType ? `${pType} ` : ''}{pTitle}</b>
             <h6 style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{title}</h6>

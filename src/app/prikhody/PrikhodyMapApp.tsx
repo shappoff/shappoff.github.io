@@ -4,6 +4,8 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './prikhody.css';
 
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 import {MapContainer} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -19,22 +21,64 @@ import LayersControlComponent from "@/components/prikhody/LayersControlComponent
 import SetMapSizeOnChange from "@/components/prikhody/SetMapSizeOnChange";
 import FilterBar from "@/components/prikhody/FilterBar";
 import Select from "react-select";
+import useDebounce from "@/components/useDebounce";
+
+import algoliasearch from 'algoliasearch/lite';
+import WrapToMarkerClusterGroup from "@/app/prikhody/WrapToMarkerClusterGroup";
+declare const process: any;
+
+const client = algoliasearch(
+    process.env.NEXT_PUBLIC_PPFF_ALGOLIA_APPLICATION_ID,
+    process.env.NEXT_PUBLIC_PPFF_ALGOLIA_SEARCH_API_KEY
+);
+
+const prikhodyIndex = client.initIndex('prikhodyIndex');
 
 const PrikhodyMapApp = ({children, items}: any) => {
     const filterBarRef = React.useRef(null);
     const pathname = usePathname();
-
+    const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [selectedPrikhodItem, setSelectedPrikhodItem] = React.useState<any>();
     const [searchTerm, setSearchTerm] = React.useState<string>('');
     const [isTypoTolerance, setIsTypoTolerance] = React.useState<boolean>(true);
     const [uOptions, setuOptions] = React.useState<any>([]);
+    const [prikhodyDataArray, setPrikhodyDataArray] = React.useState<any>([]);
 
     const size = useWindowSize();
     const router = useRouter();
+    const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
     const [rootWith, setRootWith] = React.useState(0);
     const [filterBarHeight, setFilterBarHeight] = React.useState(0);
     const [footerHeight, setFooterHeight] = React.useState(0);
+
+    React.useEffect(() => {
+
+        setPrikhodyDataArray([]);
+        if (debouncedSearchTerm.length) {
+            setIsLoading(true);
+            prikhodyIndex.search(debouncedSearchTerm, {
+                hitsPerPage: 1000,
+                typoTolerance: isTypoTolerance
+            })
+                .then(({hits}: any) => {
+
+                    const withCoords: Array<any> = [];
+                    const noCoords: Array<any> = [];
+                    hits.forEach((hit: any) => {
+                        if (hit._geoloc?.lat) {
+                            const {objectID, title, pTitle, pType, _geoloc, src, atd} = hit;
+                            withCoords.push([objectID, title, pTitle, pType, _geoloc.lat, _geoloc.lng, src, atd.join('|')]);
+                        } else {
+                            noCoords.push(hit);
+                        }
+                    });
+                    setPrikhodyDataArray(withCoords);
+                    setIsLoading(false);
+                });
+        }
+
+    }, [debouncedSearchTerm]);
 
     React.useEffect(() => {
         const resultList: any = document.getElementById('slide-panel-info1') ? document.getElementById('slide-panel-info1') : null;
@@ -52,6 +96,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
     }, [size]);
 
     React.useEffect(() => {
+        setSearchTerm('');
         if (~pathname.indexOf('/p/')) {
             const selectedPathnameId = pathname.slice(pathname.indexOf('/p/')).replaceAll('/p/', '').replaceAll('/', '');
             const selectedPrikhod = items.find((item: any) => {
@@ -89,6 +134,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
     }, [items]);
 
     const searchHandler = ({target}: any) => {
+        setIsLoading(true);
         setSearchTerm(target.value);
     }
 
@@ -140,6 +186,11 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         />
                     </FilterBar>
             </div>
+            {
+                isLoading ? <Box sx={{ position: 'absolute', top: '50%', right: '50%', zIndex: 1000 }}>
+                    <CircularProgress />
+                </Box> : <></>
+            }
             <MapContainer
                 attributionControl={false}
                 id="map"
@@ -155,7 +206,11 @@ const PrikhodyMapApp = ({children, items}: any) => {
                 <SetMapSizeOnChange key="SetMapSizeOnChange" top={`${filterBarHeight}px`}
                                     height={`calc(100vh - ${footerHeight + filterBarHeight}px)`}/>
                 <LayersControlComponent key="LayersControlComponent" rootWith={rootWith}/>
-                {children}
+                {
+                    prikhodyDataArray.length && !~pathname.indexOf('/p/') ? <>
+                        <WrapToMarkerClusterGroup items={prikhodyDataArray} />
+                    </> : children
+                }
             </MapContainer>
         </div>;
 };
