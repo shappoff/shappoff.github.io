@@ -317,3 +317,9 @@ body.loading #input-id {
 .badge-wrapper {
     position: relative;
 }
+.MuiAutocomplete-root {
+    -webkit-transition: flex-grow 100ms ease-in-out;
+    -moz-transition: flex-grow 100ms ease-in-out;
+    -o-transition: flex-grow 100ms ease-in-out;
+    transition: flex-grow 100ms ease-in-out;
+}
