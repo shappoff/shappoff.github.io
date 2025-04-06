@@ -38,6 +38,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
     const pathname = usePathname();
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [selectedPrikhodItem, setSelectedPrikhodItem] = React.useState<any>();
+    const [selectedATDItem, setSelectedATDItem] = React.useState<any>();
     const [searchTerm, setSearchTerm] = React.useState<string>('');
     const [isTypoTolerance, setIsTypoTolerance] = React.useState<boolean>(true);
     const [uOptions, setuOptions] = React.useState<any>([]);
@@ -54,7 +55,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
     React.useEffect(() => {
 
         setPrikhodyDataArray([]);
-        if (debouncedSearchTerm.length) {
+        if (debouncedSearchTerm && debouncedSearchTerm.length) {
             setIsLoading(true);
             prikhodyIndex.search(debouncedSearchTerm, {
                 hitsPerPage: 1000,
@@ -73,8 +74,11 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         }
                     });
                     setPrikhodyDataArray(withCoords);
-                    setIsLoading(false);
-                });
+                }).finally(() => {
+                setIsLoading(false);
+            });
+        } else {
+            setPrikhodyDataArray([]);
         }
 
     }, [debouncedSearchTerm]);
@@ -97,6 +101,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
     React.useEffect(() => {
         setSearchTerm('');
         if (~pathname.indexOf('/p/')) {
+            setIsLoading(false);
             const selectedPathnameId = pathname.slice(pathname.indexOf('/p/')).replaceAll('/p/', '').replaceAll('/', '');
             const selectedPrikhod = items.find((item: any) => {
                 return item[0] === selectedPathnameId
@@ -132,9 +137,11 @@ const PrikhodyMapApp = ({children, items}: any) => {
         setuOptions(optionsItmes.sort((a: any, b: any) => a.label.localeCompare(b.label)));
     }, [items]);
 
-    const searchHandler = ({target}: React.ChangeEvent<HTMLInputElement>) => {
-        setIsLoading(true);
-        setSearchTerm(target.value);
+    const searchHandler = (event: any) => {
+        if (event?.target.value) {
+            setIsLoading(true);
+        }
+        setSearchTerm(event?.target.value);
     }
 
     const keysHandler = (e: any) => {
@@ -149,6 +156,12 @@ const PrikhodyMapApp = ({children, items}: any) => {
             router.push('/prikhody')
         }
     };
+    React.useEffect(() => {
+        const dd = uOptions.find((v: any) => {
+            return ~location.href.indexOf(v.value);
+        });
+        setSelectedATDItem(dd);
+    }, [uOptions]);
 
     return (~pathname.indexOf('atd') || ~pathname.indexOf('/p/')) && pathname.split('/').filter((v: string) => !!v).length < 3 ?
         children :
@@ -160,22 +173,44 @@ const PrikhodyMapApp = ({children, items}: any) => {
                     noValidate
                     autoComplete="off"
                 >
-                    <TextField
-                        sx={{flexGrow: 1}}
+                    <Autocomplete
+                        value={selectedPrikhodItem ? selectedPrikhodItem : ''}
                         size="small"
-                        value={searchTerm}
-                        onChange={searchHandler}
+                        id="search-atd-input"
+                        loading={isLoading}
+                        onInputChange={searchHandler}
+                        disablePortal
+                        noOptionsText="Не найдено результатов"
                         onFocus={(e: any) => {
-                            e.target.parentNode.parentNode.style.flexGrow = 3;
+                            e.target.parentNode.parentNode.parentNode.style.flexGrow = 3;
                         }}
                         onBlur={(e: any) => {
-                            e.target.parentNode.parentNode.style.flexGrow = 1;
+                            e.target.parentNode.parentNode.parentNode.style.flexGrow = 1;
                         }}
-                        id="search-church-input"
-                        label="Церковь / Костел"
-                        variant="outlined"
+                        options={prikhodyDataArray.map(([objectID, title, pTitle, pType, lat, lng, src, atd]: any) => {
+                            return {
+                                label: `${pType} ${pTitle}, ${title}`,
+                                value: objectID,
+                            };
+                        })}
+                        sx={{ flexGrow: 1 }}
+                        onChange={(event: any, newValueItem: any | null) => {
+                            if (newValueItem && newValueItem.value) {
+                                setSelectedPrikhodItem(newValueItem);
+                                router.push(`/prikhody/p/${newValueItem.value}`);
+                            } else {
+                                if (~pathname.indexOf('/p/')) {
+                                    setSelectedPrikhodItem(void(0));
+                                    goBack();
+                                } else {
+                                    router.push(`/prikhody`);
+                                }
+                            }
+                        }}
+                        renderInput={(params) => <TextField {...params} label="Церковь / Костел" placeholder="Начните вводить" />}
                     />
                     <Autocomplete
+                        value={selectedATDItem ? selectedATDItem : ''}
                         size="small"
                         id="search-atd-input"
                         disablePortal
@@ -190,7 +225,9 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         onChange={(event: any, newValueItem: any | null) => {
                             if (newValueItem && newValueItem.value) {
                                 router.push(`/prikhody/atd/${newValueItem.value}`);
+                                setSelectedATDItem(newValueItem);
                             } else {
+                                setSelectedATDItem(void(0));
                                 if (~pathname.indexOf('/p/')) {
                                     setSelectedPrikhodItem(null);
                                     goBack();
