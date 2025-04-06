@@ -106,11 +106,12 @@ const PrikhodyMapApp = ({children, items}: any) => {
             const selectedPrikhod = items.find((item: any) => {
                 return item[0] === selectedPathnameId
             });
-
-            setSelectedPrikhodItem({
-                label: `${selectedPrikhod[3]} ${selectedPrikhod[2]}, ${selectedPrikhod[1]}`,
-                value: selectedPrikhod[0],
-            });
+            if (selectedPrikhod) {
+                setSelectedPrikhodItem({
+                    label: `${selectedPrikhod[3]} ${selectedPrikhod[2]}, ${selectedPrikhod[1]}`,
+                    value: selectedPrikhod[0],
+                });
+            }
         }
     }, [pathname]);
 
@@ -163,7 +164,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
         setSelectedATDItem(dd);
     }, [uOptions]);
 
-    return (~pathname.indexOf('atd') || ~pathname.indexOf('/p/')) && pathname.split('/').filter((v: string) => !!v).length < 3 ?
+    return (~pathname.indexOf('atd') || (pathname.endsWith('/p/') || pathname.endsWith('/p'))) ?
         children :
         <div>
             <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
