@@ -3,8 +3,10 @@ import fs from "fs";
 import {prikhodyMainDataPath} from "@/components/paths";
 
 import './prkhd.css';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import CreatePortalWrapper from "@/components/CreatePortalWrapper";
-import Link from "next/link";
 
 
 export const metadata: Metadata = {
@@ -34,21 +36,22 @@ export default function PrikhodListPage() {
     const allPrikhods = JSON.parse(fs.readFileSync(prikhodyMainDataPath, 'utf8'));
 
     return <CreatePortalWrapper id="slide-panel-info">
-        <ol key="prikhody-list">
+        <List key="prikhody-list">
             {
                 allPrikhods
                     .sort((a: any, b: any) => a[2].localeCompare(b[2]))
                     .map(([id, title, np, npType, lat, lng, , atdStr]: any, index: number) =>
-                        <li key={id}>
-                            <Link href={`/prikhody/p/${id}`}
+                        <ListItem key={id}>
+                            <span>{index + 1}. </span>
+                            <a href={`/prikhody/p/${id}`}
                                title={`${title}`}
                                aria-label={`${title}`}
                             >
-                                {`${npType} ${np}, ${title}, ${atdStr?.split('|').join(', ')}`}
-                            </Link>
-                        </li>
+                                <ListItemText primary={`${npType} ${np}, ${title}, ${atdStr?.split('|').join(', ')}`}/>
+                            </a>
+                        </ListItem>
                     )
             }
-        </ol>
+        </List>
     </CreatePortalWrapper>
 }
