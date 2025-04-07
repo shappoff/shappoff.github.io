@@ -116,7 +116,15 @@ const MainTabsOpisi = ({fond, opNmbPool, digited, opisi, rejected}: any) => {
                                     <section style={{display: 'flex', flexWrap: 'wrap', width: '100vw'}}>
                                         {
                                             Object.keys(digited[opNmb] || {}).length ? <>
-                                                <Divider sx={{width: '100%'}} textAlign="center"><h4>Оцифрованные дела Описи № {value}</h4></Divider>
+                                                <Divider sx={{width: '100%'}} textAlign="center">
+                                                    <WrapToTooltip note="обновлено 31.03.2025 | Таблица откроется в новом окне">
+                                                        <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1eKuTaDS5g8xCZX35N14Kyy9a01saGEya/">
+                                                            <u>
+                                                                <h4>Оцифрованные дела Описи № {value}</h4>
+                                                            </u>
+                                                        </Link>
+                                                    </WrapToTooltip>
+                                                </Divider>
                                             </> : <></>
                                         }
                                         <div className="digeted-box-ul">
