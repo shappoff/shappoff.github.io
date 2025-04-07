@@ -3406,7 +3406,7 @@ export default async function () {
             range: 'main!A1:L'
         },
         {
-            spreadsheetId: '1uYH8uEomgtuDVVylEHwY3HLQ7BqMhVrFrZHg53HFwSA',
+            spreadsheetId: '1-sTheH2DP378yZrX4YmykZLXzVrE1pwApm6YMx08Y8c',
             range: 'Лист1!A2:D'
         },
         {
