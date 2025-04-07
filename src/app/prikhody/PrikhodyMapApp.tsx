@@ -174,6 +174,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
                     autoComplete="off"
                 >
                     <Autocomplete
+                        onClose={() => {setIsLoading(false)}}
                         value={selectedPrikhodItem ? selectedPrikhodItem : ''}
                         size="small"
                         id="search-atd-input"
