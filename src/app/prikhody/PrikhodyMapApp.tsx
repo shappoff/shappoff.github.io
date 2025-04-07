@@ -169,7 +169,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
             <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
                 <Box
                     component="form"
-                    sx={{ '& > :not(style)': { m: 1, width: '25ch' }, width: '100%', display: 'flex' }}
+                    sx={{ '& > :not(style)': { m: 1 }, width: '100%', display: 'flex' }}
                     noValidate
                     autoComplete="off"
                 >
@@ -180,7 +180,6 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         id="search-atd-input"
                         loading={isLoading}
                         onInputChange={searchHandler}
-                        disablePortal
                         noOptionsText="Не найдено результатов"
                         onFocus={(e: any) => {
                             e.target.parentNode.parentNode.parentNode.style.flexGrow = 3;
@@ -214,7 +213,6 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         value={selectedATDItem ? selectedATDItem : ''}
                         size="small"
                         id="search-atd-input"
-                        disablePortal
                         onFocus={(e: any) => {
                             e.target.parentNode.parentNode.parentNode.style.flexGrow = 3;
                         }}

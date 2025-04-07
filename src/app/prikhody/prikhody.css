@@ -323,3 +323,7 @@ body.loading #input-id {
     -o-transition: flex-grow 100ms ease-in-out;
     transition: flex-grow 100ms ease-in-out;
 }
+
+.MuiAutocomplete-popper {
+    width: 90vw !important;
+}
