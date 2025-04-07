@@ -28,6 +28,7 @@ ul.digeted-box-ul li:hover {
 }
 .MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary:not(.Mui-selected) {
     font-size: smaller;
+    text-transform: capitalize;
 }
 .Mui-selected {
     font-size: larger;
