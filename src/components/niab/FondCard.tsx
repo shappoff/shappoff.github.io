@@ -1,8 +1,9 @@
 import Card from "react-bootstrap/Card";
-import Table from "react-bootstrap/Table";
 import React from "react";
 import {Accordion, Badge} from "react-bootstrap";
 import Link from "next/link";
+import Button from '@mui/material/Button';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const openInNewTab = (url: string) => {
     const newWindow: Window | null = window.open(url, '_blank', 'noopener,noreferrer,width=400,height=400');
@@ -98,52 +99,13 @@ const FondCard = ({item, index, analytics}: any) => {
                         <div dangerouslySetInnerHTML={{__html: state.anotation}}/>
                     </Accordion.Body>
                 </Accordion.Item>
-                <Accordion.Item eventKey="2">
-                    <Accordion.Header onClick={() => {
-                        setCurrentAccordion('2');
-                        if (analytics && !analyticsSent) {
-                            analytics(item.fod);
-                            setAnalyticsSent(true);
-                        }
-                    }}><i>Описи</i></Accordion.Header>
-                    <Accordion.Body>
-                        <Table>
-                            <tbody>
-                            {
-                                item.opisi?.map((opis: any, oIndex: number) => {
-                                    return <tr key={oIndex}>
-                                        <td style={{position: 'relative'}}>
-                                            {
-                                                opis.s ? <>
-                                                    <Link href="#" title={`Проиндексированно ${opis.s} %`} style={{fontSize: "xx-small"}}>{opis.s} %</Link>
-                                                </> : <></>
-                                            }
-                                        </td>
-                                        <td>
-                                            {
-                                                opis.docId ? <Link className="opis-link-src" href="#" onClick={() => {
-                                                    openInNewTab(`https://drive.google.com/file/d/${opis.docId}`);
-                                                    // window.open(, '', 'width=400, height=400').focus();
-                                                }}>{opis.op}</Link> : opis.op
-
-                                            }
-                                        </td>
-                                        <td>{opis.i?.split('|').map((int: string, index: number) => {
-                                            const [title, src] = int.split('](');
-                                            return <Link key={index} href="#" onClick={() => {
-                                                openInNewTab(src.replace(')', ''));
-                                                // window.open(src.replace(')', ''), '', 'width=400, height=400').focus();
-                                            }}>{index ? ', ' : ''}{title.replace('[', '')}</Link>
-                                        })}</td>
-                                        <td>{opis.n}</td>
-
-                                    </tr>
-                                })
-                            }
-                            </tbody>
-                        </Table>
-                    </Accordion.Body>
-                </Accordion.Item>
+                <Button size="small"
+                        variant="outlined"
+                        className="fond-opis-button-src"
+                        fullWidth={true}
+                        startIcon="Описи"
+                        endIcon={<ArrowForwardIosIcon />}
+                        href={`/niab/${item.fod}`} />
             </Accordion>
         </Card.Body>
     </Card>
