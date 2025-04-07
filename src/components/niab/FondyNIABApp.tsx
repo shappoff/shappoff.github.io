@@ -12,7 +12,6 @@ import {HashRoute} from "./HashRoute";
 import Slider from 'rc-slider';
 import SliderTooltip from "./SliderTooltip";
 import {useGAnalytics} from "../useGAnalytics";
-// import {algoliasearch} from "algoliasearch";
 import algoliasearch from 'algoliasearch/lite';
 
 const HASH_MAP = {

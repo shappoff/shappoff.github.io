@@ -22,6 +22,10 @@ import Button from '@mui/material/Button';
 import './MainTabsOpisi.css'
 import CopyToClipboardData from "@/components/CopyToClipboardData";
 import Divider from '@mui/material/Divider';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
 
 
 function compareDelaNumbers(a: any, b: any) {
@@ -29,7 +33,7 @@ function compareDelaNumbers(a: any, b: any) {
 }
 
 
-const MainTabsOpisi = ({fond, opNmbPool, digited, opisi, rejected}: any) => {
+const MainTabsOpisi = ({fond, opNmbPool, digited, opisi, rejected, indexed}: any) => {
 
     const [value, setValue] = React.useState<number>(1);
 
@@ -64,41 +68,67 @@ const MainTabsOpisi = ({fond, opNmbPool, digited, opisi, rejected}: any) => {
                                                  }}
                                                  value={+opNmb}>
                                     {
-                                        Object.keys(rejected[value] || {}).length ? <>
-                                            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                                                <Alert severity="info">
-                                                    <b>Если вам отказали в выдаче дела, сообщите об этом пожалуйста - </b>
-                                                    <Link href={`mailto:ilasica@internet.ru`}>ilasica@internet.ru</Link>
-                                                </Alert>
-                                                <TableContainer>
-                                                    <Table size="small" stickyHeader aria-label="sticky table">
-                                                        <TableHead>
-                                                            <TableRow>
-                                                                <TableCell align="center">№ Дела</TableCell>
-                                                                <TableCell align="center">Заголовок дела</TableCell>
-                                                                <TableCell align="center">Причина</TableCell>
-                                                                <TableCell align="center">контактное лицо</TableCell>
-                                                            </TableRow>
-                                                        </TableHead>
-                                                        <TableBody>
-                                                            {Object.keys(rejected[value] || {}).map((delo: string, index:  number) => {
-                                                                const [title, reason, contact] = rejected[value][delo] || [];
-                                                                return <TableRow
-                                                                    key={index}
-                                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                                >
-                                                                    <TableCell align="center">№ {delo}</TableCell>
-                                                                    <TableCell align="left">{title}</TableCell>
-                                                                    <TableCell align="center">{reason}</TableCell>
-                                                                    <TableCell align="center"><Link href={`mailto:${contact}`}>{contact}</Link></TableCell>
-                                                                </TableRow>
-                                                            })}
-                                                        </TableBody>
-                                                    </Table>
-                                                </TableContainer>
-                                            </Paper>
+                                        indexed[value] ? <>
+                                            <Divider sx={{width: '100%', margin: '10px 0'}} textAlign="center">
+                                                <WrapToTooltip note="О проекте | Откроется в новом окне">
+                                                    <Link target="_blank" href="https://forum.vgd.ru/post/468/118798/p3690535.htm#pp3690535">
+                                                        <u>
+                                                            <h4>Опись № {value}, проиндексирована на {indexed[value]}</h4>
+                                                        </u>
+                                                    </Link>
+                                                </WrapToTooltip>
+                                            </Divider>
                                         </> : <></>
                                     }
+                                    {
+                                        Object.keys(rejected[value] || {}).length ? <>
+                                            <Accordion sx={{ marginTop: '1rem', width: '100%' }}>
+                                                <AccordionSummary
+                                                    expandIcon={<ExpandMoreIcon />}
+                                                    aria-controls="panel2-content"
+                                                    id="panel2-header"
+                                                >
+                                                    <h4>Информация об отказах в выдаче дел</h4>
+                                                </AccordionSummary>
+                                                <AccordionDetails>
+                                                    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                                                        <Alert severity="info">
+                                                            <b>Если вам отказали в выдаче дела, сообщите об этом пожалуйста - </b>
+                                                            <Link href={`mailto:ilasica@internet.ru`}>ilasica@internet.ru</Link>
+                                                        </Alert>
+                                                        <TableContainer>
+                                                            <Table size="small" stickyHeader aria-label="sticky table">
+                                                                <TableHead>
+                                                                    <TableRow>
+                                                                        <TableCell align="center">№ Дела</TableCell>
+                                                                        <TableCell align="center">Заголовок дела</TableCell>
+                                                                        <TableCell align="center">Причина</TableCell>
+                                                                        <TableCell align="center">контактное лицо</TableCell>
+                                                                    </TableRow>
+                                                                </TableHead>
+                                                                <TableBody>
+                                                                    {Object.keys(rejected[value] || {}).map((delo: string, index:  number) => {
+                                                                        const [title, reason, contact] = rejected[value][delo] || [];
+                                                                        return <TableRow
+                                                                            key={index}
+                                                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                                        >
+                                                                            <TableCell align="center">№ {delo}</TableCell>
+                                                                            <TableCell align="left">{title}</TableCell>
+                                                                            <TableCell align="center">{reason}</TableCell>
+                                                                            <TableCell align="center"><Link href={`mailto:${contact}`}>{contact}</Link></TableCell>
+                                                                        </TableRow>
+                                                                    })}
+                                                                </TableBody>
+                                                            </Table>
+                                                        </TableContainer>
+                                                    </Paper>
+                                                </AccordionDetails>
+                                            </Accordion>
+
+                                        </> : <></>
+                                    }
+
 
                                     <section style={{
                                         display: 'flex',
@@ -116,7 +146,7 @@ const MainTabsOpisi = ({fond, opNmbPool, digited, opisi, rejected}: any) => {
                                     <section style={{display: 'flex', flexWrap: 'wrap', width: '100vw'}}>
                                         {
                                             Object.keys(digited[opNmb] || {}).length ? <>
-                                                <Divider sx={{width: '100%'}} textAlign="center">
+                                                <Divider sx={{width: '100%', margin: '10px 0'}} textAlign="center">
                                                     <WrapToTooltip note="обновлено 31.03.2025 | Таблица откроется в новом окне">
                                                         <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1eKuTaDS5g8xCZX35N14Kyy9a01saGEya/">
                                                             <u>

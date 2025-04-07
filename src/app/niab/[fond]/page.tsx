@@ -17,6 +17,7 @@ import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow}
 
 import {
     digitedFormattedDataPath,
+    indexedNIABDataPath,
     mainDataPath,
     rejectedFormattedPath,
     stat333Path
@@ -57,6 +58,7 @@ const FondPage = async ({params}: any) => {
     const allPosts = JSON.parse(fs.readFileSync(mainDataPath, 'utf8'));
     const rejectedPosts = JSON.parse(fs.readFileSync(rejectedFormattedPath, 'utf8'));
     const digitedFormattedData = JSON.parse(fs.readFileSync(digitedFormattedDataPath, 'utf8'));
+    const indexedNIABData = JSON.parse(fs.readFileSync(indexedNIABDataPath, 'utf8'));
     const d333Posts = JSON.parse(fs.readFileSync(stat333Path, 'utf8'));
     const currentItem = allPosts.find((item: any) => +item.fod === +fond || item.fod === fond) || {};
     const opNmbPool: any = {};
@@ -198,6 +200,7 @@ const FondPage = async ({params}: any) => {
                 rejected={rejectedPosts[fond] || {}}
                 opNmbPool={Object.keys(opNmbPool)}
                 digited={digitedFormattedData[fond] || {}}
+                indexed={indexedNIABData[fond] || {}}
                 opisi={currentItem.opisi || []}
             />
 

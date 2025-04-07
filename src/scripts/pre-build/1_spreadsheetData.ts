@@ -8,7 +8,8 @@ import {
     prikhodyMainDataPath,
     prikhodyArchivesDataPath,
     digitedFormattedDataPath,
-    rejectedFormattedPath
+    rejectedFormattedPath,
+    indexedNIABDataPath
 } from "@/components/paths";
 import {get} from "@/components/utils";
 
@@ -3469,6 +3470,11 @@ export default async function () {
 
         return pool;
     }, {});
+
+    fs.writeFileSync(indexedNIABDataPath, JSON.stringify(indexedFormattedData, null, 4), {
+        encoding: 'utf8',
+        flag: 'w'
+    });
 
     const digitedFormattedData: any = digitedData?.data?.values?.reduce((pool: any, [fond, opis, value, comment]: any, index: number, arr: Array<any>) => {
 

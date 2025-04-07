@@ -3,6 +3,7 @@ import path from "path";
 export const digitedPath = path.resolve(`public/niab/digited.json`);
 export const stat333Path = path.resolve(`public/niab/333-9.json`);
 export const rejectedPath = path.resolve(`public/niab/rejected.json`);
+export const indexedNIABDataPath = path.resolve(`public/indexedNIABData.json`);
 export const rejectedFormattedPath = path.resolve(`public/rejectedFormattedPath.json`);
 export const mainDataPath = path.resolve(`public/niab/data.json`);
 export const all_merged = path.resolve(`public/catalogarchivesgov/all_merged.json`);
