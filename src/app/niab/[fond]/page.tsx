@@ -2,7 +2,7 @@ import Link from "next/link";
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
-import FondTabs from "@/components/niab/FondTabs";
+import MainTabsOpisi from "@/components/niab/MainTabsOpisi";
 import fs from "fs";
 
 import Stack from '@mui/material/Stack';
@@ -14,10 +14,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import React from "react";
 import Tooltip from '@mui/material/Tooltip';
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+
 import {
     digitedFormattedDataPath,
     mainDataPath,
-    rejectedPath,
+    rejectedFormattedPath,
     stat333Path
 } from "@/components/paths";
 
@@ -54,12 +55,17 @@ export async function generateMetadata({ params }: any) {
 const FondPage = async ({params}: any) => {
     const {fond} = await params;
     const allPosts = JSON.parse(fs.readFileSync(mainDataPath, 'utf8'));
-    const rejectedPosts = JSON.parse(fs.readFileSync(rejectedPath, 'utf8'));
-    const digitedPosts = JSON.parse(fs.readFileSync(digitedFormattedDataPath, 'utf8'));
+    const rejectedPosts = JSON.parse(fs.readFileSync(rejectedFormattedPath, 'utf8'));
+    const digitedFormattedData = JSON.parse(fs.readFileSync(digitedFormattedDataPath, 'utf8'));
     const d333Posts = JSON.parse(fs.readFileSync(stat333Path, 'utf8'));
-    const rejectedItems = rejectedPosts.filter((rejected: any) => +rejected[0] === +fond);
-    const digitedItems = digitedPosts[fond];
     const currentItem = allPosts.find((item: any) => +item.fod === +fond || item.fod === fond) || {};
+    const opNmbPool: any = {};
+    currentItem.opisi.forEach(({opNmb}: any) => {
+        if (opNmb) {
+            opNmbPool[opNmb] = true;
+        }
+    });
+
 // https://niab.by/newsite/ru/Priostanovka_hkranilische4
     const isntZal: any = !!fourthStorage[fond];
     return <>
@@ -136,9 +142,6 @@ const FondPage = async ({params}: any) => {
                     </Grid>
                 </AccordionDetails>
             </Accordion>
-
-
-            <FondTabs digitedPosts={digitedItems} rejectedItems={rejectedItems} opisi={currentItem.opisi || []} />
             {
                 +fond === 333 ? <>
                     <Accordion>
@@ -190,6 +193,14 @@ const FondPage = async ({params}: any) => {
                     </Accordion>
                 </> : <></>
             }
+            <MainTabsOpisi
+                fond={fond}
+                rejected={rejectedPosts[fond] || {}}
+                opNmbPool={Object.keys(opNmbPool)}
+                digited={digitedFormattedData[fond] || {}}
+                opisi={currentItem.opisi || []}
+            />
+
         </Box>
     </>
 };
