@@ -128,14 +128,15 @@ const MainTabsOpisi = ({fond, opNmbPool, digited, opisi, rejected}: any) => {
                                                         comment = comment === true ? null : comment;
                                                         return <>
                                                             <WrapToTooltip key={indexDelo} note={comment}>
-                                                                <Button key={indexDelo} startIcon={'№'}
+                                                                <Button key={indexDelo}
+                                                                        startIcon={'№'}
+                                                                        endIcon={<CopyToClipboardData data={`НИАБ ${fond}-${opNmb}-${deloNmb}`} withSnackbar={true} />}
                                                                         variant="outlined"
                                                                         sx={{
                                                                             cursor: 'default',
                                                                             color: comment ? 'blue' : 'black'
                                                                             }}>
                                                                     {comment ? <u>{deloNmb}</u> : <span>{deloNmb}</span>}
-                                                                    <CopyToClipboardData data={`НИАБ ${fond}-${opNmb}-${deloNmb}`} withSnackbar={true} />
                                                                 </Button>
                                                             </WrapToTooltip>
                                                         </>
