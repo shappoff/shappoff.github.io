@@ -116,7 +116,7 @@ const MainTabsOpisi = ({fond, opNmbPool, digited, opisi, rejected}: any) => {
                                     <section style={{display: 'flex', flexWrap: 'wrap', width: '100vw'}}>
                                         {
                                             Object.keys(digited[opNmb] || {}).length ? <>
-                                                <Divider sx={{width: '100%'}} textAlign="center"><h4>Оцифрованные дела описи</h4></Divider>
+                                                <Divider sx={{width: '100%'}} textAlign="center"><h4>Оцифрованные дела Описи № {value}</h4></Divider>
                                             </> : <></>
                                         }
                                         <div className="digeted-box-ul">
