@@ -40,7 +40,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
     const [selectedPrikhodItem, setSelectedPrikhodItem] = React.useState<any>();
     const [selectedATDItem, setSelectedATDItem] = React.useState<any>();
     const [searchTerm, setSearchTerm] = React.useState<string>('');
-    const [isTypoTolerance, setIsTypoTolerance] = React.useState<boolean>(true);
+    const [typoTolerance, setTypoTolerance] = React.useState<boolean>(true);
     const [uOptions, setuOptions] = React.useState<Array<any>>([
         {
             label: 'Приходы без информации о сохранности',
@@ -68,7 +68,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
             setIsLoading(true);
             prikhodyIndex.search(debouncedSearchTerm, {
                 hitsPerPage: 1000,
-                typoTolerance: isTypoTolerance
+                typoTolerance
             })
                 .then(({hits}: any) => {
 
