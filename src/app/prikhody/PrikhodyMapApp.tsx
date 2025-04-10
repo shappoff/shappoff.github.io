@@ -41,7 +41,16 @@ const PrikhodyMapApp = ({children, items}: any) => {
     const [selectedATDItem, setSelectedATDItem] = React.useState<any>();
     const [searchTerm, setSearchTerm] = React.useState<string>('');
     const [isTypoTolerance, setIsTypoTolerance] = React.useState<boolean>(true);
-    const [uOptions, setuOptions] = React.useState<any>([]);
+    const [uOptions, setuOptions] = React.useState<any>([
+        {
+            label: 'Приходы без информации о сохранности',
+            value: '/prikhody/noinfo/'
+        },
+        {
+            label: 'Приходы c оцифрованными делами в НИАБ Минск',
+            value: '/prikhody/digited/'
+        }
+    ]);
     const [prikhodyDataArray, setPrikhodyDataArray] = React.useState<any>([]);
 
     const size = useWindowSize();
@@ -127,16 +136,6 @@ const PrikhodyMapApp = ({children, items}: any) => {
                 });
             }
         });
-        const additional = [
-            {
-                label: 'Приходы без информации о сохранности',
-                value: '/prikhody/noinfo/'
-            },
-            {
-                label: 'Приходы c оцифрованными делами в НИАБ Минск',
-                value: '/prikhody/digited/'
-            },
-        ];
 
         const optionsItmes = Object.keys(atdObj).map((hit: any) => {
             return ({
@@ -145,7 +144,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
             })
         });
 
-        setuOptions([...additional, ...optionsItmes.sort((a: any, b: any) => a.label.localeCompare(b.label))]);
+        setuOptions((additional) => [...additional, ...optionsItmes.sort((a: any, b: any) => a.label.localeCompare(b.label))]);
     }, [items]);
 
     const searchHandler = (event: any) => {
@@ -169,10 +168,10 @@ const PrikhodyMapApp = ({children, items}: any) => {
     };
     React.useEffect(() => {
         const dd = uOptions.find((v: any) => {
-            return ~location.href.indexOf(v.value);
+            return ~pathname.indexOf(v.value);
         });
         setSelectedATDItem(dd);
-    }, [uOptions]);
+    }, [pathname]);
 
     return (~pathname.indexOf('atd') || ~pathname.indexOf('/p/')) && pathname.split('/').filter((v: string) => !!v).length < 3 ?
         children :
