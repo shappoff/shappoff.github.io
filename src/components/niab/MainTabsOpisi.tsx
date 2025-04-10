@@ -26,6 +26,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
+import {useGAnalytics} from "@/components/useGAnalytics";
 
 
 function compareDelaNumbers(a: any, b: any) {
@@ -36,6 +37,14 @@ function compareDelaNumbers(a: any, b: any) {
 const MainTabsOpisi = ({fond, opNmbPool, digited, opisi, rejected, indexed}: any) => {
 
     const [value, setValue] = React.useState<number>(1);
+
+    useGAnalytics('G-BS71TCVL7J');
+
+    React.useEffect(() => {
+        gtag('event', 'search', {
+            fond: `${fond}`,
+        });
+    }, []);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
