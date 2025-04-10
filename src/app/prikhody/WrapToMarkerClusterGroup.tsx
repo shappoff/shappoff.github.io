@@ -17,7 +17,10 @@ function WrapToMarkerClusterGroup({items, enable = true, bounds = false, markerL
         }
         {
             enable ?
-                <MarkerClusterGroup key="MarkerClusterGroup">
+                <MarkerClusterGroup
+                    key="MarkerClusterGroup"
+                    maxClusterRadius={150}
+                >
                     <Markers key="Markers-2" items={items} markerLabel={markerLabel} />
                 </MarkerClusterGroup>
                 :
