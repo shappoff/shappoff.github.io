@@ -46,6 +46,6 @@ export default function PrikhodyMapPage() {
 
 
     return <>
-        <WrapToMarkerClusterGroup items={noinfo} maxClusterRadius={30} enable={true} bounds={false} markerLabel="Оцифровано дел:" />
+        <WrapToMarkerClusterGroup items={noinfo} maxClusterRadius={40} enable={true} bounds={false} markerLabel="Оцифровано дел:" />
     </>
 }
