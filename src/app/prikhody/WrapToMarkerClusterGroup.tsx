@@ -5,7 +5,13 @@ import Markers from "@/app/prikhody/MarkersList";
 import useMarkersBounds from "@/components/prikhody/useMarkersBounds";
 import BoundsToMapItems from "@/components/prikhody/BoundsToMapItems";
 
-function WrapToMarkerClusterGroup({items, enable = true, bounds = false, markerLabel}: any) {
+function WrapToMarkerClusterGroup({
+                                      items,
+                                      maxClusterRadius = 150,
+                                      enable = true,
+                                      bounds = false,
+                                      markerLabel
+}: any) {
     const markersBounds = useMarkersBounds(items);
     return <>
         {
@@ -19,7 +25,7 @@ function WrapToMarkerClusterGroup({items, enable = true, bounds = false, markerL
             enable ?
                 <MarkerClusterGroup
                     key="MarkerClusterGroup"
-                    maxClusterRadius={150}
+                    maxClusterRadius={maxClusterRadius}
                 >
                     <Markers key="Markers-2" items={items} markerLabel={markerLabel} />
                 </MarkerClusterGroup>
