@@ -44,11 +44,11 @@ const PrikhodyMapApp = ({children, items}: any) => {
     const [uOptions, setuOptions] = React.useState<Array<any>>([
         {
             label: 'Приходы без информации о сохранности',
-            value: '/prikhody/noinfo/'
+            value: '/prikhody/noinfo'
         },
         {
             label: 'Приходы c оцифрованными делами в НИАБ Минск',
-            value: '/prikhody/digited/'
+            value: '/prikhody/digited'
         }
     ]);
     const [prikhodyDataArray, setPrikhodyDataArray] = React.useState<any>([]);
