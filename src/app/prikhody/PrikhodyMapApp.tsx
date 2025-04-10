@@ -127,6 +127,17 @@ const PrikhodyMapApp = ({children, items}: any) => {
                 });
             }
         });
+        const additional = [
+            {
+                label: 'Приходы без информации о сохранности',
+                value: '/prikhody/noinfo/'
+            },
+            {
+                label: 'Приходы c оцифрованными делами в НИАБ Минск',
+                value: '/prikhody/digited/'
+            },
+        ];
+
         const optionsItmes = Object.keys(atdObj).map((hit: any) => {
             return ({
                 label: atdObj[hit],
@@ -134,7 +145,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
             })
         });
 
-        setuOptions(optionsItmes.sort((a: any, b: any) => a.label.localeCompare(b.label)));
+        setuOptions([...additional, ...optionsItmes.sort((a: any, b: any) => a.label.localeCompare(b.label))]);
     }, [items]);
 
     const searchHandler = (event: any) => {
@@ -223,7 +234,11 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         sx={{ flexGrow: 1 }}
                         onChange={(event: any, newValueItem: any | null) => {
                             if (newValueItem && newValueItem.value) {
-                                router.push(`/prikhody/atd/${newValueItem.value}`);
+                                if (~newValueItem.value.indexOf('prikhody')) {
+                                    router.push(`${newValueItem.value}`);
+                                } else {
+                                    router.push(`/prikhody/atd/${newValueItem.value}`);
+                                }
                                 setSelectedATDItem(newValueItem);
                             } else {
                                 setSelectedATDItem(void(0));
@@ -250,7 +265,6 @@ const PrikhodyMapApp = ({children, items}: any) => {
                 key="map1"
                 center={[53.902287, 27.561824]}
                 zoom={7}
-
                 trackResize={true}
                 scrollWheelZoom={true}
                 zoomControl={false}
