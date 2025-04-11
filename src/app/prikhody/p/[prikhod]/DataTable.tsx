@@ -77,7 +77,7 @@ export default function DataTable({data, digited, rejected}: any) {
                     {
                         getNestedArrayValue(digited, fond, opis, delo) && short === 'НИАБ' ? <>
                             <Tooltip arrow title="Оцифрованно в НИАБ согласно перечню цифровых копий, имеющихся в фонде пользования">
-                                <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1CpcEoB-OkTR6W7bjeU3dhUPSKhH4enfm/">
+                                <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1eKuTaDS5g8xCZX35N14Kyy9a01saGEya/">
                                     <DocumentScannerOutlinedIcon sx={{ fontSize: 20, cursor: 'pointer' }} />
                                 </Link>
                             </Tooltip>
