@@ -170,10 +170,10 @@ const PrikhodyMapApp = ({children, items}: any) => {
     };
     React.useEffect(() => {
         const dd = uOptions.find((v: any) => {
-            return ~pathname.indexOf(v.value);
+            return ~location.href.indexOf(v.value);
         });
         setSelectedATDItem(dd);
-    }, [pathname]);
+    }, [uOptions]);
 
     return (~pathname.indexOf('atd') || ~pathname.indexOf('/p/')) && pathname.split('/').filter((v: string) => !!v).length < 3 ?
         children :
