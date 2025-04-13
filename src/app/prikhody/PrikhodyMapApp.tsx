@@ -173,7 +173,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
             return ~location.href.indexOf(v.value);
         });
         setSelectedATDItem(dd);
-    }, [uOptions]);
+    }, [pathname]);
 
     return (~pathname.indexOf('atd') || ~pathname.indexOf('/p/')) && pathname.split('/').filter((v: string) => !!v).length < 3 ?
         children :
