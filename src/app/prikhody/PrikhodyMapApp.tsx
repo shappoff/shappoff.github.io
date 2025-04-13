@@ -43,14 +43,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
     const [searchTerm, setSearchTerm] = React.useState<string>('');
     const [typoTolerance, setTypoTolerance] = React.useState<boolean>(true);
     const [uOptions, setuOptions] = React.useState<Array<any>>([
-        {
-            label: 'Приходы без информации о сохранности',
-            value: '/prikhody/noinfo'
-        },
-        {
-            label: 'Приходы c оцифрованными делами в НИАБ Минск',
-            value: '/prikhody/digited'
-        }
+
     ]);
     const [prikhodyDataArray, setPrikhodyDataArray] = React.useState<any>([]);
 
@@ -144,9 +137,18 @@ const PrikhodyMapApp = ({children, items}: any) => {
                 label: atdObj[hit],
                 value: hit
             })
+        }).sort((a: any, b: any) => a.label.localeCompare(b.label));
+
+        optionsItmes.unshift({
+                label: 'Приходы без информации о сохранности',
+                value: '/prikhody/noinfo'
+            });
+        optionsItmes.unshift({
+            label: 'Приходы c оцифрованными делами в НИАБ Минск',
+            value: '/prikhody/digited'
         });
 
-        setuOptions((additional: Array<any>) => [...additional, ...optionsItmes.sort((a: any, b: any) => a.label.localeCompare(b.label))]);
+        setuOptions(optionsItmes);
     }, [items]);
 
     const searchHandler = (event: any) => {
@@ -172,8 +174,8 @@ const PrikhodyMapApp = ({children, items}: any) => {
         const dd = uOptions.find((v: any) => {
             return ~location.href.indexOf(v.value);
         });
-        setSelectedATDItem(dd);
-    }, [pathname]);
+        dd && setSelectedATDItem(dd);
+    }, [uOptions]);
 
     return (~pathname.indexOf('atd') || ~pathname.indexOf('/p/')) && pathname.split('/').filter((v: string) => !!v).length < 3 ?
         children :
