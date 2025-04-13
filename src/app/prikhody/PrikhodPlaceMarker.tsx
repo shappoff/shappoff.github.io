@@ -43,11 +43,13 @@ const PrikhodPlaceMarker = ({hit, isDev, markerLabel = 'Сохранилось �
                    })}
                    position={[parseFloat(lat), parseFloat(lng)]}>
         <Popup key="Popup">
-            <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{pType ? `${pType} ` : ''}{pTitle}</b>
+            <div>
+                <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{pType ? `${pType} ` : ''}{pTitle}</b>
+                <IndicateButton item={{title: `${pTitle}`, objectID}} label="Указать точное место" />
+            </div>
             <h6 style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{title}</h6>
             <div>
                 <small>{markerLabel} {src}.</small>
-                <IndicateButton item={{title: `${pTitle}`, objectID}} label="Указать точное место" />
             </div>
             {children}
 
