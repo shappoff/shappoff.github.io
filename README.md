@@ -1,5 +1,3 @@
-## Getting Started111
-
 First, run the development server:
 
 ```bash
