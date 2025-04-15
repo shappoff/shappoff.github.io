@@ -15,7 +15,7 @@ import React from "react";
 
 const PrikhodPlaceMarker = ({hit, isDev, markerLabel = 'Сохранилось дел:', setCurrentLocIdInPopUp, selectCallback, children}: any) => {
 
-    const popupRef = React.createRef();
+    const popupRef = React.createRef<any>();
 
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = hit;
     const [prtitle, type] = objectID.split('_');
