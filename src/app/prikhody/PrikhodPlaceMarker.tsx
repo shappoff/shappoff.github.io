@@ -11,8 +11,12 @@ import { renderToStaticMarkup } from "react-dom/server";
 import Link from "next/link";
 import Image from 'next/image';
 import IndicateButton from "@/components/prikhody/IndicateButton";
+import React from "react";
 
 const PrikhodPlaceMarker = ({hit, isDev, markerLabel = 'Сохранилось дел:', setCurrentLocIdInPopUp, selectCallback, children}: any) => {
+
+    const popupRef = React.createRef();
+
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = hit;
     const [prtitle, type] = objectID.split('_');
     const redLink = `https://radzima.net/ru/${type}/${prtitle}.html`;
@@ -42,10 +46,15 @@ const PrikhodPlaceMarker = ({hit, isDev, markerLabel = 'Сохранилось �
                        className: `marker-church-div-icon ${isOrtodox ? 'orthodox' : 'сatholic'} ${+src === 0 ? 'no-metrics' : ''}`
                    })}
                    position={[parseFloat(lat), parseFloat(lng)]}>
-        <Popup key="Popup">
+        <Popup key="Popup" ref={popupRef}>
             <div>
                 <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{pType ? `${pType} ` : ''}{pTitle}</b>
-                <IndicateButton item={{title: `${pTitle}`, objectID}} label="Указать точное место" />
+                <IndicateButton item={{title: `${pTitle}`, objectID}}
+                                label="Указать точное место"
+                                popupRef={popupRef}
+                                callBack={() => {
+                                    popupRef.current._closeButton.click();
+                                }} />
             </div>
             <h6 style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{title}</h6>
             <div>

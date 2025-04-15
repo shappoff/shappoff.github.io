@@ -3,15 +3,17 @@ import React from "react";
 import {useMap} from "react-leaflet";
 import Badge from "react-bootstrap/Badge";
 
-const IndicateButton = ({item, setIsShowPanel, label = 'указать на карте'}: any) => {
+    const IndicateButton = ({item, callBack, label = 'указать на карте'}: any) => {
     const map = useMap();
     return <Badge bg="secondary" className="indicate-button"
                  onClick={() => {
+                     callBack && callBack();
                      const mapElement = document.getElementById('map');
                      if (mapElement) {
                          L.DomUtil.addClass(mapElement,'crosshair-cursor-enabled');
                      }
                      const clichHandler = async (e: any) => {
+
                          var coord = e.latlng;
                          var lat = coord.lat;
                          var lng = coord.lng;
@@ -42,7 +44,6 @@ const IndicateButton = ({item, setIsShowPanel, label = 'указать на ка
                      }
                      setTimeout(() => {
                          map.on('click', clichHandler);
-                         setIsShowPanel(false);
                      });
                  }}
     >{label}</Badge>
