@@ -22,6 +22,10 @@ export const metadata: Metadata = {
         title,
         description,
         url,
+        images: [
+            { url: 'https://shappoff.github.io/preview/400_400_bocheikovo1943.jpg', width: 400, height: 400, type: 'image/jpg' },
+            { url: 'https://shappoff.github.io/preview/650_650_bocheikovo1943.jpg', width: 650, height: 650, type: 'image/jpg' },
+        ],
         type: 'website',
     },
 };
