@@ -19,7 +19,7 @@ const Bocheikovo1943 = () => {
         whenReady={() => {
             setTimeout(() => {
                 document!.querySelector('.leaflet-control-attribution.leaflet-control')!
-                    .innerHTML = '<div>Деревня Залазье 14 октября 1943 г., Аэрофотосъемка, NCAP TUGX/0508</div>';
+                    .innerHTML = '<div>Бочейково 4 августа 1943 г., Аэрофотосъемка, NCAP TUGX/0500</div>';
             }, 100);
         }}
     >
