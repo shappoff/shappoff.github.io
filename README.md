@@ -1,7 +1,6 @@
 
 ```bash
 # or
-# or
 pnpm dev
 # or
 bun dev
