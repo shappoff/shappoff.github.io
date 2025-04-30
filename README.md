@@ -1,7 +1,6 @@
 
 ```bash
 # or
-yarn dev
 # or
 pnpm dev
 # or
