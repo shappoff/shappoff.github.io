@@ -147,6 +147,14 @@ const PrikhodyMapApp = ({children, items}: any) => {
             label: 'Приходы c оцифрованными делами в НИАБ Минск',
             value: '/prikhody/digited'
         });
+        optionsItmes.unshift({
+            label: 'Католические',
+            value: '/prikhody/catholics'
+        });
+        optionsItmes.unshift({
+            label: 'Православные',
+            value: '/prikhody/orthodox'
+        });
 
         setuOptions(optionsItmes);
     }, [items]);
