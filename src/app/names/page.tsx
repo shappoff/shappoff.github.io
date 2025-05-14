@@ -1,5 +1,5 @@
 import fs from "fs";
-import {namesDataPath} from "@/components/paths";
+import {orthodox_catholicNameDataPath} from "@/components/paths";
 import Names from "@/app/names/Names";
 
 export const metadata =  {
@@ -8,6 +8,6 @@ export const metadata =  {
 }
 
 export default function Page() {
-    const namesData = JSON.parse(fs.readFileSync(namesDataPath, 'utf8'));
+    const namesData = JSON.parse(fs.readFileSync(orthodox_catholicNameDataPath, 'utf8'));
     return <Names data={namesData} />
 }

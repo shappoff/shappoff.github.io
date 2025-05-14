@@ -13,3 +13,4 @@ export const prikhodyMainDataPath = path.resolve(`public/prikhodyMainData.json`)
 export const prikhodyArchivesDataPath = path.resolve(`public/prikhodyArchivesData.json`);
 export const digitedFormattedDataPath = path.resolve(`public/digitedFormattedData.json`);
 export const namesDataPath = path.resolve(`public/names.json`);
+export const orthodox_catholicNameDataPath = path.resolve(`public/orthodox_catholicNameDataPath.json`);

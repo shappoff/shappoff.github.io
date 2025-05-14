@@ -9,7 +9,8 @@ import {
     prikhodyArchivesDataPath,
     digitedFormattedDataPath,
     rejectedFormattedPath,
-    indexedNIABDataPath
+    indexedNIABDataPath,
+    orthodox_catholicNameDataPath
 } from "@/components/paths";
 import {get} from "@/components/utils";
 
@@ -3392,7 +3393,9 @@ export default async function () {
         stat333Data,
         cgia_19_127Data,
         prikhodyMain,
-        prikhodyArchivesData
+        prikhodyArchivesData,
+        catholicName,
+        orthodoxName,
     ] = await getGoogleSheetsDataArr([
         {
             spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
@@ -3425,6 +3428,14 @@ export default async function () {
         {
             spreadsheetId: '1A9dPH4ppRf5fWGYJzyKI9Z_82GKg-wq4HNLkDduY2r0',
             range: 'archives!A2:I'
+        },
+        {
+            spreadsheetId: '18eVUTKA3nZulxV65qCW3GxUQ5xHyn8MnYhNJOoJzsEs',
+            range: 'catholic!A1:D'
+        },
+        {
+            spreadsheetId: '18eVUTKA3nZulxV65qCW3GxUQ5xHyn8MnYhNJOoJzsEs',
+            range: 'orthodox!A1:F'
         },
     ]);
 
@@ -3648,6 +3659,31 @@ export default async function () {
     });
 
 
+    const handleNameRow = () => {
+        let titlesPool: any;
+
+        return (row: any, rowIndex: number) => {
+            const res: any = {index: rowIndex};
+            if (rowIndex === 0) {
+                titlesPool = row;
+            } else {
+                row.forEach((cell: any, cellIndex: number) => {
+                    const fieldName: any = titlesPool[cellIndex];
+                    res[fieldName] = cell;
+                });
+            }
+
+            return res;
+
+        }
+    };
+    const catholicNameData = get(catholicName, 'data.values', []).map(handleNameRow());
+    const orthodoxNameData = get(orthodoxName, 'data.values', []).map(handleNameRow());
+
+    fs.writeFileSync(orthodox_catholicNameDataPath, JSON.stringify([...catholicNameData, ...orthodoxNameData], null, 4), {
+        encoding: 'utf8',
+        flag: 'w'
+    });
 }
 
 function createDirIfNot(dir: any) {

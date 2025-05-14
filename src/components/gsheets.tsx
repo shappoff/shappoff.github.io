@@ -36,7 +36,9 @@ export async function getGoogleSheetsDataArr(spreadsheets: Array<any>) {
         stat333Data,
         cgia_19_127Data,
         prikhodyMain,
-        prikhodyArchivesData
+        prikhodyArchivesData,
+        catholicName,
+        orthodoxName,
     ] = spreadsheets;
 
     return [
@@ -48,5 +50,7 @@ export async function getGoogleSheetsDataArr(spreadsheets: Array<any>) {
         await sheets.spreadsheets.values.get(cgia_19_127Data),
         await sheets.spreadsheets.values.get(prikhodyMain),
         await sheets.spreadsheets.values.get(prikhodyArchivesData),
+        await sheets.spreadsheets.values.get(catholicName),
+        await sheets.spreadsheets.values.get(orthodoxName),
     ];
 }

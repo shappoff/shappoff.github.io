@@ -25,7 +25,7 @@ const Names = ({data}: any) => {
         if (value.length) {
             setHits(data.filter(({key, sex}: any) => {
                 const regexp = new RegExp(value, "g");
-                return key.match(regexp) && currentSex === sex;
+                return key && key.match(regexp) && currentSex === sex;
             }));
         } else {
             setHits([]);
@@ -55,20 +55,20 @@ const Names = ({data}: any) => {
                         <TableRow>
                             <TableCell>Въ передачѣ на русскій языкъ</TableCell>
                             <TableCell>Въ польскомъ произношеніи.</TableCell>
-                            <TableCell>Источник</TableCell>
+                            <TableCell>Святцы</TableCell>
+                            <TableCell>Смысл имени</TableCell>
+                            <TableCell>Происхождение</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {
-                            hits.map(({pl, ru, sex, src = []}, index) =>
+                            hits.map(({pl, ru, sex, date, sence, origin}, index) =>
                                 <TableRow key={index}>
-                                    <TableCell >{ru}</TableCell>
-                                    <TableCell >{pl}</TableCell>
-                                    <TableCell >
-                                        {
-                                            src.map((s: string, ind: number) => <span key={ind} title={s === 'ort' ? 'в Правосвии' : 'в Католичестве'}>{getIcon(s)}</span>)
-                                        }
-                                    </TableCell>
+                                    <TableCell>{ru}</TableCell>
+                                    { pl ? <TableCell>{pl}</TableCell> : <TableCell />}
+                                    { date ? <TableCell>{date}</TableCell> : <TableCell />}
+                                    { sence ? <TableCell>{sence}</TableCell> : <TableCell />}
+                                    { origin ? <TableCell>{origin}</TableCell> : <TableCell />}
                                 </TableRow>
                             )
                         }
