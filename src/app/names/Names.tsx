@@ -11,6 +11,8 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/joy/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 const Names = ({data}: any) => {
     const [value, setValue] = React.useState<string>('');
@@ -58,6 +60,7 @@ const Names = ({data}: any) => {
                             <TableCell>Святцы</TableCell>
                             <TableCell>Смысл имени</TableCell>
                             <TableCell>Происхождение</TableCell>
+                            <TableCell>источник</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -69,6 +72,11 @@ const Names = ({data}: any) => {
                                     { date ? <TableCell>{date}</TableCell> : <TableCell />}
                                     { sence ? <TableCell>{sence}</TableCell> : <TableCell />}
                                     { origin ? <TableCell>{origin}</TableCell> : <TableCell />}
+                                    <TableCell>
+                                        <Tooltip title={
+                                            pl ? ' 1901 г. Cписокъ всѣхъ имѣющихся въ обиходѣ у Римско-Католиковъ имѣющихся крестныхъ именъ.' : '1915 г. Алфавитъ именъ веѣхъ святыхъ, празднуемыхъ Православною Восточною Церковью'
+                                        }><MenuBookIcon /></Tooltip>
+                                    </TableCell>
                                 </TableRow>
                             )
                         }
