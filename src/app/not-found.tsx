@@ -6,7 +6,15 @@ import path from "path";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-    title: '404'
+    title: 'Сїѧ страни́ца не найдена',
+    icons: [
+        {
+            url: '/favicon404.png',
+            type: 'image/x-icon',
+            sizes: 'any',
+            rel: 'icon'
+        }
+    ],
 };
 
 
