@@ -24,7 +24,6 @@ import useDebounce from "@/components/useDebounce";
 
 import algoliasearch from 'algoliasearch/lite';
 import WrapToMarkerClusterGroup from "@/app/prikhody/WrapToMarkerClusterGroup";
-import {useGAnalytics} from "@/components/useGAnalytics";
 declare const process: any;
 
 const client = algoliasearch(
@@ -49,7 +48,6 @@ const PrikhodyMapApp = ({children, items}: any) => {
 
     const size = useWindowSize();
     const router = useRouter();
-    useGAnalytics('G-D24N93Y7CD');
     const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
     const [rootWith, setRootWith] = React.useState(0);

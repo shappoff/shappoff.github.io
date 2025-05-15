@@ -11,7 +11,6 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import '../../app/prikhody0/prikhody.css';
 
-
 import {
     MapContainer
 } from "react-leaflet";
@@ -44,7 +43,6 @@ import Select from "react-select";
 import useMarkersBounds from "./useMarkersBounds";
 import BoundsToMapItems from "./BoundsToMapItems";
 import NoFoundPrikhod from "./NoFoundPrikhod";
-import {useGAnalytics} from "../useGAnalytics";
 import useFirebaseAuth from "./useFirebaseAuth";
 import {useList} from "react-firebase-hooks/database";
 
@@ -58,8 +56,6 @@ const PrikhodyMapApp = () => {
     const [currentNotFoundPrikhodNPs, setCurrentNotFoundPrikhodNPs] = React.useState<any>([]);
     const [currentDescriptionItem, setCurrentDescriptionItem] = React.useState<any>();
     const [snapshots, loading, error] = useList(ref(getDatabase(app), `prikhods/${currentLocIdInPopUp?.objectID}`));
-
-    useGAnalytics('G-D24N93Y7CD');
 
     React.useEffect(() => {
         const found: Array<any> = [];

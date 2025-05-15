@@ -14,11 +14,11 @@ const openInNewTab = (url: string) => {
     return newWindow;
 }
 
-const FondCard = ({item, index, analytics}: any) => {
+const FondCard = ({item, index}: any) => {
     const [currentAccordion, setCurrentAccordion] = React.useState<string>();
     const [isOpendSrcFond, setIsOpendSrcFond] = React.useState<boolean>(false);
     const [state, setState] = React.useState<any>({});
-    const [analyticsSent, setAnalyticsSent] = React.useState<boolean>(false);
+
     // https://niab.by/newsite/ru/Priostanovka_hkranilische4
     const isntZal: any = !!fourthStorage[item.fod];
 

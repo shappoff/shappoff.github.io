@@ -11,7 +11,6 @@ import {HashRoute} from "./HashRoute";
 
 import Slider from 'rc-slider';
 import SliderTooltip from "./SliderTooltip";
-import {useGAnalytics} from "../useGAnalytics";
 import algoliasearch from 'algoliasearch/lite';
 
 const HASH_MAP = {
@@ -47,14 +46,6 @@ const FondyNIABApp = () => {
 
     const debouncedSearchTerm = useDebounce(searchTerm, 1500);
 
-    useGAnalytics('G-BS71TCVL7J');
-
-    const selectedFONDHandler = React.useCallback((fod: number) => {
-        gtag('event', 'search', {
-            fond: `${fod}`,
-        });
-    }, []);
-
     React.useEffect(() => {
         const effRouter = new HashRoute(window.location.href);
         const fond = effRouter.take(HASH_MAP.query);
@@ -74,7 +65,6 @@ const FondyNIABApp = () => {
             setIsLoading(true);
             setSearchTerm(fond);
             setCurrentPage(0);
-            selectedFONDHandler(fond);
         }
         setRoute(effRouter);
 
@@ -268,7 +258,7 @@ const FondyNIABApp = () => {
         <div className="list-result">
             {
                 resultsAll.map((item: any, index: number) => {
-                    return <FondCard key={index} index={index} item={item} analytics={selectedFONDHandler} />
+                    return <FondCard key={index} index={index} item={item} />
                 })
             }
         </div>

@@ -22,6 +22,7 @@ import {
     rejectedFormattedPath,
     stat333Path
 } from "@/components/paths";
+import GAnalitycs from "@/components/niab/GAnalitycs";
 
 export async function generateStaticParams() {
     const stPropsArr: Array<any> = [];
@@ -71,6 +72,7 @@ const FondPage = async ({params}: any) => {
 // https://niab.by/newsite/ru/Priostanovka_hkranilische4
     const isntZal: any = !!fourthStorage[fond];
     return <>
+        <GAnalitycs fond={fond} />
         <Box sx={{flexGrow: 1, margin: 3}}>
             <Breadcrumbs aria-label="breadcrumb">
                 <Link href="/niab">
