@@ -1,26 +1,72 @@
-import styles from "./page.module.css";
 import Link from "next/link";
+import './main-page.css';
+
+const links = [
+    {href: "/zhigalo", title: "Дневник Семёна Жигало", description: "д. Скакуновщина, Бешенковичский район."},
+    {href: "/names", title: "Имена", description: "Подбор католических и православных имен."},
+    {href: "/copy", title: "Копии документов", description: "Что есть у меня в наличии"},
+    {href: "/fond", title: "Список", description: "Докумнеты, которые я планирую смотреть в архивах."},
+    {
+        href: "/zalazje1943",
+        title: "Залазье, аэрофотосьемка",
+        description: "14 октября 1943 г., Толочинский район, Витебская область.",
+    },
+    {
+        href: "/bocheikovo1943",
+        title: "Бочейково, аэрофотосьемка",
+        description: "4 августа 1943 г., Бешенковичский район, Витебская область.",
+    },
+    {
+        href: "/glinniki1870",
+        title: "Глинники",
+        description: "План деревни. 1870 г., Могилевская губерния, Могилевский уезд, Павловичская волость",
+    },
+    {
+        href: "/glinniki1846",
+        title: "имение Глинники",
+        description: "План имения. 1846 г. Могилевская губерния, Могилевский уезд, Павловичская волость",
+    },
+    {
+        href: "/niab",
+        title: "Фонды и описи НИАБ",
+        description: "Удобный поиск описей по фондам НИАБ (Национальный исторический архив Беларуси).",
+    },
+    {href: "/kp", title: "Книги Память", description: ""},
+    {
+        href: "/prikhody",
+        title: "Приходы Беларуси",
+        description: "Карта церквей и костелов. Сохранность метрических записей.",
+    },
+    {href: "/catalogarchivesgov", title: "Карта аэрофотосъемки", description: "Беларусь времен ВОВ."},
+];
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Link href="/zhigalo">Дневник Семёна Жигало, д. Скакуновщина, Бешенковичский район.</Link>
-        <Link href="/names">Имена. Подбор католических и православных имен.</Link>
-        <Link href="/copy">Копии документов что есть у меня.</Link>
-        <Link href="/fond">Документы, которые я планирую смотреть в архивах.</Link>
-        <Link href="/zalazje1943">Деревня Залазье 14 октября 1943 г., Толочинский район, Витебская область.</Link>
-        <Link href="/bocheikovo1943">Бочейково 4 августа 1943 г., Бешенковичский район, Витебская область.</Link>
-        <Link href="/glinniki1870">План д. Глинники, 1870 г., Могилевская губерния, Могилевский уезд, Павловичская волость</Link>
-        <Link href="/glinniki1846">План имения Глинники, 1846 г. Могилевская губерния, Могилевский уезд, Павловичская волость</Link>
-        <Link href="/niab">Фонды и описи НИАБ. Удобный поиск описей по фондам НИАБ (Национальный исторический архив Беларуси).</Link>
-        <Link href="/kp">Книги Память.</Link>
-        <Link href="/prikhody">Приходы Беларуси. Карта церквей и костелов. Сохранность метрических записей.</Link>
-        <Link href="/catalogarchivesgov">Карта аэрофотосъемки Беларуси времен ВОВ.</Link>
-      </main>
-      <footer className={styles.footer}>
-
-      </footer>
-    </div>
-  );
+    return (
+        <div className="page-container">
+            <div className="content-container">
+                <div className="links-grid" style={{opacity: 1, willChange: 'opacity'}}>
+                    {
+                        links.map(({href, title, description}: any, index: number) => <div className="link-card" style={{animationDelay: `${index + 1}00ms`}}>
+                            <Link href={href} className="card-content">
+                                <div className="card-header">
+                                    <div>
+                                        <h2 className="card-title">{title}</h2>
+                                        <p className="card-description">{description}</p>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                                         strokeLinejoin="round"
+                                         className="lucide lucide-external-link card-icon">
+                                        <path d="M15 3h6v6"></path>
+                                        <path d="M10 14 21 3"></path>
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    </svg>
+                                </div>
+                            </Link></div>)
+                    }
+                </div>
+            </div>
+        </div>
+    );
 }
