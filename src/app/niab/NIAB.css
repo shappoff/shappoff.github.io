@@ -491,3 +491,18 @@ body.loading #input-id {
 .card:hover .empty-line {
     height: 13px;
 }
+.card {
+    opacity: 0;
+    transform: translateY(20px); /* Начальное смещение вниз */
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
