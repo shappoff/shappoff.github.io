@@ -14,8 +14,7 @@ export default function NotFound() {
             <div className="error-document">
                 <div className="paper-background"></div>
                 <div className="wax-seal">
-                    <div className="wax-seal-text">404</div>
-                    <div className="wax-seal-overlay"></div>
+                    <img src="/404stamp.png" alt="Печать"/>
                 </div>
                 <div className="content-container">
                     <div className="ornate-header">
