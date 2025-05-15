@@ -1,19 +1,19 @@
 'use client'
-import Error from 'next/error'
+
 import React from "react";
 
-const Page404 = () => {
+const Page404 = ({routeList}: any) => {
     React.useEffect(() => {
         const {origin, pathname, href, search} = location;
-        if (pathname.endsWith('/')) {
+        if (pathname.endsWith('/') && routeList.some((route) => ~pathname.indexOf(`${route}/`))) {
             location.href = `${origin}${pathname.slice(0, -1)}${search}`;
         }
         if (pathname === '/novosady') {
             location.href = 'https://indexby.github.io/novosady/';
         }
     }, []);
-    return <></>;
 
+    return <></>;
 };
 
 export default Page404;

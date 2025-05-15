@@ -1,8 +1,14 @@
+import fs from "fs";
 import Page404 from "@/components/Page404";
 import {monomakhUnicode} from "@/components/fonts";
 import './not-found.css';
+import path from "path";
 
 export default function NotFound() {
+    const srcApp = path.resolve(`src/app`);
+    const filenames = fs.readdirSync( srcApp );
+    const routeList = filenames.filter((file: string) => !~file.indexOf('.'));
+
     return (
         <div className={`error-page-container ${monomakhUnicode.variable}`} style={{fontFamily: 'var(--font-monomakh), serif'}}>
             <div className="error-document">
@@ -57,7 +63,7 @@ export default function NotFound() {
                 <div className="corner-ornament corner-bottom-left"></div>
                 <div className="corner-ornament corner-bottom-right"></div>
             </div>
-            <Page404 />
+            <Page404 routeList={routeList} />
         </div>
     )
 }
