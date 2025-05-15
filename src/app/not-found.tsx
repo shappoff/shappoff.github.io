@@ -12,18 +12,17 @@ export default function NotFound() {
                 </div>
                 <div className="content-container">
                     <div className="ornate-header">
-                        <div className=" header-title">Императорскій Указъ</div>
+                        {/*<div className=" header-title">Императорскїй Оу҆ка́зъ</div>*/}
+                        <div className=" header-title">У҆ка́зъ</div>
                         <div className="divider">
                             <div className="divider-line"></div>
                             <div className="divider-symbol">✦</div>
                             <div className="divider-line"></div>
                         </div>
                     </div>
-                    <h1 className=" main-title">Страница не найдена</h1>
+                    <h1 className=" main-title">Сїѧ страни́ца не найдена</h1>
                     <div className=" error-code">404</div>
-                    <p className=" russian-text">По указу Его Императорского Величества, сим объявляется, что искомый
-                        документ не обнаружен в архивах.</p><p className="english-text">By decree of His Imperial
-                    Majesty, it is hereby declared that the requested document was not found in the archives.</p>
+                    {/*<p className=" russian-text">По ᲂу҆ка́зꙋ є҆го̀ Императорского вели́чества си҄мъ ѻбъѧвлѧетсѧ что̀ и҆ско́мый докꙋментъ не ѻбнарꙋженъ въ архивахъ.</p>*/}
                     <div className="ornate-divider">
                         <div className="ornate-divider-line"></div>
                         <div className="ornate-divider-symbol">❧</div>
@@ -35,7 +34,7 @@ export default function NotFound() {
                              className="lucide lucide-chevron-left return-icon">
                             <path d="m15 18-6-6 6-6"></path>
                         </svg>
-                        <span>Вернуться на главную</span></a></div>
+                        <span>Вернꙋтьсѧ на гла́внꙋю</span></a></div>
                     <div className=" footer-text">
                         {(() => {
                             // Get current date
@@ -48,7 +47,7 @@ export default function NotFound() {
                             // If date is between September 1 and December 31, add 5509
                             const byzantineYear = currentMonth < 8 ? currentYear + 5508 : currentYear + 5509;
 
-                            return `Составлено и скреплено печатью в лето ${byzantineYear} от сотворения мира`;
+                            return `соста́влено и҆ скреплено печа́тїю въ лѣ́то ${byzantineYear} ѻт сотворе́нїѧ мї́ра`;
                         })()}
                     </div>
                 </div>
