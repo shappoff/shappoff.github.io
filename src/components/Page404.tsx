@@ -5,7 +5,7 @@ import React from "react";
 const Page404 = ({routeList}: any) => {
     React.useEffect(() => {
         const {origin, pathname, href, search} = location;
-        if (pathname.endsWith('/') && routeList.some((route) => ~pathname.indexOf(`${route}/`))) {
+        if (pathname.endsWith('/') && routeList.some((route: string) => ~pathname.indexOf(`${route}/`))) {
             location.href = `${origin}${pathname.slice(0, -1)}${search}`;
         }
         if (pathname === '/novosady') {
