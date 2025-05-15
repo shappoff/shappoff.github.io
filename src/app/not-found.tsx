@@ -1,3 +1,4 @@
+import Page404 from "@/components/Page404";
 import {monomakhUnicode} from "@/components/fonts";
 import './not-found.css';
 
@@ -56,6 +57,7 @@ export default function NotFound() {
                 <div className="corner-ornament corner-bottom-left"></div>
                 <div className="corner-ornament corner-bottom-right"></div>
             </div>
+            <Page404 />
         </div>
     )
 }

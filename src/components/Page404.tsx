@@ -12,7 +12,7 @@ const Page404 = () => {
             location.href = 'https://indexby.github.io/novosady/';
         }
     }, []);
-    return <Error statusCode={404} />;
+    return <></>;
 
 };
 
