@@ -1,5 +1,4 @@
 import localFont from "next/font/local"
-import MonomakhUnicode from "../../public/MonomakhUnicode.otf";
 
 export const monomakhUnicode = localFont({
   src: [
