@@ -11,6 +11,7 @@
   max-width: 48rem;
   width: 100%;
   position: relative;
+  height: 88vh;
 }
 
 .paper-background {
@@ -58,6 +59,10 @@
   padding: 1.5rem;
   padding-top: 4rem;
   text-align: center;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 @media (min-width: 640px) {

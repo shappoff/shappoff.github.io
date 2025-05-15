@@ -3,6 +3,12 @@ import Page404 from "@/components/Page404";
 import {monomakhUnicode} from "@/components/fonts";
 import './not-found.css';
 import path from "path";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: '404'
+};
+
 
 export default function NotFound() {
     const srcApp = path.resolve(`src/app`);
@@ -19,7 +25,7 @@ export default function NotFound() {
                 <div className="content-container">
                     <div className="ornate-header">
                         {/*<div className=" header-title">Императорскїй Оу҆ка́зъ</div>*/}
-                        <div className=" header-title">У҆ка́зъ</div>
+                        <div className=" header-title">У҆ка́зъ 404</div>
                         <div className="divider">
                             <div className="divider-line"></div>
                             <div className="divider-symbol">✦</div>
