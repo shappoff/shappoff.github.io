@@ -1,5 +1,5 @@
 import type {Metadata, Viewport} from "next";
-  import { GoogleAnalytics } from '@next/third-parties/google'
+import GAAnalytics from "@/components/GAAnalytics";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -26,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <GoogleAnalytics gaId="G-BS71TCVL7J" debugMode={!!process.env.DEBUG} />
+    {
+      !!process.env.DEBUG ? <></> : <GAAnalytics />
+    }
       <body>
         {children}
       </body>
