@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const GAAnalytics = () => {
     const [ga, setGa] = React.useState<boolean>(true);
