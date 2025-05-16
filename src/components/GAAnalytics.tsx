@@ -6,7 +6,7 @@ const GAAnalytics = () => {
     const [ga, setGa] = React.useState<boolean>(true);
     React.useEffect(() => {
         if (~location.href.indexOf('debug')) {
-            localStorage.setItem('debug', true);
+            localStorage.setItem('debug', 'true');
             setGa(false);
         }
         if (localStorage.getItem('debug')) {
