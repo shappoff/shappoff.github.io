@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <GoogleAnalytics gaId="G-BS71TCVL7J" debugMode={process.env.DEBUG || false} />
+      <GoogleAnalytics gaId="G-BS71TCVL7J" debugMode={!!process.env.DEBUG} />
       <body>
         {children}
       </body>
