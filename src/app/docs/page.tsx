@@ -1,27 +1,30 @@
 import Link from "next/link";
-import './main-page.css';
+import '../main-page.css';
 
 const links = [
-    {href: "/zhigalo", title: "Дневник Семёна Жигало", description: "д. Скакуновщина, Бешенковичский район."},
-    {href: "/names", title: "Имена", description: "Подбор католических и православных имен."},
-    {href: "/copy", title: "Копии документов", description: "Что есть у меня в наличии"},
-    {href: "/fond", title: "Список", description: "Докумнеты, которые я планирую смотреть в архивах."},
     {
-        href: "/niab",
-        title: "Фонды и описи НИАБ",
-        description: "Удобный поиск описей по фондам НИАБ (Национальный исторический архив Беларуси).",
+        href: "/zalazje1943",
+        title: "Залазье, аэрофотосьемка",
+        description: "14 октября 1943 г., Толочинский район, Витебская область.",
     },
-    {href: "/kp", title: "Книги Память", description: ""},
     {
-        href: "/prikhody",
-        title: "Приходы Беларуси",
-        description: "Карта церквей и костелов. Сохранность метрических записей.",
+        href: "/bocheikovo1943",
+        title: "Бочейково, аэрофотосьемка",
+        description: "4 августа 1943 г., Бешенковичский район, Витебская область.",
     },
-    {href: "/catalogarchivesgov", title: "Карта аэрофотосъемки", description: "Беларусь времен ВОВ."},
-    {href: "/docs", title: "Документы", description: "Карты, аэрофотоснимки, документы"},
+    {
+        href: "/glinniki1870",
+        title: "Глинники",
+        description: "План деревни. 1870 г., Могилевская губерния, Могилевский уезд, Павловичская волость",
+    },
+    {
+        href: "/glinniki1846",
+        title: "имение Глинники",
+        description: "План имения. 1846 г. Могилевская губерния, Могилевский уезд, Павловичская волость",
+    },
 ];
 
-export default function Home() {
+export default function Docs() {
     return (
         <div className="page-container">
             <div className="content-container">
