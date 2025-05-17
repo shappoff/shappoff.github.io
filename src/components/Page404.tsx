@@ -11,7 +11,7 @@ const Page404 = ({routeList}: any) => {
         if (pathname === '/novosady') {
             location.href = 'https://indexby.github.io/novosady/';
         }
-    }, []);
+    });
 
     return <></>;
 };
