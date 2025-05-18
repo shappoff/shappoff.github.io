@@ -7,7 +7,6 @@ const Page404 = ({routeList}: any) => {
         const {origin, pathname, href, search} = location;
         if (pathname.endsWith('/') && routeList.some((route: string) => pathname.endsWith(`${route}/`))) {
             location.replace(`${origin}${pathname.slice(0, -1)}${search}`);
-            // history.replaceState(null, document.title, `${pathname.slice(0, -1)}${search}`)
         }
         if (pathname === '/novosady') {
             location.href = 'https://indexby.github.io/novosady/';
