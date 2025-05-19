@@ -8,6 +8,10 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+  th, td, button, body {
+    background-color: white !important;
+    color: black !important;
+  }
 }
 
 html,
