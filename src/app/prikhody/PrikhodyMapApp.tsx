@@ -102,7 +102,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
 
     React.useEffect(() => {
         setSearchTerm('');
-        if (~pathname.indexOf('/p/')) {
+        if (~pathname.indexOf('/p/') && !pathname.endsWith('/p/') && !pathname.endsWith('/p')) {
             setIsLoading(false);
             const selectedPathnameId = pathname.slice(pathname.indexOf('/p/')).replaceAll('/p/', '').replaceAll('/', '');
             const selectedPrikhod = items.find((item: any) => {
