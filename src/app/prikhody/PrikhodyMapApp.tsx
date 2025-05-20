@@ -209,7 +209,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         }}
                         options={prikhodyDataArray.map(([objectID, title, pTitle, pType, lat, lng, src, atd]: any) => {
                             return {
-                                label: `${pType} ${pTitle}, ${title}`,
+                                label: `${pType} ${pTitle}, ${title}${atd ? `, [${atd.split('|').find((item: string) => item.includes('уезд'))}]` : ''}`,
                                 value: objectID,
                             };
                         })}
