@@ -208,8 +208,13 @@ const PrikhodyMapApp = ({children, items}: any) => {
                             e.target.parentNode.parentNode.parentNode.style.flexGrow = 1;
                         }}
                         options={prikhodyDataArray.map(([objectID, title, pTitle, pType, lat, lng, src, atd]: any) => {
+                            let atdLabel;
+                            if (atd) {
+                                atdLabel = atd.split('|').filter((item: string) => item.includes('уезд')) || null;
+                            }
+
                             return {
-                                label: `${pType} ${pTitle}, ${title}${atd ? `, [${atd.split('|').find((item: string) => item.includes('уезд'))}]` : ''}`,
+                                label: `${pType} ${pTitle}, ${title}${atdLabel ? `, [${atdLabel}]` : ''}`,
                                 value: objectID,
                             };
                         })}
