@@ -2,22 +2,22 @@ import Link from "next/link";
 import './main-page.css';
 
 const links = [
-    {href: "/zhigalo", title: "Дневник Семёна Жигало", description: "д. Скакуновщина, Бешенковичский район."},
-    {href: "/names", title: "Имена", description: "Подбор католических и православных имен."},
-    {href: "/copy", title: "Копии документов", description: "Что есть у меня в наличии"},
-    {href: "/fond", title: "Список", description: "Докумнеты, которые я планирую смотреть в архивах."},
-    {
-        href: "/niab",
-        title: "Фонды и описи НИАБ",
-        description: "Удобный поиск описей по фондам НИАБ (Национальный исторический архив Беларуси).",
-    },
-    {href: "/kp", title: "Книги Память", description: ""},
+    {href: "/catalogarchivesgov", title: "Карта аэрофотосъемки", description: "Беларусь времен ВОВ."},
     {
         href: "/prikhody",
         title: "Приходы Беларуси",
         description: "Карта церквей и костелов. Сохранность метрических записей.",
     },
-    {href: "/catalogarchivesgov", title: "Карта аэрофотосъемки", description: "Беларусь времен ВОВ."},
+    {
+        href: "/niab",
+        title: "Фонды и описи НИАБ",
+        description: "Удобный поиск описей по фондам НИАБ (Национальный исторический архив Беларуси).",
+    },
+    {href: "/zhigalo", title: "Дневник Семёна Жигало", description: "д. Скакуновщина, Бешенковичский район."},
+    {href: "/names", title: "Имена", description: "Подбор католических и православных имен."},
+    {href: "/copy", title: "Копии документов", description: "Что есть у меня в наличии"},
+    {href: "/fond", title: "Список", description: "Докумнеты, которые я планирую смотреть в архивах."},
+    {href: "/kp", title: "Книги Память", description: ""},
     {href: "/docs", title: "Документы", description: "Карты, аэрофотоснимки, документы"},
 ];
 
