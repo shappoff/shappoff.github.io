@@ -183,7 +183,12 @@ const PrikhodyMapApp = ({children, items}: any) => {
         dd && setSelectedATDItem(dd);
     }, [uOptions]);
 
-    return (~pathname.indexOf('atd') || ~pathname.indexOf('/p/')) && pathname.split('/').filter((v: string) => !!v).length < 3 ?
+    return (
+        pathname.endsWith('/atd/') ||
+        pathname.endsWith('atd') ||
+        pathname.endsWith('/p/') ||
+        pathname.endsWith('/p')
+    ) ?
         children :
         <div>
             <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
