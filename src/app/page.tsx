@@ -2,7 +2,7 @@ import Link from "next/link";
 import './main-page.css';
 
 const links = [
-    {href: "/catalogarchivesgov", title: "Карта аэрофотосъемки", description: "Беларусь времен ВОВ."},
+    {href: "/catalogarchivesgov", title: "Карта аэрофотосъемки", description: "Немецкие аэрофотоснимки Беларуси времен ВОВ. С сайта catalog.archives.gov"},
     {
         href: "/prikhody",
         title: "Приходы Беларуси",
