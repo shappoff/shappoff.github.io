@@ -7,7 +7,7 @@ import {
 
 export const metadata: Metadata = {
     title: "Карта аэрофотосъемки Беларуси времен ВОВ",
-    description: "Карта аэрофотосъемки Беларуси времен ВОВ",
+    description: "Немецкие аэрофотоснимки Беларуси времен ВОВ. С сайта catalog.archives.gov.",
 };
 
 export default function CatalogarchivesgovPage() {
