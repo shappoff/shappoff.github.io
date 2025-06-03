@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Alert from '@mui/material/Alert';
 
-export default function AlertInfo({children, severity, anchorOrigin}: any) {
+export default function AlertInfo({children, severity, anchorOrigin, style = {}}: any) {
     const [open, setOpen] = React.useState<boolean>(true);
 
     const handleClose = (
@@ -24,6 +24,7 @@ export default function AlertInfo({children, severity, anchorOrigin}: any) {
         anchorOrigin={anchorOrigin}
         open={open}
         autoHideDuration={6000}
+        style={style}
         onClose={handleClose}
     >
         <Alert severity={severity}>
