@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import MainTabsOpisi from "@/components/niab/MainTabsOpisi";
 import fs from "fs";
-
+import HomeIcon from '@mui/icons-material/Home';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import Accordion from '@mui/material/Accordion';
@@ -75,6 +75,9 @@ const FondPage = async ({params}: any) => {
         <GAnalitycs fond={fond} />
         <Box sx={{flexGrow: 1, margin: 3}}>
             <Breadcrumbs aria-label="breadcrumb">
+                <Link href="/">
+                    <HomeIcon />
+                </Link>
                 <Link href="/niab">
                     Фонды НИАБ
                 </Link>

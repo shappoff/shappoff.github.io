@@ -24,6 +24,7 @@ import useDebounce from "@/components/useDebounce";
 
 import algoliasearch from 'algoliasearch/lite';
 import WrapToMarkerClusterGroup from "@/app/prikhody/WrapToMarkerClusterGroup";
+import HomeButton from "@/components/HomeButton";
 declare const process: any;
 
 const client = algoliasearch(
@@ -192,12 +193,14 @@ const PrikhodyMapApp = ({children, items}: any) => {
         children :
         <div>
             <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
+
                 <Box
                     component="form"
                     sx={{ '& > :not(style)': { m: 1 }, width: '100%', display: 'flex' }}
                     noValidate
                     autoComplete="off"
                 >
+                    <HomeButton absolute={false} />
                     <Autocomplete
                         onClose={() => {setIsLoading(false)}}
                         value={selectedPrikhodItem ? selectedPrikhodItem : ''}

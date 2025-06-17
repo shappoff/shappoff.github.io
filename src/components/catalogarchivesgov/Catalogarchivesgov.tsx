@@ -11,6 +11,7 @@ import 'react-leaflet-markercluster/styles'
 
 import PlaceMarker from "@/components/catalogarchivesgov/PlaceMarker";
 import React from "react";
+import HomeButton from "@/components/HomeButton";
 
 export default function Catalogarchivesgov({items}: any) {
     const list = items
@@ -29,6 +30,7 @@ export default function Catalogarchivesgov({items}: any) {
             return {...item, _geoloc, title2}
         })
     return <>
+        <HomeButton absolute={true} variant={true} />
         <MapContainer
             attributionControl={false}
             id="map"

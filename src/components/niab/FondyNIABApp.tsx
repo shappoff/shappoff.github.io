@@ -12,6 +12,7 @@ import {HashRoute} from "./HashRoute";
 import Slider from 'rc-slider';
 import SliderTooltip from "./SliderTooltip";
 import algoliasearch from 'algoliasearch/lite';
+import HomeButton from "@/components/HomeButton";
 
 const HASH_MAP = {
     query: 'q',
@@ -179,6 +180,7 @@ const FondyNIABApp = () => {
     return <div id="root">
         <div id="navbar" className="filter-bar">
             <div className="first-raw">
+                <HomeButton absolute={false} variant={true} />
                 <Form.Control id="input-id"
                               placeholder="Название или номер фонда НИАБ"
                               enterKeyHint={'search'}
