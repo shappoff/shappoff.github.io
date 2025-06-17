@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import './main-page.css';
 
 const links = [
@@ -44,6 +45,13 @@ export default function Home() {
                                 </div>
                             </Link></div>)
                     }
+                    <div className="link-card" style={{animationDelay: `${links.length + 1}00ms`}}>
+                        <Link href="https://www.linkedin.com/in/shappoff/" target="_blank" className="card-content">
+                            <div className="card-header">
+                                <h2 className="card-title">Мой linkedIn</h2>
+                                <LinkedInIcon fontSize="large" />
+                            </div>
+                        </Link></div>
                 </div>
             </div>
         </div>
