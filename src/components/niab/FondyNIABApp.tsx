@@ -1,18 +1,15 @@
 'use client'
 import React from "react";
-import Form from "react-bootstrap/Form";
-import Select from "react-select";
 import useDebounce from "../useDebounce";
-import Spinner from 'react-bootstrap/Spinner';
-import Pagination from 'react-bootstrap/Pagination';
-
-import FondCard from "./FondCard";
 import {HashRoute} from "./HashRoute";
 
-import Slider from 'rc-slider';
-import SliderTooltip from "./SliderTooltip";
 import algoliasearch from 'algoliasearch/lite';
-import HomeButton from "@/components/HomeButton";
+import FondyNIABSearchBar from "./FondyNIABApp/FondyNIABSearchBar";
+import FondyNIABFilters from "./FondyNIABApp/FondyNIABFilters";
+import FondyNIABYearSlider from "./FondyNIABApp/FondyNIABYearSlider";
+import FondyNIABResultsList from "./FondyNIABApp/FondyNIABResultsList";
+import FondyNIABPagination from "./FondyNIABApp/FondyNIABPagination";
+import FondyNIABLoadingSpinner from "./FondyNIABApp/FondyNIABLoadingSpinner";
 
 const HASH_MAP = {
     query: 'q',
@@ -179,109 +176,33 @@ const FondyNIABApp = () => {
 
     return <div id="root">
         <div id="navbar" className="filter-bar">
-            <div className="first-raw">
-                <HomeButton absolute={false} variant={true} />
-                <Form.Control id="input-id"
-                              placeholder="Название или номер фонда НИАБ"
-                              enterKeyHint={'search'}
-                              multiple={false}
-                              autoFocus={true}
-                              onInput={searchHandler}
-                              onChange={keysHandler}
-                              type="text"
-                              className={'input-form-control'}
-                              value={searchTerm}
-                />
-                {
-                    searchTerm ? <div className="select__indicator select__clear-indicator css-1xc3v61-indicatorContainer"
-                                      onClick={() => {
-                                          if (searchTerm) {
-                                              searchHandler({target: {value: ''}});
-                                          }
-
-                                          document.getElementById('input-id')?.focus({preventScroll: true});
-                                      }}
-                                      aria-hidden="true">
-                        <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" className="css-tj5bde-Svg">
-                            <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
-                        </svg>
-                    </div> : <></>
-                }
-            </div>
-            <div className="second-raw noselect">
-                <Select className="select-filter storage"
-                        isClearable={true}
-                        options={facets && facets.storage && Object.keys(facets.storage).map((lang, index) => ({label: `№ ${lang} (${facets.storage[lang]} ${plural(facets.storage[lang])})`, value: lang})) as any}
-                        placeholder={'№ хранилища'}
-                        onChange={(e: any) => {
-                            setStoreFilter(e?.value);
-                            setCurrentPage(0);
-                        }}
-                />
-                <Select className="select-filter lang"
-                        isClearable={true}
-                        options={facets && facets.lang && Object.keys(facets.lang).map((lang, index) => ({label: `${lang} (${facets.lang[lang]} ${plural(facets.lang[lang])})`, value: lang})) as any}
-                        placeholder={'Язык фонда'}
-                        onChange={(e: any) => {
-                            setLangFilter(e?.value);
-                            setCurrentPage(0);
-                        }}
-                />
-                <div className="form-check form-check-inline form-switch typo-tolerance">
-                    <input className="form-check-input" type="checkbox"
-                           role="switch" id="flexSwitchCheckDefault"
-                           checked={!isTypoTolerance}
-                           onChange={(e: any) => setIsTypoTolerance(!e.target.checked)}/>
-                    <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Точное совпадение</label>
-                </div>
-            </div>
-            <div className="third-raw">
-                {
-                    yearsRangeFilter.length ? <Slider
-                        handleRender={(renderProps: any) => {
-                            return (
-                                <div {...renderProps.props}>
-                                    <SliderTooltip>{renderProps.props['aria-valuenow']}</SliderTooltip>
-                                </div>
-                            );
-                        }}
-                        range
-                        min={yearsMinMax[0]}
-                        max={yearsMinMax[1]}
-                        defaultValue={yearsRangeFilter}
-                        allowCross={false}
-                        dots={false}
-                        onChangeComplete={(e: any) => {setYearsRangeFilter(e)}}
-                    /> : <></>
-                }
-            </div>
+            <FondyNIABSearchBar
+                searchTerm={searchTerm}
+                searchHandler={searchHandler}
+                keysHandler={keysHandler}
+            />
+            <FondyNIABFilters
+                facets={facets}
+                setStoreFilter={setStoreFilter}
+                setLangFilter={setLangFilter}
+                isTypoTolerance={isTypoTolerance}
+                setIsTypoTolerance={setIsTypoTolerance}
+                setCurrentPage={setCurrentPage}
+                plural={plural}
+            />
+            <FondyNIABYearSlider
+                yearsRangeFilter={yearsRangeFilter}
+                yearsMinMax={yearsMinMax}
+                setYearsRangeFilter={setYearsRangeFilter}
+            />
         </div>
-
-        <div className="list-result">
-            {
-                resultsAll.map((item: any, index: number) => {
-                    return <FondCard key={index} index={index} item={item} />
-                })
-            }
-        </div>
-        <Pagination>
-            <Pagination.First onClick={() => setCurrentPage(0)} disabled={currentPage === 0} />
-            <Pagination.Prev onClick={() => setCurrentPage((v: number) => --v)} disabled={currentPage === 0} />
-            {
-                nbPages && Array(nbPages).fill('').map((n: string, page: number) => {
-                    return <Pagination.Item key={page} active={page === currentPage} onClick={() => setCurrentPage(page)}>
-                        {page + 1}
-                    </Pagination.Item>
-                })
-            }
-            <Pagination.Next onClick={() => setCurrentPage((v: number) => ++v)} disabled={currentPage === (nbPages - 1)} />
-            <Pagination.Last onClick={() => setCurrentPage(nbPages - 1)} disabled={currentPage === (nbPages - 1)} />
-        </Pagination>
-        {
-            isLoading ? <>
-                <Spinner animation="border" />
-            </> : <></>
-        }
+        <FondyNIABResultsList resultsAll={resultsAll} />
+        <FondyNIABPagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            nbPages={nbPages}
+        />
+        <FondyNIABLoadingSpinner isLoading={isLoading} />
     </div>;
 };
 
