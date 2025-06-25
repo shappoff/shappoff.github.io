@@ -1,11 +1,11 @@
 import L from "leaflet";
 import React from "react";
 import {useMap} from "react-leaflet";
-import Badge from "react-bootstrap/Badge";
+import Button from "@mui/material/Button";
 
-    const IndicateButton = ({item, callBack, label = 'указать на карте'}: any) => {
+const IndicateButton = ({item, callBack, label = 'указать на карте'}: any) => {
     const map = useMap();
-    return <Badge bg="secondary" className="indicate-button"
+    return <Button variant="contained" color="secondary" className="indicate-button"
                  onClick={() => {
                      callBack && callBack();
                      const mapElement = document.getElementById('map');
@@ -46,7 +46,7 @@ import Badge from "react-bootstrap/Badge";
                          map.on('click', clichHandler);
                      });
                  }}
-    >{label}</Badge>
+    >{label}</Button>
 };
 
 const sendTGMessage = (text: string) => {

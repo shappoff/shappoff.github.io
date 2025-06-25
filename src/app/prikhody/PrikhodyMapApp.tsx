@@ -1,7 +1,6 @@
 'use client'
 
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './prikhody.css';
 
 import CircularProgress from '@mui/material/CircularProgress';

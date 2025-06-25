@@ -1,9 +1,9 @@
 import React from "react";
-import Spinner from 'react-bootstrap/Spinner';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const FondyNIABLoadingSpinner = ({isLoading}: any) => (
     isLoading ? <>
-        <Spinner animation="border" />
+        <CircularProgress />
     </> : <></>
 );
 

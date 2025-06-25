@@ -1,9 +1,15 @@
-import Card from "react-bootstrap/Card";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Badge from "@mui/material/Badge";
 import React from "react";
-import {Accordion, Badge} from "react-bootstrap";
 import Link from "next/link";
 import Button from '@mui/material/Button';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const openInNewTab = (url: string) => {
     const newWindow: Window | null = window.open(url, '_blank', 'noopener,noreferrer,width=400,height=400');
@@ -15,7 +21,7 @@ const openInNewTab = (url: string) => {
 }
 
 const FondCard = ({item, index}: any) => {
-    const [currentAccordion, setCurrentAccordion] = React.useState<string>();
+    const [currentAccordion, setCurrentAccordion] = React.useState<string | false>(false);
     const [isOpendSrcFond, setIsOpendSrcFond] = React.useState<boolean>(false);
     const [state, setState] = React.useState<any>({});
 
@@ -32,25 +38,14 @@ const FondCard = ({item, index}: any) => {
             const isTitle = !!~title.indexOf('<b>');
             const isAnotation = !!~anotation.indexOf('<b>');
 
-            const activeKey = isTitle ? '0' : isAnotation ? '1' : void (0);
+            const activeKey = isTitle ? '0' : isAnotation ? '1' : false;
             setCurrentAccordion(activeKey);
         }
     }, [item]);
 
     return <Card key={index} className={isOpendSrcFond ? 'fond-src-opened' : ''} style={{animationDelay: `${index + 1}00ms`}}>
-        {
-            item.s ?
-            <div className="percentage-box" title={`${item.s} %`}>
-                <div className="empty-line">
-                    <div title={`Проиндексирован на ${item.s}%`} className="percentage-line" style={{
-                        width: `${Math.round(item.s)}%`
-                    }}><span className="percens">{`${item.s} %`}</span></div>
-                </div>
-            </div>
-                : <></>
-        }
-        <Card.Title>
-            <h5>
+        <CardHeader
+            title={<>
                 <a
                     href={`/niab/${item.fod}`}
                     className="fond-link-src">
@@ -71,43 +66,42 @@ const FondCard = ({item, index}: any) => {
                     </g>
                 </svg>
             </span>
-            </h5>
-            <div>
-                {isntZal ? <Badge bg="danger" pill><Link target="_blank" href="https://niab.by/newsite/ru/Priostanovka_hkranilische4">Не выдается c 01.10.2024</Link></Badge> : <></>}
-                {item.storage ? <Badge bg="light" pill text="dark">Хранилище №{item.storage}</Badge> : <></>}
-                {item.count ? <Badge bg="light" pill text="dark">{item.count} ед. хр.</Badge> : <></>}
-                {
-                    item.lang?.map((ln: string) => <Badge key={ln} bg="light" pill text="dark">
-                        {ln}
-                    </Badge>)
-                }
-                {item.years ? <Badge bg="light" pill text="dark">{item.years}</Badge> : <></>}
-            </div>
-        </Card.Title>
-        <Card.Body>
-            <Accordion activeKey={currentAccordion} flush>
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header onClick={() => setCurrentAccordion('0')}><i>Название фонда</i></Accordion.Header>
-                    <Accordion.Body>
-                        <div dangerouslySetInnerHTML={{__html: state.title}}/>
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header onClick={() => setCurrentAccordion('1')}><i>Аннотация
-                        документов</i></Accordion.Header>
-                    <Accordion.Body>
-                        <div dangerouslySetInnerHTML={{__html: state.anotation}}/>
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Button size="small"
-                        variant="outlined"
-                        className="fond-opis-button-src"
-                        fullWidth={true}
-                        startIcon="Описи"
-                        endIcon={<ArrowForwardIosIcon />}
-                        href={`/niab/${item.fod}`} />
+            </>}
+            subheader={<div>
+                {isntZal && <Badge color="error" badgeContent="!" sx={{mr: 1}} />}
+                {item.storage && <Badge color="secondary" badgeContent={item.storage} sx={{mr: 1}} />}
+                {item.count && <Badge color="secondary" badgeContent={item.count} sx={{mr: 1}} />}
+                {item.lang?.map((ln: string) => <Badge key={ln} color="secondary" badgeContent={ln} sx={{mr: 1}} />)}
+                {item.years && <Badge color="secondary" badgeContent={item.years} sx={{mr: 1}} />}
+                {isntZal && <Link target="_blank" href="https://niab.by/newsite/ru/Priostanovka_hkranilische4">Не выдается c 01.10.2024</Link>}
+            </div>}
+        />
+        <CardContent>
+            <Accordion expanded={currentAccordion === '0'} onChange={(_e, expanded) => setCurrentAccordion(expanded ? '0' : false)}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <i>Название фонда</i>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <div dangerouslySetInnerHTML={{__html: state.title}}/>
+                </AccordionDetails>
             </Accordion>
-        </Card.Body>
+            <Accordion expanded={currentAccordion === '1'} onChange={(_e, expanded) => setCurrentAccordion(expanded ? '1' : false)}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <i>Аннотация документов</i>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <div dangerouslySetInnerHTML={{__html: state.anotation}}/>
+                </AccordionDetails>
+            </Accordion>
+            <Button size="small"
+                    variant="outlined"
+                    className="fond-opis-button-src"
+                    fullWidth={true}
+                    endIcon={<ArrowForwardIosIcon />}
+                    href={`/niab/${item.fod}`}>
+                Описи
+            </Button>
+        </CardContent>
     </Card>
 };
 

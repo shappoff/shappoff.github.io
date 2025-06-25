@@ -1,20 +1,20 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
+import TextField from "@mui/material/TextField";
 import HomeButton from "@/components/HomeButton";
 
 const FondyNIABSearchBar = ({searchTerm, searchHandler, keysHandler}: any) => (
     <div className="first-raw">
         <HomeButton absolute={false} variant={true} />
-        <Form.Control id="input-id"
-                      placeholder="Название или номер фонда НИАБ"
-                      enterKeyHint={'search'}
-                      multiple={false}
-                      autoFocus={true}
-                      onInput={searchHandler}
-                      onChange={keysHandler}
-                      type="text"
-                      className={'input-form-control'}
-                      value={searchTerm}
+        <TextField
+            id="input-id"
+            placeholder="Название или номер фонда НИАБ"
+            variant="outlined"
+            size="small"
+            autoFocus
+            onInput={searchHandler}
+            onChange={keysHandler}
+            value={searchTerm}
+            fullWidth
         />
         {
             searchTerm ? <div className="select__indicator select__clear-indicator css-1xc3v61-indicatorContainer"

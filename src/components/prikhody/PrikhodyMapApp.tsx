@@ -1,15 +1,23 @@
 'use client'
 
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Accordion from 'react-bootstrap/Accordion';
-import ListGroup from 'react-bootstrap/ListGroup';
-import CloseButton from 'react-bootstrap/CloseButton';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import Badge from 'react-bootstrap/Badge';
-import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Drawer from '@mui/material/Drawer';
+import Badge from '@mui/material/Badge';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import CircularProgress from '@mui/material/CircularProgress';
 import '../../app/prikhody0/prikhody.css';
+import Box from '@mui/material/Box';
 
 import {
     MapContainer
@@ -19,7 +27,6 @@ import useDebounce from "../useDebounce";
 import {useWindowSize} from "./useWindowSize";
 import SetMapSizeOnChange from "./SetMapSizeOnChange";
 import PrikhodPlaceMarker from "./PrikhodPlaceMarker";
-import {Button, Modal, Spinner} from "react-bootstrap";
 import FilterBar from "./FilterBar";
 import LayersControlComponent from "./LayersControlComponent";
 
@@ -223,7 +230,7 @@ const PrikhodyMapApp = () => {
     return <>
         {
             isLoading ? <>
-                <Spinner key="spinner" animation="border" />
+                <CircularProgress key="spinner" />
             </> : <></>
         }
         <div key="filter-bar" id="filter-bar" ref={filterBarRef}>
@@ -249,7 +256,7 @@ const PrikhodyMapApp = () => {
                 />
                 {
                     !!noMapHits?.length ? <div id="info-panel-label-button" onClick={() => setIsShowNotFoundPanel(true)}>
-                        <Badge bg="warning" text="dark">
+                        <Badge badgeContent={noMapHits.length} color="warning">
                             Не найденные на карте<br/>приходы
                         </Badge>
                     </div> : <></>
@@ -291,7 +298,7 @@ const PrikhodyMapApp = () => {
                         <IndicateButton item={hit} setIsShowPanel={setIsShowPanel} label="Сменить местоположение" />
                         {
                             !!currentNotFoundPrikhodNPs?.length ? <div id="info-panel-label-button" onClick={() => setIsShowNotFoundPanel(true)}>
-                                <Badge bg="warning" text="dark">
+                                <Badge badgeContent={currentNotFoundPrikhodNPs.length} color="warning">
                                     Не найденные на карте<br/>населенные пункты прихода
                                 </Badge>
                             </div> : <></>
@@ -314,137 +321,124 @@ const PrikhodyMapApp = () => {
                     onClick={(event: any) => {
                     }}>
                 </ul>
-                <Modal show={isShowPanel} fullscreen={true} onHide={() => setIsShowPanel(false)}>
-                    <Modal.Header className="modal-header-box">
-                        <div className="breadcrumbs-header">
-                            <CloseButton onClick={() => setIsShowPanel(false)} />&emsp;
-                            <span><i>{currentLocIdInPopUp?.year}</i> &gt; </span>
-                            <span><i>{currentLocIdInPopUp?.eparchy}</i> &gt; </span>
-                            <span><i>{currentLocIdInPopUp?.deanery}</i> &gt; </span>
-                            <span><i>{currentLocIdInPopUp?.pTitle}</i></span>
-                        </div>
-                        <ul className={`nav nav-tabs tab-list-of-types ${isShowPanel ? 'active' : ''}`}
-                            onClick={(event: any) => {
-                                if (event.target.closest('.nav-item')) {
-                                    if (event.target.classList.contains('active')) {
-                                        setIsShowPanel(false);
-                                    }
-                                    if (!isShowPanel) {
+                <Modal
+                    open={isShowPanel}
+                    onClose={() => setIsShowPanel(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <IconButton onClick={() => setIsShowPanel(false)}>
+                                <CloseIcon />
+                            </IconButton>
+                            <h2 className="modal-title">
+                                <Box component="span">{currentLocIdInPopUp?.year} &gt; {currentLocIdInPopUp?.eparchy} &gt; {currentLocIdInPopUp?.deanery} &gt; {currentLocIdInPopUp?.pTitle}</Box>
+                            </h2>
+                            <ul className={`nav nav-tabs tab-list-of-types ${isShowPanel ? 'active' : ''}`}
+                                onClick={(event: any) => {
+                                    if (event.target.closest('.nav-item')) {
+                                        if (event.target.classList.contains('active')) {
+                                            setIsShowPanel(false);
+                                        }
+                                        if (!isShowPanel) {
+                                            setIsShowPanel((prev: boolean) => !prev);
+                                        }
+                                    } else {
                                         setIsShowPanel((prev: boolean) => !prev);
                                     }
-                                } else {
-                                    setIsShowPanel((prev: boolean) => !prev);
-                                }
-                            }}>
-                        </ul>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{currentLocIdInPopUp?.pType ? `${currentLocIdInPopUp?.pType} ` : ''}{currentLocIdInPopUp?.pTitle}</b>
-                        <h6 style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{currentLocIdInPopUp?.title}</h6>
-                        <Accordion>
-                            <Accordion.Item eventKey="0">
-                                <Accordion.Header><b>Сохранность в архивах (год, фонд, опись, архив)</b></Accordion.Header>
-                                <Accordion.Body>
-                                    <Form>
-                                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                            <Form.Control as="textarea" placeholder="Прислать сохранность по приходу" rows={3} id="new-fod-text" />
-                                            <Button variant="secondary" type="button" onClick={() => {
-                                                const newFodText: any = document.getElementById('new-fod-text');
-                                                if (newFodText.value.length > 10 && newFodText.value.length < 4096) {
-                                                    const pre = `src:prikhody\n\`${currentLocIdInPopUp.objectID}\``;
-                                                    const msg = `${pre}\n${newFodText.value}`;
-                                                    sendTGMessage(msg)
-                                                        .then(() => {
-                                                            alert("Отправлено!");
-                                                            newFodText.value = '';
-                                                        });
-                                                }
-                                            }}>Отправить</Button>
-                                        </Form.Group>
-                                    </Form>
-                                    {
-                                        currentDescriptionItem?.archives ? <>
-                                            <ListGroup>
-                                                {
-                                                    currentDescriptionItem.archives?.map((value: any, index: number) => {
-                                                        const {arTitle, description, year, note, link} = value;
+                                }}>
+                            </ul>
+                        </div>
+                        <div className="modal-body">
+                            <b style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{currentLocIdInPopUp?.pType ? `${currentLocIdInPopUp?.pType} ` : ''}{currentLocIdInPopUp?.pTitle}</b>
+                            <h6 style={{textTransform: 'capitalize', whiteSpace: 'nowrap'}}>{currentLocIdInPopUp?.title}</h6>
+                            <Accordion>
+                                <AccordionSummary
+                                    expandIcon={<Box sx={{ width: 24 }} />}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                >
+                                    <b>Сохранность в архивах (год, фонд, опись, архив)</b>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <TextField
+                                        id="outlined-multiline-static"
+                                        label="Прислать сохранность по приходу"
+                                        multiline
+                                        rows={3}
+                                        defaultValue=""
+                                        fullWidth
+                                    />
+                                    <Button variant="contained" onClick={() => {
+                                        const newFodText = document.getElementById('outlined-multiline-static') as HTMLInputElement | null;
+                                        if (newFodText && newFodText.value.length > 10 && newFodText.value.length < 4096) {
+                                            const pre = `src:prikhody\n\`${currentLocIdInPopUp.objectID}\``;
+                                            const msg = `${pre}\n${newFodText.value}`;
+                                            sendTGMessage(msg)
+                                                .then(() => {
+                                                    alert("Отправлено!");
+                                                    newFodText.value = '';
+                                                });
+                                        }
+                                    }}>Отправить</Button>
+                                </AccordionDetails>
+                            </Accordion>
+                            {
+                                currentDescriptionItem?.archives ? <>
+                                    <List>
+                                        {
+                                            currentDescriptionItem.archives?.map((value: any, index: number) => {
+                                                const {arTitle, description, year, note, link} = value;
 
-                                                        let fond;
-                                                        if (~description.indexOf('НИАБ')) {
-                                                            description?.split(' ').reduce((previousValue: string, currentValue: string) => {
-                                                                if (~previousValue.toLowerCase().indexOf('фонд')) {
-                                                                    fond = currentValue.replace(/[^0-9.]/g, '');
-                                                                }
-                                                                return currentValue;
-                                                            }, '')
+                                                let fond;
+                                                if (~description.indexOf('НИАБ')) {
+                                                    description?.split(' ').reduce((previousValue: string, currentValue: string) => {
+                                                        if (~previousValue.toLowerCase().indexOf('фонд')) {
+                                                            fond = currentValue.replace(/[^0-9.]/g, '');
                                                         }
-
-                                                        return <ListGroup.Item key={index}>
-                                                            <span>{year}</span>
-                                                            &emsp;
-                                                            <span title={arTitle} dangerouslySetInnerHTML={{__html: description?.replace(fond, `<a target="_blank" href="https://shappoff.github.io/niab/?q=${fond}">${fond}</a>`)}}></span>
-                                                            &emsp;
-                                                            <span>{note}</span>
-                                                            &emsp;
-                                                            {
-                                                                link ? <a target="_blank" href={link}>familysearch.org</a> : <></>
-                                                            }
-                                                        </ListGroup.Item>
-                                                    })
+                                                        return currentValue;
+                                                    }, '')
                                                 }
-                                            </ListGroup>
-                                        </> : <></>
-                                    }
-                                </Accordion.Body>
-                            </Accordion.Item>
-                            <Accordion.Item eventKey="1">
-                                <Accordion.Header><b>Список селений, которые относились к приходу церкви</b></Accordion.Header>
-                                <Accordion.Body className="np-cards-result">
-                                    {
-                                        currentDescriptionItem?.nps ? <>
-                                            {
-                                                currentDescriptionItem.nps?.map((item: any, index: number) => {
-                                                    return <Card key={index} className="card-np-item" style={{  }}>
-                                                        <Card.Body>
-                                                            <Card.Title><span dangerouslySetInnerHTML={{__html: item.title}} /></Card.Title>
-                                                            <span>
-                                                                {
-                                                                    item.coords?.length ? <></> :
-                                                                        <IndicateButton setIsShowPanel={setIsShowPanel} item={item} />
-                                                                }
-                                                            </span>
-                                                        </Card.Body>
-                                                        {/*&emsp;*/}
 
-                                                    </Card>
-                                                })
-                                            }
-                                        </> : <></>
-                                    }
-                                </Accordion.Body>
-                            </Accordion.Item>
-                        </Accordion>
-                    </Modal.Body>
-                    <Modal.Footer>
+                                                return <ListItem key={index}>
+                                                    <span>{year}</span>
+                                                    &emsp;
+                                                    <span title={arTitle} dangerouslySetInnerHTML={{__html: description?.replace(fond, `<a target="_blank" href="https://shappoff.github.io/niab/?q=${fond}">${fond}</a>`)}}></span>
+                                                    &emsp;
+                                                    <span>{note}</span>
+                                                    &emsp;
+                                                    {
+                                                        link ? <a target="_blank" href={link}>familysearch.org</a> : <></>
+                                                    }
+                                                </ListItem>
+                                            })
+                                        }
+                                    </List>
+                                </> : <></>
+                            }
+                        </div>
+                        <div className="modal-footer">
                             <div>{currentLocIdInPopUp?.g.join(', ')}</div>
                             <div>{currentLocIdInPopUp?.u.join(', ')}</div>
                             <div>{currentLocIdInPopUp?.v.join(', ')}</div>
-                    </Modal.Footer>
+                        </div>
+                    </div>
                 </Modal>
             </div>
 
             <div id="info-panel" ref={resultListRef}>
                 <div className="info-panel">
 
-                    <Offcanvas show={isShowNotFoundPanel} onHide={() => {
-                        setIsShowNotFoundPanel(false);
-                    }}>
-                        <Offcanvas.Header closeButton>
-                            <Offcanvas.Title>Не найдены на карте:</Offcanvas.Title>
-
-                        </Offcanvas.Header>
-                        <Offcanvas.Body>
-
+                    <Drawer
+                        anchor="right"
+                        open={isShowNotFoundPanel}
+                        onClose={() => {
+                            setIsShowNotFoundPanel(false);
+                        }}
+                    >
+                        <div className="drawer-content">
+                            <h2>Не найдены на карте:</h2>
                             {
                                 currentNotFoundPrikhodNPs?.length ? <>
                                     <NoFoundPrikhod hit={currentLocIdInPopUp} setIsShowNotFoundPanel={setIsShowNotFoundPanel} />
@@ -455,8 +449,8 @@ const PrikhodyMapApp = () => {
                                     return <NoFoundPrikhod key={hit.objectID} hit={hit} setIsShowNotFoundPanel={setIsShowNotFoundPanel} />
                                 })
                             }
-                        </Offcanvas.Body>
-                    </Offcanvas>
+                        </div>
+                    </Drawer>
                 </div>
             </div>
         </MapContainer>
