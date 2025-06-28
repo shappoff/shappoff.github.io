@@ -1,13 +1,14 @@
 import React from "react";
 import {latLngBounds} from 'leaflet'
+import { PrikhodHit } from '../../shared/types';
 
-const useMarkersBounds = (mapHits: Array<any>) => {
+const useMarkersBounds = (mapHits: Array<PrikhodHit>) => {
 
     const [currentBounds, setCurrentBounds] = React.useState<any>();
 
     React.useEffect(() => {
         const bounds = latLngBounds([])
-        mapHits && mapHits.length && [...mapHits].forEach((item: any) => {
+        mapHits && mapHits.length && [...mapHits].forEach((item: PrikhodHit) => {
             if (item?.coords?.length) {
                 const [lat, lng] = item.coords;
                 if (!lat || !lng) {
@@ -21,8 +22,8 @@ const useMarkersBounds = (mapHits: Array<any>) => {
                     return;
                 }
                 bounds.extend([lat, lng]);
-            }
-        });
+        }
+    });
 
         mapHits.length && setCurrentBounds(bounds);
     }, [mapHits, mapHits.length]);

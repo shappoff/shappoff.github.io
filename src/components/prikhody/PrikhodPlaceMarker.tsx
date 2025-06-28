@@ -5,17 +5,18 @@ const {
 import {Marker, Popup, Tooltip} from "react-leaflet";
 import React from "react";
 import {catholicCrossIcon, ortodoxCrossIcon} from "../icons";
+import { PrikhodMarkerProps, LeafletEvent } from '../../shared/types';
 
-const PrikhodPlaceMarker = ({hit, popupclose, popupopen, setCurrentLocIdInPopUp, selectCallback, children}: any) => {
+const PrikhodPlaceMarker = ({hit, popupclose, popupopen, setCurrentLocIdInPopUp, selectCallback, children}: PrikhodMarkerProps) => {
 
     const isOrtodox = !!~hit.title.indexOf('церковь');
     return <Marker title={`${hit.pType ? `${hit.pType} ` : ''}${hit.pTitle}, ${hit.title}`}
                    eventHandlers={{
-                       popupclose: (e: any) => popupclose && popupclose(e),
-                       mouseover: (e: any) => {
+                       popupclose: (e: LeafletEvent) => popupclose && popupclose(e),
+                       mouseover: (e: LeafletEvent) => {
                            setCurrentLocIdInPopUp && setCurrentLocIdInPopUp(hit);
                        },
-                       popupopen: (e: any) => {
+                       popupopen: (e: LeafletEvent) => {
                            setCurrentLocIdInPopUp(hit);
                            popupopen && popupopen(e);
                        },

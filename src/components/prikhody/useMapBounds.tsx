@@ -1,8 +1,9 @@
 import React from "react";
 import { useMap } from "react-leaflet";
 import {throttle} from "./throttle";
+import { MapBoundsProps } from '../../shared/types';
 
-const MapBounds = ({setMapBounds}: any) => {
+const MapBounds = ({setMapBounds}: MapBoundsProps) => {
     const map = useMap();
 
     const func = throttle(() => {

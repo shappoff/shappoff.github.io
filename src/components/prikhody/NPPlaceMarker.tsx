@@ -4,9 +4,10 @@ const {
 } = L;
 import {Marker, Popup, Tooltip} from "react-leaflet";
 import React from "react";
+import { NPPlaceMarkerProps } from '../../shared/types';
 import {catholicCrossIcon, dot, ortodoxCrossIcon, square, triangle} from "../icons";
 
-const NPPlaceMarker = ({hit, color}: any) => {
+const NPPlaceMarker = ({hit, color}: NPPlaceMarkerProps) => {
     let icon = dot(color);
     if (~hit.title.indexOf('деревня')) {
         icon = triangle(color);
@@ -14,7 +15,8 @@ const NPPlaceMarker = ({hit, color}: any) => {
         icon = square(color);
     }
     const title = hit.title?.replace('<strong>', '').replace('</strong>', '').trim();
-    return <Marker
+
+    return <Marker title={hit.title}
                    icon={new DivIcon({
                        html: icon,
                        className: `marker-div-icon`

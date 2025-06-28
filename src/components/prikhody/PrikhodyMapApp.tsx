@@ -45,22 +45,33 @@ import BoundsToMapItems from "./BoundsToMapItems";
 import NoFoundPrikhod from "./NoFoundPrikhod";
 import useFirebaseAuth from "./useFirebaseAuth";
 import {useList} from "react-firebase-hooks/database";
+import {
+  PrikhodHit,
+  PrikhodNP,
+  PrikhodDescription,
+  SearchEvent,
+  KeyboardEvent,
+  MapBounds as MapBoundsType,
+  SearchResult,
+  SelectOption,
+  FormElement
+} from '../../shared/types';
 
 const PrikhodyMapApp = () => {
-    const filterBarRef = React.useRef(null);
-    const resultListRef = React.useRef(null);
+    const filterBarRef = React.useRef<HTMLDivElement>(null);
+    const resultListRef = React.useRef<HTMLDivElement>(null);
     const app = useFirebaseAuth();
-    const [currentLocIdInPopUp, setCurrentLocIdInPopUp] = React.useState<any>();
+    const [currentLocIdInPopUp, setCurrentLocIdInPopUp] = React.useState<PrikhodHit | undefined>();
     const [zoomToBounds, setZoomToBounds] = React.useState<boolean>(false);
-    const [currentPrikhodNPs, setCurrentPrikhodNPs] = React.useState<any>([]);
-    const [currentNotFoundPrikhodNPs, setCurrentNotFoundPrikhodNPs] = React.useState<any>([]);
-    const [currentDescriptionItem, setCurrentDescriptionItem] = React.useState<any>();
+    const [currentPrikhodNPs, setCurrentPrikhodNPs] = React.useState<PrikhodNP[]>([]);
+    const [currentNotFoundPrikhodNPs, setCurrentNotFoundPrikhodNPs] = React.useState<PrikhodNP[]>([]);
+    const [currentDescriptionItem, setCurrentDescriptionItem] = React.useState<PrikhodDescription | undefined>();
     const [snapshots, loading, error] = useList(ref(getDatabase(app), `prikhods/${currentLocIdInPopUp?.objectID}`));
 
     React.useEffect(() => {
-        const found: Array<any> = [];
-        const notFound: Array<any> = [];
-        currentDescriptionItem?.nps?.map((value: any) => {
+        const found: PrikhodNP[] = [];
+        const notFound: PrikhodNP[] = [];
+        currentDescriptionItem?.nps?.map((value: PrikhodNP) => {
                 if (value.coords?.length) {
                     found.push(value);
                 } else {
@@ -74,7 +85,7 @@ const PrikhodyMapApp = () => {
     }, [currentDescriptionItem]);
 
     React.useEffect(() => {
-        const vvv = snapshots?.reduce((previousValue: any, currentValue: any) => {
+        const vvv = snapshots?.reduce((previousValue: Record<string, any>, currentValue: any) => {
             previousValue[currentValue.key] = currentValue.val();
             return previousValue;
         }, {});
@@ -87,15 +98,15 @@ const PrikhodyMapApp = () => {
     const [isTypoTolerance, setIsTypoTolerance] = React.useState<boolean>(true);
     const [isShowPanel, setIsShowPanel] = React.useState<boolean>(false);
     const [isShowNotFoundPanel, setIsShowNotFoundPanel] = React.useState<boolean>(false);
-    const [facets, setFacets] = React.useState<any>({});
-    const [gOptions, setgOptions] = React.useState<any>([]);
-    const [uOptions, setuOptions] = React.useState<any>([]);
+    const [facets, setFacets] = React.useState<Record<string, Record<string, number>>>({});
+    const [gOptions, setgOptions] = React.useState<SelectOption[]>([]);
+    const [uOptions, setuOptions] = React.useState<SelectOption[]>([]);
     const [gFilter, setgFilter] = React.useState<string>('');
     const [uFilter, setuFilter] = React.useState<string>('');
 
-    const [mapHits, setMapHits] = React.useState<Array<any>>([]);
-    const [noMapHits, setNoMapHits] = React.useState<Array<any>>([]);
-    const [mapBounds, setMapBounds] = React.useState<any>({});
+    const [mapHits, setMapHits] = React.useState<PrikhodHit[]>([]);
+    const [noMapHits, setNoMapHits] = React.useState<PrikhodHit[]>([]);
+    const [mapBounds, setMapBounds] = React.useState<MapBoundsType>({} as MapBoundsType);
 
     const size = useWindowSize();
     const markersBounds = useMarkersBounds(mapHits);
@@ -134,11 +145,11 @@ const PrikhodyMapApp = () => {
         }
     }, [isLoading]);
 
-    const searchHandler = ({target}: any) => {
+    const searchHandler = ({target}: SearchEvent) => {
         setSearchTerm(target.value);
     }
 
-    const keysHandler = (e: any) => {
+    const keysHandler = (e: KeyboardEvent) => {
         if (e.which == 27) {
             setSearchTerm('');
         }
@@ -149,8 +160,8 @@ const PrikhodyMapApp = () => {
     const [footerHeight, setFooterHeight] = React.useState(0);
 
     React.useEffect(() => {
-        const resultList: any = resultListRef ? resultListRef.current : null;
-        const filterBar: any = filterBarRef ? filterBarRef.current : null;
+        const resultList: HTMLDivElement | null = resultListRef ? resultListRef.current : null;
+        const filterBar: HTMLDivElement | null = filterBarRef ? filterBarRef.current : null;
         const root = document.querySelector('body');
         if (filterBar) {
             setFilterBarHeight(filterBar.clientHeight);
@@ -166,7 +177,7 @@ const PrikhodyMapApp = () => {
     React.useEffect(() => {
         if (isPopUpOpen) {return;}
         setIsLoading(true);
-        const facetFilters: any = [];
+        const facetFilters: string[] = [];
 
         if (gFilter.length) {
             facetFilters.push(`g:${gFilter}`)
@@ -194,12 +205,12 @@ const PrikhodyMapApp = () => {
             filters,
             insideBoundingBox
         })
-            .then(({hits, facets}: any) => {
+            .then(({hits, facets}: SearchResult) => {
                 setFacets(facets);
 
-                const withCoords: Array<any> = [];
-                const noCoords: Array<any> = [];
-                hits.forEach((hit: any) => {
+                const withCoords: PrikhodHit[] = [];
+                const noCoords: PrikhodHit[] = [];
+                hits.forEach((hit: PrikhodHit) => {
                     if (hit._geoloc?.lat) {
                         withCoords.push(hit);
                     } else {
@@ -212,7 +223,7 @@ const PrikhodyMapApp = () => {
             });
     }, [debouncedSearchTerm, mapBounds, gFilter, uFilter]);
 
-    const selectCallback = React.useCallback((hit: any) => {
+    const selectCallback = React.useCallback((hit: PrikhodHit) => {
         setCurrentLocIdInPopUp(hit);
         setIsShowPanel(true);
     }, []);
@@ -242,7 +253,7 @@ const PrikhodyMapApp = () => {
                         isLoading={isLoading}
                         options={uOptions}
                         placeholder={'Уезд/Район'}
-                        onChange={(e: any) => {
+                        onChange={(e: SelectOption | null) => {
                             setuFilter(e?.value || '');
                             e?.value && setZoomToBounds(true);
                         }}
@@ -278,7 +289,7 @@ const PrikhodyMapApp = () => {
             <SetMapSizeOnChange top={`${filterBarHeight}px`} height={`calc(100vh - ${footerHeight + filterBarHeight}px)`}/>
             <LayersControlComponent rootWith={rootWith}/>
             {
-                mapHits.map((hit: any, index: number) => {
+                mapHits.map((hit: PrikhodHit, index: number) => {
                     return <PrikhodPlaceMarker
                             popupclose={popupclose}
                             popupopen={popupopen}
@@ -300,18 +311,18 @@ const PrikhodyMapApp = () => {
                 })
             }
             {
-                currentPrikhodNPs?.map((np: any) => {
-                    if (~np.title.indexOf(currentLocIdInPopUp?.pTitle)) {
+                currentPrikhodNPs?.map((np: PrikhodNP) => {
+                    if (~np.title.indexOf(currentLocIdInPopUp?.pTitle || '')) {
                         return <></>
                     }
-                    return <NPPlaceMarker key={np.objectID} hit={np} prikhod={currentLocIdInPopUp} color={currentLocIdInPopUp.src ? !!~currentLocIdInPopUp.title.indexOf('церковь') ? 'red' : 'blue' : 'black'} />
+                    return <NPPlaceMarker key={np.objectID} hit={np} prikhod={currentLocIdInPopUp} color={currentLocIdInPopUp?.src ? !!~currentLocIdInPopUp.title.indexOf('церковь') ? 'red' : 'blue' : 'black'} />
                 })
             }
 
 
             <div className="result-list">
                 <ul className={`nav nav-tabs tab-list-of-types ${isShowPanel ? 'active' : ''}`}
-                    onClick={(event: any) => {
+                    onClick={(event: React.MouseEvent) => {
                     }}>
                 </ul>
                 <Modal show={isShowPanel} fullscreen={true} onHide={() => setIsShowPanel(false)}>
@@ -324,7 +335,7 @@ const PrikhodyMapApp = () => {
                             <span><i>{currentLocIdInPopUp?.pTitle}</i></span>
                         </div>
                         <ul className={`nav nav-tabs tab-list-of-types ${isShowPanel ? 'active' : ''}`}
-                            onClick={(event: any) => {
+                            onClick={(event: React.MouseEvent) => {
                                 if (event.target.closest('.nav-item')) {
                                     if (event.target.classList.contains('active')) {
                                         setIsShowPanel(false);
@@ -349,9 +360,9 @@ const PrikhodyMapApp = () => {
                                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                             <Form.Control as="textarea" placeholder="Прислать сохранность по приходу" rows={3} id="new-fod-text" />
                                             <Button variant="secondary" type="button" onClick={() => {
-                                                const newFodText: any = document.getElementById('new-fod-text');
-                                                if (newFodText.value.length > 10 && newFodText.value.length < 4096) {
-                                                    const pre = `src:prikhody\n\`${currentLocIdInPopUp.objectID}\``;
+                                                const newFodText: FormElement | null = document.getElementById('new-fod-text') as FormElement;
+                                                if (newFodText && newFodText.value.length > 10 && newFodText.value.length < 4096) {
+                                                    const pre = `src:prikhody\n\`${currentLocIdInPopUp?.objectID}\``;
                                                     const msg = `${pre}\n${newFodText.value}`;
                                                     sendTGMessage(msg)
                                                         .then(() => {
@@ -451,7 +462,7 @@ const PrikhodyMapApp = () => {
                                 </> : <></>
                             }
                             {
-                                noMapHits.map((hit: any, index: number) => {
+                                noMapHits.map((hit: PrikhodHit, index: number) => {
                                     return <NoFoundPrikhod key={hit.objectID} hit={hit} setIsShowNotFoundPanel={setIsShowNotFoundPanel} />
                                 })
                             }

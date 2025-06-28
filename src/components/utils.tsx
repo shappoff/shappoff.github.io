@@ -1,3 +1,11 @@
+import { 
+  GetFunction, 
+  IsObjectFunction, 
+  MergeDeepFunction, 
+  GetNestedArrayValueFunction,
+  GenericObject,
+  GenericArray
+} from '../shared/types';
 
 export const getNickName = (email?: string | null | undefined) => {
     let emailToParse: string | null | undefined = '';
@@ -12,19 +20,19 @@ export const getNickName = (email?: string | null | undefined) => {
 };
 
 
-export function get(obj: any, propPath: string, defaultValue?: any) {
+export const get: GetFunction = (obj: GenericObject, propPath: string, defaultValue?: any) => {
     return getPropertyByPath(obj, propPath, defaultValue);
 }
 
-function getPropertyByPath(obj: any, propPath: string, defaultValue?: any) {
+function getPropertyByPath(obj: GenericObject, propPath: string, defaultValue?: any): any {
     return propPath.split('.').reduce((o, p) => (o && o[p]) || defaultValue, obj);
 }
 
-export function isObject(item: any) {
+export const isObject: IsObjectFunction = (item: any): boolean => {
     return (item && typeof item === 'object' && !Array.isArray(item));
 }
 
-export function mergeDeep(target: any, ...sources: any) {
+export const mergeDeep: MergeDeepFunction = (target: GenericObject, ...sources: GenericObject[]): GenericObject => {
     if (!sources.length) return target;
     const source = sources.shift();
 
@@ -67,7 +75,7 @@ export function copyToClipboard(data: string, callback: (value: void) => void | 
     }
 }
 
-export function getNestedArrayValue(digited: any, fond: string, opis: string, delo: string) {
+export const getNestedArrayValue: GetNestedArrayValueFunction = (digited: GenericObject, fond: string, opis: string, delo: string): boolean | null => {
 
     if (!digited) {
         return null;
@@ -85,7 +93,7 @@ export function getNestedArrayValue(digited: any, fond: string, opis: string, de
 }
 
 export function create_geoloc(lat: string, lng: string) {
-    let _geoloc;
+    let _geoloc: { lat: number; lng: number } | {};
     if (lat && lng) {
         _geoloc = {lat: +lat.trim(), lng: +lng.trim()};
     } else {

@@ -1,25 +1,26 @@
-import Card from "react-bootstrap/Card";
+import React from "react";
+import {Card} from "react-bootstrap";
+import { NoFoundPrikhodProps, PrikhodNP } from '../../shared/types';
 import IndicateButton from "./IndicateButton";
 import Accordion from "react-bootstrap/Accordion";
-import React from "react";
 import {useList} from "react-firebase-hooks/database";
 import {getDatabase, ref} from "firebase/database";
 import {app} from "./firebase";
 
-const NoFoundPrikhod = ({hit, setIsShowNotFoundPanel}: any, ) => {
+const NoFoundPrikhod = ({hit, setIsShowNotFoundPanel}: NoFoundPrikhodProps) => {
     if (!hit) {return <></>}
     const [snapshots, loading, error] = useList(ref(getDatabase(app), `prikhods/${hit?.objectID}`));
-    const [currentDescriptionItem, setCurrentDescriptionItem] = React.useState<any>();
+    const [currentDescriptionItem, setCurrentDescriptionItem] = React.useState<PrikhodNP[]>([]);
 
     React.useEffect(() => {
-        const formattedSnapshots = snapshots?.reduce((previousValue: any, currentValue: any) => {
+        const formattedSnapshots = snapshots?.reduce((previousValue: Record<string, any>, currentValue: any) => {
             previousValue[currentValue.key] = currentValue.val();
             return previousValue;
         }, {});
-        setCurrentDescriptionItem(formattedSnapshots?.nps?.filter((item: any) => !item.coords?.length));
+        setCurrentDescriptionItem(formattedSnapshots?.nps?.filter((item: PrikhodNP) => !item.coords?.length) || []);
     }, [snapshots]);
 
-    return <Card className="card-np-item">
+    return <Card key={hit.objectID} className="card-np-item">
         <Card.Body>
             <Card.Title><span>{hit.pType}</span> <span>{hit.pTitle}</span><span>, </span><span>{hit.title}</span></Card.Title>
             {
@@ -31,7 +32,7 @@ const NoFoundPrikhod = ({hit, setIsShowNotFoundPanel}: any, ) => {
                         <Accordion.Header>Населенные пункты прихода:</Accordion.Header>
                         <Accordion.Body>
                             {
-                                currentDescriptionItem?.map((item: any, index: number) => {
+                                currentDescriptionItem?.map((item: PrikhodNP, index: number) => {
                                     return item.coords?.length ? <></> : <Card key={index} className="card-np-item">
                                         <Card.Body>
                                             <Card.Title><span

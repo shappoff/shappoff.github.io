@@ -2,12 +2,13 @@ import L from "leaflet";
 import React from "react";
 import {useMap} from "react-leaflet";
 import Badge from "react-bootstrap/Badge";
+import { IndicateButtonProps } from '../../shared/types';
 
-    const IndicateButton = ({item, callBack, label = 'указать на карте'}: any) => {
+    const IndicateButton = ({item, callBack, label = 'указать на карте'}: IndicateButtonProps) => {
     const map = useMap();
     return <Badge bg="secondary" className="indicate-button"
                  onClick={() => {
-                     callBack && callBack();
+            callBack && callBack();
                      const mapElement = document.getElementById('map');
                      if (mapElement) {
                          L.DomUtil.addClass(mapElement,'crosshair-cursor-enabled');
@@ -37,7 +38,7 @@ import Badge from "react-bootstrap/Badge";
                          }).catch(() => {
                              if (mapElement) {
                                  L.DomUtil.removeClass(mapElement,'crosshair-cursor-enabled');
-                             }
+        }
                              map.off('click', clichHandler);
                              alert("Координаты НЕ отправлены!");
                          });
@@ -47,7 +48,7 @@ import Badge from "react-bootstrap/Badge";
                      });
                  }}
     >{label}</Badge>
-};
+    };
 
 const sendTGMessage = (text: string) => {
     const parse_mode = 'Markdown';
