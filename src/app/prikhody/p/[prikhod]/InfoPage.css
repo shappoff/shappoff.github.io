@@ -1,0 +1,18 @@
+.MuiDrawer-root > div {
+    height: 100vh;
+}
+
+.close-button-card {
+    position: fixed;
+    background-color: #fff;
+    border: 1px solid gray;
+    top: 2px;
+    left: 2px;
+    margin: 0;
+    z-index: 3;
+}
+
+.MuiBox-root > .MuiBox-root {
+    display: flex;
+    align-items: center;
+}

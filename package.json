@@ -1,0 +1,46 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "prebuild": "tsx ./src/scripts/runner.ts",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.5",
+    "@mui/joy": "^5.0.0-beta.52",
+    "@mui/lab": "^6.0.0-beta.29",
+    "@mui/material": "^6.4.2",
+    "@mui/x-data-grid": "^7.28.0",
+    "@next/third-parties": "^15.3.2",
+    "algoliasearch": "^4.24.0",
+    "bootstrap": "^5.3.3",
+    "cyrillic-to-translit-js": "^3.2.1",
+    "firebase": "^11.3.0",
+    "googleapis": "^144.0.0",
+    "leaflet": "^1.9.4",
+    "next": "15.1.2",
+    "rc-slider": "^11.1.7",
+    "react": "^19.0.0",
+    "react-bootstrap": "^2.10.7",
+    "react-dom": "^19.0.0",
+    "react-firebase-hooks": "^5.1.1",
+    "react-leaflet": "^5.0.0",
+    "react-leaflet-markercluster": "^5.0.0-rc.0",
+    "react-select": "^5.9.0"
+  },
+  "devDependencies": {
+    "@types/gtag.js": "^0.0.20",
+    "@types/leaflet": "^1.9.15",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tsx": "^4.19.3",
+    "typescript": "^5"
+  }
+}

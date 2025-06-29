@@ -1,0 +1,37 @@
+ul.digeted-box-ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+ul.digeted-box-ul li {
+    cursor: default;
+    list-style-type: none;
+    border: 1px solid #1976d2;
+
+    border-radius: 3px;
+    height: fit-content;
+    margin: 2px;
+    padding: 2px;
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+ul.digeted-box-ul li span {
+    color: #1976d2;
+}
+ul.digeted-box-ul li:hover {
+    font-weight: bold;
+    background-color: #42a5f5;
+    box-shadow: var(--mui-shadows-4, 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12));
+}
+
+.MuiTabs-list.MuiTabs-flexContainer {
+    margin-top: 1rem;
+}
+.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary:not(.Mui-selected) {
+    font-size: smaller;
+    text-transform: capitalize;
+}
+.Mui-selected {
+    font-size: larger;
+    font-weight: bold;
+    text-transform: uppercase;
+}
