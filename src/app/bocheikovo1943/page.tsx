@@ -1,14 +1,14 @@
 import {Metadata} from "next";
-import MapApp from "@/app/bocheikovo1943/MapApp";
+import DynamicMapApp from "@/components/DynamicMapApp";
 
 const title = "Бочейково 4 августа 1943 г., Бешенковичский район";
-const description = "Бочейково 4 августа 1943 г., Бешенковичский район, Витебская область. Аэрофотосъемка, NCAP TUGX/0500";
+const description = "Бочейково 4 августа 1943 г., Бешенковичский район, Витебская область. Аэрофотосъёмка, NCAP TUGX/0500";
 const url = 'https://shappoff.github.io/bocheikovo1943';
 
 export const metadata: Metadata = {
     title,
     description,
-    keywords: ['Беларусь', 'Бешенковичский район', 'Аэрофотосъемка', 'Великая Отечественная война', 'Бочейково'],
+    keywords: ['Беларусь', 'Бешенковичский район', 'Аэрофотосъёмка', 'Великая Отечественная война', 'Бочейково'],
     robots: { index: true, follow: true },
     icons: [
         {
@@ -31,5 +31,5 @@ export const metadata: Metadata = {
 };
 
 export default function Bocheikovo1943Page() {
-  return <MapApp />;
+  return <DynamicMapApp mapKey="bocheikovo1943" />;
 }
