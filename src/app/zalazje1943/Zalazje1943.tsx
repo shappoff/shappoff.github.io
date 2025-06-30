@@ -1,36 +1,26 @@
-'use client'
-
+"use client";
 import React from "react";
-import "leaflet/dist/leaflet.css";
-import {
-    MapContainer,
-    TileLayer,
-    LayerGroup,
-} from "react-leaflet";
+import HistoricalMap from "@/components/HistoricalMap";
 
-const Zalazje1943 = () => {
+const attribution = "Деревня Залазье 14 октября 1943 г., Аэрофотосъёмка, NCAP TUGX/0508";
+const tileUrl = "https://raw.githubusercontent.com/shappoff/storage/zalazje1943/tiles/{z}/{y}/{x}.jpg";
 
-    return <MapContainer
-        id="map"
-        center={[-50, 0]}
-        zoom={3}
-        zoomControl={true}
-        style={{height: '99vh'}}
-        whenReady={() => {
-            setTimeout(() => {
-                document!.querySelector('.leaflet-control-attribution.leaflet-control')!
-                    .innerHTML = '<div>Деревня Залазье 14 октября 1943 г., Аэрофотосъемка, NCAP TUGX/0508</div>';
-            }, 100);
-        }}
-    >
-        <TileLayer
-            attribution="Деревня Залазье 14 октября 1943 г., Аэрофотосъемка, NCAP TUGX/0508"
-            url={`https://raw.githubusercontent.com/shappoff/storage/zalazje1943/tiles/{z}/{y}/{x}.jpg`}
-            maxZoom={6}
-            minZoom={2}
-            noWrap={true}
-        />
-    </MapContainer>;
-};
+const Zalazje1943 = ({children}: any) => (
+  <HistoricalMap
+    center={[-50, 0]}
+    zoom={3}
+    minZoom={2}
+    maxZoom={6}
+    tileUrl={tileUrl}
+    attribution={attribution}
+    id="map"
+    zoomControl={true}
+    whenReady={() => {
+      setTimeout(() => {
+        document!.querySelector('.leaflet-control-attribution.leaflet-control')!.innerHTML = '<div>Деревня Залазье 14 октября 1943 г., Аэрофотосъёмка, NCAP TUGX/0508</div>';
+      }, 100);
+    }}
+  >{children}</HistoricalMap>
+);
 
 export default Zalazje1943;

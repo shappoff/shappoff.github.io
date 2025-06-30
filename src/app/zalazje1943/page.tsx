@@ -1,14 +1,14 @@
 import {Metadata} from "next";
-import MapApp from "@/app/zalazje1943/MapApp";
+import DynamicMapApp from "@/components/DynamicMapApp";
 
-const title = "Залазье 1943г., Аэрофотосъемка.";
-const description = "Деревня Залазье 14 октября 1943 г., Толочинский район, Витебская область. Аэрофотосъемка, NCAP TUGX/0508";
+const title = "Залазье 1943г., Аэрофотосъёмка.";
+const description = "Деревня Залазье 14 октября 1943 г., Толочинский район, Витебская область. Аэрофотосъёмка, NCAP TUGX/0508";
 const url = 'https://shappoff.github.io/zalazje1943';
 
 export const metadata: Metadata = {
     title,
     description,
-    keywords: ['Беларусь', 'Толочинский район', 'Аэрофотосъемка', 'Великая Отечественная война', 'Славное', 'Залазье'],
+    keywords: ['Беларусь', 'Толочинский район', 'Аэрофотосъёмка', 'Великая Отечественная война', 'Славное', 'Залазье'],
     robots: { index: true, follow: true },
     icons: [
         {
@@ -31,5 +31,5 @@ export const metadata: Metadata = {
 };
 
 export default function Zalazje1943Page() {
-  return <MapApp />;
+  return <DynamicMapApp mapKey="zalazje1943" />;
 }
