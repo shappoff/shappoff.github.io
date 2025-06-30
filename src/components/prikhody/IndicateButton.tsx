@@ -56,9 +56,6 @@ const sendTGMessage = async (text: string) => {
     if (data.error) {
         throw new Error(data.error);
     }
-    if (data.success) {
-        throw new Error(data.success);
-    }
     return data;
 };
 
