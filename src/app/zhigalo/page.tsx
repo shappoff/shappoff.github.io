@@ -19,11 +19,11 @@ export default function Zhigalo() {
             "@type": "Person",
             "name": "Семен Жигало"
         },
-        "datePublished": "1930-01-13",
-        "dateModified": "1943-10-24",
+        "datePublished": "2024-12-25",
+        "dateModified": new Date().toISOString().slice(0, 10),
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": typeof window !== 'undefined' ? window.location.href : ''
+            "@id": "https://shappoff.github.io/zhigalo"
         }
     };
     return (
