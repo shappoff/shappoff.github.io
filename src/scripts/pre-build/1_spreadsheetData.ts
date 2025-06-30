@@ -3410,7 +3410,7 @@ export default async function () {
             range: 'main!A1:L'
         },
         {
-            spreadsheetId: '1-sTheH2DP378yZrX4YmykZLXzVrE1pwApm6YMx08Y8c',
+            spreadsheetId: '1bNEDa65KJNfcjCmVTHcqGnOe4O4EOXbYjz6ZbiR5J0A',
             range: 'Лист1!A2:D'
         },
         {
