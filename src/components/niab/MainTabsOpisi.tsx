@@ -150,8 +150,8 @@ const MainTabsOpisi = ({fond, opNmbPool, digited, opisi, rejected, indexed}: any
                                         {
                                             Object.keys(digited[opNmb] || {}).length ? <>
                                                 <Divider sx={{width: '100%', margin: '10px 0'}} textAlign="center">
-                                                    <WrapToTooltip note="обновлено 31.03.2025 | Таблица откроется в новом окне">
-                                                        <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1eKuTaDS5g8xCZX35N14Kyy9a01saGEya/">
+                                                    <WrapToTooltip note="обновлено 30.06.2025 | Таблица откроется в новом окне">
+                                                        <Link target="_blank" href="https://docs.google.com/spreadsheets/d/1RZ6MFWHrzl7Eo_8PyPLmqscUeIUbml2G/">
                                                             <u>
                                                                 <h4>Оцифрованные дела Описи № {value}</h4>
                                                             </u>
