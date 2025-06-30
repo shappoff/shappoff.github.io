@@ -14,6 +14,7 @@ interface HistoricalMapProps {
   id?: string;
   zoomControl?: boolean;
   whenReady?: () => void;
+  children?: React.ReactNode;
 }
 
 const HistoricalMap: React.FC<HistoricalMapProps> = ({
@@ -27,7 +28,7 @@ const HistoricalMap: React.FC<HistoricalMapProps> = ({
   id = "map",
   zoomControl = true,
   whenReady,
-  children
+  children,
 }) => (
   <MapContainer
     id={id}

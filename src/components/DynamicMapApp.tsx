@@ -4,7 +4,7 @@ import React from "react";
 
 interface DynamicMapAppProps {
   mapKey: "zalazje1943" | "glinniki1870" | "glinniki1846" | "bocheikovo1943";
-  children?: Array<React.ReactElement>
+  children?: React.ReactNode
 }
 const componentMap = {
   zalazje1943: () => import("@/app/zalazje1943/Zalazje1943"),
