@@ -49,10 +49,17 @@ import Badge from "react-bootstrap/Badge";
     >{label}</Badge>
 };
 
-const sendTGMessage = (text: string) => {
-    const parse_mode = 'Markdown';
-    const disable_web_page_preview = true;
-    return fetch(`https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=162676802&parse_mode=${parse_mode}&disable_web_page_preview=${disable_web_page_preview}&text=${encodeURIComponent(text)}`)
+const sendTGMessage = async (text: string) => {
+    const response = await fetch(`/api/feedback?text=${encodeURIComponent(text)}`);
+    const data = await response.json();
+    console.log(data);
+    if (data.error) {
+        throw new Error(data.error);
+    }
+    if (data.success) {
+        throw new Error(data.success);
+    }
+    return data;
 };
 
 export {sendTGMessage};
