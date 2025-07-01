@@ -2524,6 +2524,7 @@ const fourthStorageMain: any = {
     2838: true,
     2892: true,
     2957: true,
+    3009: true,
     3004: true,
     3097: true,
     3234: true,
@@ -2533,7 +2534,6 @@ const fourthStorageMain: any = {
     2839: true,
     2894: true,
     2958: true,
-    3009: true,
     3098: true,
     3236: true,
     3373: true,
@@ -3381,78 +3381,81 @@ const handleNumber = (num = '') => {
     return isNaN(+num) ? num.length ? num : '' : +num;
 }
 
+const spreadsheetsConfig = {
+    mainTable: {
+        spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
+        range: 'main!A1:M'
+    },
+    indexed: {
+        spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
+        range: 'indexed!A2:C'
+    },
+    rejected: {
+        spreadsheetId: '1iFNV_EWdeMKjYhz-So3a6dv2v64K8VpgDajag-mJIY8',
+        range: 'main!A1:L'
+    },
+    digited: {
+        spreadsheetId: '1bNEDa65KJNfcjCmVTHcqGnOe4O4EOXbYjz6ZbiR5J0A',
+        range: 'Лист1!A2:D'
+    },
+    stat333: {
+        spreadsheetId: '1X-a2Xfm60fB6RvpTTO1XKqm7FvBNscrHjdXFVzSBgkQ',
+        range: 'Опись 333-9!A3:J'
+    },
+    cgia_19_127: {
+        spreadsheetId: '1ZPdTmzquF_qraM1pfQcjBox_KbDc20wDStCMv55wjJQ',
+        range: 'main!A1:H'
+    },
+    prikhodyMain: {
+        spreadsheetId: '1A9dPH4ppRf5fWGYJzyKI9Z_82GKg-wq4HNLkDduY2r0',
+        range: 'main!A2:H'
+    },
+    prikhodyArchives: {
+        spreadsheetId: '1A9dPH4ppRf5fWGYJzyKI9Z_82GKg-wq4HNLkDduY2r0',
+        range: 'archives!A2:I'
+    },
+    catholicName: {
+        spreadsheetId: '18eVUTKA3nZulxV65qCW3GxUQ5xHyn8MnYhNJOoJzsEs',
+        range: 'catholic!A1:D'
+    },
+    orthodoxName: {
+        spreadsheetId: '18eVUTKA3nZulxV65qCW3GxUQ5xHyn8MnYhNJOoJzsEs',
+        range: 'orthodox!A1:F'
+    },
+    // Add new spreadsheets here as needed
+};
 
 export default async function () {
     console.log('Google sheets pre-build data update');
 
-    const [
-        mainTableData,
-        indexedData,
-        rejectedData,
-        digitedData,
-        stat333Data,
-        cgia_19_127Data,
+    const results = await getGoogleSheetsDataArr(spreadsheetsConfig);
+    const {
+        mainTable,
+        indexed,
+        rejected,
+        digited,
+        stat333,
+        cgia_19_127,
         prikhodyMain,
-        prikhodyArchivesData,
+        prikhodyArchives,
         catholicName,
-        orthodoxName,
-    ] = await getGoogleSheetsDataArr([
-        {
-            spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
-            range: 'main!A1:M'
-        },
-        {
-            spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
-            range: 'indexed!A2:C'
-        },
-        {
-            spreadsheetId: '1iFNV_EWdeMKjYhz-So3a6dv2v64K8VpgDajag-mJIY8',
-            range: 'main!A1:L'
-        },
-        {
-            spreadsheetId: '1bNEDa65KJNfcjCmVTHcqGnOe4O4EOXbYjz6ZbiR5J0A',
-            range: 'Лист1!A2:D'
-        },
-        {
-            spreadsheetId: '1X-a2Xfm60fB6RvpTTO1XKqm7FvBNscrHjdXFVzSBgkQ',
-            range: 'Опись 333-9!A3:J'
-        },
-        {
-            spreadsheetId: '1ZPdTmzquF_qraM1pfQcjBox_KbDc20wDStCMv55wjJQ',
-            range: 'main!A1:H'
-        },
-        {
-            spreadsheetId: '1A9dPH4ppRf5fWGYJzyKI9Z_82GKg-wq4HNLkDduY2r0',
-            range: 'main!A2:H'
-        },
-        {
-            spreadsheetId: '1A9dPH4ppRf5fWGYJzyKI9Z_82GKg-wq4HNLkDduY2r0',
-            range: 'archives!A2:I'
-        },
-        {
-            spreadsheetId: '18eVUTKA3nZulxV65qCW3GxUQ5xHyn8MnYhNJOoJzsEs',
-            range: 'catholic!A1:D'
-        },
-        {
-            spreadsheetId: '18eVUTKA3nZulxV65qCW3GxUQ5xHyn8MnYhNJOoJzsEs',
-            range: 'orthodox!A1:F'
-        },
-    ]);
+        orthodoxName
+    } = results;
 
-    const cgia_19_127FormattedData: any = get(cgia_19_127Data, 'data.values', []);
+    const cgia_19_127FormattedData: any = cgia_19_127;
     fs.writeFileSync(cgia_19_127Path, JSON.stringify(cgia_19_127FormattedData, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
 
-    const prikhodyMainData: any = get(prikhodyMain, 'data.values', []);
+    const prikhodyMainData: any = prikhodyMain;
     fs.writeFileSync(prikhodyMainDataPath, JSON.stringify(prikhodyMainData, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
 
     let prikhodyArchivesDataObj: any = {};
-    get(prikhodyArchivesData, 'data.values', [])
+    prikhodyArchives
         .forEach(([objectID, year = '', type = '', short = '', fod = '', link = '', full = '', pages, note]: any) => {
             if (!prikhodyArchivesDataObj[objectID]) {
                 prikhodyArchivesDataObj[objectID] = [];
@@ -3465,20 +3468,18 @@ export default async function () {
         flag: 'w'
     });
 
-    fs.writeFileSync(stat333Path, JSON.stringify(get(stat333Data, 'data.values', []), null, 4), {
+    fs.writeFileSync(stat333Path, JSON.stringify(stat333, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
 
-    const indexedFormattedData: any = indexedData?.data?.values?.reduce((pool: any, [fond, opis, value]: any, index: number, arr: Array<any>) => {
-
+    const indexedFormattedData: any = indexed.reduce((pool: any, [fond, opis, value]: any, index: number, arr: Array<any>) => {
         if (!pool[fond]) {
             pool[fond] = {};
         }
         if (!pool[fond][opis]) {
             pool[fond][opis] = value;
         }
-
         return pool;
     }, {});
 
@@ -3487,8 +3488,7 @@ export default async function () {
         flag: 'w'
     });
 
-    const digitedFormattedData: any = digitedData?.data?.values?.reduce((pool: any, [fond, opis, value, comment]: any, index: number, arr: Array<any>) => {
-
+    const digitedFormattedData: any = digited.reduce((pool: any, [fond, opis, value, comment]: any, index: number, arr: Array<any>) => {
         if (!pool[fond]) {
             pool[fond] = {};
         }
@@ -3498,7 +3498,6 @@ export default async function () {
         if (!pool[fond][opis][value]) {
             pool[fond][opis][value] = comment || true;
         }
-
         return pool;
     }, {});
 
@@ -3506,7 +3505,7 @@ export default async function () {
         encoding: 'utf8',
         flag: 'w'
     });
-    const rejectedRawData: any = get(rejectedData, 'data.values', [])
+    const rejectedRawData: any = rejected
         .filter((v: any) => v.length);
     fs.writeFileSync(rejectedPath, JSON.stringify(rejectedRawData, null, 4), {
         encoding: 'utf8',
@@ -3514,7 +3513,6 @@ export default async function () {
     });
 
     const rejectedFormattedData = rejectedRawData.reduce((pool: any, [fond, opis, delo, title, req, answer, reason, send, scan, contact, comment]: any, index: number, arr: Array<any>) => {
-
         if (!pool[fond]) {
             pool[fond] = {};
         }
@@ -3524,7 +3522,6 @@ export default async function () {
         if (!pool[fond][opis][delo]) {
             pool[fond][opis][delo] = [title, reason, contact];
         }
-
         return pool;
     }, {});
     fs.writeFileSync(rejectedFormattedPath, JSON.stringify(rejectedFormattedData, null, 4), {
@@ -3532,13 +3529,12 @@ export default async function () {
         flag: 'w'
     });
 
-
     const tabRangesData: Array<any> = [];
     let titles: any;
     let currentItem: any;
     let currentFOD: any;
     const opNmbPool = new Set();
-    mainTableData?.data?.values?.forEach((row: any, rowIndex: number) => {
+    mainTable.forEach((row: any, rowIndex: number) => {
         const res: any = {index: rowIndex};
         if (rowIndex === 0) {
             titles = row;
@@ -3658,7 +3654,6 @@ export default async function () {
         flag: 'w'
     });
 
-
     const handleNameRow = () => {
         let titlesPool: any;
 
@@ -3677,8 +3672,8 @@ export default async function () {
 
         }
     };
-    const catholicNameData = get(catholicName, 'data.values', []).map(handleNameRow());
-    const orthodoxNameData = get(orthodoxName, 'data.values', []).map(handleNameRow());
+    const catholicNameData = catholicName.map(handleNameRow());
+    const orthodoxNameData = orthodoxName.map(handleNameRow());
 
     fs.writeFileSync(orthodox_catholicNameDataPath, JSON.stringify([...catholicNameData, ...orthodoxNameData], null, 4), {
         encoding: 'utf8',

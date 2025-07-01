@@ -26,31 +26,11 @@ export async function getGoogleSheetsData(range: string, spreadsheetId: string) 
 
     return data.data.values;
 }
-export async function getGoogleSheetsDataArr(spreadsheets: Array<any>) {
+export async function getGoogleSheetsDataArr(spreadsheets: Record<string, {spreadsheetId: string, range: string}>) {
     const sheets = await getAuthedSheets();
-    const [
-        mainTableConfig,
-        indexedConfig,
-        rejectedConfig,
-        digitedConfig,
-        stat333Data,
-        cgia_19_127Data,
-        prikhodyMain,
-        prikhodyArchivesData,
-        catholicName,
-        orthodoxName,
-    ] = spreadsheets;
-
-    return [
-        await sheets.spreadsheets.values.get(mainTableConfig),
-        await sheets.spreadsheets.values.get(indexedConfig),
-        await sheets.spreadsheets.values.get(rejectedConfig),
-        await sheets.spreadsheets.values.get(digitedConfig),
-        await sheets.spreadsheets.values.get(stat333Data),
-        await sheets.spreadsheets.values.get(cgia_19_127Data),
-        await sheets.spreadsheets.values.get(prikhodyMain),
-        await sheets.spreadsheets.values.get(prikhodyArchivesData),
-        await sheets.spreadsheets.values.get(catholicName),
-        await sheets.spreadsheets.values.get(orthodoxName),
-    ];
+    const entries = Object.entries(spreadsheets);
+    const results = await Promise.all(
+        entries.map(([_, config]) => sheets.spreadsheets.values.get(config))
+    );
+    return Object.fromEntries(entries.map(([key], i) => [key, results[i].data.values]));
 }
