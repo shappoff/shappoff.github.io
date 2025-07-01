@@ -3442,14 +3442,12 @@ export default async function () {
         orthodoxName
     } = results;
 
-    const cgia_19_127FormattedData: any = cgia_19_127;
-    fs.writeFileSync(cgia_19_127Path, JSON.stringify(cgia_19_127FormattedData, null, 4), {
+    fs.writeFileSync(cgia_19_127Path, JSON.stringify(cgia_19_127, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
 
-    const prikhodyMainData: any = prikhodyMain;
-    fs.writeFileSync(prikhodyMainDataPath, JSON.stringify(prikhodyMainData, null, 4), {
+    fs.writeFileSync(prikhodyMainDataPath, JSON.stringify(prikhodyMain, null, 4), {
         encoding: 'utf8',
         flag: 'w'
     });
