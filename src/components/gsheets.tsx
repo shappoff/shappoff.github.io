@@ -32,5 +32,5 @@ export async function getGoogleSheetsDataArr(spreadsheets: Record<string, {sprea
     const results = await Promise.all(
         entries.map(([_, config]) => sheets.spreadsheets.values.get(config))
     );
-    return Object.fromEntries(entries.map(([key], i) => [key, results[i].data.values]));
+    return Object.fromEntries(entries.map(([key], i) => [key, results[i]?.data?.values ?? []]));
 }
