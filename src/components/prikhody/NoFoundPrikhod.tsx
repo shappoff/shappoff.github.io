@@ -6,17 +6,36 @@ import {useList} from "react-firebase-hooks/database";
 import {getDatabase, ref} from "firebase/database";
 import {app} from "./firebase";
 
-const NoFoundPrikhod = ({hit, setIsShowNotFoundPanel}: any, ) => {
+// Define type for NoFoundPrikhod props
+interface NoFoundPrikhodProps {
+    hit: {
+        objectID: string;
+        pType?: string;
+        pTitle?: string;
+        title: string;
+        _geoloc: { lat: number; lng: number };
+        [key: string]: any;
+    };
+    setIsShowNotFoundPanel: (show: boolean) => void;
+}
+
+interface NpItem {
+    title: string;
+    coords?: [number, number];
+    [key: string]: any;
+}
+
+const NoFoundPrikhod = ({hit, setIsShowNotFoundPanel}: NoFoundPrikhodProps) => {
     if (!hit) {return <></>}
     const [snapshots, loading, error] = useList(ref(getDatabase(app), `prikhods/${hit?.objectID}`));
-    const [currentDescriptionItem, setCurrentDescriptionItem] = React.useState<any>();
+    const [currentDescriptionItem, setCurrentDescriptionItem] = React.useState<NpItem[] | undefined>();
 
     React.useEffect(() => {
-        const formattedSnapshots = snapshots?.reduce((previousValue: any, currentValue: any) => {
+        const formattedSnapshots = snapshots?.reduce((previousValue: Record<string, any>, currentValue: any) => {
             previousValue[currentValue.key] = currentValue.val();
             return previousValue;
         }, {});
-        setCurrentDescriptionItem(formattedSnapshots?.nps?.filter((item: any) => !item.coords?.length));
+        setCurrentDescriptionItem(formattedSnapshots?.nps?.filter((item: NpItem) => !item.coords?.length));
     }, [snapshots]);
 
     return <Card className="card-np-item">

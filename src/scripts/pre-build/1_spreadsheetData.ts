@@ -12,7 +12,6 @@ import {
     indexedNIABDataPath,
     orthodox_catholicNameDataPath
 } from "@/components/paths";
-import {get} from "@/components/utils";
 
 interface SpreadsheetConfig {
   spreadsheetId: string;

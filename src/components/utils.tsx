@@ -1,3 +1,5 @@
+// Type for generic object with string keys and unknown values
+export type AnyObject = Record<string, unknown>;
 
 export const getNickName = (email?: string | null | undefined) => {
     let emailToParse: string | null | undefined = '';
@@ -11,35 +13,34 @@ export const getNickName = (email?: string | null | undefined) => {
     return nickname ? nickname : 'anonymous';
 };
 
-
-export function get(obj: any, propPath: string, defaultValue?: any) {
-    return getPropertyByPath(obj, propPath, defaultValue);
+export function get<T = unknown>(obj: AnyObject, propPath: string, defaultValue?: T): T | undefined {
+    return getPropertyByPath<T>(obj, propPath, defaultValue);
 }
 
-function getPropertyByPath(obj: any, propPath: string, defaultValue?: any) {
-    return propPath.split('.').reduce((o, p) => (o && o[p]) || defaultValue, obj);
+function getPropertyByPath<T = unknown>(obj: AnyObject, propPath: string, defaultValue?: T): T | undefined {
+    return propPath.split('.').reduce((o: unknown, p: string) => (o && (o as AnyObject)[p]) || defaultValue, obj) as T | undefined;
 }
 
-export function isObject(item: any) {
-    return (item && typeof item === 'object' && !Array.isArray(item));
+export function isObject(item: unknown): boolean {
+    return (item !== null && typeof item === 'object' && !Array.isArray(item));
 }
 
-export function mergeDeep(target: any, ...sources: any) {
-    if (!sources.length) return target;
+export function mergeDeep<T extends AnyObject, S extends AnyObject>(target: T, ...sources: S[]): T & S {
+    if (!sources.length) return target as T & S;
     const source = sources.shift();
 
     if (isObject(target) && isObject(source)) {
         for (const key in source) {
             if (isObject(source[key])) {
                 if (!target[key]) Object.assign(target, {[key]: {}});
-                mergeDeep(target[key], source[key]);
+                mergeDeep(target[key] as AnyObject, source[key] as AnyObject);
             } else {
                 Object.assign(target, {[key]: source[key]});
             }
         }
     }
 
-    return mergeDeep(target, ...sources);
+    return mergeDeep(target as T & S, ...sources as S[]);
 }
 
 export function stringToColour(str: string) {
@@ -67,8 +68,7 @@ export function copyToClipboard(data: string, callback: (value: void) => void | 
     }
 }
 
-export function getNestedArrayValue(digited: any, fond: string, opis: string, delo: string) {
-
+export function getNestedArrayValue(digited: Record<string, Record<string, Record<string, unknown>>> | undefined, fond: string, opis: string, delo: string): boolean | null {
     if (!digited) {
         return null;
     }

@@ -1,8 +1,8 @@
 export function throttle(func: Function, ms: number) {
 
     let isThrottled = false;
-    let savedArgs: any;
-    let savedThis: any;
+    let savedArgs: unknown;
+    let savedThis: unknown;
 
     function wrapper() {
 
@@ -19,7 +19,7 @@ export function throttle(func: Function, ms: number) {
         setTimeout(function() {
             isThrottled = false;
             if (savedArgs) {
-                wrapper.apply(savedThis, savedArgs);
+                wrapper.apply(savedThis as any, savedArgs as any);
                 savedArgs = savedThis = null;
             }
         }, ms);

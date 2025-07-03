@@ -1,13 +1,20 @@
 import React from "react";
 import {latLngBounds} from 'leaflet'
 
-const useMarkersBounds = (mapHits: Array<any>) => {
+// Define type for mapHits
+interface MapHit {
+    coords?: [number, number];
+    length?: number;
+    [key: string]: any;
+}
 
-    const [currentBounds, setCurrentBounds] = React.useState<any>();
+const useMarkersBounds = (mapHits: Array<MapHit>) => {
+
+    const [currentBounds, setCurrentBounds] = React.useState<ReturnType<typeof latLngBounds> | undefined>();
 
     React.useEffect(() => {
         const bounds = latLngBounds([])
-        mapHits && mapHits.length && [...mapHits].forEach((item: any) => {
+        mapHits && mapHits.length && [...mapHits].forEach((item: MapHit) => {
             if (item?.coords?.length) {
                 const [lat, lng] = item.coords;
                 if (!lat || !lng) {
@@ -15,7 +22,7 @@ const useMarkersBounds = (mapHits: Array<any>) => {
                 }
                 bounds.extend([lat, lng]);
             }
-            if (item?.length) {
+            if (Array.isArray(item) && item.length) {
                 const [,,,,lat, lng] = item;
                 if (!lat || !lng) {
                     return;
