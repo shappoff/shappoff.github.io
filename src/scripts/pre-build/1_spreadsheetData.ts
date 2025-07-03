@@ -13,7 +13,7 @@ import {
     orthodox_catholicNameDataPath
 } from "@/components/paths";
 
-interface SpreadsheetConfig {
+export interface SpreadsheetConfig {
   spreadsheetId: string;
   range: string;
 }

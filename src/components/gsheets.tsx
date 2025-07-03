@@ -1,6 +1,7 @@
 import { google } from "googleapis";
 import {AnyAuthClient} from "google-auth-library";
 import {sheets_v4} from "googleapis/build/src/apis/sheets/v4";
+import {SpreadsheetConfig} from "@/scripts/pre-build/1_spreadsheetData";
 
 const getAuthedSheets = async (): Promise<sheets_v4.Sheets> => {
     const auth: AnyAuthClient = await google.auth.getClient({
@@ -28,7 +29,7 @@ export async function getGoogleSheetsData(range: string, spreadsheetId: string) 
 
     return data.data.values;
 }
-export async function getGoogleSheetsDataArr(spreadsheets: Record<string, {spreadsheetId: string, range: string}>) {
+export async function getGoogleSheetsDataArr(spreadsheets: Record<string, SpreadsheetConfig>) {
     const sheets: sheets_v4.Sheets = await getAuthedSheets();
     const entries = Object.entries(spreadsheets);
     const results = await Promise.all(
