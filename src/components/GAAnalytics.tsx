@@ -3,7 +3,7 @@
 import React from 'react';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
-const GAAnalytics = () => {
+const GAAnalytics: React.FC = () => {
     const [ga, setGa] = React.useState<boolean>(false);
     React.useEffect(() => {
         if (~location.href.indexOf('debug')) {
