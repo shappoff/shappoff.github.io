@@ -14,7 +14,12 @@ import {
 } from "@/components/paths";
 import {get} from "@/components/utils";
 
-const firstStorage: any = {
+interface SpreadsheetConfig {
+  spreadsheetId: string;
+  range: string;
+}
+
+const firstStorage: Record<number, boolean> = {
     1297: true,
     2049: true,
     2097: true,
@@ -347,7 +352,7 @@ const firstStorage: any = {
     3291: true
 };
 
-const secondStorage: any = {
+const secondStorage: Record<number, boolean> = {
     1: true,
     164: true,
     266: true,
@@ -3350,7 +3355,7 @@ const fiveStorage: any = {
 
 };
 
-const getDocId = (url = '') => {
+const getDocId = (url: string = ''): string => {
     const idIndex = url.indexOf('id=');
     if (~idIndex) {
         return url.slice(idIndex + 3);
@@ -3359,7 +3364,7 @@ const getDocId = (url = '') => {
     }
 };
 
-function normalazePageNumb(page = '') {
+function normalazePageNumb(page: string = ''): string {
     let additional = '';
     switch (page.length) {
         case 1:
@@ -3377,11 +3382,11 @@ function normalazePageNumb(page = '') {
     return `${additional}${page}`;
 }
 
-const handleNumber = (num = '') => {
+const handleNumber = (num: string = ''): string | number => {
     return isNaN(+num) ? num.length ? num : '' : +num;
 }
 
-const spreadsheetsConfig = {
+const spreadsheetsConfig: Record<string, SpreadsheetConfig> = {
     mainTable: {
         spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
         range: 'main!A1:M'
