@@ -1,7 +1,7 @@
 import { google } from "googleapis";
 import {AnyAuthClient} from "google-auth-library";
 import {sheets_v4} from "googleapis/build/src/apis/sheets/v4";
-import {SpreadsheetConfig} from "@/scripts/pre-build/1_spreadsheetData";
+import {SpreadsheetsArrayConfig} from "@/scripts/pre-build/1_spreadsheetData";
 
 const getAuthedSheets = async (): Promise<sheets_v4.Sheets> => {
     const auth: AnyAuthClient = await google.auth.getClient({
@@ -29,11 +29,22 @@ export async function getGoogleSheetsData(range: string, spreadsheetId: string) 
 
     return data.data.values;
 }
-export async function getGoogleSheetsDataArr(spreadsheets: Record<string, SpreadsheetConfig>) {
+
+type Entries<T> = {
+    [K in keyof T]: [K, T[K]];
+}[keyof T][];
+
+type GetFirstType<T> = T extends Array<infer First> ? First : T;
+
+type EntriesSheetsConfig = Entries<SpreadsheetsArrayConfig>;
+
+type EntrieSheetConfig = GetFirstType<EntriesSheetsConfig>;
+
+export async function getGoogleSheetsDataArr(spreadsheets: SpreadsheetsArrayConfig) {
     const sheets: sheets_v4.Sheets = await getAuthedSheets();
-    const entries = Object.entries(spreadsheets);
+    const entries: EntriesSheetsConfig = Object.entries(spreadsheets);
     const results = await Promise.all(
-        entries.map(([_, config]) => sheets.spreadsheets.values.get(config))
+        entries.map(([_, config]: EntrieSheetConfig) => sheets.spreadsheets.values.get(config))
     );
-    return Object.fromEntries(entries.map(([key], i) => [key, results[i]?.data?.values ?? []]));
+    return Object.fromEntries(entries.map(([key]: EntrieSheetConfig, i: number) => [key, results[i]?.data?.values ?? []]));
 }

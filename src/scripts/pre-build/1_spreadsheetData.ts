@@ -18,6 +18,8 @@ export interface SpreadsheetConfig {
   range: string;
 }
 
+export type SpreadsheetsArrayConfig = Record<string, SpreadsheetConfig>;
+
 const firstStorage: Record<number, boolean> = {
     1297: true,
     2049: true,
@@ -3385,7 +3387,7 @@ const handleNumber = (num: string = ''): string | number => {
     return isNaN(+num) ? num.length ? num : '' : +num;
 }
 
-const spreadsheetsConfig: Record<string, SpreadsheetConfig> = {
+const spreadsheetsConfig: SpreadsheetsArrayConfig = {
     mainTable: {
         spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
         range: 'main!A1:M'
@@ -3432,7 +3434,6 @@ const spreadsheetsConfig: Record<string, SpreadsheetConfig> = {
 export default async function () {
     console.log('Google sheets pre-build data update');
 
-    const results = await getGoogleSheetsDataArr(spreadsheetsConfig);
     const {
         mainTable,
         indexed,
@@ -3444,7 +3445,7 @@ export default async function () {
         prikhodyArchives,
         catholicName,
         orthodoxName
-    } = results;
+    } = await getGoogleSheetsDataArr(spreadsheetsConfig);
 
     fs.writeFileSync(cgia_19_127Path, JSON.stringify(cgia_19_127, null, 4), {
         encoding: 'utf8',
