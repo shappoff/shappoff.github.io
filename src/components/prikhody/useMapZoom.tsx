@@ -2,7 +2,12 @@ import React from "react";
 import { useMap } from "react-leaflet";
 import {throttle} from "./throttle";
 
-const MapZoom = ({setMapZoom}: any) => {
+// Define type for MapZoom props
+interface MapZoomProps {
+    setMapZoom: (zoom: number) => void;
+}
+
+const MapZoom = ({setMapZoom}: MapZoomProps) => {
     const map = useMap();
 
     const func = () => {

@@ -12,9 +12,15 @@ import {
     indexedNIABDataPath,
     orthodox_catholicNameDataPath
 } from "@/components/paths";
-import {get} from "@/components/utils";
 
-const firstStorage: any = {
+export interface SpreadsheetConfig {
+  spreadsheetId: string;
+  range: string;
+}
+
+export type SpreadsheetsArrayConfig = Record<string, SpreadsheetConfig>;
+
+const firstStorage: Record<number, boolean> = {
     1297: true,
     2049: true,
     2097: true,
@@ -347,7 +353,7 @@ const firstStorage: any = {
     3291: true
 };
 
-const secondStorage: any = {
+const secondStorage: Record<number, boolean> = {
     1: true,
     164: true,
     266: true,
@@ -3350,7 +3356,7 @@ const fiveStorage: any = {
 
 };
 
-const getDocId = (url = '') => {
+const getDocId = (url: string = ''): string => {
     const idIndex = url.indexOf('id=');
     if (~idIndex) {
         return url.slice(idIndex + 3);
@@ -3359,7 +3365,7 @@ const getDocId = (url = '') => {
     }
 };
 
-function normalazePageNumb(page = '') {
+function normalazePageNumb(page: string = ''): string {
     let additional = '';
     switch (page.length) {
         case 1:
@@ -3377,11 +3383,11 @@ function normalazePageNumb(page = '') {
     return `${additional}${page}`;
 }
 
-const handleNumber = (num = '') => {
+const handleNumber = (num: string = ''): string | number => {
     return isNaN(+num) ? num.length ? num : '' : +num;
 }
 
-const spreadsheetsConfig = {
+const spreadsheetsConfig: SpreadsheetsArrayConfig = {
     mainTable: {
         spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
         range: 'main!A1:M'
@@ -3428,7 +3434,6 @@ const spreadsheetsConfig = {
 export default async function () {
     console.log('Google sheets pre-build data update');
 
-    const results = await getGoogleSheetsDataArr(spreadsheetsConfig);
     const {
         mainTable,
         indexed,
@@ -3440,7 +3445,7 @@ export default async function () {
         prikhodyArchives,
         catholicName,
         orthodoxName
-    } = results;
+    } = await getGoogleSheetsDataArr(spreadsheetsConfig);
 
     fs.writeFileSync(cgia_19_127Path, JSON.stringify(cgia_19_127, null, 4), {
         encoding: 'utf8',

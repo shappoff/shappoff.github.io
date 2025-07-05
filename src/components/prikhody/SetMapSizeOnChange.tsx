@@ -1,7 +1,13 @@
 import {useMap} from "react-leaflet";
 import React from "react";
 
-const SetMapSizeOnChange = ({ top, height }: any) => {
+// Define type for SetMapSizeOnChange props
+interface SetMapSizeOnChangeProps {
+    top: string;
+    height: string;
+}
+
+const SetMapSizeOnChange = ({ top, height }: SetMapSizeOnChangeProps) => {
     const map = useMap();
     React.useEffect(() => {
         if (map != null) {

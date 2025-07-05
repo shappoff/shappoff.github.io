@@ -1,7 +1,13 @@
 import {LayerGroup, LayersControl, TileLayer} from "react-leaflet";
 import React from "react";
 
-const LayersControlComponent = ({rootWith, maps}: any) => {
+// Define type for LayersControlComponent props
+interface LayersControlComponentProps {
+    rootWith: number;
+    maps?: unknown;
+}
+
+const LayersControlComponent = ({rootWith, maps}: LayersControlComponentProps) => {
     return <>
         <LayersControl collapsed={rootWith < 600}>
             <LayersControl.BaseLayer checked={true} name="OSM">
