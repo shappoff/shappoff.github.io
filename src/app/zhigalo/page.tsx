@@ -1,14 +1,13 @@
 import "./zhigalo.css";
 import {Metadata} from "next";
-import {Fragment} from "react";
+import React, {Fragment} from "react";
 
 export const metadata: Metadata = {
     title: "Семен Жигало. Дневник.",
     description: "Семен Жигало - крестьянин деревни Скакуновщины. Этот дневник был найден в Скакуновщине в старой хате за печкой. Он писался c 1930-го и по 1943-го. Дневник перепечатали на печатной машинке с сохранением орфографии, потом он много раз ксерокопировался. Отец Семена - Стефан Андреев Жигало 1859 г.р., а его дед - Андрей Кондратьев Жигало 1833 г.р. Судя по всему, его дед не коренной житель Скакуновщины, т.к. не упоминается в более ранних документах.",
 };
 
-
-export default function Zhigalo() {
+export default function Zhigalo(): React.JSX.Element {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "Article",
