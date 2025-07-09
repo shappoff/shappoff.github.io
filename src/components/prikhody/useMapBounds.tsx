@@ -2,7 +2,12 @@ import React from "react";
 import { useMap } from "react-leaflet";
 import {throttle} from "./throttle";
 
-const MapBounds = ({setMapBounds}: any) => {
+// Define type for MapBounds props
+interface MapBoundsProps {
+    setMapBounds: (bounds: L.LatLngBounds) => void;
+}
+
+const MapBounds = ({setMapBounds}: MapBoundsProps) => {
     const map = useMap();
 
     const func = throttle(() => {

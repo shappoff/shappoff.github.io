@@ -5,7 +5,14 @@ import {copyToClipboard} from "@/components/utils";
 import Tooltip from '@mui/material/Tooltip';
 import Snackbar from '@mui/material/Snackbar';
 
-const CopyToClipboardData = ({data, callback, withSnackbar = false}: any) => {
+// Props interface for the CopyToClipboardData component
+interface CopyToClipboardDataProps {
+  data: string;
+  callback?: () => void;
+  withSnackbar?: boolean;
+}
+
+const CopyToClipboardData: React.FC<CopyToClipboardDataProps> = ({data, callback, withSnackbar = false}): React.JSX.Element => {
     const [openSnackbar, setOpenSnackbar] = React.useState<boolean>(false);
     const [isCopied, setIsCopied] = React.useState<boolean>(false);
 

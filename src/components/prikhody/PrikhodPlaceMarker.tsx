@@ -6,18 +6,36 @@ import {Marker, Popup, Tooltip} from "react-leaflet";
 import React from "react";
 import {catholicCrossIcon, ortodoxCrossIcon} from "../icons";
 
-const PrikhodPlaceMarker = ({hit, popupclose, popupopen, setCurrentLocIdInPopUp, selectCallback, children}: any) => {
+// Define type for PrikhodPlaceMarker props
+interface PrikhodPlaceMarkerProps {
+    hit: {
+        title: string;
+        pType?: string;
+        pTitle?: string;
+        _geoloc: { lat: number; lng: number };
+        src?: number;
+        [key: string]: any;
+    };
+    popupclose?: (e: L.LeafletEvent) => void;
+    popupopen?: (e: L.LeafletEvent) => void;
+    setCurrentLocIdInPopUp?: (hit: any) => void;
+    selectCallback: (hit: any) => void;
+    children?: React.ReactNode;
+    isMobile?: boolean;
+}
+
+const PrikhodPlaceMarker = ({hit, popupclose, popupopen, setCurrentLocIdInPopUp, selectCallback, children}: PrikhodPlaceMarkerProps) => {
 
     const isOrtodox = !!~hit.title.indexOf('церковь');
     return <Marker title={`${hit.pType ? `${hit.pType} ` : ''}${hit.pTitle}, ${hit.title}`}
                    eventHandlers={{
-                       popupclose: (e: any) => popupclose && popupclose(e),
-                       mouseover: (e: any) => {
-                           setCurrentLocIdInPopUp && setCurrentLocIdInPopUp(hit);
+                       popupclose: (e: L.LeafletEvent) => { if (popupclose) popupclose(e); },
+                       mouseover: (e: L.LeafletEvent) => {
+                           if (setCurrentLocIdInPopUp) setCurrentLocIdInPopUp(hit);
                        },
-                       popupopen: (e: any) => {
-                           setCurrentLocIdInPopUp(hit);
-                           popupopen && popupopen(e);
+                       popupopen: (e: L.LeafletEvent) => {
+                           if (setCurrentLocIdInPopUp) setCurrentLocIdInPopUp(hit);
+                           if (popupopen) popupopen(e);
                        },
                    }}
                    icon={new DivIcon({
