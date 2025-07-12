@@ -7,7 +7,10 @@
     "build": "next build",
     "prebuild": "tsx ./src/scripts/runner.ts",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -35,11 +38,17 @@
     "react-select": "^5.9.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
     "@types/gtag.js": "^0.0.20",
+    "@types/jest": "^30.0.0",
     "@types/leaflet": "^1.9.15",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "jest": "^30.0.4",
+    "jest-environment-jsdom": "^30.0.4",
+    "ts-jest": "^29.4.0",
     "tsx": "^4.19.3",
     "typescript": "^5"
   }
