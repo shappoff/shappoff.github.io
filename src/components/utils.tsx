@@ -21,6 +21,18 @@ function getPropertyByPath<T = unknown>(obj: AnyObject, propPath: string, defaul
     return propPath.split('.').reduce((o: unknown, p: string) => (o && (o as AnyObject)[p]) || defaultValue, obj) as T | undefined;
 }
 
+/*
+function getPropertyByPath<T = unknown>(obj: AnyObject, propPath: string, defaultValue?: T): T | undefined {
+    const result = propPath.split('.')
+        .reduce((o: unknown, p: string) => {
+            return o !== undefined && o !== null
+                ? (o as AnyObject)[p]
+                : undefined
+        }, obj);
+    return result === undefined ? defaultValue : result as T;
+}
+*/
+
 export function isObject(item: unknown): boolean {
     return (item !== null && typeof item === 'object' && !Array.isArray(item));
 }
