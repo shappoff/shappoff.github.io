@@ -98,6 +98,13 @@ jobs:
          echo "NEXT_PUBLIC_PPFF_ALGOLIA_SEARCH_API_KEY=${{secrets.NEXT_PUBLIC_PPFF_ALGOLIA_SEARCH_API_KEY}}" >> ./.env.production
          echo "NEXT_PUBLIC_PPFF_ALGOLIA_APPLICATION_ID=${{secrets.NEXT_PUBLIC_PPFF_ALGOLIA_APPLICATION_ID}}" >> ./.env.production
          echo "NEXT_PUBLIC_TELEGRAM_BOT_TOKEN=${{secrets.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN}}" >> ./.env.production
+         echo "TABLE_NIAB_MAIN=${{secrets.TABLE_NIAB_MAIN}}" >> ./.env.production
+         echo "TABLE_REJECTED=${{secrets.TABLE_REJECTED}}" >> ./.env.production
+         echo "TABLE_DIGITED=${{secrets.TABLE_DIGITED}}" >> ./.env.production
+         echo "TABLE_STAT333=${{secrets.TABLE_STAT333}}" >> ./.env.production
+         echo "TABLE_CGIA_19_127=${{secrets.TABLE_CGIA_19_127}}" >> ./.env.production
+         echo "TABLE_PRIKHODY_MAIN=${{secrets.TABLE_PRIKHODY_MAIN}}" >> ./.env.production
+         echo "TABLE_ORTHODOX_CATHOLICS_NAME=${{secrets.TABLE_ORTHODOX_CATHOLICS_NAME}}" >> ./.env.production
 
       - name: preBuild with Next.js
         run: npm run prebuild

@@ -3389,43 +3389,43 @@ const handleNumber = (num: string = ''): string | number => {
 
 const spreadsheetsConfig: SpreadsheetsArrayConfig = {
     mainTable: {
-        spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
+        spreadsheetId: process.env.TABLE_NIAB_MAIN,
         range: 'main!A1:M'
     },
     indexed: {
-        spreadsheetId: '1Rk81HuByagjWntIrCe_8FKYM9_LDHfOX--i0n_3YhqE',
+        spreadsheetId: process.env.TABLE_NIAB_MAIN,
         range: 'indexed!A2:C'
     },
     rejected: {
-        spreadsheetId: '1iFNV_EWdeMKjYhz-So3a6dv2v64K8VpgDajag-mJIY8',
+        spreadsheetId: process.env.TABLE_REJECTED,
         range: 'main!A1:L'
     },
     digited: {
-        spreadsheetId: '1bNEDa65KJNfcjCmVTHcqGnOe4O4EOXbYjz6ZbiR5J0A',
+        spreadsheetId: process.env.TABLE_DIGITED,
         range: 'Лист1!A2:D'
     },
     stat333: {
-        spreadsheetId: '1X-a2Xfm60fB6RvpTTO1XKqm7FvBNscrHjdXFVzSBgkQ',
+        spreadsheetId: process.env.TABLE_STAT333,
         range: 'Опись 333-9!A3:J'
     },
     cgia_19_127: {
-        spreadsheetId: '1ZPdTmzquF_qraM1pfQcjBox_KbDc20wDStCMv55wjJQ',
+        spreadsheetId: process.env.TABLE_CGIA_19_127,
         range: 'main!A1:H'
     },
     prikhodyMain: {
-        spreadsheetId: '1A9dPH4ppRf5fWGYJzyKI9Z_82GKg-wq4HNLkDduY2r0',
+        spreadsheetId: process.env.TABLE_PRIKHODY_MAIN,
         range: 'main!A2:H'
     },
     prikhodyArchives: {
-        spreadsheetId: '1A9dPH4ppRf5fWGYJzyKI9Z_82GKg-wq4HNLkDduY2r0',
+        spreadsheetId: process.env.TABLE_PRIKHODY_MAIN,
         range: 'archives!A2:I'
     },
     catholicName: {
-        spreadsheetId: '18eVUTKA3nZulxV65qCW3GxUQ5xHyn8MnYhNJOoJzsEs',
+        spreadsheetId: process.env.TABLE_ORTHODOX_CATHOLICS_NAME,
         range: 'catholic!A1:D'
     },
     orthodoxName: {
-        spreadsheetId: '18eVUTKA3nZulxV65qCW3GxUQ5xHyn8MnYhNJOoJzsEs',
+        spreadsheetId: process.env.TABLE_ORTHODOX_CATHOLICS_NAME,
         range: 'orthodox!A1:F'
     },
     // Add new spreadsheets here as needed
