@@ -3389,43 +3389,43 @@ const handleNumber = (num: string = ''): string | number => {
 
 const spreadsheetsConfig: SpreadsheetsArrayConfig = {
     mainTable: {
-        spreadsheetId: process.env.TABLE_NIAB_MAIN,
+        spreadsheetId: process.env.TABLE_NIAB_MAIN as string,
         range: 'main!A1:M'
     },
     indexed: {
-        spreadsheetId: process.env.TABLE_NIAB_MAIN,
+        spreadsheetId: process.env.TABLE_NIAB_MAIN as string,
         range: 'indexed!A2:C'
     },
     rejected: {
-        spreadsheetId: process.env.TABLE_REJECTED,
+        spreadsheetId: process.env.TABLE_REJECTED as string,
         range: 'main!A1:L'
     },
     digited: {
-        spreadsheetId: process.env.TABLE_DIGITED,
+        spreadsheetId: process.env.TABLE_DIGITED as string,
         range: 'Лист1!A2:D'
     },
     stat333: {
-        spreadsheetId: process.env.TABLE_STAT333,
+        spreadsheetId: process.env.TABLE_STAT333 as string,
         range: 'Опись 333-9!A3:J'
     },
     cgia_19_127: {
-        spreadsheetId: process.env.TABLE_CGIA_19_127,
+        spreadsheetId: process.env.TABLE_CGIA_19_127 as string,
         range: 'main!A1:H'
     },
     prikhodyMain: {
-        spreadsheetId: process.env.TABLE_PRIKHODY_MAIN,
+        spreadsheetId: process.env.TABLE_PRIKHODY_MAIN as string,
         range: 'main!A2:H'
     },
     prikhodyArchives: {
-        spreadsheetId: process.env.TABLE_PRIKHODY_MAIN,
+        spreadsheetId: process.env.TABLE_PRIKHODY_MAIN as string,
         range: 'archives!A2:I'
     },
     catholicName: {
-        spreadsheetId: process.env.TABLE_ORTHODOX_CATHOLICS_NAME,
+        spreadsheetId: process.env.TABLE_ORTHODOX_CATHOLICS_NAME as string,
         range: 'catholic!A1:D'
     },
     orthodoxName: {
-        spreadsheetId: process.env.TABLE_ORTHODOX_CATHOLICS_NAME,
+        spreadsheetId: process.env.TABLE_ORTHODOX_CATHOLICS_NAME as string,
         range: 'orthodox!A1:F'
     },
     // Add new spreadsheets here as needed
