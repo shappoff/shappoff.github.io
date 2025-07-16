@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Select from "react-select";
 import useDebounce from "../useDebounce";
 import Spinner from 'react-bootstrap/Spinner';
-import Pagination from 'react-bootstrap/Pagination';
+import PaginationNIAB from "@/components/niab/Pagination";
 
 import FondCard from "./FondCard";
 import {HashRoute} from "./HashRoute";
@@ -13,6 +13,7 @@ import Slider from 'rc-slider';
 import SliderTooltip from "./SliderTooltip";
 import algoliasearch from 'algoliasearch/lite';
 import HomeButton from "@/components/HomeButton";
+import {fondNmbToObjectId} from "@/components/utils";
 
 const HASH_MAP = {
     query: 'q',
@@ -132,7 +133,7 @@ const FondyNIABApp = () => {
         }
 
         if (!isID && debouncedSearchTerm) {
-            facetFilters.push(`objectID:${normalazePageNumb(debouncedSearchTerm)}`);
+            facetFilters.push(`objectID:${fondNmbToObjectId(debouncedSearchTerm)}`);
         }
 
         algoliaIndex.search(isID ? debouncedSearchTerm : '', {
@@ -264,19 +265,7 @@ const FondyNIABApp = () => {
                 })
             }
         </div>
-        <Pagination>
-            <Pagination.First onClick={() => setCurrentPage(0)} disabled={currentPage === 0} />
-            <Pagination.Prev onClick={() => setCurrentPage((v: number) => --v)} disabled={currentPage === 0} />
-            {
-                nbPages && Array(nbPages).fill('').map((n: string, page: number) => {
-                    return <Pagination.Item key={page} active={page === currentPage} onClick={() => setCurrentPage(page)}>
-                        {page + 1}
-                    </Pagination.Item>
-                })
-            }
-            <Pagination.Next onClick={() => setCurrentPage((v: number) => ++v)} disabled={currentPage === (nbPages - 1)} />
-            <Pagination.Last onClick={() => setCurrentPage(nbPages - 1)} disabled={currentPage === (nbPages - 1)} />
-        </Pagination>
+        <PaginationNIAB currentPage={currentPage} nbPages={nbPages} setCurrentPage={setCurrentPage} />
         {
             isLoading ? <>
                 <Spinner animation="border" />
@@ -287,21 +276,4 @@ const FondyNIABApp = () => {
 
 export default FondyNIABApp;
 
-function normalazePageNumb(page: string) {
-    let additional = '';
-    switch (page.length) {
-        case 1:
-            additional = '000';
-            break;
-        case 2:
-            additional = '00';
-            break;
-        case 3:
-            additional = '0';
-            break;
-        default:
-            additional = '';
-    }
-    return `${additional}${page}`;
-}
 
