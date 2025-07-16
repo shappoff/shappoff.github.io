@@ -8,6 +8,7 @@ import {
   copyToClipboard,
   getNestedArrayValue,
   create_geoloc,
+  fondNmbToObjectId,
 } from '../utils';
 
 describe('utils', () => {
@@ -166,6 +167,27 @@ describe('utils', () => {
     });
     it('trims input strings', () => {
       expect(create_geoloc(' 1 ', ' 2 ')).toEqual({ lat: 1, lng: 2 });
+    });
+  });
+
+  describe('fondNmbToObjectId', () => {
+    it('pads single digit with three zeros', () => {
+      expect(fondNmbToObjectId('5')).toBe('0005');
+    });
+    it('pads two digits with two zeros', () => {
+      expect(fondNmbToObjectId('12')).toBe('0012');
+    });
+    it('pads three digits with one zero', () => {
+      expect(fondNmbToObjectId('123')).toBe('0123');
+    });
+    it('returns four digits as is', () => {
+      expect(fondNmbToObjectId('1234')).toBe('1234');
+    });
+    it('returns longer strings as is', () => {
+      expect(fondNmbToObjectId('12345')).toBe('12345');
+    });
+    it('handles empty string', () => {
+      expect(fondNmbToObjectId('')).toBe('');
     });
   });
 });
