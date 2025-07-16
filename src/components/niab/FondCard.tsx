@@ -16,6 +16,10 @@ const FondCard = ({item, index}: any) => {
 
     const [currentAccordion, setCurrentAccordion] = React.useState<string>(activeKey);
 
+    React.useEffect(() => {
+        activeKey && setCurrentAccordion(activeKey);
+    }, [activeKey]);
+
     // https://niab.by/newsite/ru/Priostanovka_hkranilische4
     const isntZal: any = !!fourthStorage[item.fod];
 
