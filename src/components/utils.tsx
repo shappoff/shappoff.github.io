@@ -105,3 +105,21 @@ export function create_geoloc(lat: string, lng: string) {
     }
     return _geoloc;
 }
+
+export function fondNmbToObjectId(page: string) {
+    let additional = '';
+    switch (page.length) {
+        case 1:
+            additional = '000';
+            break;
+        case 2:
+            additional = '00';
+            break;
+        case 3:
+            additional = '0';
+            break;
+        default:
+            additional = '';
+    }
+    return `${additional}${page}`;
+}
