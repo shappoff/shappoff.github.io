@@ -2,7 +2,7 @@ import {plural} from "@/components/utils";
 import Select from "react-select";
 import React from "react";
 
-function createOptionsList(lang, facets) {
+function createOptionsList(lang: string, facets: any) {
     return ({label: `№ ${lang} (${facets[lang]} ${plural(facets[lang])})`, value: lang});
 }
 
