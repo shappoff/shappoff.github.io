@@ -71,8 +71,10 @@ jobs:
           # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
+
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+
       - name: Set Secrets and Change Dir
         run: | # Secrets needed on the server
          touch ./.env.production
@@ -106,10 +108,16 @@ jobs:
          echo "TABLE_PRIKHODY_MAIN=${{secrets.TABLE_PRIKHODY_MAIN}}" >> ./.env.production
          echo "TABLE_ORTHODOX_CATHOLICS_NAME=${{secrets.TABLE_ORTHODOX_CATHOLICS_NAME}}" >> ./.env.production
 
+
+      - name: Run Jest Tests
+        run: npm run test
+
       - name: preBuild with Next.js
         run: npm run prebuild
+
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
