@@ -4,7 +4,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 
 const SearchInputControl = ({searchHandler, searchTerm}: any) => {
-    const inputRef = React.useRef();
+    // const inputRef = React.useRef(null);
     return (
         <>
             <Form.Control id="input-id"
@@ -24,7 +24,7 @@ const SearchInputControl = ({searchHandler, searchTerm}: any) => {
                                           searchHandler({target: {value: ''}});
                                       }
 
-                                      inputRef.current.focus({preventScroll: true});
+                                      // inputRef.current.focus({preventScroll: true});
                                   }}
                                   aria-hidden="true">
                     <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" className="css-tj5bde-Svg">
