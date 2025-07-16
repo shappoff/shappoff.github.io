@@ -37,7 +37,7 @@ const FondCard = ({item, index}: any) => {
         }
     }, [item]);
 
-    return <Card key={index} className={isOpendSrcFond ? 'fond-src-opened' : ''} style={{animationDelay: `${index + 1}00ms`}}>
+    return <Card key={item.objectID} className={isOpendSrcFond ? 'fond-src-opened' : ''} style={{animationDelay: `${index + 1}00ms`}}>
         {
             item.s ?
             <div className="percentage-box" title={`${item.s} %`}>

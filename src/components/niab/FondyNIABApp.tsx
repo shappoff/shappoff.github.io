@@ -261,7 +261,7 @@ const FondyNIABApp = () => {
         <div className="list-result">
             {
                 resultsAll.map((item: any, index: number) => {
-                    return <FondCard key={index} index={index} item={item} />
+                    return <FondCard key={item.objectID} index={index} item={item} />
                 })
             }
         </div>
