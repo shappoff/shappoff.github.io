@@ -8,7 +8,6 @@ interface IPaginationProps {
 }
 
 function PaginationNIAB({currentPage = 0, nbPages = 0, setCurrentPage}: IPaginationProps) {
-    console.log(++count, 'PaginationNIAB:render', currentPage, nbPages);
     return (<>
         <Pagination>
             <Pagination.First onClick={() => setCurrentPage(0)} disabled={currentPage === 0} />
