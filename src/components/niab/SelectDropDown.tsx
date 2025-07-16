@@ -6,12 +6,12 @@ function createOptionsList(lang, facets) {
     return ({label: `№ ${lang} (${facets[lang]} ${plural(facets[lang])})`, value: lang});
 }
 
-const SelectDropDown = ({facets, setStoreFilter, setCurrentPage}: any) => {
+const SelectDropDown = ({facets, setStoreFilter, setCurrentPage, placeholder}: any) => {
     return (
-        <Select className="select-filter storage"
+        <Select className="select-filter"
                 isClearable={true}
                 options={Object.keys(facets).map((lang, index) => createOptionsList(lang, facets)) as any}
-                placeholder={'№ хранилища'}
+                placeholder={placeholder}
                 onChange={(e: any) => {
                     setStoreFilter(e?.value);
                     setCurrentPage(0);
