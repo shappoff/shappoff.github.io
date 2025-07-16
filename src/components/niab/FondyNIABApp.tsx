@@ -1,7 +1,5 @@
 'use client'
 import React from "react";
-import Form from "react-bootstrap/Form";
-import Select from "react-select";
 import useDebounce from "../useDebounce";
 import Spinner from 'react-bootstrap/Spinner';
 import PaginationNIAB from "@/components/niab/Pagination";
@@ -9,19 +7,14 @@ import PaginationNIAB from "@/components/niab/Pagination";
 import FondCard from "./FondCard";
 import {HashRoute} from "./HashRoute";
 
-import Slider from 'rc-slider';
-import SliderTooltip from "./SliderTooltip";
 import algoliasearch from 'algoliasearch/lite';
-import HomeButton from "@/components/HomeButton";
 import {fondNmbToObjectId} from "@/components/utils";
+import NavBarNIAB from "@/components/niab/NavBarNIAB";
 
 const HASH_MAP = {
     query: 'q',
 };
-const plural = (number: number, titles: Array<string> = ['фонд', 'фонда', 'фондов']) => {
-    const cases = [2, 0, 1, 1, 1, 2];
-    return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
-}
+
 declare const process: any;
 // grigorysh58@gmail.com
 const client = algoliasearch(
@@ -179,84 +172,20 @@ const FondyNIABApp = () => {
     };
 
     return <div id="root">
-        <div id="navbar" className="filter-bar">
-            <div className="first-raw">
-                <HomeButton absolute={false} variant={true} />
-                <Form.Control id="input-id"
-                              placeholder="Название или номер фонда НИАБ"
-                              enterKeyHint={'search'}
-                              multiple={false}
-                              autoFocus={true}
-                              onInput={searchHandler}
-                              onChange={keysHandler}
-                              type="text"
-                              className={'input-form-control'}
-                              value={searchTerm}
-                />
-                {
-                    searchTerm ? <div className="select__indicator select__clear-indicator css-1xc3v61-indicatorContainer"
-                                      onClick={() => {
-                                          if (searchTerm) {
-                                              searchHandler({target: {value: ''}});
-                                          }
-
-                                          document.getElementById('input-id')?.focus({preventScroll: true});
-                                      }}
-                                      aria-hidden="true">
-                        <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false" className="css-tj5bde-Svg">
-                            <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
-                        </svg>
-                    </div> : <></>
-                }
-            </div>
-            <div className="second-raw noselect">
-                <Select className="select-filter storage"
-                        isClearable={true}
-                        options={facets && facets.storage && Object.keys(facets.storage).map((lang, index) => ({label: `№ ${lang} (${facets.storage[lang]} ${plural(facets.storage[lang])})`, value: lang})) as any}
-                        placeholder={'№ хранилища'}
-                        onChange={(e: any) => {
-                            setStoreFilter(e?.value);
-                            setCurrentPage(0);
-                        }}
-                />
-                <Select className="select-filter lang"
-                        isClearable={true}
-                        options={facets && facets.lang && Object.keys(facets.lang).map((lang, index) => ({label: `${lang} (${facets.lang[lang]} ${plural(facets.lang[lang])})`, value: lang})) as any}
-                        placeholder={'Язык фонда'}
-                        onChange={(e: any) => {
-                            setLangFilter(e?.value);
-                            setCurrentPage(0);
-                        }}
-                />
-                <div className="form-check form-check-inline form-switch typo-tolerance">
-                    <input className="form-check-input" type="checkbox"
-                           role="switch" id="flexSwitchCheckDefault"
-                           checked={!isTypoTolerance}
-                           onChange={(e: any) => setIsTypoTolerance(!e.target.checked)}/>
-                    <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Точное совпадение</label>
-                </div>
-            </div>
-            <div className="third-raw">
-                {
-                    yearsRangeFilter.length ? <Slider
-                        handleRender={(renderProps: any) => {
-                            return (
-                                <div {...renderProps.props}>
-                                    <SliderTooltip>{renderProps.props['aria-valuenow']}</SliderTooltip>
-                                </div>
-                            );
-                        }}
-                        range
-                        min={yearsMinMax[0]}
-                        max={yearsMinMax[1]}
-                        defaultValue={yearsRangeFilter}
-                        allowCross={false}
-                        dots={false}
-                        onChangeComplete={(e: any) => {setYearsRangeFilter(e)}}
-                    /> : <></>
-                }
-            </div>
-        </div>
+        <NavBarNIAB
+            searchHandler={searchHandler}
+            keysHandler={keysHandler}
+            searchTerm={searchTerm}
+            facets={facets}
+            setStoreFilter={setStoreFilter}
+            setCurrentPage={setCurrentPage}
+            setLangFilter={setLangFilter}
+            isTypoTolerance={isTypoTolerance}
+            setIsTypoTolerance={setIsTypoTolerance}
+            yearsRangeFilter={yearsRangeFilter}
+            yearsMinMax={yearsMinMax}
+            setYearsRangeFilter={setYearsRangeFilter}
+        />
 
         <div className="list-result">
             {
