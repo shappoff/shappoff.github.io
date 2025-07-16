@@ -1,6 +1,6 @@
 import React, {Dispatch, SetStateAction} from "react";
 import Pagination from 'react-bootstrap/Pagination';
-let count = 0;
+
 interface IPaginationProps {
     currentPage: number;
     nbPages: number;
