@@ -5,39 +5,21 @@ import Link from "next/link";
 import Button from '@mui/material/Button';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const openInNewTab = (url: string) => {
-    const newWindow: Window | null = window.open(url, '_blank', 'noopener,noreferrer,width=400,height=400');
-    if (newWindow) {
-        newWindow.opener = null;
-    }
-
-    return newWindow;
-}
-
 const FondCard = ({item, index}: any) => {
-    const [currentAccordion, setCurrentAccordion] = React.useState<string>();
-    const [isOpendSrcFond, setIsOpendSrcFond] = React.useState<boolean>(false);
-    const [state, setState] = React.useState<any>({});
+    const {_highlightResult} = item;
+    const anotation = _highlightResult.anotation?.value;
+    const title = _highlightResult.title.value;
+    const state = {title, anotation};
+    const isTitle = !!~title.indexOf('<b>');
+    const isAnotation = !!~anotation.indexOf('<b>');
+    const activeKey = isTitle ? '0' : isAnotation ? '1' : void (0);
+
+    const [currentAccordion, setCurrentAccordion] = React.useState<string>(activeKey);
 
     // https://niab.by/newsite/ru/Priostanovka_hkranilische4
     const isntZal: any = !!fourthStorage[item.fod];
 
-    React.useEffect(() => {
-        if (item) {
-            const {_highlightResult} = item;
-            const anotation = _highlightResult.anotation?.value;
-            const title = _highlightResult.title.value;
-            setState({title, anotation});
-
-            const isTitle = !!~title.indexOf('<b>');
-            const isAnotation = !!~anotation.indexOf('<b>');
-
-            const activeKey = isTitle ? '0' : isAnotation ? '1' : void (0);
-            setCurrentAccordion(activeKey);
-        }
-    }, [item]);
-
-    return <Card key={item.objectID} className={isOpendSrcFond ? 'fond-src-opened' : ''} style={{animationDelay: `${index + 1}00ms`}}>
+    return <Card key={item.objectID} style={{animationDelay: `${index + 1}00ms`}}>
         {
             item.s ?
             <div className="percentage-box" title={`${item.s} %`}>
@@ -85,15 +67,15 @@ const FondCard = ({item, index}: any) => {
             </div>
         </Card.Title>
         <Card.Body>
-            <Accordion activeKey={currentAccordion} flush>
+            <Accordion activeKey={currentAccordion ?? ''} flush>
                 <Accordion.Item eventKey="0">
-                    <Accordion.Header onClick={() => setCurrentAccordion('0')}><i>Название фонда</i></Accordion.Header>
+                    <Accordion.Header onClick={() => setCurrentAccordion((prevState: string) => prevState === '0' ? '' : '0')}><i>Название фонда</i></Accordion.Header>
                     <Accordion.Body>
                         <div dangerouslySetInnerHTML={{__html: state.title}}/>
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
-                    <Accordion.Header onClick={() => setCurrentAccordion('1')}><i>Аннотация
+                    <Accordion.Header onClick={() => setCurrentAccordion((prevState: string) => prevState === '1' ? '' : '1')}><i>Аннотация
                         документов</i></Accordion.Header>
                     <Accordion.Body>
                         <div dangerouslySetInnerHTML={{__html: state.anotation}}/>
