@@ -12,7 +12,7 @@ const FondCard = ({item, index}: any) => {
     const state = {title, anotation};
     const isTitle = !!~title.indexOf('<b>');
     const isAnotation = !!~anotation.indexOf('<b>');
-    const activeKey = isTitle ? '0' : isAnotation ? '1' : void (0);
+    const activeKey = isTitle ? '0' : isAnotation ? '1' : '';
 
     const [currentAccordion, setCurrentAccordion] = React.useState<string>(activeKey);
 
