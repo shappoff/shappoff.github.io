@@ -1,10 +1,31 @@
 import React from "react";
 import Card from '@mui/material/Card';
 
-import {Accordion, Badge} from "react-bootstrap";
+import {Accordion} from "react-bootstrap";
 import Link from "next/link";
 import Button from '@mui/material/Button';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import styled from 'styled-components';
+
+const Badge = styled.span`
+  font-size: 10px;
+  border-radius: 50rem;
+  background-color: ${(props) => props.$bg === 'danger' ? 'rgba(220, 53, 69, 1)' : 'rgba(248, 249, 250, 1)'};
+  color: ${(props) => props.$bg === 'danger' ? '#ffffff' : 'rgba(33, 37, 41, 1)'};
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  margin: 0;
+  & a {
+    color: ${(props) => props.$bg === 'danger' ? '#ffffff' : 'rgba(33, 37, 41, 1)'};
+  }
+`;
+
 
 const FondCard = ({item, index}: any) => {
     const {_highlightResult} = item;
@@ -63,7 +84,7 @@ const FondCard = ({item, index}: any) => {
             </span>
                 </h5>
                 <div>
-                    {isntZal ? <Badge bg="danger" pill><Link target="_blank"
+                    {isntZal ? <Badge $bg="danger" pill><Link target="_blank"
                                                              href="https://niab.by/newsite/ru/Priostanovka_hkranilische4">Не
                         выдается c 01.10.2024</Link></Badge> : <></>}
                     {item.storage ? <Badge bg="light" pill text="dark">Хранилище №{item.storage}</Badge> : <></>}
