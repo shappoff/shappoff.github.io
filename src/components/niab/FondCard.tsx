@@ -1,12 +1,12 @@
 import React from "react";
 import Card from '@mui/material/Card';
 
-import {Accordion} from "react-bootstrap";
 import Link from "next/link";
 import Button from '@mui/material/Button';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from 'styled-components';
 import Tooltip from '@mui/material/Tooltip';
+import CardBody from "@/components/niab/CardBody";
 
 const ProgressLine = styled.progress`
   position: relative;
@@ -14,6 +14,7 @@ const ProgressLine = styled.progress`
   margin: 3px 6px;
   width: 97%;
   background-color: #ff0;
+
   ${(props) => props.$pill && 'border-radius: 50rem;'}
   &:after {
     content: "${(props) => props.$content && props.$content} %";
@@ -22,8 +23,14 @@ const ProgressLine = styled.progress`
     left: ${(props) => (props.$content - 3) / 2}%;
     font-size: 8px;
   }
-  &::-moz-progress-bar { background-color: #ff0; }
-  &::-webkit-progress-value { background-color: #ff0; }
+
+  &::-moz-progress-bar {
+    background-color: #ff0;
+  }
+
+  &::-webkit-progress-value {
+    background-color: #ff0;
+  }
 `;
 
 const Badge = styled.span`
@@ -41,6 +48,7 @@ const Badge = styled.span`
   vertical-align: baseline;
   box-sizing: border-box;
   margin: 0;
+
   & a {
     color: ${(props) => props.$bg === 'danger' ? '#ffffff' : 'rgba(33, 37, 41, 1)'};
   }
@@ -52,15 +60,6 @@ const FondCard = ({item, index}: any) => {
     const anotation = _highlightResult.anotation?.value;
     const title = _highlightResult.title.value;
     const state = {title, anotation};
-    const isTitle = !!~title.indexOf('<b>');
-    const isAnotation = !!~anotation.indexOf('<b>');
-    const activeKey = isTitle ? '0' : isAnotation ? '1' : '';
-
-    const [currentAccordion, setCurrentAccordion] = React.useState<string>(activeKey);
-
-    React.useEffect(() => {
-        activeKey && setCurrentAccordion(activeKey);
-    }, [activeKey]);
 
     // https://niab.by/newsite/ru/Priostanovka_hkranilische4
     const isntZal: any = !!fourthStorage[item.fod];
@@ -68,29 +67,29 @@ const FondCard = ({item, index}: any) => {
     const styleAnimationDelay = index < 12 ? {animationDelay: `${index + 1}00ms`} : {animationDelay: `${index + 1200}ms`};
 
     return <Card className="card" key={item.objectID} style={styleAnimationDelay}>
-            {
-                item.s ?
-                    <Tooltip title={`Проиндексирован на ${item.s}%`}>
-                        <ProgressLine max="100" value={item.s} $content={item.s} />
-                    </Tooltip>
-                    : <></>
-            }
-        <section className="card-title h5">
-                <h5>
-                    <a
-                        href={`/niab/${item.fod}`}
-                        className="fond-link-src">
-                        Фонд {item.fod}
-                    </a>
+        {
+            item.s ?
+                <Tooltip title={`Проиндексирован на ${item.s}%`}>
+                    <ProgressLine max="100" value={item.s} $content={item.s}/>
+                </Tooltip>
+                : <></>
+        }
+        <section className="card-title-section">
+            <h5>
+                <a
+                    href={`/niab/${item.fod}`}
+                    className="fond-link-src">
+                    Фонд {item.fod}
+                </a>
 
-                    <span className="copy-fond-icon" title="Скопировать ссылку на фонд" onClick={() => {
-                        const copyLink = `${location.origin}${location.pathname}${item.fod}`;
-                        try {
-                            navigator.clipboard.writeText(copyLink);
-                        } catch (err) {
-                            console.error('Failed to copy: ', err);
-                        }
-                    }}>
+                <span className="copy-fond-icon" title="Скопировать ссылку на фонд" onClick={() => {
+                    const copyLink = `${location.origin}${location.pathname}${item.fod}`;
+                    try {
+                        navigator.clipboard.writeText(copyLink);
+                    } catch (err) {
+                        console.error('Failed to copy: ', err);
+                    }
+                }}>
                 <svg x="0px" y="0px" height="10px" width="10px" viewBox="0 0 115.77 122.88">
                     <g>
                         <path className="st0"
@@ -98,47 +97,32 @@ const FondCard = ({item, index}: any) => {
                     </g>
                 </svg>
             </span>
-                </h5>
-                <div>
-                    {isntZal ? <Badge $bg="danger" $pill><Link target="_blank"
-                                                             href="https://niab.by/newsite/ru/Priostanovka_hkranilische4">Не
-                        выдается c 01.10.2024</Link></Badge> : <></>}
-                    {item.storage ? <Badge bg="light" $pill text="dark">Хранилище №{item.storage}</Badge> : <></>}
-                    {item.count ? <Badge bg="light" $pill text="dark">{item.count} ед. хр.</Badge> : <></>}
-                    {
-                        item.lang?.map((ln: string) => <Badge key={ln} bg="light" $pill text="dark">
-                            {ln}
-                        </Badge>)
-                    }
-                    {item.years ? <Badge bg="light" $pill text="dark">{item.years}</Badge> : <></>}
-                </div>
+            </h5>
+            <div>
+                {isntZal ? <Badge $bg="danger" $pill><Link target="_blank"
+                                                           href="https://niab.by/newsite/ru/Priostanovka_hkranilische4">Не
+                    выдается c 01.10.2024</Link></Badge> : <></>}
+                {item.storage ? <Badge bg="light" $pill text="dark">Хранилище №{item.storage}</Badge> : <></>}
+                {item.count ? <Badge bg="light" $pill text="dark">{item.count} ед. хр.</Badge> : <></>}
+                {
+                    item.lang?.map((ln: string) => <Badge key={ln} bg="light" $pill text="dark">
+                        {ln}
+                    </Badge>)
+                }
+                {item.years ? <Badge bg="light" $pill text="dark">{item.years}</Badge> : <></>}
+            </div>
         </section>
-        <section className="card-body">
-                <Accordion activeKey={currentAccordion ?? ''} flush>
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header
-                            onClick={() => setCurrentAccordion((prevState: string) => prevState === '0' ? '' : '0')}><i>Название
-                            фонда</i></Accordion.Header>
-                        <Accordion.Body>
-                            <div dangerouslySetInnerHTML={{__html: state.title}}/>
-                        </Accordion.Body>
-                    </Accordion.Item>
-                    <Accordion.Item eventKey="1">
-                        <Accordion.Header
-                            onClick={() => setCurrentAccordion((prevState: string) => prevState === '1' ? '' : '1')}><i>Аннотация
-                            документов</i></Accordion.Header>
-                        <Accordion.Body>
-                            <div dangerouslySetInnerHTML={{__html: state.anotation}}/>
-                        </Accordion.Body>
-                    </Accordion.Item>
-                    <Button size="small"
-                            variant="outlined"
-                            className="fond-opis-button-src"
-                            fullWidth={true}
-                            startIcon="Описи"
-                            endIcon={<ArrowForwardIosIcon/>}
-                            href={`/niab/${item.fod}`}/>
-                </Accordion>
+        <section className="card-body-section">
+            <CardBody state={state} />
+        </section>
+        <section className="card-footer-section">
+            <Button size="small"
+                    variant="outlined"
+                    className="fond-opis-button-src"
+                    fullWidth={true}
+                    startIcon="Описи"
+                    endIcon={<ArrowForwardIosIcon/>}
+                    href={`/niab/${item.fod}`}/>
         </section>
     </Card>
 };
