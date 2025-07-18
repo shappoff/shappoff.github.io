@@ -6,9 +6,29 @@ import Link from "next/link";
 import Button from '@mui/material/Button';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from 'styled-components';
+import Tooltip from '@mui/material/Tooltip';
+
+const ProgressLine = styled.progress`
+  position: relative;
+  height: 10px;
+  margin: 3px 6px;
+  width: 97%;
+  background-color: #ff0;
+  ${(props) => props.$pill && 'border-radius: 50rem;'}
+  &:after {
+    content: "${(props) => props.$content && props.$content} %";
+    position: absolute;
+    top: 0;
+    left: ${(props) => (props.$content - 3) / 2}%;
+    font-size: 8px;
+  }
+  &::-moz-progress-bar { background-color: #ff0; }
+  &::-webkit-progress-value { background-color: #ff0; }
+`;
 
 const Badge = styled.span`
   font-size: 10px;
+  ${(props) => props.$pill && 'border-radius: 50rem;'}
   border-radius: 50rem;
   background-color: ${(props) => props.$bg === 'danger' ? 'rgba(220, 53, 69, 1)' : 'rgba(248, 249, 250, 1)'};
   color: ${(props) => props.$bg === 'danger' ? '#ffffff' : 'rgba(33, 37, 41, 1)'};
@@ -50,13 +70,9 @@ const FondCard = ({item, index}: any) => {
     return <Card className="card" key={item.objectID} style={styleAnimationDelay}>
             {
                 item.s ?
-                    <div className="percentage-box" title={`${item.s} %`}>
-                        <div className="empty-line">
-                            <div title={`Проиндексирован на ${item.s}%`} className="percentage-line" style={{
-                                width: `${Math.round(item.s)}%`
-                            }}><span className="percens">{`${item.s} %`}</span></div>
-                        </div>
-                    </div>
+                    <Tooltip title={`Проиндексирован на ${item.s}%`}>
+                        <ProgressLine max="100" value={item.s} $content={item.s} />
+                    </Tooltip>
                     : <></>
             }
         <section className="card-title h5">
@@ -84,17 +100,17 @@ const FondCard = ({item, index}: any) => {
             </span>
                 </h5>
                 <div>
-                    {isntZal ? <Badge $bg="danger" pill><Link target="_blank"
+                    {isntZal ? <Badge $bg="danger" $pill><Link target="_blank"
                                                              href="https://niab.by/newsite/ru/Priostanovka_hkranilische4">Не
                         выдается c 01.10.2024</Link></Badge> : <></>}
-                    {item.storage ? <Badge bg="light" pill text="dark">Хранилище №{item.storage}</Badge> : <></>}
-                    {item.count ? <Badge bg="light" pill text="dark">{item.count} ед. хр.</Badge> : <></>}
+                    {item.storage ? <Badge bg="light" $pill text="dark">Хранилище №{item.storage}</Badge> : <></>}
+                    {item.count ? <Badge bg="light" $pill text="dark">{item.count} ед. хр.</Badge> : <></>}
                     {
-                        item.lang?.map((ln: string) => <Badge key={ln} bg="light" pill text="dark">
+                        item.lang?.map((ln: string) => <Badge key={ln} bg="light" $pill text="dark">
                             {ln}
                         </Badge>)
                     }
-                    {item.years ? <Badge bg="light" pill text="dark">{item.years}</Badge> : <></>}
+                    {item.years ? <Badge bg="light" $pill text="dark">{item.years}</Badge> : <></>}
                 </div>
         </section>
         <section className="card-body">

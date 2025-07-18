@@ -37,12 +37,7 @@
     flex-direction: column;
     align-items: center;
 }
-.badge.rounded-pill {
-    font-size: 10px;
-}
-.badge.rounded-pill a {
-    color: #ffffff;
-}
+
 .card > .card-title {
     margin: 16px;
     display: flex;
@@ -461,28 +456,6 @@ body.loading #input-id {
     user-select: none;
 }
 
-.percentage-box {
-    position: relative;
-    width: 100%;
-}
-.empty-line {
-    position: absolute;
-    background-color: yellow;
-    width: 100%;
-    height: 3px;
-}
-.percentage-line {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    height: 3px;
-    background-color: green;
-}
-.percentage-line .percens {
-    position: absolute;
-    font-size: xx-small;
-    color: #ffffff;
-}
 .card:hover .percentage-line,
 .card:hover .empty-line {
     height: 13px;
