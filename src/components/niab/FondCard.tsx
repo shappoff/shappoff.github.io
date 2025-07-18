@@ -1,5 +1,6 @@
-import Card from "react-bootstrap/Card";
 import React from "react";
+import Card from '@mui/material/Card';
+
 import {Accordion, Badge} from "react-bootstrap";
 import Link from "next/link";
 import Button from '@mui/material/Button';
@@ -25,7 +26,7 @@ const FondCard = ({item, index}: any) => {
 
     const styleAnimationDelay = index < 12 ? {animationDelay: `${index + 1}00ms`} : {animationDelay: `${index + 1200}ms`};
 
-    return <Card key={item.objectID} style={styleAnimationDelay}>
+    return <Card className="card" key={item.objectID} style={styleAnimationDelay}>
             {
                 item.s ?
                     <div className="percentage-box" title={`${item.s} %`}>
@@ -37,7 +38,7 @@ const FondCard = ({item, index}: any) => {
                     </div>
                     : <></>
             }
-        <Card.Title>
+        <section className="card-title h5">
                 <h5>
                     <a
                         href={`/niab/${item.fod}`}
@@ -74,8 +75,8 @@ const FondCard = ({item, index}: any) => {
                     }
                     {item.years ? <Badge bg="light" pill text="dark">{item.years}</Badge> : <></>}
                 </div>
-        </Card.Title>
-        <Card.Body>
+        </section>
+        <section className="card-body">
                 <Accordion activeKey={currentAccordion ?? ''} flush>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header
@@ -101,7 +102,7 @@ const FondCard = ({item, index}: any) => {
                             endIcon={<ArrowForwardIosIcon/>}
                             href={`/niab/${item.fod}`}/>
                 </Accordion>
-        </Card.Body>
+        </section>
     </Card>
 };
 
