@@ -27,4 +27,4 @@ const SliderController = ({yearsRangeFilter, yearsMinMax, setYearsRangeFilter}: 
     );
 };
 
-export default SliderController;
+export default React.memo(SliderController);

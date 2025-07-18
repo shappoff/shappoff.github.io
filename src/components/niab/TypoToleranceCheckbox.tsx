@@ -13,4 +13,4 @@ const TypoToleranceCheckbox = ({isTypoTolerance, setIsTypoTolerance}: any) => {
     );
 };
 
-export default TypoToleranceCheckbox;
+export default React.memo(TypoToleranceCheckbox);
