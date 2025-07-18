@@ -24,10 +24,12 @@
 .card-text {
     min-height: 0;
 }
-.card-body {
+.card-body-section {
+    flex: 1 1 auto;
+    padding: 0.25rem 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: nowrap;
     overflow: hidden;
 }
@@ -38,8 +40,17 @@
     align-items: center;
 }
 
-.card > .card-title {
+.card > .card-title-section {
     margin: 16px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card > .card-footer-section {
+    padding: 0 1rem 0.5rem 1rem;
     display: flex;
     flex-wrap: nowrap;
     align-content: center;
@@ -56,8 +67,9 @@
     }
 
     .list-result > .card {
-        width: 30rem;
+        width: 29.6rem;
         min-height: 10rem;
+        margin: 0.2rem;
     }
 
 }
