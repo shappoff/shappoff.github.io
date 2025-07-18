@@ -15,4 +15,4 @@ const HomeButton = ({absolute, variant}: any) => {
     </Tooltip>
 }
 
-export default HomeButton;
+export default React.memo(HomeButton);

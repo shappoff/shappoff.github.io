@@ -10,6 +10,7 @@ import {HashRoute} from "./HashRoute";
 import algoliasearch from 'algoliasearch/lite';
 import {fondNmbToObjectId} from "@/components/utils";
 import NavBarNIAB from "@/components/niab/NavBarNIAB";
+import SearchInputControl from "@/components/niab/SearchInputControl";
 
 const HASH_MAP = {
     query: 'q',
@@ -173,9 +174,7 @@ const FondyNIABApp = () => {
 
     return <div id="root">
         <NavBarNIAB
-            searchHandler={searchHandler}
             keysHandler={keysHandler}
-            searchTerm={searchTerm}
             facets={facets}
             setStoreFilter={setStoreFilter}
             setCurrentPage={setCurrentPage}
@@ -185,7 +184,12 @@ const FondyNIABApp = () => {
             yearsRangeFilter={yearsRangeFilter}
             yearsMinMax={yearsMinMax}
             setYearsRangeFilter={setYearsRangeFilter}
-        />
+        >
+            <SearchInputControl
+                searchHandler={searchHandler}
+                searchTerm={searchTerm}
+            />
+        </NavBarNIAB>
 
         <div className="list-result">
             {

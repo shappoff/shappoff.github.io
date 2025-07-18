@@ -7,11 +7,7 @@ import SelectDropDown from "@/components/niab/SelectDropDown";
 import TypoToleranceCheckbox from "@/components/niab/TypoToleranceCheckbox";
 import SliderController from "@/components/niab/SliderController";
 
-let count = 0;
-
 const NavBarNIAB = ({
-                        searchHandler,
-                        searchTerm,
                         facets,
                         setStoreFilter,
                         setCurrentPage,
@@ -20,17 +16,15 @@ const NavBarNIAB = ({
                         setIsTypoTolerance,
                         yearsRangeFilter,
                         yearsMinMax,
-                        setYearsRangeFilter
+                        setYearsRangeFilter,
+                        children
                     }: any) => {
-    console.log(++count, 'NavBarNIAB:render');
+
     return (
         <div id="navbar" className="filter-bar">
             <div className="first-raw">
                 <HomeButton absolute={false} variant={true} />
-                <SearchInputControl
-                    searchHandler={searchHandler}
-                    searchTerm={searchTerm}
-                />
+                {children}
             </div>
             <div className="second-raw noselect">
                 <SelectDropDown
