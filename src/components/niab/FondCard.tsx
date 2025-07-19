@@ -8,14 +8,17 @@ import styled from 'styled-components';
 import Tooltip from '@mui/material/Tooltip';
 import CardBody from "@/components/niab/CardBody";
 
-const ProgressLine = styled.progress`
+type ProgressLineType = {
+    $content: number
+};
+
+const ProgressLine = styled.progress<ProgressLineType>`
   position: relative;
   height: 10px;
   margin: 3px 6px;
   width: 97%;
   background-color: #ff0;
 
-  ${(props) => props.$pill && 'border-radius: 50rem;'}
   &:after {
     content: "${(props) => props.$content && props.$content} %";
     position: absolute;
@@ -33,7 +36,12 @@ const ProgressLine = styled.progress`
   }
 `;
 
-const Badge = styled.span`
+type BadgeType = {
+    $pill: boolean;
+    $bg: string;
+};
+
+const Badge = styled.span<BadgeType>`
   font-size: 10px;
   ${(props) => props.$pill && 'border-radius: 50rem;'}
   border-radius: 50rem;
@@ -99,17 +107,17 @@ const FondCard = ({item, index}: any) => {
             </span>
             </h5>
             <div>
-                {isntZal ? <Badge $bg="danger" $pill><Link target="_blank"
+                {isntZal ? <Badge $bg="danger" $pill={true}><Link target="_blank"
                                                            href="https://niab.by/newsite/ru/Priostanovka_hkranilische4">Не
                     выдается c 01.10.2024</Link></Badge> : <></>}
-                {item.storage ? <Badge bg="light" $pill text="dark">Хранилище №{item.storage}</Badge> : <></>}
-                {item.count ? <Badge bg="light" $pill text="dark">{item.count} ед. хр.</Badge> : <></>}
+                {item.storage ? <Badge $bg="light" $pill={true}>Хранилище №{item.storage}</Badge> : <></>}
+                {item.count ? <Badge $bg="light" $pill={true}>{item.count} ед. хр.</Badge> : <></>}
                 {
-                    item.lang?.map((ln: string) => <Badge key={ln} bg="light" $pill text="dark">
+                    item.lang?.map((ln: string) => <Badge key={ln} $bg="light" $pill={true}>
                         {ln}
                     </Badge>)
                 }
-                {item.years ? <Badge bg="light" $pill text="dark">{item.years}</Badge> : <></>}
+                {item.years ? <Badge $bg="light" $pill={true}>{item.years}</Badge> : <></>}
             </div>
         </section>
         <section className="card-body-section">
