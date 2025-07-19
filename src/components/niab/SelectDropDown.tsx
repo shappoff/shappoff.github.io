@@ -1,6 +1,7 @@
 import {plural} from "@/components/utils";
 import Select from "react-select";
 import React from "react";
+import './SelectDropDown.css';
 
 function createOptionsList(lang: string, facets: any) {
     return ({label: `№ ${lang} (${facets[lang]} ${plural(facets[lang])})`, value: lang});
@@ -10,7 +11,7 @@ const SelectDropDown = ({facets, setStoreFilter, setCurrentPage, placeholder}: a
         <Select className="select-filter"
                 isClearable={true}
                 options={Object.keys(facets).map((lang, index) => createOptionsList(lang, facets)) as any}
-                placeholder={placeholder}
+                placeholder={<span className="placeholder-dropdown">{placeholder}</span>}
                 onChange={(e: any) => {
                     setStoreFilter(e?.value);
                     setCurrentPage(0);
