@@ -83,7 +83,7 @@
 }
 @media (max-width: 620px) {
     .list-result {
-        margin: 155px 0;
+        margin: 9rem 0;
     }
     .filter-bar.down {
         top: -134px;
