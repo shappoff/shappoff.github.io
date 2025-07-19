@@ -1,15 +1,19 @@
 import React from "react";
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import './TypoToleranceCheckbox.css';
 
 const TypoToleranceCheckbox = ({isTypoTolerance, setIsTypoTolerance}: any) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setIsTypoTolerance(!event.target.checked);
+    };
     return (
-        <div className="form-check form-check-inline form-switch typo-tolerance">
-            <input className="form-check-input" type="checkbox"
-                   role="switch" id="flexSwitchCheckDefault"
-                   checked={!isTypoTolerance}
-                   onChange={(e: any) => setIsTypoTolerance(!e.target.checked)}/>
-            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Точное совпадение</label>
-        </div>
-
+        <FormControlLabel className="typo-tolerance-checkbox-label" control={
+            <Switch className="typo-tolerance-checkbox" size="small" onChange={handleChange} checked={!isTypoTolerance} />
+        } label={
+            <span className="form-check-label">Точное совпадение</span>
+        }
+        />
     );
 };
 

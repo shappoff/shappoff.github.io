@@ -89,11 +89,7 @@
         top: -134px;
     }
 }
-@media (max-width: 661px) {
-    .form-check-label {
-        display: none;
-    }
-}
+
 .fond-opis-button-src {
     margin-top: 10px;
 }
