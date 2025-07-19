@@ -4,8 +4,20 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const CardBody = ({state: stateProps}: any) => {
-    const [state, setState] = React.useState();
+type StateType = {
+    isTitle: boolean
+    isAnotation?: boolean
+};
+
+type StatePropsType = {
+    state: {
+        title: string;
+        anotation: string;
+    }
+};
+
+const CardBody = ({state: stateProps}: StatePropsType) => {
+    const [state, setState] = React.useState<StateType>();
 
     React.useEffect(() => {
         const {title, anotation} = stateProps;
@@ -23,7 +35,8 @@ const CardBody = ({state: stateProps}: any) => {
         <Accordion expanded={state.isTitle}>
             <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                 <header>
-                    <i>Название фонда</i></header>
+                    <i>Название фонда</i>
+                </header>
             </AccordionSummary>
             <AccordionDetails>
                 <p dangerouslySetInnerHTML={{__html: stateProps.title}}/>
@@ -32,7 +45,8 @@ const CardBody = ({state: stateProps}: any) => {
         <Accordion expanded={state.isAnotation}>
             <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                 <header>
-                    <i>Аннотация документов</i></header>
+                    <i>Аннотация документов</i>
+                </header>
             </AccordionSummary>
             <AccordionDetails>
                 <p dangerouslySetInnerHTML={{__html: stateProps.anotation}}/>
