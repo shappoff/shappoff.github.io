@@ -8,7 +8,7 @@ const TypoToleranceCheckbox = ({isTypoTolerance, setIsTypoTolerance}: any) => {
         setIsTypoTolerance(!event.target.checked);
     };
     return (
-        <FormControlLabel className="typo-tolerance-checkbox-label" control={
+        <FormControlLabel className="typo-tolerance-checkbox-label form-control-label-ff form-check-label-ff" control={
             <Switch className="typo-tolerance-checkbox" size="small" onChange={handleChange} checked={!isTypoTolerance} />
         } label={
             <span className="form-check-label">Точное совпадение</span>
