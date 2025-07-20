@@ -87,6 +87,10 @@ const FondyNIABApp = () => {
     }, []);
 
     React.useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentPage]);
+
+    React.useEffect(() => {
         if (isLoading) {
             document.body.classList.add('loading');
         } else {

@@ -75,6 +75,7 @@ a.fond-link-src, a.opis-link-src {
     font-weight: 400;
     text-decoration: none;
     border-bottom: 1px solid #000000;
+    white-space: nowrap;
 }
 .accordion-body {
     padding: 0;

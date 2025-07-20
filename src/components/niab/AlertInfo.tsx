@@ -23,7 +23,7 @@ export default function AlertInfo({children, severity, anchorOrigin, style = {}}
     return <Snackbar
         anchorOrigin={anchorOrigin}
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         style={style}
         onClose={handleClose}
     >
