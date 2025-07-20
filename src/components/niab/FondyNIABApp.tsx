@@ -4,6 +4,14 @@ import useDebounce from "../useDebounce";
 import Spinner from 'react-bootstrap/Spinner';
 import PaginationNIAB from "@/components/niab/Pagination";
 
+import {
+    useQuery,
+    useMutation,
+    useQueryClient,
+    QueryClient,
+    QueryClientProvider,
+} from '@tanstack/react-query';
+
 import FondCard from "./FondCard";
 import {HashRoute} from "./HashRoute";
 
@@ -98,7 +106,7 @@ const FondyNIABApp = () => {
         }
     }, [isLoading]);
 
-    React.useEffect(() => {
+    async function algoliaSearch() {
 
         if (!route || (route.take(HASH_MAP.query) && !debouncedSearchTerm)) {
             return;
@@ -134,7 +142,7 @@ const FondyNIABApp = () => {
             facetFilters.push(`objectID:${fondNmbToObjectId(debouncedSearchTerm)}`);
         }
 
-        algoliaIndex.search(isID ? debouncedSearchTerm : '', {
+        const searched = await algoliaIndex.search(isID ? debouncedSearchTerm : '', {
             responseFields: ['facets', 'hits', 'nbPages', 'page', 'facets_stats'],
             typoTolerance: isTypoTolerance,
             analytics: true,
@@ -142,24 +150,23 @@ const FondyNIABApp = () => {
             facetFilters,
             filters,
             page: currentPage
-        })
-            .then(({hits, facets, nbPages, page, facets_stats}: any) => {
-                setFacetsStats(facets_stats);
-                if (!yearsMinMax.length) {
-                    setYearsMinMax([facets_stats?.dRange.min, facets_stats?.dRange.max]);
-                }
-                if (!yearsRangeFilter.length) {
-                    setYearsRangeFilter([facets_stats?.dRange.min, facets_stats?.dRange.max]);
-                }
-                setCurrentPage(page);
-                setNbPages(nbPages);
-                setResultsAll(hits);
-                setFacets(facets);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
-    }, [debouncedSearchTerm, isTypoTolerance, langFilter, storeFilter, currentPage, yearsRangeFilter, route]);
+        });
+
+        const {hits, facets, nbPages, page, facets_stats} = searched;
+        setFacetsStats(facets_stats);
+        if (!yearsMinMax.length) {
+            setYearsMinMax([facets_stats?.dRange.min, facets_stats?.dRange.max]);
+        }
+        if (!yearsRangeFilter.length) {
+            setYearsRangeFilter([facets_stats?.dRange.min, facets_stats?.dRange.max]);
+        }
+        setCurrentPage(page);
+        setNbPages(nbPages);
+        setResultsAll(hits);
+        setFacets(facets);
+        setIsLoading(false);
+        return searched;
+    }
 
     const searchHandler = ({target}: any) => {
         setIsLoading(true);
@@ -175,6 +182,8 @@ const FondyNIABApp = () => {
             route.add(HASH_MAP.query, '');
         }
     };
+
+    const { isPending, isError, data, error } = useQuery({ queryKey: ['algoliaSearch'], queryFn: algoliaSearch })
 
     return <div id="root">
         <NavBarNIAB
@@ -204,7 +213,7 @@ const FondyNIABApp = () => {
         </div>
         <PaginationNIAB currentPage={currentPage} nbPages={nbPages} setCurrentPage={setCurrentPage} />
         {
-            isLoading ? <>
+            isLoading || isPending ? <>
                 <Spinner animation="border" />
             </> : <></>
         }
