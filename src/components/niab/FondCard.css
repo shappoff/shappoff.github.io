@@ -15,6 +15,7 @@
 }
 
 .progress-line-section {
+    position: relative;
     min-height: 10px;
     max-height: 10px;
     height: 10px;

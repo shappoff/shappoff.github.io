@@ -5,9 +5,7 @@ import Link from "next/link";
 import Button from '@mui/material/Button';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from 'styled-components';
-import Tooltip from '@mui/material/Tooltip';
 import CardBody from "@/components/niab/CardBody";
-import Zoom from '@mui/material/Zoom';
 
 import './FondCard.css';
 
@@ -20,24 +18,29 @@ const ProgressLine = styled.progress<ProgressLineType>`
   height: 10px;
   margin: 3px 6px;
   width: 97%;
+`;
 
-/*
-  &:after {
-    content: "Проиндексирован на ${(props) => props.$content && props.$content} %";
-    position: absolute;
-    top: 4px;
-    left: ${(props) => (props.$content - 3) / 2}%;
-    font-size: 1px;
-    
+const LabelProgressLine = styled.label<ProgressLineType>`
+  background-color: #ffffff;
+  border-radius: 4px;
+  color: #0063B1;
+  padding: 3px 6px;
+  font-size: 0.6rem;
+  font-weight: 500;
+  position: relative;
+  width: fit-content;
+  bottom: 28px;
+  left: 36%;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+
+  .card:hover & {
+    opacity: 1;
+    transform: scale(1);
   }
-*/
-  /*
-  .card:hover &  {
-    &:after {
-      font-size: 15px;
-    }
-  }
-  */
 `;
 
 type BadgeType = {
@@ -73,23 +76,6 @@ export type StateType = {
     anotation: string
 };
 
-const TooltipWrapper = ({children, title}: any) => {
-    return <>{
-        title ? <>
-            <Tooltip
-                placement="top"
-                arrow
-                title={title}
-                slots={{
-                    transition: Zoom,
-                }}
-            >
-                {children}
-            </Tooltip>
-        </> : children
-    }</>
-};
-
 const FondCard = ({item, index}: any) => {
     const [state, setState] = React.useState<StateType>();
 
@@ -108,53 +94,54 @@ const FondCard = ({item, index}: any) => {
 
     const styleAnimationDelay = index < 12 ? {animationDelay: `${index + 1}00ms`} : {animationDelay: `${index + 1200}ms`};
 
-    return <TooltipWrapper title={item.s ? `Ф.${item.fod} проиндексирован на ${item.s}%` : null}>
-        <Card className="card" key={item.objectID} style={styleAnimationDelay}>
-            <section className="progress-line-section">
-                {
-                    item.s ?
-                        <ProgressLine max="100" value={item.s} $content={item.s}/>
-                        : <></>
-                }
-            </section>
+    return <Card className="card" key={item.objectID} style={styleAnimationDelay}>
+        <section className="progress-line-section">
+            {
+                item.s ?
+                    <>
+                        <ProgressLine id={item.objectID} max="100" value={item.s} $content={item.s} />
+                        <LabelProgressLine htmlFor={item.objectID}>Проиндексирован на {item.s} %</LabelProgressLine>
+                    </>
+                    : <></>
+            }
+        </section>
 
-            <section className="card-title-section">
-                <h5>
-                    <a
-                        target="_blank"
-                        href={item.fodlink}
-                        className="fond-link-src">
-                        Ф.{item.fod}
-                    </a>
-                </h5>
-                <div className="card-title-section-info">
-                    {isntZal ? <Badge $bg="danger" $pill={true}><Link target="_blank"
-                                                               href="https://niab.by/newsite/ru/Priostanovka_hkranilische4">Не
-                        выдается c 01.10.2024</Link></Badge> : <></>}
-                    {item.storage ? <Badge $bg="light" $pill={true}>Хранилище №{item.storage}</Badge> : <></>}
-                    {item.count ? <Badge $bg="light" $pill={true}>{item.count} ед. хр.</Badge> : <></>}
-                    {
-                        item.lang?.map((ln: string) => <Badge key={ln} $bg="light" $pill={true}>
-                            {ln}
-                        </Badge>)
-                    }
-                    {item.years ? <Badge $bg="light" $pill={true}>{item.years}</Badge> : <></>}
-                </div>
-            </section>
-            <section className="card-body-section">
-                {state && <CardBody key={`${state.isTitle}${state.isAnotation}`} state={state}/>}
-            </section>
-            <section className="card-footer-section">
-                <Button size="small"
-                        variant="outlined"
-                        className="fond-opis-button-src"
-                        fullWidth={true}
-                        startIcon="Описи"
-                        endIcon={<ArrowForwardIosIcon/>}
-                        href={`/niab/${item.fod}`}/>
-            </section>
-        </Card>
-    </TooltipWrapper>
+        <section className="card-title-section">
+            <h5>
+                <a
+                    target="_blank"
+                    href={item.fodlink}
+                    className="fond-link-src">
+                    Ф.{item.fod}
+                </a>
+            </h5>
+            <div className="card-title-section-info">
+                {isntZal ? <Badge $bg="danger" $pill={true}><Link target="_blank"
+                                                                  href="https://niab.by/newsite/ru/Priostanovka_hkranilische4">Не
+                    выдается c 01.10.2024</Link></Badge> : <></>}
+                {item.storage ? <Badge $bg="light" $pill={true}>Хранилище №{item.storage}</Badge> : <></>}
+                {item.count ? <Badge $bg="light" $pill={true}>{item.count} ед. хр.</Badge> : <></>}
+                {
+                    item.lang?.map((ln: string) => <Badge key={ln} $bg="light" $pill={true}>
+                        {ln}
+                    </Badge>)
+                }
+                {item.years ? <Badge $bg="light" $pill={true}>{item.years}</Badge> : <></>}
+            </div>
+        </section>
+        <section className="card-body-section">
+            {state && <CardBody key={`${state.isTitle}${state.isAnotation}`} state={state}/>}
+        </section>
+        <section className="card-footer-section">
+            <Button size="small"
+                    variant="outlined"
+                    className="fond-opis-button-src"
+                    fullWidth={true}
+                    startIcon="Описи"
+                    endIcon={<ArrowForwardIosIcon/>}
+                    href={`/niab/${item.fod}`}/>
+        </section>
+    </Card>
 };
 
 export default FondCard;
