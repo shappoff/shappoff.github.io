@@ -81,7 +81,7 @@ const FondPage = async ({params}: any) => {
                 <Link href="/niab">
                     Фонды НИАБ
                 </Link>
-                <Link href={`/niab/${fond}`}>
+                <Link target="_blank" href={currentItem.fodlink}>
                     ф.{fond}
                 </Link>
 
