@@ -40,3 +40,12 @@
         margin: 0.2rem;
     }
 }
+
+a.fond-link-src {
+    position: relative;
+    color: #000000;
+    font-weight: 400;
+    text-decoration: none;
+    border-bottom: 1px solid #000000;
+    white-space: nowrap;
+}

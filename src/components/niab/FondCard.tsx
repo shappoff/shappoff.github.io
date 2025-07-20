@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import CardBody from "@/components/niab/CardBody";
 
 import './FondCard.css';
-import {openInNewTab} from "@/components/utils";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 type ProgressLineType = {
     $content: number
@@ -115,10 +115,9 @@ const FondCard = ({item, index}: any) => {
             <h5>
                 <a
                     target="_blank"
-                    href="#"
-                    onClick={() => openInNewTab(item.fodlink)}
+                    href={item.fodlink}
                     className="fond-link-src">
-                    Ф.{item.fod}
+                    Ф.{item.fod} <LaunchIcon sx={{ fontSize: 10, top: -3, position: 'absolute' }} />
                 </a>
             </h5>
             <div className="card-title-section-info">
