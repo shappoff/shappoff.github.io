@@ -191,3 +191,49 @@ describe('utils', () => {
     });
   });
 });
+
+describe('plural', () => {
+  it('returns correct form for 1', () => {
+    expect(require('../utils').plural(1)).toBe('фонд');
+  });
+  it('returns correct form for 2', () => {
+    expect(require('../utils').plural(2)).toBe('фонда');
+  });
+  it('returns correct form for 5', () => {
+    expect(require('../utils').plural(5)).toBe('фондов');
+  });
+  it('returns correct form for 21', () => {
+    expect(require('../utils').plural(21)).toBe('фонд');
+  });
+  it('returns correct form for 12', () => {
+    expect(require('../utils').plural(12)).toBe('фондов');
+  });
+  it('works with custom titles', () => {
+    expect(require('../utils').plural(1, ['cat', 'cats', 'catses'])).toBe('cat');
+    expect(require('../utils').plural(2, ['cat', 'cats', 'catses'])).toBe('cats');
+    expect(require('../utils').plural(5, ['cat', 'cats', 'catses'])).toBe('catses');
+  });
+});
+
+describe('openInNewTab', () => {
+  let originalOpen: any;
+  beforeAll(() => {
+    originalOpen = window.open;
+  });
+  afterAll(() => {
+    window.open = originalOpen;
+  });
+  it('calls window.open with correct params and sets opener to null', () => {
+    const mockWindow = { opener: {}, };
+    const url = 'https://example.com';
+    window.open = jest.fn(() => mockWindow as any);
+    const result = require('../utils').openInNewTab(url);
+    expect(window.open).toHaveBeenCalledWith(url, '_blank', 'noopener,noreferrer,width=400,height=400');
+    expect(result.opener).toBeNull();
+  });
+  it('returns null if window.open returns null', () => {
+    window.open = jest.fn(() => null);
+    const result = require('../utils').openInNewTab('https://example.com');
+    expect(result).toBeNull();
+  });
+});
