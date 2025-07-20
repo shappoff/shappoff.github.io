@@ -1,0 +1,41 @@
+.card > .card-title-section {
+    margin: 10px 16px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+.card-title-section h5 {
+    min-width: 62px;
+    max-width: 65px;
+}
+.card-title-section-info {
+    padding: 0 7px;
+}
+
+.progress-line-section {
+    min-height: 10px;
+    max-height: 10px;
+    height: 10px;
+}
+
+.card > .card-footer-section {
+    padding: 0 1rem 0.5rem 1rem;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card {
+    width: 94vw;
+}
+@media (min-width: 768px) {
+    .card {
+        width: 30vw;
+        min-height: 10rem;
+        margin: 0.2rem;
+    }
+}
