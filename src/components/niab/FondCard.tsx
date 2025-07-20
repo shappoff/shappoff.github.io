@@ -7,6 +7,9 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from 'styled-components';
 import Tooltip from '@mui/material/Tooltip';
 import CardBody from "@/components/niab/CardBody";
+import Zoom from '@mui/material/Zoom';
+
+import './FondCard.css';
 
 type ProgressLineType = {
     $content: number
@@ -17,23 +20,24 @@ const ProgressLine = styled.progress<ProgressLineType>`
   height: 10px;
   margin: 3px 6px;
   width: 97%;
-  background-color: #ff0;
 
+/*
   &:after {
-    content: "${(props) => props.$content && props.$content} %";
+    content: "Проиндексирован на ${(props) => props.$content && props.$content} %";
     position: absolute;
-    top: 0;
+    top: 4px;
     left: ${(props) => (props.$content - 3) / 2}%;
-    font-size: 8px;
+    font-size: 1px;
+    
   }
-
-  &::-moz-progress-bar {
-    background-color: #ff0;
+*/
+  /*
+  .card:hover &  {
+    &:after {
+      font-size: 15px;
+    }
   }
-
-  &::-webkit-progress-value {
-    background-color: #ff0;
-  }
+  */
 `;
 
 type BadgeType = {
@@ -69,6 +73,22 @@ export type StateType = {
     anotation: string
 };
 
+const TooltipWrapper = ({children, title}: any) => {
+    return <>{
+        title ? <>
+            <Tooltip
+                placement="top"
+                arrow
+                title={title}
+                slots={{
+                    transition: Zoom,
+                }}
+            >
+                {children}
+            </Tooltip>
+        </> : children
+    }</>
+};
 
 const FondCard = ({item, index}: any) => {
     const [state, setState] = React.useState<StateType>();
@@ -88,55 +108,53 @@ const FondCard = ({item, index}: any) => {
 
     const styleAnimationDelay = index < 12 ? {animationDelay: `${index + 1}00ms`} : {animationDelay: `${index + 1200}ms`};
 
-    return <Card className="card" key={item.objectID} style={styleAnimationDelay}>
-        <section>
-            {
-                item.s ?
-                    <Tooltip title={`Проиндексирован на ${item.s}%`}>
-                        <ProgressLine max="100" value={item.s} $content={item.s}/>
-                    </Tooltip>
-                    : <></>
-            }
-        </section>
-
-        <section className="card-title-section">
-            <h5>
-                <a
-                    target="_blank"
-                    href={item.fodlink}
-                    className="fond-link-src">
-                    Ф. {item.fod}
-                </a>
-
-
-            </h5>
-            <div>
-                {isntZal ? <Badge $bg="danger" $pill={true}><Link target="_blank"
-                                                           href="https://niab.by/newsite/ru/Priostanovka_hkranilische4">Не
-                    выдается c 01.10.2024</Link></Badge> : <></>}
-                {item.storage ? <Badge $bg="light" $pill={true}>Хранилище №{item.storage}</Badge> : <></>}
-                {item.count ? <Badge $bg="light" $pill={true}>{item.count} ед. хр.</Badge> : <></>}
+    return <TooltipWrapper title={item.s ? `Ф.${item.fod} проиндексирован на ${item.s}%` : null}>
+        <Card className="card" key={item.objectID} style={styleAnimationDelay}>
+            <section className="progress-line-section">
                 {
-                    item.lang?.map((ln: string) => <Badge key={ln} $bg="light" $pill={true}>
-                        {ln}
-                    </Badge>)
+                    item.s ?
+                        <ProgressLine max="100" value={item.s} $content={item.s}/>
+                        : <></>
                 }
-                {item.years ? <Badge $bg="light" $pill={true}>{item.years}</Badge> : <></>}
-            </div>
-        </section>
-        <section className="card-body-section">
-            {state && <CardBody key={`${state.isTitle}${state.isAnotation}`} state={state}/>}
-        </section>
-        <section className="card-footer-section">
-            <Button size="small"
-                    variant="outlined"
-                    className="fond-opis-button-src"
-                    fullWidth={true}
-                    startIcon="Описи"
-                    endIcon={<ArrowForwardIosIcon/>}
-                    href={`/niab/${item.fod}`}/>
-        </section>
-    </Card>
+            </section>
+
+            <section className="card-title-section">
+                <h5>
+                    <a
+                        target="_blank"
+                        href={item.fodlink}
+                        className="fond-link-src">
+                        Ф.{item.fod}
+                    </a>
+                </h5>
+                <div className="card-title-section-info">
+                    {isntZal ? <Badge $bg="danger" $pill={true}><Link target="_blank"
+                                                               href="https://niab.by/newsite/ru/Priostanovka_hkranilische4">Не
+                        выдается c 01.10.2024</Link></Badge> : <></>}
+                    {item.storage ? <Badge $bg="light" $pill={true}>Хранилище №{item.storage}</Badge> : <></>}
+                    {item.count ? <Badge $bg="light" $pill={true}>{item.count} ед. хр.</Badge> : <></>}
+                    {
+                        item.lang?.map((ln: string) => <Badge key={ln} $bg="light" $pill={true}>
+                            {ln}
+                        </Badge>)
+                    }
+                    {item.years ? <Badge $bg="light" $pill={true}>{item.years}</Badge> : <></>}
+                </div>
+            </section>
+            <section className="card-body-section">
+                {state && <CardBody key={`${state.isTitle}${state.isAnotation}`} state={state}/>}
+            </section>
+            <section className="card-footer-section">
+                <Button size="small"
+                        variant="outlined"
+                        className="fond-opis-button-src"
+                        fullWidth={true}
+                        startIcon="Описи"
+                        endIcon={<ArrowForwardIosIcon/>}
+                        href={`/niab/${item.fod}`}/>
+            </section>
+        </Card>
+    </TooltipWrapper>
 };
 
 export default FondCard;

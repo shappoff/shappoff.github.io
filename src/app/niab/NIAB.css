@@ -1,6 +1,7 @@
 .list-result {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     margin: 102px 0;
     width: 94vw;
 }
@@ -40,38 +41,11 @@
     align-items: center;
 }
 
-.card > .card-title-section {
-    margin: 16px;
-    display: flex;
-    flex-wrap: nowrap;
-    align-content: center;
-    align-items: center;
-    justify-content: space-between;
-}
 
-.card > .card-footer-section {
-    padding: 0 1rem 0.5rem 1rem;
-    display: flex;
-    flex-wrap: nowrap;
-    align-content: center;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.list-result > .card {
-    width: 94vw;
-}
 @media (min-width: 768px) {
     .accordion-item .accordion-button {
         padding: 0;
     }
-
-    .list-result > .card {
-        width: 29.6rem;
-        min-height: 10rem;
-        margin: 0.2rem;
-    }
-
 }
 .filter-bar.down {
     top: -96px;
