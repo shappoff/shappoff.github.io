@@ -14,6 +14,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import React from "react";
 import Tooltip from '@mui/material/Tooltip';
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import LaunchIcon from '@mui/icons-material/Launch';
 
 import {
     digitedFormattedDataPath,
@@ -81,8 +82,8 @@ const FondPage = async ({params}: any) => {
                 <Link href="/niab">
                     Фонды НИАБ
                 </Link>
-                <Link target="_blank" href={currentItem.fodlink}>
-                    ф.{fond}
+                <Link target="_blank" href={currentItem.fodlink} style={{position: 'relative'}}>
+                    ф.{fond} <LaunchIcon sx={{ fontSize: 10, top: -3, position: 'absolute' }} />
                 </Link>
 
             </Breadcrumbs>
