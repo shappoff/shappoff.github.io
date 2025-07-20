@@ -7,8 +7,10 @@ import Typography from '@mui/material/Typography';
 import Link from "next/link";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import WrapToTooltip from "@/components/niab/BasicTooltip";
+import {openInNewTab} from "@/components/utils";
 
 export default function OpisCard({info}: any) {
+    const opisUrl = `https://drive.google.com/file/d/${info?.docId}`;
     return (
         <Card sx={{
             margin: '1rem',
@@ -22,17 +24,19 @@ export default function OpisCard({info}: any) {
                 },
             },
         }}>
-            <CardContent>
-                <Typography variant="h6" component="div" sx={{whiteSpace: 'nowrap'}}>Опись {info?.op}</Typography>
-                <WrapToTooltip note={info?.n}>
-                    <Link target="_blank" href={`https://drive.google.com/file/d/${info?.docId}`}>
-                        <PictureAsPdfIcon sx={{ fontSize: 70 }} />
-                    </Link>
-                </WrapToTooltip>
-            </CardContent>
-            <CardActions>
-                {info?.docId ? <Button size="small"><Link target="_blank" href={`https://drive.google.com/file/d/${info?.docId}`}>Открыть</Link></Button> : <></>}
-            </CardActions>
+            <Link target="_blank" href="#" onClick={() => openInNewTab(opisUrl)}>
+                <CardContent>
+                    <Typography variant="h6" component="div" sx={{whiteSpace: 'nowrap'}}>Опись {info?.op}</Typography>
+                    <WrapToTooltip note={info?.n}>
+
+                            <PictureAsPdfIcon sx={{ fontSize: 70 }} />
+
+                    </WrapToTooltip>
+                </CardContent>
+                <CardActions>
+                    {info?.docId ? <Button size="small">Открыть</Button> : <></>}
+                </CardActions>
+            </Link>
         </Card>
     );
 }

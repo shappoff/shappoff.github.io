@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import CardBody from "@/components/niab/CardBody";
 
 import './FondCard.css';
+import {openInNewTab} from "@/components/utils";
 
 type ProgressLineType = {
     $content: number
@@ -78,6 +79,8 @@ export type StateType = {
     anotation: string
 };
 
+
+
 const FondCard = ({item, index}: any) => {
     const [state, setState] = React.useState<StateType>();
 
@@ -112,7 +115,8 @@ const FondCard = ({item, index}: any) => {
             <h5>
                 <a
                     target="_blank"
-                    href={item.fodlink}
+                    href="#"
+                    onClick={() => openInNewTab(item.fodlink)}
                     className="fond-link-src">
                     Ф.{item.fod}
                 </a>
