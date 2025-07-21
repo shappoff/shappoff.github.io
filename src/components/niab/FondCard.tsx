@@ -79,14 +79,12 @@ export type StateType = {
     anotation: string
 };
 
-
-
 const FondCard = ({item, index}: any) => {
 
     // https://niab.by/newsite/ru/Priostanovka_hkranilische4
     const isntZal: any = !!fourthStorage[item.fod];
 
-    const styleAnimationDelay = index < 12 ? {animationDelay: `${index + 1}00ms`} : {animationDelay: `${index + 1200}ms`};
+    const styleAnimationDelay = index < 12 ? {animationDelay: `${index * 50}ms`} : {animationDelay: `${index + 600}ms`};
 
     return <Card className="card" key={item.objectID} style={styleAnimationDelay}>
         <section className="progress-line-section">
