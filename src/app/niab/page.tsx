@@ -2,7 +2,7 @@ import {Metadata} from "next";
 import FondyNIABApp from "@/components/niab/FondyNIABApp";
 import './bootstrap.css';
 import './NIAB.css';
-// import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const metadata: Metadata = {
     title: "Фонды и описи НИАБ",
