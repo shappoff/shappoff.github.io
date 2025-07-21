@@ -79,7 +79,7 @@ const FondyNIABApp = () => {
 
     const algoliaSearch = React.useCallback(async function() {
 
-        const isID = isNaN(+debouncedSearchTerm);
+        const isID = !isNaN(+debouncedSearchTerm);
 
         let filters: string = '';
 
@@ -104,11 +104,11 @@ const FondyNIABApp = () => {
             facetFilters.push([`storage:${storeFilter}`]);
         }
 
-        if (!isID && debouncedSearchTerm) {
+        if (isID && debouncedSearchTerm) {
             facetFilters.push(`objectID:${fondNmbToObjectId(debouncedSearchTerm)}`);
         }
 
-        const searched = await algoliaIndex.search(isID ? debouncedSearchTerm : '', {
+        const searched = await algoliaIndex.search(!isID ? debouncedSearchTerm : '', {
             responseFields: ['facets', 'hits', 'nbPages', 'page', 'facets_stats'],
             typoTolerance: isTypoTolerance,
             analytics: true,
@@ -151,9 +151,7 @@ const FondyNIABApp = () => {
 
     if (error) return <div>Ошибка: {error.message}</div>;
     if (isError) return <div>Ошибка: {isError}</div>;
-    if (isPending) {
-        return <Spinner animation="border" />;
-    }
+
     return <div id="root">
         <NavBarNIAB
             keysHandler={keysHandler}
