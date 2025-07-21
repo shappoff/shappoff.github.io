@@ -106,7 +106,10 @@ const FondCard = ({item, index}: any) => {
                     target="_blank"
                     href={item.fodlink}
                     className="fond-link-src">
-                    Ф.{item.fod} <LaunchIcon sx={{ fontSize: 10, top: -3, position: 'absolute' }} />
+                    Ф.{item.fod}
+                    <sup>
+                        <LaunchIcon sx={{ fontSize: 10, top: -4, position: 'relative' }} />
+                    </sup>
                 </a>
             </h5>
             <div className="card-title-section-info">
