@@ -148,8 +148,7 @@ const FondyNIABApp = () => {
 
     const { isPending, isError, data, error } = useQuery({
         queryKey: ['algoliaSearch', currentPage, debouncedSearchTerm],
-        queryFn: algoliaSearch,
-        keepPreviousData: true
+        queryFn: algoliaSearch
     });
 
     console.log('data', data);
@@ -183,7 +182,7 @@ const FondyNIABApp = () => {
                 })
             }
         </div>
-        <PaginationNIAB currentPage={data?.page} nbPages={data?.nbPages} setCurrentPage={setCurrentPage} />
+        <PaginationNIAB currentPage={data?.page || 0} nbPages={data?.nbPages || 0} setCurrentPage={setCurrentPage} />
         {
             isPending ? <>
                 <Spinner animation="border" />
