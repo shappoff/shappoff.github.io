@@ -1,11 +1,11 @@
 'use client'
 
-import HomeButton from "@/components/HomeButton";
 import React from "react";
-import SearchInputControl from "@/components/niab/SearchInputControl";
+import HomeButton from "@/components/HomeButton";
 import SelectDropDown from "@/components/niab/SelectDropDown";
 import TypoToleranceCheckbox from "@/components/niab/TypoToleranceCheckbox";
 import SliderController from "@/components/niab/SliderController";
+
 
 const NavBarNIAB = ({
                         facets,
@@ -44,6 +44,7 @@ const NavBarNIAB = ({
                 />
             </div>
             <div className="third-raw">
+                {/* TODO fix it */}
                 <SliderController
                     yearsRangeFilter={yearsRangeFilter}
                     yearsMinMax={yearsMinMax}
