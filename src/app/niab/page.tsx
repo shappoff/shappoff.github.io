@@ -2,7 +2,6 @@ import {Metadata} from "next";
 import FondyNIABApp from "@/components/niab/FondyNIABApp";
 import './NIAB.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ReactQueryTanstack from "@/components/niab/ReactQueryTanstack";
 
 export const metadata: Metadata = {
     title: "Фонды и описи НИАБ",
@@ -22,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default async function NIAB() {
-    return <ReactQueryTanstack>
+    return <>
         <FondyNIABApp/>
-    </ReactQueryTanstack>;
+    </>;
 }

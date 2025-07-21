@@ -1,5 +1,6 @@
 import AlertInfo from "@/components/niab/AlertInfo";
 import * as React from "react";
+import ReactQueryTanstack from "@/components/niab/ReactQueryTanstack";
 // import Link from "next/link";
 
 export default function Layout({ children }: any) {
@@ -11,7 +12,7 @@ export default function Layout({ children }: any) {
                 Бумажные дела не выдают с 02.06.2025 <Link target="_blank" href="https://niab.by/newsite/ru/Priostanovka_hkranilische4"><u>подробнее...</u></Link>
             </AlertInfo>
 */}
-            <>{children}</>
+            <ReactQueryTanstack>{children}</ReactQueryTanstack>
         </>
     )
 }
