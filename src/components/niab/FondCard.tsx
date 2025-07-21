@@ -82,17 +82,6 @@ export type StateType = {
 
 
 const FondCard = ({item, index}: any) => {
-    const [state, setState] = React.useState<StateType>();
-
-    React.useEffect(() => {
-        const {_highlightResult} = item;
-        const anotation = _highlightResult.anotation?.value;
-        const title = _highlightResult.title.value;
-        const isTitle = !!~title.indexOf('<b>');
-        const isAnotation = !!~anotation.indexOf('<b>');
-
-        setState({isTitle, isAnotation, anotation, title});
-    }, [item]);
 
     // https://niab.by/newsite/ru/Priostanovka_hkranilische4
     const isntZal: any = !!fourthStorage[item.fod];
@@ -135,7 +124,7 @@ const FondCard = ({item, index}: any) => {
             </div>
         </section>
         <section className="card-body-section">
-            {state && <CardBody key={`${state.isTitle}${state.isAnotation}`} state={state}/>}
+            <CardBody item={item}/>
         </section>
         <section className="card-footer-section">
             <Button size="small"
