@@ -4,13 +4,7 @@ import useDebounce from "../useDebounce";
 import Spinner from 'react-bootstrap/Spinner';
 import PaginationNIAB from "@/components/niab/Pagination";
 
-import {
-    useQuery,
-    useMutation,
-    useQueryClient,
-    QueryClient,
-    QueryClientProvider,
-} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import FondCard from "./FondCard";
 import {HashRoute} from "./HashRoute";
@@ -34,18 +28,14 @@ const client = algoliasearch(
 const algoliaIndex = client.initIndex('foandyniab');
 
 const FondyNIABApp = () => {
-    const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [searchTerm, setSearchTerm] = React.useState<string>('');
     const [isTypoTolerance, setIsTypoTolerance] = React.useState<boolean>(true);
     const [langFilter, setLangFilter] = React.useState<string>();
     const [storeFilter, setStoreFilter] = React.useState<number>();
-    const [resultsAll, setResultsAll] = React.useState<Array<any>>([]);
     const [yearsRangeFilter, setYearsRangeFilter] = React.useState<Array<any>>([]);
     const [facetsStats, setFacetsStats] = React.useState<any>();
     const [yearsMinMax, setYearsMinMax] = React.useState<Array<any>>([]);
-    const [nbPages, setNbPages] = React.useState<number>(0);
     const [currentPage, setCurrentPage] = React.useState<number>(0);
-    const [facets, setFacets] = React.useState<any>({});
     const [route, setRoute] = React.useState<any>();
 
     const debouncedSearchTerm = useDebounce(searchTerm, 1500);
@@ -65,8 +55,6 @@ const FondyNIABApp = () => {
                 return;
             }
 
-
-            setIsLoading(true);
             setSearchTerm(fond);
             setCurrentPage(0);
         }
@@ -98,22 +86,12 @@ const FondyNIABApp = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [currentPage]);
 
-    React.useEffect(() => {
-        if (isLoading) {
-            document.body.classList.add('loading');
-        } else {
-            document.body.classList.remove('loading');
-        }
-    }, [isLoading]);
-
     async function algoliaSearch() {
 
         if (!route || (route.take(HASH_MAP.query) && !debouncedSearchTerm)) {
             return;
         }
         const isID = isNaN(+debouncedSearchTerm);
-
-        setIsLoading(true);
 
         let filters: string = '';
 
@@ -152,7 +130,7 @@ const FondyNIABApp = () => {
             page: currentPage
         });
 
-        const {hits, facets, nbPages, page, facets_stats} = searched;
+        const {facets_stats} = searched;
         setFacetsStats(facets_stats);
         if (!yearsMinMax.length) {
             setYearsMinMax([facets_stats?.dRange.min, facets_stats?.dRange.max]);
@@ -160,16 +138,10 @@ const FondyNIABApp = () => {
         if (!yearsRangeFilter.length) {
             setYearsRangeFilter([facets_stats?.dRange.min, facets_stats?.dRange.max]);
         }
-        setCurrentPage(page);
-        setNbPages(nbPages);
-        setResultsAll(hits);
-        setFacets(facets);
-        setIsLoading(false);
         return searched;
     }
 
     const searchHandler = ({target}: any) => {
-        setIsLoading(true);
         setSearchTerm(target.value);
         setCurrentPage(0);
         route.add(HASH_MAP.query, target.value);
@@ -183,12 +155,20 @@ const FondyNIABApp = () => {
         }
     };
 
-    const { isPending, isError, data, error } = useQuery({ queryKey: ['algoliaSearch'], queryFn: algoliaSearch })
+    const { isPending, isError, data, error } = useQuery({
+        queryKey: ['algoliaSearch', currentPage],
+        queryFn: algoliaSearch,
+        keepPreviousData: true
+    });
+
+    console.log('data', data);
+
+    if (error) return <div>Ошибка: {error.message}</div>;
 
     return <div id="root">
         <NavBarNIAB
             keysHandler={keysHandler}
-            facets={facets}
+            facets={data?.facets}
             setStoreFilter={setStoreFilter}
             setCurrentPage={setCurrentPage}
             setLangFilter={setLangFilter}
@@ -206,14 +186,14 @@ const FondyNIABApp = () => {
 
         <div className="list-result">
             {
-                resultsAll.map((item: any, index: number) => {
+                data?.hits.map((item: any, index: number) => {
                     return <FondCard key={item.objectID} index={index} item={item} />
                 })
             }
         </div>
-        <PaginationNIAB currentPage={currentPage} nbPages={nbPages} setCurrentPage={setCurrentPage} />
+        <PaginationNIAB currentPage={data?.page} nbPages={data?.nbPages} setCurrentPage={setCurrentPage} />
         {
-            isLoading || isPending ? <>
+            isPending ? <>
                 <Spinner animation="border" />
             </> : <></>
         }
