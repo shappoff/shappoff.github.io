@@ -130,13 +130,14 @@ const FondCard = ({item, index}: any) => {
             <CardBody item={item}/>
         </section>
         <section className="card-footer-section">
-            <Button size="small"
-                    variant="outlined"
-                    className="fond-opis-button-src"
-                    fullWidth={true}
-                    startIcon="Описи"
-                    endIcon={<ArrowForwardIosIcon/>}
-                    href={`/niab/${item.fod}`}/>
+            <Link href={`/niab/${item.fod}`}>
+                <Button size="small"
+                        variant="outlined"
+                        className="fond-opis-button-src"
+                        fullWidth={true}
+                        startIcon="Описи"
+                        endIcon={<ArrowForwardIosIcon/>} />
+            </Link>
         </section>
     </Card>
 };
