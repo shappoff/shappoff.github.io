@@ -77,11 +77,8 @@ const FondyNIABApp = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [currentPage]);
 
-    async function algoliaSearch() {
+    const algoliaSearch = React.useCallback(async function() {
 
-        if (!route || (route.take(HASH_MAP.query) && !debouncedSearchTerm)) {
-            return;
-        }
         const isID = isNaN(+debouncedSearchTerm);
 
         let filters: string = '';
@@ -129,8 +126,9 @@ const FondyNIABApp = () => {
         if (!yearsRangeFilter.length) {
             setYearsRangeFilter([facets_stats?.dRange.min, facets_stats?.dRange.max]);
         }
+
         return searched;
-    }
+    }, [currentPage, debouncedSearchTerm, isTypoTolerance]);
 
     const searchHandler = ({target}: any) => {
         setSearchTerm(target.value);
@@ -147,15 +145,15 @@ const FondyNIABApp = () => {
     };
 
     const { isPending, isError, data, error } = useQuery({
-        queryKey: ['algoliaSearch', currentPage, debouncedSearchTerm],
+        queryKey: [currentPage, debouncedSearchTerm],
         queryFn: algoliaSearch
     });
 
-    console.log('data', data);
-
     if (error) return <div>Ошибка: {error.message}</div>;
     if (isError) return <div>Ошибка: {isError}</div>;
-
+    if (isPending) {
+        return <Spinner animation="border" />;
+    }
     return <div id="root">
         <NavBarNIAB
             keysHandler={keysHandler}
