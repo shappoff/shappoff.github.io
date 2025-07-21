@@ -147,7 +147,7 @@ const FondyNIABApp = () => {
     };
 
     const { isPending, isError, data, error } = useQuery({
-        queryKey: ['algoliaSearch', currentPage],
+        queryKey: ['algoliaSearch', currentPage, debouncedSearchTerm],
         queryFn: algoliaSearch,
         keepPreviousData: true
     });

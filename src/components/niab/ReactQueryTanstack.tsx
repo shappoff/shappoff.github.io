@@ -1,5 +1,6 @@
 'use client'
 
+import React from "react";
 import {
     useQuery,
     useMutation,
@@ -11,7 +12,13 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 
 const ReactQueryTanstack = ({children}: any) => {
-    const queryClient = new QueryClient()
+    const [queryClient] = React.useState(() => new QueryClient({
+        defaultOptions: {
+            queries: {
+                staleTime: 5 * 60 * 1000, // Example: 5 minutes
+            },
+        },
+    }));
 
     return <QueryClientProvider client={queryClient}>
         {children}
