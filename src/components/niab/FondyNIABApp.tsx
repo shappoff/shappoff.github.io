@@ -9,23 +9,14 @@ import { useQuery } from '@tanstack/react-query';
 import FondCard from "./FondCard";
 import {HashRoute} from "./HashRoute";
 
-import algoliasearch from 'algoliasearch/lite';
 import {fondNmbToObjectId} from "@/components/utils";
 import NavBarNIAB from "@/components/niab/NavBarNIAB";
 import SearchInputControl from "@/components/niab/SearchInputControl";
+import algoliaIndex from "@/components/niab/AlgoliaServiceInstance";
 
 const HASH_MAP = {
     query: 'q',
 };
-
-declare const process: any;
-// grigorysh58@gmail.com
-const client = algoliasearch(
-    process.env.NEXT_PUBLIC_NIAB_ALGOLIA_APPLICATION_ID,
-    process.env.NEXT_PUBLIC_NIAB_ALGOLIA_SEARCH_ONLY_API_KEY
-);
-
-const algoliaIndex = client.initIndex('foandyniab');
 
 const FondyNIABApp = () => {
     const [searchTerm, setSearchTerm] = React.useState<string>('');
@@ -164,6 +155,7 @@ const FondyNIABApp = () => {
     console.log('data', data);
 
     if (error) return <div>Ошибка: {error.message}</div>;
+    if (isError) return <div>Ошибка: {isError}</div>;
 
     return <div id="root">
         <NavBarNIAB
