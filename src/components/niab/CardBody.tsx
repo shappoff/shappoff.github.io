@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactElement} from "react";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -6,12 +6,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const BEFO_AFTER_STRING = 80;
 
-function calculateTitle(title, isOpen, defaultTitle) {
-    const dots = '...';
+function calculateTitle(title: string, isOpen: boolean, defaultTitle: string): ReactElement<unknown, string> {
+    const dots = ' ... ';
     const startIndex = title.indexOf('<b>');
     let isBTagExist = !!~startIndex;
 
-    let resultTitle = '';
+    let resultTitle;
     if (isOpen || (!isOpen && !isBTagExist)) {
         resultTitle = <i>{defaultTitle}</i>;
     } else {
@@ -22,12 +22,12 @@ function calculateTitle(title, isOpen, defaultTitle) {
         }} />
     }
 
-    return resultTitle
+    return resultTitle;
 }
 
 const CardBody = ({item}: any) => {
-    const [isOpenTitle, setIsOpenTitle] = React.useState(false);
-    const [isOpenAnotation, setIsOpenAnotation] = React.useState(false);
+    const [isOpenTitle, setIsOpenTitle] = React.useState<boolean>(false);
+    const [isOpenAnotation, setIsOpenAnotation] = React.useState<boolean>(false);
 
     const {_highlightResult} = item;
     const title = _highlightResult.title.value;
