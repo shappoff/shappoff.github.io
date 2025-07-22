@@ -22,6 +22,7 @@ const ProgressLine = styled.progress<ProgressLineType>`
 `;
 
 const LabelProgressLine = styled.label`
+  display: inline-block;
   background-color: #ffffff;
   border-radius: 4px;
   color: #0063B1;
@@ -36,7 +37,7 @@ const LabelProgressLine = styled.label`
 
   opacity: 0;
   transform: scale(0);
-  transition: all 0.3s ease;
+  transition: 0.3s;
 
   .card:hover &,
   .card:focus &,

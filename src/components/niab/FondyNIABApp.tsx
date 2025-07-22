@@ -76,6 +76,8 @@ const FondyNIABApp = () => {
 
     React.useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        const navbar: HTMLElement | null = document.getElementById("navbar");
+        navbar?.classList.remove('down');
     }, [currentPage]);
 
     const algoliaSearch = React.useCallback(async function() {
