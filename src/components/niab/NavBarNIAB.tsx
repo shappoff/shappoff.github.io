@@ -39,7 +39,7 @@ const NavBarNIAB = ({
                     placeholder="№ хранилища"
                 >{(event: SelectChangeEvent) => {
                             setCurrentPage(0);
-                            setStoreFilter(event.target.value);
+                            setStoreFilter(event?.target.value);
                 }}</SelectDropDown>
                 <SelectDropDown
                     facets={facets?.lang || {}}
@@ -47,7 +47,7 @@ const NavBarNIAB = ({
                     placeholder="Язык фонда"
                 >{(event: SelectChangeEvent) => {
                     setCurrentPage(0);
-                    setLangFilter(event.target.value);
+                    setLangFilter(event?.target.value);
                 }}</SelectDropDown>
                 <TypoToleranceCheckbox
                     isTypoTolerance={isTypoTolerance} setIsTypoTolerance={setIsTypoTolerance}
