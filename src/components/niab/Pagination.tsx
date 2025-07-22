@@ -1,5 +1,6 @@
 import React, {Dispatch, SetStateAction} from "react";
-import Pagination from 'react-bootstrap/Pagination';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 interface IPaginationProps {
     currentPage: number;
@@ -8,21 +9,12 @@ interface IPaginationProps {
 }
 
 function PaginationNIAB({currentPage = 0, nbPages = 0, setCurrentPage}: IPaginationProps) {
-    return (<>
-        <Pagination>
-            <Pagination.First onClick={() => setCurrentPage(0)} disabled={currentPage === 0} />
-            <Pagination.Prev onClick={() => setCurrentPage((v: number) => --v)} disabled={currentPage === 0} />
-            {
-                Number.isInteger(nbPages) && Array(nbPages).fill('').map((_: string, page: number) => {
-                    return <Pagination.Item key={page} active={page === currentPage} onClick={() => setCurrentPage(page)}>
-                        {page + 1}
-                    </Pagination.Item>
-                })
-            }
-            <Pagination.Next onClick={() => setCurrentPage((v: number) => ++v)} disabled={currentPage === (nbPages - 1)} />
-            <Pagination.Last onClick={() => setCurrentPage(nbPages - 1)} disabled={currentPage === (nbPages - 1)} />
-        </Pagination>
-    </>);
+    function changePageHandler(e, page) {
+        setCurrentPage(page)
+    }
+    return <Stack spacing={2}>
+        <Pagination count={nbPages} variant="outlined" shape="rounded" page={currentPage} onChange={changePageHandler} />
+    </Stack>
 }
 
 export default React.memo(PaginationNIAB);
