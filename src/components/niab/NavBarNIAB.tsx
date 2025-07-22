@@ -54,7 +54,6 @@ const NavBarNIAB = ({
                 />
             </div>
             <div className="third-raw">
-                {/* TODO fix it */}
                 <SliderController
                     yearsRangeFilter={yearsRangeFilter}
                     yearsMinMax={yearsMinMax}

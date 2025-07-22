@@ -12,11 +12,10 @@ const SliderController = ({yearsRangeFilter, yearsMinMax, setYearsRangeFilter}: 
     }
     const [minValue, maxValue] = yearsMinMax;
     const [minFilter, maxFilter] = yearsRangeFilter;
-    const [value, setValue] = React.useState<number[]>([minFilter, maxFilter]);
-    const handleChange = throttle((event: Event, newValue: number[]) => {
-        setValue(newValue);
-        setYearsRangeFilter(newValue);
-    }, 400);
+
+    const handleChange = (event: Event, [start, end]: number[]) => {
+        start < end && setYearsRangeFilter([start, end]);
+    }
 
     return minValue && maxValue && minFilter && maxFilter ?
         <Slider
@@ -25,7 +24,7 @@ const SliderController = ({yearsRangeFilter, yearsMinMax, setYearsRangeFilter}: 
             max={maxValue}
             size="small"
             getAriaLabel={() => 'Years range'}
-            value={value}
+            value={[minFilter, maxFilter]}
             onChange={handleChange}
             valueLabelDisplay="on"
             marks
