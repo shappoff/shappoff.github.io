@@ -22,7 +22,7 @@ const SelectDropDown = ({facets, placeholder, selected, children}: any) => {
                 onChange={children}
             >
                 {
-                    Object.keys(facets).map((lang, index) =>
+                    Object.keys(facets).map((lang:  string) =>
                         <MenuItem value={lang}>
                             {`${lang} (${facets[lang]} ${plural(facets[lang])})`}
                         </MenuItem>
