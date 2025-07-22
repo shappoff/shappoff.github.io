@@ -1,22 +1,35 @@
 import {plural} from "@/components/utils";
-import Select from "react-select";
 import React from "react";
 import './SelectDropDown.css';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
-function createOptionsList(lang: string, facets: any) {
-    return ({label: `№ ${lang} (${facets[lang]} ${plural(facets[lang])})`, value: lang});
-}
-const SelectDropDown = ({facets, setStoreFilter, setCurrentPage, placeholder}: any) => {
+const SelectDropDown = ({facets, placeholder, selected, children}: any) => {
+    const id = React.useId();
+
     return (
-        <Select className="select-filter"
-                isClearable={true}
-                options={Object.keys(facets).map((lang, index) => createOptionsList(lang, facets)) as any}
-                placeholder={<span className="placeholder-dropdown">{placeholder}</span>}
-                onChange={(e: any) => {
-                    setStoreFilter(e?.value);
-                    setCurrentPage(0);
-                }}
-        />
+        <FormControl fullWidth>
+            <InputLabel size="small" id={id}>{placeholder}</InputLabel>
+            <Select
+                sx={{ minWidth: 150 }}
+                className="select-filter"
+                size="small"
+                labelId={id}
+                inputProps={{MenuProps: {disableScrollLock: true}}}
+                value={selected}
+                onChange={children}
+            >
+                {
+                    Object.keys(facets).map((lang, index) =>
+                        <MenuItem value={lang}>
+                            {`${lang} (${facets[lang]} ${plural(facets[lang])})`}
+                        </MenuItem>
+                    )
+                }
+            </Select>
+        </FormControl>
     );
 };
 

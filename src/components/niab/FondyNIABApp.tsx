@@ -157,8 +157,10 @@ const FondyNIABApp = () => {
             keysHandler={keysHandler}
             facets={data?.facets}
             setStoreFilter={setStoreFilter}
+            storeFilter={storeFilter}
             setCurrentPage={setCurrentPage}
             setLangFilter={setLangFilter}
+            langFilter={langFilter}
             isTypoTolerance={isTypoTolerance}
             setIsTypoTolerance={setIsTypoTolerance}
             yearsRangeFilter={yearsRangeFilter}
