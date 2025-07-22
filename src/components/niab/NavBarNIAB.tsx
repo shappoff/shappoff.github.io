@@ -5,6 +5,7 @@ import HomeButton from "@/components/HomeButton";
 import SelectDropDown from "@/components/niab/SelectDropDown";
 import TypoToleranceCheckbox from "@/components/niab/TypoToleranceCheckbox";
 import SliderController from "@/components/niab/SliderController";
+import Box from '@mui/material/Box';
 
 
 const NavBarNIAB = ({
@@ -22,10 +23,14 @@ const NavBarNIAB = ({
 
     return (
         <div id="navbar" className="filter-bar">
-            <div className="first-raw">
+            <Box sx={{ '& > :not(style)': { m: 1 } }}
+                 noValidate
+                 autoComplete="off"
+                 className="first-raw"
+            >
                 <HomeButton absolute={false} variant={true} />
                 {children}
-            </div>
+            </Box>
             <div className="second-raw noselect">
                 <SelectDropDown
                     facets={facets?.storage || {}}
