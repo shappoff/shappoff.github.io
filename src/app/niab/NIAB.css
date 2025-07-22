@@ -2,9 +2,16 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 102px 0;
+    margin: 154px 0;
     width: 94vw;
 }
+
+@media (min-width: 898px) {
+    .list-result {
+        margin: 120px 0;
+    }
+}
+
 .filter-bar {
     position: fixed;
     z-index: 4;
@@ -48,7 +55,7 @@
     }
 }
 .filter-bar.down {
-    top: -96px;
+    top: -157px;
 }
 @media (min-width: 621px) and (max-width: 768px) {
     .form-check-label {

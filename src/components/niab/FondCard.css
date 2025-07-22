@@ -1,3 +1,5 @@
+
+
 .card > .card-title-section {
     margin: 10px 16px;
     display: flex;
@@ -9,6 +11,7 @@
 .card-title-section h5 {
     min-width: 62px;
     max-width: 65px;
+    font-size: 1.25rem;
 }
 .card-title-section-info {
     padding: 0 7px;
@@ -36,12 +39,26 @@
 
 .card {
     width: 94vw;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+    animation-delay: 100ms;
+    animation: fadeInUp .5s ease-out forwards;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: var(--bs-card-bg);
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.175);
+    margin: 0.2rem;
 }
 @media (min-width: 768px) {
     .card {
         width: 30vw;
         min-height: 10rem;
-        margin: 0.2rem;
     }
 }
 

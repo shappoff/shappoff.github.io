@@ -25,14 +25,14 @@ const NavBarNIAB = ({
 
     return (
         <div id="navbar" className="filter-bar">
-            <Box sx={{ '& > :not(style)': { m: 1 } }}
+            <Box sx={{ '& > :not(style)': { ml: 1, mr: 1, mt: 0.5, mb: 0.5 } }}
                  component="div"
                  className="first-raw"
             >
                 <HomeButton absolute={false} variant={true} />
                 {children}
             </Box>
-            <div className="second-raw noselect">
+            <Box sx={{ '& > :not(style)': { ml: 1, mr   : 1 } }} className="second-raw noselect">
                 <SelectDropDown
                     facets={facets?.storage || {}}
                     selected={storeFilter}
@@ -52,7 +52,7 @@ const NavBarNIAB = ({
                 <TypoToleranceCheckbox
                     isTypoTolerance={isTypoTolerance} setIsTypoTolerance={setIsTypoTolerance}
                 />
-            </div>
+            </Box>
             <div className="third-raw">
                 <SliderController
                     yearsRangeFilter={yearsRangeFilter}
