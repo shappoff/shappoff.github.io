@@ -13,7 +13,7 @@ const SliderController = ({yearsRangeFilter, yearsMinMax, setYearsRangeFilter}: 
     const [minValue, maxValue] = yearsMinMax;
     const [minFilter, maxFilter] = yearsRangeFilter;
 
-    const handleChange = (event: Event, [start, end]: number[]) => {
+    const handleChange = (_: any, [start, end]: any) => {
         start < end && setYearsRangeFilter([start, end]);
     }
 
