@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from '@mui/material/Slider';
-import {throttle} from "@/components/prikhody/throttle";
+import './SliderController.css';
 
 function valuetext(value: number) {
     return `${value} г`;
