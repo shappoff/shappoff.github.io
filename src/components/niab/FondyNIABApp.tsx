@@ -134,6 +134,7 @@ const FondyNIABApp = () => {
         isTypoTolerance,
         storeFilter,
         langFilter,
+        yearsRangeFilter,
     ]);
 
     const searchHandler = ({target}: any) => {
@@ -151,7 +152,7 @@ const FondyNIABApp = () => {
     };
 
     const { isPending, isError, data, error } = useQuery({
-        queryKey: [currentPage, debouncedSearchTerm, isTypoTolerance, langFilter, storeFilter],
+        queryKey: [currentPage, debouncedSearchTerm, isTypoTolerance, langFilter, storeFilter, yearsRangeFilter],
         queryFn: algoliaSearch
     });
 
