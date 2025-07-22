@@ -64,10 +64,13 @@
 }
 @media (max-width: 620px) {
     .list-result {
-        margin: 9rem 0;
+        margin: 10.5rem 0;
     }
     .filter-bar.down {
         top: -134px;
+    }
+    .select-filter {
+        max-width: 145px;
     }
 }
 

@@ -10,10 +10,10 @@ const SelectDropDown = ({facets, placeholder, selected, children}: any) => {
     const id = React.useId();
 
     return (
-        <FormControl fullWidth>
+        <FormControl>
             <InputLabel size="small" id={id}>{placeholder}</InputLabel>
             <Select
-                sx={{ minWidth: 150 }}
+                sx={{ minWidth: 145 }}
                 className="select-filter"
                 size="small"
                 labelId={id}
