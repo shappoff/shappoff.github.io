@@ -419,7 +419,7 @@ body.loading #input-id {
 
 .third-raw {
     width: 94vw;
-    padding: 1.5rem 2rem 1.2rem 2rem;
+    padding: 1.5rem 2rem 0.2rem 2rem;
 }
 
 .rc-slider-mark {

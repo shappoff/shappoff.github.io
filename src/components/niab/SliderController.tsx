@@ -1,30 +1,38 @@
 import React from "react";
-import Slider from 'rc-slider';
-import SliderTooltip from "@/components/niab/SliderTooltip";
+import Slider from '@mui/material/Slider';
+import {throttle} from "@/components/prikhody/throttle";
+
+function valuetext(value: number) {
+    return `${value} г`;
+}
 
 const SliderController = ({yearsRangeFilter, yearsMinMax, setYearsRangeFilter}: any) => {
-    return (
-        <>
-        {
-            yearsRangeFilter.length ? <Slider
-                handleRender={(renderProps: any) => {
-                    return (
-                        <div {...renderProps.props}>
-                            <SliderTooltip>{renderProps.props['aria-valuenow']}</SliderTooltip>
-                        </div>
-                    );
-                }}
-                range
-                min={yearsMinMax[0]}
-                max={yearsMinMax[1]}
-                defaultValue={yearsRangeFilter}
-                allowCross={false}
-                dots={false}
-                onChangeComplete={(e: any) => {setYearsRangeFilter(e)}}
-            /> : <></>
-        }
-        </>
-    );
+    if (!yearsRangeFilter.length || !yearsMinMax.length) {
+        return <></>
+    }
+    const [minValue, maxValue] = yearsMinMax;
+    const [minFilter, maxFilter] = yearsRangeFilter;
+    const [value, setValue] = React.useState<number[]>([minFilter, maxFilter]);
+    const handleChange = throttle((event: Event, newValue: number[]) => {
+        setValue(newValue);
+        setYearsRangeFilter(newValue);
+    }, 400);
+
+    return minValue && maxValue && minFilter && maxFilter ?
+        <Slider
+            min={minValue}
+            step={10}
+            max={maxValue}
+            size="small"
+            getAriaLabel={() => 'Years range'}
+            value={value}
+            onChange={handleChange}
+            valueLabelDisplay="on"
+            marks
+            valueLabelFormat={(x: any) => <span style={{fontSize: 'xx-small'}}>{x} г.</span>}
+            getAriaValueText={valuetext}
+        /> :
+        <></>;
 };
 
 export default React.memo(SliderController);
