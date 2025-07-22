@@ -128,7 +128,13 @@ const FondyNIABApp = () => {
         }
 
         return searched;
-    }, [currentPage, debouncedSearchTerm, isTypoTolerance]);
+    }, [
+        currentPage,
+        debouncedSearchTerm,
+        isTypoTolerance,
+        storeFilter,
+        langFilter,
+    ]);
 
     const searchHandler = ({target}: any) => {
         setSearchTerm(target.value);
@@ -145,7 +151,7 @@ const FondyNIABApp = () => {
     };
 
     const { isPending, isError, data, error } = useQuery({
-        queryKey: [currentPage, debouncedSearchTerm],
+        queryKey: [currentPage, debouncedSearchTerm, isTypoTolerance, langFilter, storeFilter],
         queryFn: algoliaSearch
     });
 
