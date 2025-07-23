@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import DynamicMapApp from "@/components/DynamicMapApp";
+import DynamicMapApp from "@/components/featured/DynamicMapApp";
 
 const title = "Залазье 1943г., Аэрофотосъёмка.";
 const description = "Деревня Залазье 14 октября 1943 г., Толочинский район, Витебская область. Аэрофотосъёмка, NCAP TUGX/0508";

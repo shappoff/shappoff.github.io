@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import DynamicMapApp from "@/components/DynamicMapApp";
+import DynamicMapApp from "@/components/featured/DynamicMapApp";
 
 export const metadata: Metadata = {
     title: "1870 г. Дер. Глинники. Генеральное межевание",

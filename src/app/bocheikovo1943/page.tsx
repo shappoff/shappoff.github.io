@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import DynamicMapApp from "@/components/DynamicMapApp";
+import DynamicMapApp from "@/components/featured/DynamicMapApp";
 
 const title = "Бочейково 4 августа 1943 г., Бешенковичский район";
 const description = "Бочейково 4 августа 1943 г., Бешенковичский район, Витебская область. Аэрофотосъёмка, NCAP TUGX/0500";

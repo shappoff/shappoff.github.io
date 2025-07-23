@@ -1,5 +1,5 @@
 import type {Metadata, Viewport} from "next";
-import GAAnalytics from "@/components/GAAnalytics";
+import GAAnalytics from "@/components/shared/GAAnalytics";
 import "./globals.css";
 
 export const viewport: Viewport = {

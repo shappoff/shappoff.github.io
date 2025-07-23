@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import HistoricalMap from "@/components/HistoricalMap";
+import HistoricalMap from "@/components/shared/HistoricalMap";
 
 const attribution = "Деревня Залазье 14 октября 1943 г., Аэрофотосъёмка, NCAP TUGX/0508";
 const tileUrl = "https://raw.githubusercontent.com/shappoff/storage/zalazje1943/tiles/{z}/{y}/{x}.jpg";
