@@ -4,7 +4,7 @@ const {
 } = L;
 import {Marker, Popup, Tooltip} from "react-leaflet";
 import React from "react";
-import {catholicCrossIcon, ortodoxCrossIcon} from "../icons";
+import {catholicCrossIcon, ortodoxCrossIcon} from "../../icons";
 
 // Define type for PrikhodPlaceMarker props
 interface PrikhodPlaceMarkerProps {

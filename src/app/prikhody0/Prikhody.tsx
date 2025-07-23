@@ -5,7 +5,7 @@ import React from "react";
 
 const Prikhody = () => {
     const MapApp = React.useMemo(() => dynamic(
-        () => import('@/components/prikhody/PrikhodyMapApp'),
+        () => import('@/components/featured/prikhody/PrikhodyMapApp'),
         {
             loading: () => <p>A map is loading</p>,
             ssr: false

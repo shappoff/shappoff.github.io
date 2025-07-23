@@ -14,10 +14,10 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import OpisCard from "@/components/niab/OpisCard";
+import OpisCard from "@/components/featured/niab/OpisCard";
 import Link from "next/link";
 import {Alert} from "@mui/material";
-import BasicTabs from "@/components/niab/CustomTabPanel";
+import BasicTabs from "@/components/featured/niab/CustomTabPanel";
 
 interface TabPanelProps {
     children?: React.ReactNode;

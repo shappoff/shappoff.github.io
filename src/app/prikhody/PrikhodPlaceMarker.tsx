@@ -10,7 +10,7 @@ import {catholicCrossIcon, ortodoxCrossIcon} from "@/components/icons";
 import { renderToStaticMarkup } from "react-dom/server";
 import Link from "next/link";
 import Image from 'next/image';
-import IndicateButton from "@/components/prikhody/IndicateButton";
+import IndicateButton from "@/components/featured/prikhody/IndicateButton";
 import React from "react";
 
 const PrikhodPlaceMarker = ({hit, isDev, markerLabel = 'Сохранилось дел:', setCurrentLocIdInPopUp, selectCallback, children}: any) => {

@@ -2,8 +2,8 @@
 
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import Markers from "@/app/prikhody/MarkersList";
-import useMarkersBounds from "@/components/prikhody/useMarkersBounds";
-import BoundsToMapItems from "@/components/prikhody/BoundsToMapItems";
+import useMarkersBounds from "@/components/featured/prikhody/useMarkersBounds";
+import BoundsToMapItems from "@/components/featured/prikhody/BoundsToMapItems";
 
 function WrapToMarkerClusterGroup({
                                       items,

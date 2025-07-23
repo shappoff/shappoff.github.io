@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import {Chip} from "@mui/material";
-import WrapToTooltip from "@/components/niab/BasicTooltip";
+import WrapToTooltip from "@/components/featured/niab/BasicTooltip";
 
 function compareDelaNumbers(a: any, b: any) {
     return +a.delo.replace(/[^0-9]/g, '') - +b.delo.replace(/[^0-9]/g, '');

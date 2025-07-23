@@ -17,9 +17,9 @@ const cyrillicToTranslit: any = new (CyrillicToTranslit as any);
 import {useRouter} from 'next/navigation';
 import {usePathname} from 'next/navigation';
 
-import {useWindowSize} from "@/components/prikhody/useWindowSize";
-import LayersControlComponent from "@/components/prikhody/LayersControlComponent";
-import SetMapSizeOnChange from "@/components/prikhody/SetMapSizeOnChange";
+import {useWindowSize} from "@/components/featured/prikhody/useWindowSize";
+import LayersControlComponent from "@/components/featured/prikhody/LayersControlComponent";
+import SetMapSizeOnChange from "@/components/featured/prikhody/SetMapSizeOnChange";
 import useDebounce from "@/components/shared/useDebounce";
 
 import algoliasearch from 'algoliasearch/lite';

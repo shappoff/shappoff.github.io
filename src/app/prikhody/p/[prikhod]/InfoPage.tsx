@@ -13,13 +13,13 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import useFirebaseAuth from "@/components/prikhody/useFirebaseAuth";
+import useFirebaseAuth from "@/components/featured/prikhody/useFirebaseAuth";
 import {getDatabase, ref} from "firebase/database";
 import {useList} from "react-firebase-hooks/database";
-import NPPlaceMarker from "@/components/prikhody/NPPlaceMarker";
+import NPPlaceMarker from "@/components/featured/prikhody/NPPlaceMarker";
 import SendArchivesData from "@/app/prikhody/p/[prikhod]/SendArchivesData";
-import useMarkersBounds from "@/components/prikhody/useMarkersBounds";
-import BoundsToMapItems from "@/components/prikhody/BoundsToMapItems";
+import useMarkersBounds from "@/components/featured/prikhody/useMarkersBounds";
+import BoundsToMapItems from "@/components/featured/prikhody/BoundsToMapItems";
 import DataTable from "@/app/prikhody/p/[prikhod]/DataTable";
 
 const InfoPage = ({archives, prikhod, digited, rejected}: any) => {

@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import FondyNIABApp from "@/components/niab/FondyNIABApp";
+import FondyNIABApp from "@/components/featured/niab/FondyNIABApp";
 import './NIAB.css';
 
 export const metadata: Metadata = {
