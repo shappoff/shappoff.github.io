@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import {useRouter} from 'next/navigation'
 import {Button} from "@mui/material";
 import React from "react";
-import CreatePortalWrapper from "@/components/CreatePortalWrapper";
+import CreatePortalWrapper from "@/components/shared/CreatePortalWrapper";
 import Box from '@mui/material/Box';
 import './InfoPage.css';
 import Tab from '@mui/material/Tab';

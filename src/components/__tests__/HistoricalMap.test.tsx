@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import HistoricalMap from '../HistoricalMap';
+import HistoricalMap from '../shared/HistoricalMap';
 
 // Mock react-leaflet components
 const mapContainerMock = jest.fn(({ children, ...props }) => (
@@ -88,4 +88,4 @@ describe('HistoricalMap', () => {
     expect(tileProps.maxZoom).toBe(6);
     expect(tileProps.minZoom).toBe(2);
   });
-}); 
+});

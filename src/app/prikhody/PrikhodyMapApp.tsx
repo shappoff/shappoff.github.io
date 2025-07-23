@@ -20,11 +20,11 @@ import {usePathname} from 'next/navigation';
 import {useWindowSize} from "@/components/prikhody/useWindowSize";
 import LayersControlComponent from "@/components/prikhody/LayersControlComponent";
 import SetMapSizeOnChange from "@/components/prikhody/SetMapSizeOnChange";
-import useDebounce from "@/components/useDebounce";
+import useDebounce from "@/components/shared/useDebounce";
 
 import algoliasearch from 'algoliasearch/lite';
 import WrapToMarkerClusterGroup from "@/app/prikhody/WrapToMarkerClusterGroup";
-import HomeButton from "@/components/HomeButton";
+import HomeButton from "@/components/shared/HomeButton";
 declare const process: any;
 
 const client = algoliasearch(

@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import useDebounce from "../useDebounce";
+import useDebounce from "../shared/useDebounce";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import PaginationNIAB from "@/components/niab/Pagination";

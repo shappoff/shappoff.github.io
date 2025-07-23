@@ -20,7 +20,7 @@ import {Alert} from "@mui/material";
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import './MainTabsOpisi.css'
-import CopyToClipboardData from "@/components/CopyToClipboardData";
+import CopyToClipboardData from "@/components/shared/CopyToClipboardData";
 import Divider from '@mui/material/Divider';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from '@mui/material/Accordion';

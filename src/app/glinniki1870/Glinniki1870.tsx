@@ -1,5 +1,5 @@
 import React from "react";
-import HistoricalMap from "@/components/HistoricalMap";
+import HistoricalMap from "@/components/shared/HistoricalMap";
 
 const attribution = "Деревня Глинники 1870 г., Генеральное межевание, НИАБ-2192-1-55";
 const tileUrl = "https://raw.githubusercontent.com/shappoff/storage/glinniki1870/tiles/{z}/{y}/{x}.jpg";

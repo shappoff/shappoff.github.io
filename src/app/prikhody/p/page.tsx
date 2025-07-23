@@ -6,7 +6,7 @@ import './prkhd.css';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import CreatePortalWrapper from "@/components/CreatePortalWrapper";
+import CreatePortalWrapper from "@/components/shared/CreatePortalWrapper";
 
 
 export const metadata: Metadata = {

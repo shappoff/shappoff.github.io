@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import DynamicMapApp from "@/components/DynamicMapApp";
+import DynamicMapApp from "@/components/featured/DynamicMapApp";
 import MarkersList from "@/app/glinniki1846/MarkersList";
 
 export const metadata: Metadata = {

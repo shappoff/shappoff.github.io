@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import CopyToClipboardData from "@/components/CopyToClipboardData";
+import CopyToClipboardData from "@/components/shared/CopyToClipboardData";
 import Tooltip from '@mui/material/Tooltip';
 import Link from "next/link";
 import {getNestedArrayValue} from "@/components/utils";

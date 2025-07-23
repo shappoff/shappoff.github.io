@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import HomeButton from "@/components/HomeButton";
+import HomeButton from "@/components/shared/HomeButton";
 import SelectDropDown from "@/components/niab/SelectDropDown";
 import TypoToleranceCheckbox from "@/components/niab/TypoToleranceCheckbox";
 import SliderController from "@/components/niab/SliderController";

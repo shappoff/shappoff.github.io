@@ -1,5 +1,5 @@
 import React from "react";
-import HistoricalMap from "@/components/HistoricalMap";
+import HistoricalMap from "@/components/shared/HistoricalMap";
 
 const attribution = "Бочейково 4 августа 1943 г., Бешенковичский район, Витебская область. Аэрофотосъёмка, NCAP TUGX/0500";
 const tileUrl = "https://raw.githubusercontent.com/shappoff/storage/bocheikovo1943/tiles/{z}/{y}/{x}.jpg";

@@ -1,5 +1,5 @@
 import React from "react";
-import HistoricalMap from "@/components/HistoricalMap";
+import HistoricalMap from "@/components/shared/HistoricalMap";
 
 const attribution = "Лесохозяйственный план государственного имения Глинник. Масштаб 1/8400. Могилевский уезд, Могилевская губерния";
 const tileUrl = "https://raw.githubusercontent.com/shappoff/storage/glinninki1846/tiles/{z}/{y}/{x}.jpg";

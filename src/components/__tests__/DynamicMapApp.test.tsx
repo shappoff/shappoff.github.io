@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import DynamicMapApp from '../DynamicMapApp';
+import DynamicMapApp from '../featured/DynamicMapApp';
 
 // Mock components for each mapKey
 const Zalazje1943 = ({ children }: { children?: React.ReactNode }) => <div data-testid="zalazje1943">Zalazje1943{children}</div>;
@@ -49,4 +49,4 @@ describe('DynamicMapApp', () => {
     expect(screen.getByTestId('child')).toBeInTheDocument();
     expect(screen.getByTestId('zalazje1943')).toContainElement(screen.getByTestId('child'));
   });
-}); 
+});

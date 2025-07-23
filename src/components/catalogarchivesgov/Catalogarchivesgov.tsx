@@ -11,7 +11,7 @@ import 'react-leaflet-markercluster/styles'
 
 import PlaceMarker from "@/components/catalogarchivesgov/PlaceMarker";
 import React from "react";
-import HomeButton from "@/components/HomeButton";
+import HomeButton from "@/components/shared/HomeButton";
 
 export default function Catalogarchivesgov({items}: any) {
     const list = items

@@ -15,7 +15,7 @@ import {
     MapContainer
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import useDebounce from "../useDebounce";
+import useDebounce from "../shared/useDebounce";
 import {useWindowSize} from "./useWindowSize";
 import SetMapSizeOnChange from "./SetMapSizeOnChange";
 import PrikhodPlaceMarker from "./PrikhodPlaceMarker";
