@@ -14,21 +14,6 @@ import React from "react";
 import HomeButton from "@/components/shared/HomeButton";
 
 export default function Catalogarchivesgov({items}: any) {
-    const list = items
-        .filter((item: any) =>
-            item.scopeAndContentNote &&
-            ~item.scopeAndContentNote?.indexOf(',') &&
-            !~item.scopeAndContentNote?.indexOf('Latitude:') &&
-            ~item.scopeAndContentNote?.indexOf('-'))
-        .map((item: any) => {
-            const [coords, title2] = item.scopeAndContentNote.split('-');
-            const [lat, lng] = coords.trim().split(',');
-            if (!(lat && lng)) {
-                return null
-            }
-            const _geoloc = {lat: lat.trim(), lng: lng.trim()};
-            return {...item, _geoloc, title2}
-        })
     return <>
         <HomeButton absolute={true} variant={true} />
         <MapContainer
@@ -57,7 +42,7 @@ export default function Catalogarchivesgov({items}: any) {
             </LayersControl>
             <MarkerClusterGroup>
                 {
-                    list.filter((item: any) => !!item).map((hit: any, index: number) => {
+                    items.map((hit: any, index: number) => {
                         return <PlaceMarker key={index} hit={hit}/>
                     })
                 }

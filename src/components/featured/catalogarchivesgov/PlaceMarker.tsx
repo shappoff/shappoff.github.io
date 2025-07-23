@@ -7,10 +7,10 @@ import {Marker, Popup, useMap} from "react-leaflet";
 import React from "react";
 
 const PlaceMarker = ({hit}: any) => {
-    const map = useMap();
     const {_geoloc} = hit;
 
     const {lat, lng} = _geoloc;
+
     return <Marker
         title={hit.title2}
         icon={new DivIcon({
