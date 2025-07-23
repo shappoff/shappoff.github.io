@@ -17,7 +17,6 @@ const NavBarNIAB = ({
                         langFilter,
                         isTypoTolerance,
                         setIsTypoTolerance,
-                        yearsRangeFilter,
                         yearsMinMax,
                         setYearsRangeFilter,
                         children
@@ -55,7 +54,6 @@ const NavBarNIAB = ({
             </Box>
             <div className="third-raw">
                 <SliderController
-                    yearsRangeFilter={yearsRangeFilter}
                     yearsMinMax={yearsMinMax}
                     setYearsRangeFilter={setYearsRangeFilter}
                 />

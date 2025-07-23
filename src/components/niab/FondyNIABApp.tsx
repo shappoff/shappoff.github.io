@@ -173,7 +173,6 @@ const FondyNIABApp = () => {
             langFilter={langFilter}
             isTypoTolerance={isTypoTolerance}
             setIsTypoTolerance={setIsTypoTolerance}
-            yearsRangeFilter={yearsRangeFilter}
             yearsMinMax={yearsMinMax}
             setYearsRangeFilter={setYearsRangeFilter}
         >
