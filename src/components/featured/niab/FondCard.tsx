@@ -5,7 +5,7 @@ import Link from "next/link";
 import Button from '@mui/material/Button';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from 'styled-components';
-import CardBody from "@/components/niab/CardBody";
+import CardBody from "@/components/featured/niab/CardBody";
 
 import './FondCard.css';
 import LaunchIcon from "@mui/icons-material/Launch";

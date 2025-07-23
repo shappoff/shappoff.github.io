@@ -2,9 +2,9 @@
 
 import React from "react";
 import HomeButton from "@/components/shared/HomeButton";
-import SelectDropDown from "@/components/niab/SelectDropDown";
-import TypoToleranceCheckbox from "@/components/niab/TypoToleranceCheckbox";
-import SliderController from "@/components/niab/SliderController";
+import SelectDropDown from "@/components/featured/niab/SelectDropDown";
+import TypoToleranceCheckbox from "@/components/featured/niab/TypoToleranceCheckbox";
+import SliderController from "@/components/featured/niab/SliderController";
 import Box from '@mui/material/Box';
 import {SelectChangeEvent} from "@mui/material";
 

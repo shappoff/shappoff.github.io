@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Link from "next/link";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import WrapToTooltip from "@/components/niab/BasicTooltip";
+import WrapToTooltip from "@/components/featured/niab/BasicTooltip";
 
 export default function OpisCard({info}: any) {
     const opisUrl = `https://drive.google.com/file/d/${info?.docId}`;

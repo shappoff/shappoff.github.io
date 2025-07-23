@@ -1,9 +1,9 @@
 'use client'
 import React from "react";
-import useDebounce from "../shared/useDebounce";
+import useDebounce from "../../shared/useDebounce";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import PaginationNIAB from "@/components/niab/Pagination";
+import PaginationNIAB from "@/components/featured/niab/Pagination";
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -11,9 +11,9 @@ import FondCard from "./FondCard";
 import {HashRoute} from "./HashRoute";
 
 import {fondNmbToObjectId} from "@/components/utils";
-import NavBarNIAB from "@/components/niab/NavBarNIAB";
-import SearchInputControl from "@/components/niab/SearchInputControl";
-import algoliaIndex from "@/components/niab/AlgoliaServiceInstance";
+import NavBarNIAB from "@/components/featured/niab/NavBarNIAB";
+import SearchInputControl from "@/components/featured/niab/SearchInputControl";
+import algoliaIndex from "@/components/featured/niab/AlgoliaServiceInstance";
 
 const HASH_MAP = {
     query: 'q',

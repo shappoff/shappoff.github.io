@@ -1,6 +1,6 @@
-import AlertInfo from "@/components/niab/AlertInfo";
+import AlertInfo from "@/components/featured/niab/AlertInfo";
 import * as React from "react";
-import ReactQueryTanstack from "@/components/niab/ReactQueryTanstack";
+import ReactQueryTanstack from "@/components/featured/niab/ReactQueryTanstack";
 // import Link from "next/link";
 
 export default function Layout({ children }: any) {

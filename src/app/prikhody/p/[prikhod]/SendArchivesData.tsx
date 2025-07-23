@@ -1,4 +1,4 @@
-import {sendTGMessage} from "@/components/prikhody/IndicateButton";
+import {sendTGMessage} from "@/components/featured/prikhody/IndicateButton";
 import React from "react";
 import Textarea from '@mui/joy/Textarea';
 import {Button} from "@mui/material";

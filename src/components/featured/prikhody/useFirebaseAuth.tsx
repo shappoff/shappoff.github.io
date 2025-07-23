@@ -1,7 +1,7 @@
 import React from "react";
 import {auth, app} from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import {getNickName} from "../utils";
+import {getNickName} from "../../utils";
 import {useSignInWithEmailAndPassword} from "react-firebase-hooks/auth";
 
 const useFirebaseAuth = () => {

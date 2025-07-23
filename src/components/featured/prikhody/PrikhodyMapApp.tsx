@@ -9,13 +9,13 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import '../../app/prikhody0/prikhody.css';
+import '../../../app/prikhody0/prikhody.css';
 
 import {
     MapContainer
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import useDebounce from "../shared/useDebounce";
+import useDebounce from "../../shared/useDebounce";
 import {useWindowSize} from "./useWindowSize";
 import SetMapSizeOnChange from "./SetMapSizeOnChange";
 import PrikhodPlaceMarker from "./PrikhodPlaceMarker";

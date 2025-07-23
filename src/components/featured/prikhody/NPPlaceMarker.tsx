@@ -4,7 +4,7 @@ const {
 } = L;
 import {Marker, Popup, Tooltip} from "react-leaflet";
 import React from "react";
-import {catholicCrossIcon, dot, ortodoxCrossIcon, square, triangle} from "../icons";
+import {catholicCrossIcon, dot, ortodoxCrossIcon, square, triangle} from "../../icons";
 
 const NPPlaceMarker = ({hit, color}: any) => {
     let icon = dot(color);

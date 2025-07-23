@@ -2,7 +2,7 @@ import Link from "next/link";
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
-import MainTabsOpisi from "@/components/niab/MainTabsOpisi";
+import MainTabsOpisi from "@/components/featured/niab/MainTabsOpisi";
 import fs from "fs";
 import HomeIcon from '@mui/icons-material/Home';
 import Stack from '@mui/material/Stack';
@@ -23,7 +23,7 @@ import {
     rejectedFormattedPath,
     stat333Path
 } from "@/components/paths";
-import GAnalitycs from "@/components/niab/GAnalitycs";
+import GAnalitycs from "@/components/featured/niab/GAnalitycs";
 
 export async function generateStaticParams() {
     const stPropsArr: Array<any> = [];

@@ -9,7 +9,7 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 import "leaflet/dist/leaflet.css";
 import 'react-leaflet-markercluster/styles'
 
-import PlaceMarker from "@/components/catalogarchivesgov/PlaceMarker";
+import PlaceMarker from "@/components/featured/catalogarchivesgov/PlaceMarker";
 import React from "react";
 import HomeButton from "@/components/shared/HomeButton";
 

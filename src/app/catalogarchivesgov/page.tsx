@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import Dynamic from "@/components/catalogarchivesgov/Dynamic";
+import Dynamic from "@/components/featured/catalogarchivesgov/Dynamic";
 import fs from "fs";
 import {
     all_merged,

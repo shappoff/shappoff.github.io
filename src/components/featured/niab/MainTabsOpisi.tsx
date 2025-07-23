@@ -6,8 +6,8 @@ import Tab from '@mui/material/Tab';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import Box from '@mui/material/Box';
-import OpisCard from "@/components/niab/OpisCard";
-import WrapToTooltip from "@/components/niab/BasicTooltip";
+import OpisCard from "@/components/featured/niab/OpisCard";
+import WrapToTooltip from "@/components/featured/niab/BasicTooltip";
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
