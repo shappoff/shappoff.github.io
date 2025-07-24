@@ -12,10 +12,10 @@ const Bocheikovo1943 = ({ children }: { children?: React.ReactNode }) => <div da
 jest.mock('next/dynamic', () => (importFn: any, opts: any) => {
   // Simulate the import function returning a promise with a default export
   const map = {
-    '@/app/zalazje1943/Zalazje1943': Zalazje1943,
-    '@/app/glinniki1870/Glinniki1870': Glinniki1870,
-    '@/app/glinniki1846/Glinniki1846': Glinniki1846,
-    '@/app/bocheikovo1943/Bocheikovo1943': Bocheikovo1943,
+    '@/components/featured/zalazje1943/Zalazje1943': Zalazje1943,
+    '@/components/featured/Glinniki1870': Glinniki1870,
+    '@/components/featured/glinniki1846/Glinniki1846': Glinniki1846,
+    '@/components/featured/Bocheikovo1943': Bocheikovo1943,
   };
   // Find the key by comparing the import function's toString
   const fnStr = importFn.toString();
