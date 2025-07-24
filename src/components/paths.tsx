@@ -1,16 +1,17 @@
 import path from "path";
 
-export const digitedPath = path.resolve(`public/niab/digited.json`);
-export const stat333Path = path.resolve(`public/niab/333-9.json`);
-export const rejectedPath = path.resolve(`public/niab/rejected.json`);
-export const indexedNIABDataPath = path.resolve(`public/indexedNIABData.json`);
-export const rejectedFormattedPath = path.resolve(`public/rejectedFormattedPath.json`);
-export const mainDataPath = path.resolve(`public/niab/data.json`);
-export const all_merged = path.resolve(`public/catalogarchivesgov/all_merged.json`);
-export const cgia_19_127Path = path.resolve(`public/cgia_19_127.json`);
-export const algolia_prikhods = path.resolve(`public/5_algolia_prikhods.json`);
-export const prikhodyMainDataPath = path.resolve(`public/prikhodyMainData.json`);
-export const prikhodyArchivesDataPath = path.resolve(`public/prikhodyArchivesData.json`);
-export const digitedFormattedDataPath = path.resolve(`public/digitedFormattedData.json`);
-export const namesDataPath = path.resolve(`public/names.json`);
-export const orthodox_catholicNameDataPath = path.resolve(`public/orthodox_catholicNameDataPath.json`);
+export const stat333Path = path.resolve(`src/app/niab/store/333-9.json`);
+export const rejectedPath = path.resolve(`src/app/niab/store/rejected.json`);
+export const mainDataPath = path.resolve(`src/app/niab/store/data.json`);
+export const indexedNIABDataPath = path.resolve(`src/app/niab/store/indexedNIABData.json`);
+export const rejectedFormattedPath = path.resolve(`src/app/niab/store/rejectedFormattedPath.json`);
+
+export const digitedFormattedDataPath = path.resolve(`src/app/prikhody/store/digitedFormattedData.json`);
+export const prikhodyArchivesDataPath = path.resolve(`src/app/prikhody/store/prikhodyArchivesData.json`);
+export const prikhodyMainDataPath = path.resolve(`src/app/prikhody/store/prikhodyMainData.json`);
+
+export const all_merged = path.resolve(`src/app/catalogarchivesgov/store/all_merged.json`);
+
+export const cgia_19_127Path = path.resolve(`src/app/cgia_19_127/store/cgia_19_127.json`);
+
+export const orthodox_catholicNameDataPath = path.resolve(`src/app/names/store/orthodox_catholicNameDataPath.json`);
