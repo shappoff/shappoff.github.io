@@ -3655,7 +3655,7 @@ export default async function () {
 
 function writeFile(
     path: PathOrFileDescriptor,
-    contents: string | NodeJS.ArrayBufferView,
+    contents: Object | Array<any>,
     options: WriteFileOptions = {encoding: 'utf8', flag: 'w'}
 ) {
     fs.mkdir(getDirName(path), {recursive: true}, function (err) {
