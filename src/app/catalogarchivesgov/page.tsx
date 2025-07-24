@@ -1,9 +1,7 @@
 import {Metadata} from "next";
 import Dynamic from "@/components/featured/catalogarchivesgov/Dynamic";
 import fs from "fs";
-import {
-    all_merged,
-} from "@/components/paths";
+import {catalogarchivesgovPath} from "@/components/paths";
 
 export const metadata: Metadata = {
     title: "Карта аэрофотосъемки Беларуси времен ВОВ",
@@ -11,6 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default function CatalogarchivesgovPage() {
-    const belarusItems = JSON.parse(fs.readFileSync(all_merged, 'utf8'));
+    const belarusItems = JSON.parse(fs.readFileSync(catalogarchivesgovPath, 'utf8'));
     return <Dynamic items={belarusItems}/>;
 }

@@ -19,15 +19,15 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import {
     digitedFormattedDataPath,
     indexedNIABDataPath,
-    mainDataPath,
+    mainFODDataPath,
     rejectedFormattedPath,
-    stat333Path
+    statistics333projectPath
 } from "@/components/paths";
 import GAnalitycs from "@/components/featured/niab/GAnalitycs";
 
 export async function generateStaticParams() {
     const stPropsArr: Array<any> = [];
-    const allPosts = JSON.parse(fs.readFileSync(mainDataPath, 'utf8'));
+    const allPosts = JSON.parse(fs.readFileSync(mainFODDataPath, 'utf8'));
     allPosts.forEach(({fod}: any) => {
         stPropsArr.push({fond: `${fod}`});
     })
@@ -37,7 +37,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: any) {
     const {fond} = await params;
-    const allPosts = JSON.parse(fs.readFileSync(mainDataPath, 'utf8'));
+    const allPosts = JSON.parse(fs.readFileSync(mainFODDataPath, 'utf8'));
 
     const currentItem = allPosts.find((item: any) => +item.fod === +fond || item.fod === fond) || {};
 
@@ -57,11 +57,11 @@ export async function generateMetadata({ params }: any) {
 
 const FondPage = async ({params}: any) => {
     const {fond} = await params;
-    const allPosts = JSON.parse(fs.readFileSync(mainDataPath, 'utf8'));
+    const allPosts = JSON.parse(fs.readFileSync(mainFODDataPath, 'utf8'));
     const rejectedPosts = JSON.parse(fs.readFileSync(rejectedFormattedPath, 'utf8'));
     const digitedFormattedData = JSON.parse(fs.readFileSync(digitedFormattedDataPath, 'utf8'));
     const indexedNIABData = JSON.parse(fs.readFileSync(indexedNIABDataPath, 'utf8'));
-    const d333Posts = JSON.parse(fs.readFileSync(stat333Path, 'utf8'));
+    const d333Posts = JSON.parse(fs.readFileSync(statistics333projectPath, 'utf8'));
     const currentItem = allPosts.find((item: any) => +item.fod === +fond || item.fod === fond) || {};
     const opNmbPool: any = {};
     currentItem.opisi.forEach(({opNmb}: any) => {
