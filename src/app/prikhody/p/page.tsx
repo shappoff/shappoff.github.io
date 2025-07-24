@@ -2,7 +2,7 @@ import {Metadata} from "next";
 import fs from "fs";
 import {prikhodyMainDataPath} from "@/components/paths";
 
-import './prkhd.css';
+import './pPage.css';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';

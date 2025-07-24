@@ -1,7 +1,7 @@
 import {Metadata} from "next";
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import BasicStack from "@/app/niab/about/BasicStack";
+import BasicStack from "@/components/featured/niab/BasicStack";
 
 const title = 'Индексация описей НИАБ';
 

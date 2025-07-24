@@ -1,6 +1,6 @@
 import {Metadata} from "next";
 import DynamicMapApp from "@/components/featured/DynamicMapApp";
-import MarkersList from "@/app/glinniki1846/MarkersList";
+import MarkersList from "@/components/featured/glinniki1846/MarkersList";
 
 export const metadata: Metadata = {
     title: "1846 год, им. Глинник. Масштаб 1/8400.",

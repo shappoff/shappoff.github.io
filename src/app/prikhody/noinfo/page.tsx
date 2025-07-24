@@ -5,7 +5,7 @@ import {
     prikhodyArchivesDataPath,
     prikhodyMainDataPath,
 } from "@/components/paths";
-import WrapToMarkerClusterGroup from "@/app/prikhody/WrapToMarkerClusterGroup";
+import WrapToMarkerClusterGroup from "@/components/featured/prikhody/WrapToMarkerClusterGroup";
 
 export const metadata: Metadata = {
     title: 'Оцифрованные дела НИАБ | Карта приходов',

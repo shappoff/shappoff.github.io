@@ -17,10 +17,10 @@ import useFirebaseAuth from "@/components/featured/prikhody/useFirebaseAuth";
 import {getDatabase, ref} from "firebase/database";
 import {useList} from "react-firebase-hooks/database";
 import NPPlaceMarker from "@/components/featured/prikhody/NPPlaceMarker";
-import SendArchivesData from "@/app/prikhody/p/[prikhod]/SendArchivesData";
+import SendArchivesData from "@/components/featured/prikhody/SendArchivesData";
 import useMarkersBounds from "@/components/featured/prikhody/useMarkersBounds";
 import BoundsToMapItems from "@/components/featured/prikhody/BoundsToMapItems";
-import DataTable from "@/app/prikhody/p/[prikhod]/DataTable";
+import DataTable from "@/components/featured/prikhody/DataTable";
 
 const InfoPage = ({archives, prikhod, digited, rejected}: any) => {
     const [objectID, title, pTitle, pType, lat, lng, src, atd] = prikhod;

@@ -1,7 +1,7 @@
 import fs from "fs";
 import {prikhodyMainDataPath} from "@/components/paths";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
-import WrapToMarkerClusterGroup from "@/app/prikhody/WrapToMarkerClusterGroup";
+import WrapToMarkerClusterGroup from "@/components/featured/prikhody/WrapToMarkerClusterGroup";
 const cyrillicToTranslit: any = new (CyrillicToTranslit as any);
 
 type Params = {
