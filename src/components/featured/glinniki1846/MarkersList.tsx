@@ -7,7 +7,7 @@ import {
     Marker,
     Popup,
 } from "react-leaflet";
-import {items} from "@/app/glinniki1846/items";
+import {items} from "@/components/featured/glinniki1846/items";
 
 const MarkersList = () => {
     return (

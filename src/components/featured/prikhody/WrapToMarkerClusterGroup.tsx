@@ -1,7 +1,7 @@
 'use client'
 
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import Markers from "@/app/prikhody/MarkersList";
+import Markers from "@/components/featured/prikhody/MarkersList";
 import useMarkersBounds from "@/components/featured/prikhody/useMarkersBounds";
 import BoundsToMapItems from "@/components/featured/prikhody/BoundsToMapItems";
 

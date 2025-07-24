@@ -1,6 +1,6 @@
 'use client'
 
-import PrikhodPlaceMarker from "@/app/prikhody/PrikhodPlaceMarker";
+import PrikhodPlaceMarker from "@/components/featured/prikhody/PrikhodPlaceMarker";
 import Link from "next/link";
 
 const Markers = ({items, markerLabel}: any) => {

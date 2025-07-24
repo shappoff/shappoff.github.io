@@ -3,7 +3,7 @@ import fs from "fs";
 import {
     prikhodyMainDataPath,
 } from "@/components/paths";
-import WrapToMarkerClusterGroup from "@/app/prikhody/WrapToMarkerClusterGroup";
+import WrapToMarkerClusterGroup from "@/components/featured/prikhody/WrapToMarkerClusterGroup";
 
 export const metadata: Metadata = {
     title: 'Православные приходы | Карта приходов',

@@ -1,8 +1,8 @@
 import {Metadata} from "next";
 import fs from "fs";
 import {prikhodyMainDataPath} from "@/components/paths";
-import Markers from "@/app/prikhody/MarkersList";
-import WrapToMarkerClusterGroup from "@/app/prikhody/WrapToMarkerClusterGroup";
+import Markers from "@/components/featured/prikhody/MarkersList";
+import WrapToMarkerClusterGroup from "@/components/featured/prikhody/WrapToMarkerClusterGroup";
 
 export const metadata: Metadata = {
     title: 'Карта приходов',

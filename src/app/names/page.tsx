@@ -1,7 +1,7 @@
 import {Metadata} from "next";
 import fs from "fs";
 import {orthodox_catholicNameDataPath} from "@/components/paths";
-import Names, {type NameData} from "@/app/names/Names";
+import Names, {type NameData} from "@/components/featured/names/Names";
 
 export const metadata: Metadata = {
     title: 'Имена | Православные и Католические',

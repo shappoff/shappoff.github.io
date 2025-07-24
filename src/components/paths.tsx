@@ -10,7 +10,7 @@ export const digitedFormattedDataPath = path.resolve(`src/app/prikhody/store/dig
 export const prikhodyArchivesDataPath = path.resolve(`src/app/prikhody/store/prikhodyArchivesData.json`);
 export const prikhodyMainDataPath = path.resolve(`src/app/prikhody/store/prikhodyMainData.json`);
 
-export const all_merged = path.resolve(`src/app/catalogarchivesgov/store/all_merged.json`);
+export const all_merged = path.resolve(`src/app/catalogarchivesgov/all_merged.json`);
 
 export const cgia_19_127Path = path.resolve(`src/app/cgia_19_127/store/cgia_19_127.json`);
 

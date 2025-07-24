@@ -5,8 +5,8 @@ import {
     prikhodyMainDataPath,
     rejectedFormattedPath
 } from "@/components/paths";
-import WrapToMarkerClusterGroup from "@/app/prikhody/WrapToMarkerClusterGroup";
-import InfoPage from "./InfoPage";
+import WrapToMarkerClusterGroup from "@/components/featured/prikhody/WrapToMarkerClusterGroup";
+import InfoPage from "../../../../components/featured/prikhody/InfoPage";
 
 
 type Params = {
