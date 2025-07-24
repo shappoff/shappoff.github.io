@@ -1,10 +1,8 @@
 import {Metadata} from "next";
 import fs from "fs";
-import path from "path";
 import Link from "next/link";
 import {List, ListItem} from "@mui/material";
-
-const targetNIAB = path.resolve(`public/niab/data.json`);
+import {mainFODDataPath} from "@/components/paths";
 
 export const metadata: Metadata = {
     title: "Фонды и описи НИАБ",
@@ -24,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default async function NIAB() {
-    const allPosts = JSON.parse(fs.readFileSync(targetNIAB, 'utf8'));
+    const allPosts = JSON.parse(fs.readFileSync(mainFODDataPath, 'utf8'));
     return <List key="List-all">
         {
             allPosts
