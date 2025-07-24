@@ -1,4 +1,5 @@
-import fs from "fs";
+import fs, {PathOrFileDescriptor, WriteFileOptions} from "fs";
+const getDirName = require('path').dirname;
 import {getGoogleSheetsDataArr} from "@/components/gsheets";
 import {
     mainDataPath,
@@ -3447,15 +3448,9 @@ export default async function () {
         orthodoxName
     } = await getGoogleSheetsDataArr(spreadsheetsConfig);
 
-    fs.writeFileSync(cgia_19_127Path, JSON.stringify(cgia_19_127, null, 4), {
-        encoding: 'utf8',
-        flag: 'w'
-    });
+    writeFile(cgia_19_127Path, JSON.stringify(cgia_19_127, null, 4));
 
-    fs.writeFileSync(prikhodyMainDataPath, JSON.stringify(prikhodyMain, null, 4), {
-        encoding: 'utf8',
-        flag: 'w'
-    });
+    writeFile(prikhodyMainDataPath, JSON.stringify(prikhodyMain, null, 4));
 
     let prikhodyArchivesDataObj: any = {};
     prikhodyArchives
@@ -3466,15 +3461,9 @@ export default async function () {
 
             prikhodyArchivesDataObj[objectID].push([year, type, short, fod, link, full, pages, note]);
         });
-    fs.writeFileSync(prikhodyArchivesDataPath, JSON.stringify(prikhodyArchivesDataObj, null, 4), {
-        encoding: 'utf8',
-        flag: 'w'
-    });
+    writeFile(prikhodyArchivesDataPath, JSON.stringify(prikhodyArchivesDataObj, null, 4));
 
-    fs.writeFileSync(stat333Path, JSON.stringify(stat333, null, 4), {
-        encoding: 'utf8',
-        flag: 'w'
-    });
+    writeFile(stat333Path, JSON.stringify(stat333, null, 4));
 
     const indexedFormattedData: any = indexed.reduce((pool: any, [fond, opis, value]: any, index: number, arr: Array<any>) => {
         if (!pool[fond]) {
@@ -3486,10 +3475,7 @@ export default async function () {
         return pool;
     }, {});
 
-    fs.writeFileSync(indexedNIABDataPath, JSON.stringify(indexedFormattedData, null, 4), {
-        encoding: 'utf8',
-        flag: 'w'
-    });
+    writeFile(indexedNIABDataPath, JSON.stringify(indexedFormattedData, null, 4));
 
     const digitedFormattedData: any = digited.reduce((pool: any, [fond, opis, value, comment]: any, index: number, arr: Array<any>) => {
         if (!pool[fond]) {
@@ -3504,16 +3490,10 @@ export default async function () {
         return pool;
     }, {});
 
-    fs.writeFileSync(digitedFormattedDataPath, JSON.stringify(digitedFormattedData, null, 4), {
-        encoding: 'utf8',
-        flag: 'w'
-    });
+    writeFile(digitedFormattedDataPath, JSON.stringify(digitedFormattedData, null, 4));
     const rejectedRawData: any = rejected
         .filter((v: any) => v.length);
-    fs.writeFileSync(rejectedPath, JSON.stringify(rejectedRawData, null, 4), {
-        encoding: 'utf8',
-        flag: 'w'
-    });
+    writeFile(rejectedPath, JSON.stringify(rejectedRawData, null, 4));
 
     const rejectedFormattedData = rejectedRawData.reduce((pool: any, [fond, opis, delo, title, req, answer, reason, send, scan, contact, comment]: any, index: number, arr: Array<any>) => {
         if (!pool[fond]) {
@@ -3527,10 +3507,7 @@ export default async function () {
         }
         return pool;
     }, {});
-    fs.writeFileSync(rejectedFormattedPath, JSON.stringify(rejectedFormattedData, null, 4), {
-        encoding: 'utf8',
-        flag: 'w'
-    });
+    writeFile(rejectedFormattedPath, JSON.stringify(rejectedFormattedData, null, 4));
 
     const tabRangesData: Array<any> = [];
     let titles: any;
@@ -3652,10 +3629,7 @@ export default async function () {
 
     currentItem && tabRangesData.push(currentItem);
 
-    fs.writeFileSync(mainDataPath, JSON.stringify(tabRangesData, null, 4), {
-        encoding: 'utf8',
-        flag: 'w'
-    });
+    writeFile(mainDataPath, JSON.stringify(tabRangesData, null, 4));
 
     const handleNameRow = () => {
         let titlesPool: any;
@@ -3678,14 +3652,17 @@ export default async function () {
     const catholicNameData = catholicName.map(handleNameRow());
     const orthodoxNameData = orthodoxName.map(handleNameRow());
 
-    fs.writeFileSync(orthodox_catholicNameDataPath, JSON.stringify([...catholicNameData, ...orthodoxNameData], null, 4), {
-        encoding: 'utf8',
-        flag: 'w'
-    });
+    writeFile(orthodox_catholicNameDataPath, JSON.stringify([...catholicNameData, ...orthodoxNameData], null, 4));
 }
 
-function createDirIfNot(dir: any) {
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
-    }
+function writeFile(
+    path: PathOrFileDescriptor,
+    contents: string | NodeJS.ArrayBufferView,
+    options: WriteFileOptions = {encoding: 'utf8', flag: 'w'}
+) {
+    fs.mkdir(getDirName(path), {recursive: true}, function (err) {
+        if (err) return err;
+
+        fs.writeFileSync(path, contents, options);
+    });
 }
