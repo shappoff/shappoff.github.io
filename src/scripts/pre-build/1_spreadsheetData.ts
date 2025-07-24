@@ -2,9 +2,9 @@ import fs, {PathOrFileDescriptor, WriteFileOptions} from "fs";
 const getDirName = require('path').dirname;
 import {getGoogleSheetsDataArr} from "@/components/gsheets";
 import {
-    mainDataPath,
-    rejectedPath,
-    stat333Path,
+    mainFODDataPath,
+    rejectedCasesByHiabPath,
+    statistics333projectPath,
     cgia_19_127Path,
     prikhodyMainDataPath,
     prikhodyArchivesDataPath,
@@ -3463,7 +3463,7 @@ export default async function () {
         });
     writeFile(prikhodyArchivesDataPath, JSON.stringify(prikhodyArchivesDataObj, null, 4));
 
-    writeFile(stat333Path, JSON.stringify(stat333, null, 4));
+    writeFile(statistics333projectPath, JSON.stringify(stat333, null, 4));
 
     const indexedFormattedData: any = indexed.reduce((pool: any, [fond, opis, value]: any, index: number, arr: Array<any>) => {
         if (!pool[fond]) {
@@ -3493,7 +3493,7 @@ export default async function () {
     writeFile(digitedFormattedDataPath, JSON.stringify(digitedFormattedData, null, 4));
     const rejectedRawData: any = rejected
         .filter((v: any) => v.length);
-    writeFile(rejectedPath, JSON.stringify(rejectedRawData, null, 4));
+    writeFile(rejectedCasesByHiabPath, JSON.stringify(rejectedRawData, null, 4));
 
     const rejectedFormattedData = rejectedRawData.reduce((pool: any, [fond, opis, delo, title, req, answer, reason, send, scan, contact, comment]: any, index: number, arr: Array<any>) => {
         if (!pool[fond]) {
@@ -3629,7 +3629,7 @@ export default async function () {
 
     currentItem && tabRangesData.push(currentItem);
 
-    writeFile(mainDataPath, JSON.stringify(tabRangesData, null, 4));
+    writeFile(mainFODDataPath, JSON.stringify(tabRangesData, null, 4));
 
     const handleNameRow = () => {
         let titlesPool: any;
