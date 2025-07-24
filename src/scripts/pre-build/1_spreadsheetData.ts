@@ -3,7 +3,6 @@ const getDirName = require('path').dirname;
 import {getGoogleSheetsDataArr} from "@/components/gsheets";
 import {
     mainFODDataPath,
-    rejectedCasesByHiabPath,
     statistics333projectPath,
     cgia_19_127Path,
     prikhodyMainDataPath,
@@ -3493,7 +3492,6 @@ export default async function () {
     writeFile(digitedFormattedDataPath, digitedFormattedData);
     const rejectedRawData: any = rejected
         .filter((v: any) => v.length);
-    writeFile(rejectedCasesByHiabPath, rejectedRawData);
 
     const rejectedFormattedData = rejectedRawData.reduce((pool: any, [fond, opis, delo, title, req, answer, reason, send, scan, contact, comment]: any, index: number, arr: Array<any>) => {
         if (!pool[fond]) {
