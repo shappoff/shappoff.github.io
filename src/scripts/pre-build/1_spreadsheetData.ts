@@ -3448,9 +3448,9 @@ export default async function () {
         orthodoxName
     } = await getGoogleSheetsDataArr(spreadsheetsConfig);
 
-    writeFile(cgia_19_127Path, JSON.stringify(cgia_19_127, null, 4));
+    writeFile(cgia_19_127Path, cgia_19_127);
 
-    writeFile(prikhodyMainDataPath, JSON.stringify(prikhodyMain, null, 4));
+    writeFile(prikhodyMainDataPath, prikhodyMain);
 
     let prikhodyArchivesDataObj: any = {};
     prikhodyArchives
@@ -3461,9 +3461,9 @@ export default async function () {
 
             prikhodyArchivesDataObj[objectID].push([year, type, short, fod, link, full, pages, note]);
         });
-    writeFile(prikhodyArchivesDataPath, JSON.stringify(prikhodyArchivesDataObj, null, 4));
+    writeFile(prikhodyArchivesDataPath, prikhodyArchivesDataObj);
 
-    writeFile(statistics333projectPath, JSON.stringify(stat333, null, 4));
+    writeFile(statistics333projectPath, stat333);
 
     const indexedFormattedData: any = indexed.reduce((pool: any, [fond, opis, value]: any, index: number, arr: Array<any>) => {
         if (!pool[fond]) {
@@ -3475,7 +3475,7 @@ export default async function () {
         return pool;
     }, {});
 
-    writeFile(indexedNIABDataPath, JSON.stringify(indexedFormattedData, null, 4));
+    writeFile(indexedNIABDataPath, indexedFormattedData);
 
     const digitedFormattedData: any = digited.reduce((pool: any, [fond, opis, value, comment]: any, index: number, arr: Array<any>) => {
         if (!pool[fond]) {
@@ -3490,10 +3490,10 @@ export default async function () {
         return pool;
     }, {});
 
-    writeFile(digitedFormattedDataPath, JSON.stringify(digitedFormattedData, null, 4));
+    writeFile(digitedFormattedDataPath, digitedFormattedData);
     const rejectedRawData: any = rejected
         .filter((v: any) => v.length);
-    writeFile(rejectedCasesByHiabPath, JSON.stringify(rejectedRawData, null, 4));
+    writeFile(rejectedCasesByHiabPath, rejectedRawData);
 
     const rejectedFormattedData = rejectedRawData.reduce((pool: any, [fond, opis, delo, title, req, answer, reason, send, scan, contact, comment]: any, index: number, arr: Array<any>) => {
         if (!pool[fond]) {
@@ -3507,7 +3507,7 @@ export default async function () {
         }
         return pool;
     }, {});
-    writeFile(rejectedFormattedPath, JSON.stringify(rejectedFormattedData, null, 4));
+    writeFile(rejectedFormattedPath, rejectedFormattedData);
 
     const tabRangesData: Array<any> = [];
     let titles: any;
@@ -3629,7 +3629,7 @@ export default async function () {
 
     currentItem && tabRangesData.push(currentItem);
 
-    writeFile(mainFODDataPath, JSON.stringify(tabRangesData, null, 4));
+    writeFile(mainFODDataPath, tabRangesData);
 
     const handleNameRow = () => {
         let titlesPool: any;
@@ -3652,7 +3652,7 @@ export default async function () {
     const catholicNameData = catholicName.map(handleNameRow());
     const orthodoxNameData = orthodoxName.map(handleNameRow());
 
-    writeFile(orthodox_catholicNameDataPath, JSON.stringify([...catholicNameData, ...orthodoxNameData], null, 4));
+    writeFile(orthodox_catholicNameDataPath, [...catholicNameData, ...orthodoxNameData]);
 }
 
 function writeFile(
@@ -3662,7 +3662,7 @@ function writeFile(
 ) {
     fs.mkdir(getDirName(path), {recursive: true}, function (err) {
         if (err) return err;
-
-        fs.writeFileSync(path, contents, options);
+        const contentsString = JSON.stringify(contents, null,4);
+        fs.writeFileSync(path, contentsString, options);
     });
 }
