@@ -25,6 +25,7 @@ import useDebounce from "@/components/shared/useDebounce";
 import algoliasearch from 'algoliasearch/lite';
 import WrapToMarkerClusterGroup from "@/components/featured/prikhody/WrapToMarkerClusterGroup";
 import HomeButton from "@/components/shared/HomeButton";
+import Spinner from "@/components/shared/Spinner";
 declare const process: any;
 
 const client = algoliasearch(
@@ -277,9 +278,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
                 </Box>
             </div>
             {
-                isLoading ? <Box sx={{ position: 'absolute', top: '50%', right: '50%', zIndex: 1000 }}>
-                    <CircularProgress />
-                </Box> : <></>
+                isLoading ? <Spinner /> : <></>
             }
             <MapContainer
                 attributionControl={false}

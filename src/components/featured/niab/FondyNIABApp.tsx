@@ -1,8 +1,6 @@
 'use client'
 import React from "react";
 import useDebounce from "../../shared/useDebounce";
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
 import PaginationNIAB from "@/components/featured/niab/Pagination";
 
 import { useQuery } from '@tanstack/react-query';
@@ -14,6 +12,7 @@ import {fondNmbToObjectId} from "@/components/utils";
 import NavBarNIAB from "@/components/featured/niab/NavBarNIAB";
 import SearchInputControl from "@/components/featured/niab/SearchInputControl";
 import algoliaIndex from "@/components/featured/niab/AlgoliaServiceInstance";
+import Spinner from "@/components/shared/Spinner";
 
 const HASH_MAP = {
     query: 'q',
@@ -191,9 +190,7 @@ const FondyNIABApp = () => {
         </div>
         <PaginationNIAB currentPage={data?.page || 0} nbPages={data?.nbPages || 0} setCurrentPage={setCurrentPage} />
         {
-            isPending ? <Box sx={{ display: 'flex' }}>
-                <CircularProgress />
-            </Box> : <></>
+            isPending ? <Spinner /> : <></>
         }
     </div>;
 };

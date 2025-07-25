@@ -1,21 +1,18 @@
 'use client'
 
-import dynamic from 'next/dynamic';
+import React from "react";
 
-const MarkersItemsList = dynamic(() => import('@/components/featured/catalogarchivesgov/MarkersItemsList'), {
-    ssr: false, // Ensure this component is only loaded on the client-side
-    loading: () => <p>Loading...</p>, // Optional loading state
-});
-const Catalogarchivesgov = dynamic(() => import('@/components/featured/catalogarchivesgov/Catalogarchivesgov'), {
-    ssr: false, // Ensure this component is only loaded on the client-side
-    loading: () => <p>Loading...</p>, // Optional loading state
-});
+import MarkersItemsList  from '@/components/featured/catalogarchivesgov/MarkersItemsList';
+import Spinner from "@/components/shared/Spinner";
+const Catalogarchivesgov = React.lazy(() => import('@/components/featured/catalogarchivesgov/Catalogarchivesgov'));
 
 
 const MapWrapper = ({items}: any) => {
-    return <Catalogarchivesgov>
-        <MarkersItemsList items={items} />
-    </Catalogarchivesgov>
+    return <React.Suspense fallback={<Spinner />}>
+        <Catalogarchivesgov>
+            <MarkersItemsList items={items} />
+        </Catalogarchivesgov>
+    </React.Suspense>
 };
 
 export default MapWrapper;
