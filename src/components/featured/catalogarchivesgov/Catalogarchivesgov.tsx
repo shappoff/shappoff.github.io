@@ -1,52 +1,40 @@
 'use client'
 
-import {
-    LayersControl,
-    MapContainer, TileLayer
-} from "react-leaflet";
-import MarkerClusterGroup from 'react-leaflet-markercluster';
-
-import "leaflet/dist/leaflet.css";
-import 'react-leaflet-markercluster/styles'
-
-import PlaceMarker from "@/components/featured/catalogarchivesgov/PlaceMarker";
 import React from "react";
-import HomeButton from "@/components/shared/HomeButton";
 
-export default function Catalogarchivesgov({items}: any) {
+const MarkerClusterGroup = React.lazy(() => import('react-leaflet-markercluster'));
+import 'react-leaflet-markercluster/styles';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import Box from '@mui/material/Box';
+import HistoricalMap from "@/components/shared/HistoricalMap";
+
+const attribution = '<div>Немецкие аэрофотоснимки Беларуси времен ВОВ. С сайта <a target="_blank" href="https://catalog.archives.gov/">catalog.archives.gov</a>.</div>';
+
+export default function Catalogarchivesgov({children}: any) {
     return <>
-        <HomeButton absolute={true} variant={true} />
-        <MapContainer
-            attributionControl={false}
-            id="map"
+        <HistoricalMap
+            minZoom={4}
+            maxZoom={20}
             center={[53.902287, 27.561824]}
             zoom={7}
-            trackResize={true}
-            scrollWheelZoom={true}
-            zoomControl={false}
+            tileUrl="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attributionControl={false}
             style={{position: 'relative', height: '100vh'}}
-        >
-            <LayersControl collapsed={false}>
-                <LayersControl.BaseLayer checked={true} name="OSM">
-                    <TileLayer
-                        url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`}
-                    />
-                </LayersControl.BaseLayer>
-                <LayersControl.BaseLayer name="Google">
-                    <TileLayer
-                        url={'http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}'}
-                        maxZoom={20}
-                        subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
-                    />
-                </LayersControl.BaseLayer>
-            </LayersControl>
-            <MarkerClusterGroup>
-                {
-                    items.map((hit: any, index: number) => {
-                        return <PlaceMarker key={index} hit={hit}/>
-                    })
-                }
-            </MarkerClusterGroup>
-        </MapContainer>
+            id="map"
+            zoomControl={false}
+            whenReady={() => {
+                setTimeout(() => {
+                    document!.querySelector('.leaflet-control-attribution.leaflet-control')!.innerHTML = attribution;
+                }, 100);
+            }}
+            attribution="">
+            <React.Suspense fallback={<Box sx={{ display: 'flex' }}><CircularProgress /></Box>}>
+                <MarkerClusterGroup>
+                    {children}
+                </MarkerClusterGroup>
+            </React.Suspense>
+
+        </HistoricalMap>
     </>
 }
