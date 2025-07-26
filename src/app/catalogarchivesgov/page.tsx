@@ -1,7 +1,7 @@
 import {Metadata} from "next";
 
 import fs from "fs";
-import {catalogarchivesgovPath} from "@/components/paths";
+import {catalogarchivesgovBelarusPath} from "@/components/paths";
 import HomeButton from "@/components/shared/HomeButton";
 import MapWrapper from "@/components/featured/catalogarchivesgov/MapWrapper";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function CatalogarchivesgovPage() {
-    const belarusItems = JSON.parse(fs.readFileSync(catalogarchivesgovPath, 'utf8'));
+    const belarusItems = JSON.parse(fs.readFileSync(catalogarchivesgovBelarusPath, 'utf8'));
     return <>
         <HomeButton absolute={true} variant={true}/>
         <MapWrapper items={belarusItems} />
