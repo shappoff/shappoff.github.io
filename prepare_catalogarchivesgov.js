@@ -1,21 +1,10 @@
 import fs from "fs";
 import path from "path";
 
-export const Belarus_full = JSON.parse(fs.readFileSync(path.resolve(`public/catalogarchivesgov/Belarus_full.json`), 'utf8'));
-export const smolensk_full = JSON.parse(fs.readFileSync(path.resolve(`public/catalogarchivesgov/smolensk_full.json`), 'utf8'));
-export const latvia_full = JSON.parse(fs.readFileSync(path.resolve(`public/catalogarchivesgov/latvia_full.json`), 'utf8'));
-export const lithuania_full = JSON.parse(fs.readFileSync(path.resolve(`public/catalogarchivesgov/lithuania_full.json`), 'utf8'));
-export const ukraine_full = JSON.parse(fs.readFileSync(path.resolve(`public/catalogarchivesgov/ukraine_full.json`), 'utf8'));
-export const russia_full = JSON.parse(fs.readFileSync(path.resolve(`public/catalogarchivesgov/russia_full.json`), 'utf8'));
-
+export const Belarus_full = JSON.parse(fs.readFileSync(path.resolve(`./catalog-export-20250726155113.json`), 'utf8'));
 
 const all = [
     ...Belarus_full,
-    ...smolensk_full,
-    ...latvia_full,
-    ...lithuania_full,
-    ...ukraine_full,
-    ...russia_full,
 ];
 
 const res = all.map((item) => {
@@ -29,9 +18,23 @@ const res = all.map((item) => {
         naId
     };
 
-});
+}).filter((item) =>
+    item.scopeAndContentNote &&
+    ~item.scopeAndContentNote?.indexOf(',') &&
+    !~item.scopeAndContentNote?.indexOf('Latitude:') &&
+    ~item.scopeAndContentNote?.indexOf('-'))
+    .map((item) => {
+        const [coords, title2] = item.scopeAndContentNote.split('-');
+        const [lat, lng] = coords.trim().split(',');
+        if (!(lat && lng)) {
+            return null
+        }
+        const _geoloc = {lat: lat.trim(), lng: lng.trim()};
+        delete item.scopeAndContentNote;
+        return {...item, _geoloc, title2}
+    }).filter((item) => !!item);
 
-fs.writeFileSync(path.resolve(`public/catalogarchivesgov/all_merged.json`), JSON.stringify(res, null, 4), {
+fs.writeFileSync(path.resolve(`./all_merged.json`), JSON.stringify(res, null, 4), {
     encoding: 'utf8',
     flag: 'w'
 });
