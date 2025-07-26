@@ -3,7 +3,7 @@ import PlaceMarker from "@/components/featured/catalogarchivesgov/PlaceMarker";
 
 function MarkersItemsList({items}: any) {
     return items.map((hit: any, index: number) => {
-        return <PlaceMarker key={index} hit={hit}/>
+        return <PlaceMarker key={`${hit.naId}${index}`} hit={hit}/>
     })
 }
 
