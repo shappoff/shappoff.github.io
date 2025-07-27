@@ -11,6 +11,7 @@ export const prikhodyMainDataPath = path.resolve(`src/app/prikhody/store/prikhod
 
 export const catalogarchivesgovPath = path.resolve(`src/app/catalogarchivesgov/all_merged.json`);
 export const catalogarchivesgovBelarusPath = path.resolve(`src/app/catalogarchivesgov/belarus.json`);
+export const catalogarchivesgovSmolenskPath = path.resolve(`src/app/catalogarchivesgov/smolensk/smolensk.json`);
 
 export const cgia_19_127Path = path.resolve(`src/app/cgia_19_127/store/cgia_19_127.json`);
 
