@@ -9,13 +9,10 @@ import HistoricalMap from "@/components/shared/HistoricalMap";
 import Spinner from "@/components/shared/Spinner";
 import dynamic from 'next/dynamic';
 
-const MarkersItemsList = dynamic(() => import('@/components/featured/catalogarchivesgov/MarkersItemsList'), {
-    loading: () => <Spinner />, ssr: false
-});
 
 const attribution = '<div>Немецкие аэрофотоснимки Беларуси времен ВОВ. С сайта <a target="_blank" href="https://catalog.archives.gov/">catalog.archives.gov</a>.</div>';
 
-export default function Catalogarchivesgov({items}: any) {
+export default function Catalogarchivesgov({children}: any) {
     return <HistoricalMap
         minZoom={4}
         maxZoom={20}
@@ -32,7 +29,7 @@ export default function Catalogarchivesgov({items}: any) {
         }}
         attribution={attribution}>
         <MarkerClusterGroup>
-            <MarkersItemsList items={items} />
+            {children}
         </MarkerClusterGroup>
     </HistoricalMap>
 }
