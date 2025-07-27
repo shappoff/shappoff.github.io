@@ -22,6 +22,13 @@ const useMarkersBounds = (mapHits: Array<MapHit>) => {
                 }
                 bounds.extend([lat, lng]);
             }
+            if (item?._geoloc?.lat && item?._geoloc?.lng) {
+                const {lat, lng} = item._geoloc;
+                if (!lat || !lng) {
+                    return;
+                }
+                bounds.extend([lat, lng]);
+            }
             if (Array.isArray(item) && item.length) {
                 const [,,,,lat, lng] = item;
                 if (!lat || !lng) {
