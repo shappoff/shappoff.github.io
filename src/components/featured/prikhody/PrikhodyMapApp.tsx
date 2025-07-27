@@ -203,6 +203,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
                 >
                     <HomeButton absolute={false} />
                     <Autocomplete
+                        blurOnSelect
                         onClose={() => {setIsLoading(false)}}
                         value={selectedPrikhodItem ? selectedPrikhodItem : ''}
                         size="small"
@@ -244,6 +245,7 @@ const PrikhodyMapApp = ({children, items}: any) => {
                         renderInput={(params) => <TextField {...params} label="Церковь / Костел" placeholder="Начните вводить" />}
                     />
                     <Autocomplete
+                        blurOnSelect
                         value={selectedATDItem ? selectedATDItem : ''}
                         size="small"
                         id="search-atd-input"
