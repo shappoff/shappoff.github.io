@@ -9,8 +9,8 @@ const Catalogarchivesgov = dynamic(() => import('@/components/featured/catalogar
 });
 
 
-const MapWrapper = ({items}: any) => {
-    return <Catalogarchivesgov items={items} />
+const MapWrapper = ({children}: any) => {
+    return <Catalogarchivesgov>{children}</Catalogarchivesgov>
 };
 
 export default MapWrapper;

@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import PlaceMarker from "@/components/featured/catalogarchivesgov/PlaceMarker";
 import useMarkersBounds from "@/components/featured/prikhody/useMarkersBounds";

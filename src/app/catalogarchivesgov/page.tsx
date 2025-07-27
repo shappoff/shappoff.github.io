@@ -2,7 +2,7 @@ import {Metadata} from "next";
 
 import fs from "fs";
 import {catalogarchivesgovBelarusPath} from "@/components/paths";
-import MapWrapper from "@/components/featured/catalogarchivesgov/MapWrapper";
+import MarkersItemsList from "@/components/featured/catalogarchivesgov/MarkersItemsList";
 
 
 export const metadata: Metadata = {
@@ -12,5 +12,6 @@ export const metadata: Metadata = {
 
 export default function CatalogarchivesgovPage() {
     const belarusItems = JSON.parse(fs.readFileSync(catalogarchivesgovBelarusPath, 'utf8'));
-    return <MapWrapper items={belarusItems} />;
+    return <MarkersItemsList items={belarusItems} />
+
 }

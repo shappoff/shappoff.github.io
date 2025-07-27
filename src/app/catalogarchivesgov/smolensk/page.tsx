@@ -2,8 +2,7 @@ import {Metadata} from "next";
 
 import fs from "fs";
 import {catalogarchivesgovSmolenskPath} from "@/components/paths";
-import HomeButton from "@/components/shared/HomeButton";
-import MapWrapper from "@/components/featured/catalogarchivesgov/MapWrapper";
+import MarkersItemsList from "@/components/featured/catalogarchivesgov/MarkersItemsList";
 
 export const metadata: Metadata = {
     title: "Карта аэрофотосъемки Смоленской области времен ВОВ",
@@ -11,9 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function CatalogarchivesgovPage() {
-    const belarusItems = JSON.parse(fs.readFileSync(catalogarchivesgovSmolenskPath, 'utf8'));
-    return <>
-        <HomeButton absolute={true} variant={true}/>
-        <MapWrapper items={belarusItems} />
-    </>;
+    const smolenskItems = JSON.parse(fs.readFileSync(catalogarchivesgovSmolenskPath, 'utf8'));
+    return <MarkersItemsList items={smolenskItems} />
 }
