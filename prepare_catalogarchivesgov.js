@@ -1,16 +1,34 @@
 import fs from "fs";
 import path from "path";
 
-export const belarus = JSON.parse(fs.readFileSync(path.resolve(`src/app/catalogarchivesgov/belarus.json`), 'utf8'));
-export const all_merged = JSON.parse(fs.readFileSync(path.resolve(`src/app/catalogarchivesgov/all_merged.json`), 'utf8'));
+export const itemArray = JSON.parse(fs.readFileSync(path.resolve(`public/catalog-export-20250727230309.json`), 'utf8'));
 
-const others = all_merged.filter((element) => {
-    const isExist = belarus.find((item) => item.title === element.title && item.title2 === element.title2 && item.naId === element.naId);
+const formaffedArray = itemArray
+    .filter((item) =>
+        item.scopeAndContentNote &&
+        ~item.scopeAndContentNote?.indexOf(',') &&
+        !~item.scopeAndContentNote?.indexOf('Latitude:') &&
+        ~item.scopeAndContentNote?.indexOf('-'))
+    .map((item) => {
+        const [coords, title2] = item.scopeAndContentNote.split('-');
+        const [lat, lng] = coords.trim().split(',');
+        if (!(lat && lng)) {
+            return null
+        }
+        const _geoloc = {lat: lat.trim(), lng: lng.trim()};
+        return {
+            title: item.title,
+            digitalObjects: item.digitalObjects,
+            productionDates: item.productionDates,
+            naId: item.naId,
+            _geoloc,
+            title2
+        }
+    })
+    .filter((item) => !!item)
 
-    return !isExist;
-});
 
-fs.writeFileSync(path.resolve(`public/others.json`), JSON.stringify(others, null, 4), {
+fs.writeFileSync(path.resolve(`public/smolensk.json`), JSON.stringify(formaffedArray, null, 4), {
     encoding: 'utf8',
     flag: 'w'
 });
