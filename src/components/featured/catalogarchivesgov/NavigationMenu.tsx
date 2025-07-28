@@ -11,23 +11,22 @@ export default function NavigationMenu() {
     const router = useRouter();
     const pathname = usePathname()
 
-    const [value, setValue] = React.useState(pathname);
+    const [selected, setSelected] = React.useState(pathname);
 
-    const isSelected = (value: string) => {
-        return {
-            classes: {
-                root: pathname === value ? 'Mui-selected' : ''
-            }
-        };
-    };
+    const isSelected = (value: string) => ({
+        classes: {
+            root: selected === value ? 'Mui-selected' : '',
+            label: selected === value ? 'Mui-selected' : ''
+        }
+    });
 
     return (
         <BottomNavigation
             sx={{ maxHeight: '2rem' }}
             showLabels
-            value={value}
+            value={selected}
             onChange={(event, newValue) => {
-                setValue(newValue);
+                setSelected(newValue);
             }}
         >
             <BottomNavigationAction
@@ -39,14 +38,14 @@ export default function NavigationMenu() {
                 label="Беларусь"
                 showLabel={true}
                 onClick={() => router.push('/catalogarchivesgov')}
-                value="catalogarchivesgov"
+                value="/catalogarchivesgov/"
                 component={Button}
                 {...isSelected('/catalogarchivesgov/')}
             />
             <BottomNavigationAction
                 label="Смоленск"
                 onClick={() => router.push('/catalogarchivesgov/smolensk')}
-                value="catalogarchivesgov/smolensk"
+                value="/catalogarchivesgov/smolensk/"
                 showLabel={true}
                 component={Button}
                 {...isSelected('/catalogarchivesgov/smolensk/')}
