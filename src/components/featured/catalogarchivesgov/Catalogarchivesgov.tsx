@@ -1,14 +1,9 @@
 'use client'
 
-import React from "react";
-
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import 'react-leaflet-markercluster/styles';
 
 import HistoricalMap from "@/components/shared/HistoricalMap";
-import Spinner from "@/components/shared/Spinner";
-import dynamic from 'next/dynamic';
-
 
 const attribution = '<div>Немецкие аэрофотоснимки Беларуси времен ВОВ. С сайта <a target="_blank" href="https://catalog.archives.gov/">catalog.archives.gov</a>.</div>';
 
@@ -19,7 +14,7 @@ export default function Catalogarchivesgov({children}: any) {
         center={[53.902287, 27.561824]}
         zoom={7}
         tileUrl="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        style={{position: 'relative', height: '100vh'}}
+        style={{position: 'relative', height: 'calc(100vh - 2rem)'}}
         id="map"
         zoomControl={false}
         whenReady={() => {
