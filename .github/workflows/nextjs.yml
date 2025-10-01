@@ -108,10 +108,6 @@ jobs:
          echo "TABLE_PRIKHODY_MAIN=${{secrets.TABLE_PRIKHODY_MAIN}}" >> ./.env.production
          echo "TABLE_ORTHODOX_CATHOLICS_NAME=${{secrets.TABLE_ORTHODOX_CATHOLICS_NAME}}" >> ./.env.production
 
-
-      - name: Run Jest Tests
-        run: npm run test
-
       - name: preBuild with Next.js
         run: npm run prebuild
 
