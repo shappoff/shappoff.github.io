@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 
 // Map key types for different map applications
-type MapKey = "zalazje1943" | "glinniki1870" | "glinniki1846" | "bocheikovo1943";
+type MapKey = "zalazje1943" | "glinniki1870" | "glinniki1846" | "bocheikovo1943" | "Usaya1640";
 
 // Component import function type
 type ComponentImportFunction = () => Promise<{ default: React.ComponentType<any> }>;
@@ -26,6 +26,7 @@ const componentMap: ComponentMap = {
   glinniki1870: () => import("@/components/featured/Glinniki1870"),
   glinniki1846: () => import("@/components/featured/glinniki1846/Glinniki1846"),
   bocheikovo1943: () => import("@/components/featured/Bocheikovo1943"),
+  Usaya1640: () => import("@/components/featured/Usaya1640"),
 };
 
 const DynamicMapApp: React.FC<DynamicMapAppProps> = ({ mapKey, children }): React.JSX.Element => {
