@@ -5,8 +5,6 @@ import {
     mainFODDataPath,
     statistics333projectPath,
     cgia_19_127Path,
-    prikhodyMainDataPath,
-    prikhodyArchivesDataPath,
     digitedFormattedDataPath,
     rejectedFormattedPath,
     indexedNIABDataPath,
@@ -3412,14 +3410,6 @@ const spreadsheetsConfig: SpreadsheetsArrayConfig = {
         spreadsheetId: process.env.TABLE_CGIA_19_127 as string,
         range: 'main!A1:H'
     },
-    prikhodyMain: {
-        spreadsheetId: process.env.TABLE_PRIKHODY_MAIN as string,
-        range: 'main!A2:H'
-    },
-    prikhodyArchives: {
-        spreadsheetId: process.env.TABLE_PRIKHODY_MAIN as string,
-        range: 'archives!A2:I'
-    },
     catholicName: {
         spreadsheetId: process.env.TABLE_ORTHODOX_CATHOLICS_NAME as string,
         range: 'catholic!A1:D'
@@ -3441,26 +3431,11 @@ export default async function () {
         digited,
         stat333,
         cgia_19_127,
-        prikhodyMain,
-        prikhodyArchives,
         catholicName,
         orthodoxName
     } = await getGoogleSheetsDataArr(spreadsheetsConfig);
 
     writeFile(cgia_19_127Path, cgia_19_127);
-
-    writeFile(prikhodyMainDataPath, prikhodyMain);
-
-    let prikhodyArchivesDataObj: any = {};
-    prikhodyArchives
-        .forEach(([objectID, year = '', type = '', short = '', fod = '', link = '', full = '', pages, note]: any) => {
-            if (!prikhodyArchivesDataObj[objectID]) {
-                prikhodyArchivesDataObj[objectID] = [];
-            }
-
-            prikhodyArchivesDataObj[objectID].push([year, type, short, fod, link, full, pages, note]);
-        });
-    writeFile(prikhodyArchivesDataPath, prikhodyArchivesDataObj);
 
     writeFile(statistics333projectPath, stat333);
 
