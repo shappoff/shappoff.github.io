@@ -6,8 +6,6 @@ export const indexedNIABDataPath = path.resolve(`src/app/niab/store/indexedNIABD
 export const rejectedFormattedPath = path.resolve(`src/app/niab/store/rejectedFormattedPath.json`);
 
 export const digitedFormattedDataPath = path.resolve(`src/app/prikhody/store/digitedFormattedData.json`);
-export const prikhodyArchivesDataPath = path.resolve(`src/app/prikhody/store/prikhodyArchivesData.json`);
-export const prikhodyMainDataPath = path.resolve(`src/app/prikhody/store/prikhodyMainData.json`);
 
 export const catalogarchivesgovPath = path.resolve(`src/app/catalogarchivesgov/all_merged.json`);
 export const catalogarchivesgovBelarusPath = path.resolve(`src/app/catalogarchivesgov/belarus.json`);
