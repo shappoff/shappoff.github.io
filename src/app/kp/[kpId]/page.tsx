@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 import '../pamyat.css';
-import {Metadata} from "next";
+import {Metadata, type Viewport} from "next";
 
 const books = [
     'tolochinskiy',
@@ -10,6 +10,11 @@ const books = [
     'berezovskiy',
     'sennenskiy',
 ];
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+}
 
 export async function generateStaticParams() {
     const stPropsArr: Array<any> = [];

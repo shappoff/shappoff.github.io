@@ -25,6 +25,12 @@ import {
 } from "@/components/paths";
 import GAnalitycs from "@/components/featured/niab/GAnalitycs";
 import fifthStorageSet from "@/components/featured/niab/fifthStorage";
+import type {Viewport} from "next";
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+}
 
 export async function generateStaticParams() {
     const stPropsArr: Array<any> = [];

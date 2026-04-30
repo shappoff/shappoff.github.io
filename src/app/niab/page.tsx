@@ -1,6 +1,11 @@
-import {Metadata} from "next";
+import {Metadata, type Viewport} from "next";
 import FondyNIABApp from "@/components/featured/niab/FondyNIABApp";
 import './NIAB.css';
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+}
 
 export const metadata: Metadata = {
     title: "Фонды и описи НИАБ",

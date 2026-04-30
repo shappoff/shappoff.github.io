@@ -1,7 +1,14 @@
 import AlertInfo from "@/components/featured/niab/AlertInfo";
 import * as React from "react";
 import ReactQueryTanstack from "@/components/featured/niab/ReactQueryTanstack";
+import type {Viewport} from "next";
 // import Link from "next/link";
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+}
+
 
 export default function Layout({ children }: any) {
     return (

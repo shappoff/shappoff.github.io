@@ -26,11 +26,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-    {
-      !!process.env.DEBUG ? <></> : <GAAnalytics />
-    }
+      <head>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+      </head>
       <body>
         {children}
+        {
+          !!process.env.DEBUG ? <></> : <GAAnalytics />
+        }
       </body>
     </html>
   );
