@@ -9,14 +9,12 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: 'shappoff',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://shappoff.github.io"),
   verification: {
     google: "WcZLxrvNHupEwOXBZ_xza8RMaDFrJ_7Nc_Ax_vyo0zw",
     yandex: "cd605c554612fb41"
   },
-  other: {
-    robots: "index, follow",
-    charset: "UTF-8",
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

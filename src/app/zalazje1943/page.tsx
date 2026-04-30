@@ -1,4 +1,5 @@
 import {Metadata} from "next";
+import Link from "next/link";
 import DynamicMapApp from "@/components/featured/DynamicMapApp";
 
 const title = "Залазье 1943г., Аэрофотосъёмка.";
@@ -31,5 +32,12 @@ export const metadata: Metadata = {
 };
 
 export default function Zalazje1943Page() {
-  return <DynamicMapApp mapKey="zalazje1943" />;
+  return (
+      <>
+          <p hidden>
+              Связанный исторический текст: <Link href="/zhigalo/">дневник Семена Жигало (1930-1943)</Link>.
+          </p>
+          <DynamicMapApp mapKey="zalazje1943" />
+      </>
+  );
 }

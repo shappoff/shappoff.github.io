@@ -44,7 +44,7 @@ const sitemapPages: SitemapPage[] = [
         priority: 1,
     },
     {
-        path: '/zhigalo',
+        path: '/zhigalo/',
         sourcePaths: ['src/app/zhigalo/page.tsx'],
         changeFrequency: 'monthly',
         priority: 0.9,

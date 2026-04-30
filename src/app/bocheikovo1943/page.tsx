@@ -1,4 +1,5 @@
 import {Metadata} from "next";
+import Link from "next/link";
 import DynamicMapApp from "@/components/featured/DynamicMapApp";
 
 const title = "Бочейково 4 августа 1943 г., Бешенковичский район";
@@ -31,5 +32,12 @@ export const metadata: Metadata = {
 };
 
 export default function Bocheikovo1943Page() {
-  return <DynamicMapApp mapKey="bocheikovo1943" />;
+  return (
+      <>
+          <p hidden>
+              Связанный источник эпохи: <Link href="/zhigalo/">дневник Семена Жигало (1930-1943)</Link>.
+          </p>
+          <DynamicMapApp mapKey="bocheikovo1943" />
+      </>
+  );
 }
