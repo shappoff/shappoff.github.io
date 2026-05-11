@@ -29,7 +29,7 @@
     "firebase": "^11.3.0",
     "googleapis": "^153.0.0",
     "leaflet": "^1.9.4",
-    "next": "15.1.2",
+    "next": "15.3.9",
     "rc-slider": "^11.1.7",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.7",
