@@ -38,6 +38,6 @@ export default async function KPDistrict({params}: any) {
     const __html = fs.readFileSync(pagePath, 'utf8');
 
     return (
-        <main dangerouslySetInnerHTML={{__html}} />
+        <div dangerouslySetInnerHTML={{__html}} />
     );
 }

@@ -34,7 +34,7 @@ export default function Zhigalo(): React.JSX.Element {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <main aria-label="Дневник Семена Жигало">
+            <article aria-label="Дневник Семена Жигало">
                 <h1>Дневник Семена Жигало.</h1>
                 <section aria-label="О документе" hidden>
                     <h2>О документе</h2>
@@ -408,7 +408,7 @@ export default function Zhigalo(): React.JSX.Element {
                     <Link href="/zalazje1943/">Залазье 1943: аэрофотосъемка и карта местности</Link>
                 </p>
             </section>
-        </main>
+        </article>
         </Fragment>
     )
 }

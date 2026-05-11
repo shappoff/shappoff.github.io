@@ -1,6 +1,19 @@
 import Link from "next/link";
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import type { Metadata } from "next";
 import './main-page.css';
+
+export const metadata: Metadata = {
+    title: "Главная",
+    description:
+        "Каталог проектов: аэрофотосъёмка архивов США, приходы Беларуси, фонды НИАБ, дневник Жигало, подбор имён в метриках, книги «Память» и документы.",
+    alternates: { canonical: "/" },
+    openGraph: {
+        title: "Главная | shappoff",
+        description:
+            "Каталог проектов по истории и генеалогии Беларуси: карты, архивы, справочники.",
+        url: "/",
+    },
+};
 
 const links = [
     {href: "/catalogarchivesgov", title: "Карта аэрофотосъемки", description: "Немецкие аэрофотоснимки Беларуси времен ВОВ. С сайта catalog.archives.gov"},
@@ -24,9 +37,14 @@ export default function Home() {
     return (
         <div className="page-container">
             <div className="content-container">
-                <div className="links-grid" style={{opacity: 1, willChange: 'opacity'}}>
+                <div className="links-grid">
                     {
-                        links.map(({href, title, description}: any, index: number) => <div className="link-card" style={{animationDelay: `${index + 1}00ms`}}>
+                        links.map(({href, title, description}: any, index: number) => (
+                            <div
+                                key={href}
+                                className="link-card"
+                                style={{ animationDelay: `${(index + 1) * 40}ms` }}
+                            >
                             <Link href={href} className="card-content">
                                 <div className="card-header">
                                     <div>
@@ -43,7 +61,9 @@ export default function Home() {
                                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                     </svg>
                                 </div>
-                            </Link></div>)
+                            </Link>
+                            </div>
+                        ))
                     }
                 </div>
             </div>

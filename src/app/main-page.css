@@ -33,15 +33,15 @@
   }
 }
 
-/* Card styles */
+/* Card styles — контент виден с первого кадра (LCP), анимация только по transform */
 .link-card {
   background-color: white;
   border-radius: 0.75rem;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   opacity: 1;
-  will-change: transform, opacity;
-  transform: none;
+  transform: translateY(10px);
+  animation: fadeInUp 0.45s ease-out forwards;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
@@ -108,20 +108,18 @@
   --color-gray-900: #111827;
 }
 
-.link-card {
-  opacity: 0;
-  transform: translateY(20px); /* Начальное смещение вниз */
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-
 @keyframes fadeInUp {
   from {
-    opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-card {
+    animation: none;
+    transform: none;
   }
 }
