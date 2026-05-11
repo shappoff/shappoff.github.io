@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function KP() {
     return (
         <div className={styles.page}>
-            <main className={styles.main}>
+            <div className={styles.main}>
                 <h1 id="книги-память">Книги Память:</h1>
                 <p><Link href="/kp/tolochinskiy">Память. Толочинский район</Link></p>
 
@@ -28,7 +28,7 @@ export default function KP() {
                 <p><Link href="/kp/berezovskiy">Память. Берёзовский район</Link></p>
 
                 <p><Link href="/kp/sennenskiy">Память. Сенненский район</Link></p>
-            </main>
+            </div>
         </div>
     );
 }
