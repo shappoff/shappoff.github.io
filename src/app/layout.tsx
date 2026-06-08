@@ -2,6 +2,7 @@ import type {Metadata, Viewport} from "next";
 import GAAnalytics from "@/components/shared/GAAnalytics";
 import SkipToMainContent from "@/components/shared/SkipToMainContent";
 import "./globals.css";
+import "./main-page.css";
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -57,17 +58,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <head>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-      </head>
       <body>
         <SkipToMainContent />
         <main id="main-content">
           {children}
         </main>
-        {
-          !!process.env.DEBUG ? <></> : <GAAnalytics />
-        }
+        <GAAnalytics />
       </body>
     </html>
   );

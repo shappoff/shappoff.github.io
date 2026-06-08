@@ -1,23 +1,28 @@
-'use client'
+import Script from 'next/script';
 
-import React from 'react';
-import { GoogleAnalytics } from '@next/third-parties/google';
+const GA_ID = 'G-BS71TCVL7J';
 
-interface GAAnalyticsProps {}
+export default function GAAnalytics() {
+  if (process.env.DEBUG) {
+    return null;
+  }
 
-const GAAnalytics: React.FC<GAAnalyticsProps> = (): React.JSX.Element => {
-    const [ga, setGa] = React.useState<boolean>(false);
-
-    React.useEffect(() => {
-        if (~location.href.indexOf('debug')) {
-            localStorage.setItem('debug', 'true');
-            setGa(false);
-            return;
+  return (
+    <Script id="ga-loader" strategy="lazyOnload">
+      {`
+        if (location.href.indexOf('debug') !== -1) {
+          localStorage.setItem('debug', 'true');
+        } else if (!localStorage.getItem('debug')) {
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_ID}';
+          s.async = true;
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}');
         }
-        setGa(!Boolean(localStorage.getItem('debug')));
-    }, []);
-
-    return ga ? <GoogleAnalytics gaId="G-BS71TCVL7J" /> : <></>
-};
-
-export default GAAnalytics;
+      `}
+    </Script>
+  );
+}

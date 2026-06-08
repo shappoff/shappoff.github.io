@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import './main-page.css';
 
 export const metadata: Metadata = {
     title: "Главная",
@@ -43,7 +42,7 @@ export default function Home() {
                             <div
                                 key={href}
                                 className="link-card"
-                                style={{ animationDelay: `${(index + 1) * 40}ms` }}
+                                style={index > 0 ? { animationDelay: `${index * 40}ms` } : undefined}
                             >
                             <Link href={href} className="card-content">
                                 <div className="card-header">
