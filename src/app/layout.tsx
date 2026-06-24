@@ -1,5 +1,6 @@
 import type {Metadata, Viewport} from "next";
 import GAAnalytics from "@/components/shared/GAAnalytics";
+import YandexMetrika from "@/components/shared/YandexMetrika";
 import SkipToMainContent from "@/components/shared/SkipToMainContent";
 import "./globals.css";
 import "./main-page.css";
@@ -64,6 +65,7 @@ export default function RootLayout({
           {children}
         </main>
         <GAAnalytics />
+        <YandexMetrika />
       </body>
     </html>
   );
