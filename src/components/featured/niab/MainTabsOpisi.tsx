@@ -85,7 +85,7 @@ const MainTabsOpisi = ({fond, opNmbPool, digited, opisi, rejected, indexed}: any
                                     }
                                     {
                                         Object.keys(rejected[value] || {}).length ? <>
-                                            <Accordion sx={{ marginTop: '1rem', width: '100%' }}>
+                                            <Accordion defaultExpanded sx={{ marginTop: '1rem', width: '100%' }}>
                                                 <AccordionSummary
                                                     expandIcon={<ExpandMoreIcon />}
                                                     aria-controls="panel2-content"
