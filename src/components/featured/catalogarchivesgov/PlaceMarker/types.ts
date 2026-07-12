@@ -1,17 +1,9 @@
-export interface GeoLocation {
-    lat: number;
-    lng: number;
-}
+export type {
+    DigitalObject,
+    MarkerDetails,
+    MarkerIndexItem,
+    ProductionDate,
+} from '../types';
 
-export interface DigitalObject {
-    objectUrl: string;
-    objectFilename: string;
-}
-
-export interface ProductionDate {
-    day?: string | number;
-    month?: string | number;
-    year?: string | number;
-}
-
+// Backward-compatible alias for legacy imports.
 export type { MarkerIndexItem as CatalogArchiveHit } from '../types';

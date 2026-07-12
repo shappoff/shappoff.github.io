@@ -1,4 +1,5 @@
 import { CatalogDataset, MarkerDetails } from './types';
+import { CATALOG_DATASETS } from './catalogDatasets';
 
 type DetailsMap = Record<string, MarkerDetails>;
 
@@ -6,14 +7,11 @@ const detailsCache = new Map<CatalogDataset, Promise<DetailsMap>>();
 
 const loadDetailsMap = (dataset: CatalogDataset): Promise<DetailsMap> => {
     if (!detailsCache.has(dataset)) {
-        const loader =
-            dataset === 'belarus'
-                ? import('@/app/catalogarchivesgov/belarus-details.json').then((module) => module.default)
-                : import('@/app/catalogarchivesgov/smolensk/smolensk-details.json').then(
-                      (module) => module.default,
-                  );
+        const loader = CATALOG_DATASETS[dataset]
+            .detailsImport()
+            .then((module) => module.default as DetailsMap);
 
-        detailsCache.set(dataset, loader as Promise<DetailsMap>);
+        detailsCache.set(dataset, loader);
     }
 
     return detailsCache.get(dataset)!;

@@ -1,50 +1,26 @@
 import fs from 'fs';
 import path from 'path';
 
-import {
-    catalogarchivesgovBelarusPath,
-    catalogarchivesgovSmolenskPath,
-} from '@/components/paths';
+import { CATALOG_DATASETS } from '@/components/featured/catalogarchivesgov/catalogDatasets';
+import { MarkerDetails, MarkerIndexItem } from '@/components/featured/catalogarchivesgov/types';
+import { toCoordinate } from '@/components/featured/catalogarchivesgov/utils/coordinates';
 
 interface CatalogSourceRecord {
     naId: string | number;
     title?: string;
     title2?: string;
-    digitalObjects?: unknown[];
-    productionDates?: unknown[];
+    digitalObjects?: MarkerDetails['digitalObjects'];
+    productionDates?: MarkerDetails['productionDates'];
     _geoloc?: {
         lat?: string | number;
         lng?: string | number;
     };
 }
 
-interface MarkerIndexRecord {
-    naId: string | number;
-    lat: number;
-    lng: number;
-    title2?: string;
-}
-
-interface MarkerDetailsRecord {
-    title?: string;
-    digitalObjects?: unknown[];
-    productionDates?: unknown[];
-}
-
-const toCoordinate = (value: string | number | undefined): number | null => {
-    if (value === undefined || value === null || value === '') {
-        return null;
-    }
-
-    const parsed = typeof value === 'number' ? value : Number.parseFloat(String(value).trim());
-
-    return Number.isFinite(parsed) ? parsed : null;
-};
-
 const splitCatalogDataset = (sourcePath: string) => {
     const source = JSON.parse(fs.readFileSync(sourcePath, 'utf8')) as CatalogSourceRecord[];
-    const index: MarkerIndexRecord[] = [];
-    const details: Record<string, MarkerDetailsRecord> = {};
+    const index: MarkerIndexItem[] = [];
+    const details: Record<string, MarkerDetails> = {};
 
     source.forEach((item) => {
         const lat = toCoordinate(item._geoloc?.lat);
@@ -71,16 +47,8 @@ const splitCatalogDataset = (sourcePath: string) => {
     const directory = path.dirname(sourcePath);
     const baseName = path.basename(sourcePath, '.json');
 
-    fs.writeFileSync(
-        path.join(directory, `${baseName}-index.json`),
-        JSON.stringify(index),
-        'utf8',
-    );
-    fs.writeFileSync(
-        path.join(directory, `${baseName}-details.json`),
-        JSON.stringify(details),
-        'utf8',
-    );
+    fs.writeFileSync(path.join(directory, `${baseName}-index.json`), JSON.stringify(index), 'utf8');
+    fs.writeFileSync(path.join(directory, `${baseName}-details.json`), JSON.stringify(details), 'utf8');
 
     console.log(
         `Split ${baseName}: ${index.length} markers → ${baseName}-index.json + ${baseName}-details.json`,
@@ -88,6 +56,7 @@ const splitCatalogDataset = (sourcePath: string) => {
 };
 
 export default async function splitCatalogMarkerData() {
-    splitCatalogDataset(catalogarchivesgovBelarusPath);
-    splitCatalogDataset(catalogarchivesgovSmolenskPath);
+    Object.values(CATALOG_DATASETS).forEach(({ sourcePath }) => {
+        splitCatalogDataset(sourcePath);
+    });
 }

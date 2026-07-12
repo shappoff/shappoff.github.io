@@ -1,4 +1,13 @@
-export type CatalogDataset = 'belarus' | 'smolensk';
+export interface DigitalObject {
+    objectUrl: string;
+    objectFilename: string;
+}
+
+export interface ProductionDate {
+    day?: string | number;
+    month?: string | number;
+    year?: string | number;
+}
 
 export interface MarkerIndexItem {
     naId: string | number;
@@ -9,13 +18,8 @@ export interface MarkerIndexItem {
 
 export interface MarkerDetails {
     title?: string;
-    digitalObjects?: {
-        objectUrl: string;
-        objectFilename: string;
-    }[];
-    productionDates?: {
-        day?: string | number;
-        month?: string | number;
-        year?: string | number;
-    }[];
+    digitalObjects?: DigitalObject[];
+    productionDates?: ProductionDate[];
 }
+
+export type { CatalogDataset } from './catalogDatasets';

@@ -1,32 +1,21 @@
 "use client"
 
 import { useMemo } from 'react';
-import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
 import {
     Marker,
     Popup,
 } from "react-leaflet";
 import type { LatLngTuple } from 'leaflet';
+
+import { createCachedDivIcon } from '@/components/shared/leaflet/createCachedDivIcon';
 import {items} from "@/components/featured/glinniki1846/items";
 
-const {DivIcon} = L;
-
-const iconCache = new Map<string, L.DivIcon>();
-
-const getLabelIcon = (label: string) => {
-    if (!iconCache.has(label)) {
-        iconCache.set(
-            label,
-            new DivIcon({
-                html: `<b>${label}</b>`,
-                className: 'marker-div-icon',
-            }),
-        );
-    }
-
-    return iconCache.get(label)!;
-};
+const getLabelIcon = (label: string) =>
+    createCachedDivIcon(`label-${label}`, {
+        html: `<b>${label}</b>`,
+        className: 'marker-div-icon',
+    });
 
 const villageMarkers: { title: string; _geoloc: LatLngTuple }[] = [
     {title: 'Залазье', _geoloc: [-69.59446755804224,-30.717773437500004]},

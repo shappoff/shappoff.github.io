@@ -5,64 +5,37 @@ import Supercluster from 'supercluster';
 import { useMap } from 'react-leaflet';
 
 import { MarkerIndexItem } from '../types';
+import {
+    CLUSTER_OPTIONS,
+    getMapBoundingBox,
+    MarkerClusterPoint,
+    toSuperclusterPoints,
+} from '../utils/cluster';
 
-type MarkerProperties = {
-    naId: string | number;
-    title2?: string;
-};
-
-type ClusterProperties = {
-    cluster: true;
-    point_count: number;
-    point_count_abbreviated: string | number;
-};
-
-export type MarkerClusterPoint =
-    | Supercluster.PointFeature<MarkerProperties>
-    | Supercluster.ClusterFeature<ClusterProperties>;
-
-const CLUSTER_OPTIONS: Supercluster.Options<MarkerProperties, ClusterProperties> = {
-    radius: 60,
-    maxZoom: 14,
-    minZoom: 0,
-};
+export type { MarkerClusterFeature, MarkerClusterPoint, MarkerPointFeature } from '../utils/cluster';
 
 export const useClusteredMarkers = (items: MarkerIndexItem[]) => {
     const map = useMap();
     const [clusters, setClusters] = useState<MarkerClusterPoint[]>([]);
 
     const index = useMemo(() => {
-        const clusterIndex = new Supercluster<MarkerProperties, ClusterProperties>(CLUSTER_OPTIONS);
-
-        clusterIndex.load(
-            items.map((item) => ({
-                type: 'Feature',
-                properties: {
-                    naId: item.naId,
-                    title2: item.title2,
-                },
-                geometry: {
-                    type: 'Point',
-                    coordinates: [item.lng, item.lat],
-                },
-            })),
-        );
+        const clusterIndex = new Supercluster(CLUSTER_OPTIONS);
+        clusterIndex.load(toSuperclusterPoints(items));
 
         return clusterIndex;
     }, [items]);
 
     const updateClusters = useCallback(() => {
-        const bounds = map.getBounds();
+        const bbox = getMapBoundingBox(map.getBounds());
         const zoom = Math.floor(map.getZoom());
-        const bbox: [number, number, number, number] = [
-            bounds.getWest(),
-            bounds.getSouth(),
-            bounds.getEast(),
-            bounds.getNorth(),
-        ];
 
         setClusters(index.getClusters(bbox, zoom) as MarkerClusterPoint[]);
     }, [index, map]);
+
+    const getClusterExpansionZoom = useCallback(
+        (clusterId: number) => index.getClusterExpansionZoom(clusterId),
+        [index],
+    );
 
     useEffect(() => {
         updateClusters();
@@ -75,11 +48,6 @@ export const useClusteredMarkers = (items: MarkerIndexItem[]) => {
             map.off('zoomend', updateClusters);
         };
     }, [map, updateClusters]);
-
-    const getClusterExpansionZoom = useCallback(
-        (clusterId: number) => index.getClusterExpansionZoom(clusterId),
-        [index],
-    );
 
     return { clusters, getClusterExpansionZoom };
 };

@@ -1,7 +1,7 @@
 import {Metadata} from "next";
 
 import fs from "fs";
-import {catalogarchivesgovBelarusIndexPath} from "@/components/paths";
+import { CATALOG_DATASETS } from "@/components/featured/catalogarchivesgov/catalogDatasets";
 import MarkersItemsList from "@/components/featured/catalogarchivesgov/MarkersItemsList";
 
 
@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 };
 
 export default function CatalogarchivesgovPage() {
-    const belarusItems = JSON.parse(fs.readFileSync(catalogarchivesgovBelarusIndexPath, 'utf8'));
+    const belarusItems = JSON.parse(fs.readFileSync(CATALOG_DATASETS.belarus.indexPath, 'utf8'));
     return <MarkersItemsList items={belarusItems} dataset="belarus" />
-
 }
