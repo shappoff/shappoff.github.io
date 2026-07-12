@@ -17,23 +17,23 @@ describe('TypoToleranceCheckbox', () => {
     const switchWithCustomClass = container.querySelector('.typo-tolerance-checkbox');
     expect(switchWithCustomClass).toBeInTheDocument();
     // It should contain a checkbox input
-    const switchInput = screen.getByRole('checkbox');
+    const switchInput = screen.getByRole('switch');
     expect(switchWithCustomClass?.contains(switchInput)).toBe(true);
   });
 
   it('checked state reflects isTypoTolerance prop', () => {
     // When isTypoTolerance is false, checked should be true
     const { rerender } = render(<TypoToleranceCheckbox isTypoTolerance={false} setIsTypoTolerance={() => {}} />);
-    expect(screen.getByRole('checkbox')).toBeChecked();
+    expect(screen.getByRole('switch')).toBeChecked();
     // When isTypoTolerance is true, checked should be false
     rerender(<TypoToleranceCheckbox isTypoTolerance={true} setIsTypoTolerance={() => {}} />);
-    expect(screen.getByRole('checkbox')).not.toBeChecked();
+    expect(screen.getByRole('switch')).not.toBeChecked();
   });
 
   it('calls setIsTypoTolerance with toggled value on change', () => {
     const setIsTypoTolerance = jest.fn();
     render(<TypoToleranceCheckbox isTypoTolerance={false} setIsTypoTolerance={setIsTypoTolerance} />);
-    fireEvent.click(screen.getByRole('checkbox'));
+    fireEvent.click(screen.getByRole('switch'));
     expect(setIsTypoTolerance).toHaveBeenCalledWith(true);
   });
 }); 
