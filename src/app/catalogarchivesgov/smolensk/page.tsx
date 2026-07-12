@@ -1,7 +1,7 @@
 import {Metadata} from "next";
 
 import fs from "fs";
-import {catalogarchivesgovSmolenskPath} from "@/components/paths";
+import {catalogarchivesgovSmolenskIndexPath} from "@/components/paths";
 import MarkersItemsList from "@/components/featured/catalogarchivesgov/MarkersItemsList";
 
 export const metadata: Metadata = {
@@ -10,6 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function CatalogarchivesgovPage() {
-    const smolenskItems = JSON.parse(fs.readFileSync(catalogarchivesgovSmolenskPath, 'utf8'));
-    return <MarkersItemsList items={smolenskItems} />
+    const smolenskItems = JSON.parse(fs.readFileSync(catalogarchivesgovSmolenskIndexPath, 'utf8'));
+    return <MarkersItemsList items={smolenskItems} dataset="smolensk" />
 }

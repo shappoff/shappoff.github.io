@@ -14,7 +14,15 @@ const useMarkersBounds = (mapHits: Array<MapHit>) => {
 
     React.useEffect(() => {
         const bounds = latLngBounds([])
-        mapHits && mapHits.length && [...mapHits].forEach((item: MapHit) => {
+        mapHits && mapHits.length && mapHits.forEach((item: MapHit) => {
+            if (item?.lat !== undefined && item?.lng !== undefined) {
+                const { lat, lng } = item;
+                if (!lat || !lng) {
+                    return;
+                }
+                bounds.extend([lat, lng]);
+                return;
+            }
             if (item?.coords?.length) {
                 const [lat, lng] = item.coords;
                 if (!lat || !lng) {
@@ -39,7 +47,7 @@ const useMarkersBounds = (mapHits: Array<MapHit>) => {
         });
 
         mapHits.length && setCurrentBounds(bounds);
-    }, [mapHits, mapHits.length]);
+    }, [mapHits]);
 
     return currentBounds;
 };

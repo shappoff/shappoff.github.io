@@ -14,15 +14,4 @@ export interface ProductionDate {
     year?: string | number;
 }
 
-export interface CatalogArchiveHit {
-    _geoloc?: GeoLocation;
-    naId: string | number;
-    title2?: string;
-    title?: string;
-    digitalObjects?: DigitalObject[];
-    productionDates?: ProductionDate[];
-}
-
-export interface PlaceMarkerProps {
-    hit: CatalogArchiveHit;
-}
+export type { MarkerIndexItem as CatalogArchiveHit } from '../types';

@@ -1,8 +1,5 @@
 'use client'
 
-import MarkerClusterGroup from 'react-leaflet-markercluster';
-import 'react-leaflet-markercluster/styles';
-
 import HistoricalMap from "@/components/shared/HistoricalMap";
 
 const attribution = '<div>Немецкие аэрофотоснимки Беларуси времен ВОВ. С сайта <a target="_blank" href="https://catalog.archives.gov/">catalog.archives.gov</a>.</div>';
@@ -23,8 +20,6 @@ export default function Catalogarchivesgov({children}: any) {
             }, 100);
         }}
         attribution={attribution}>
-        <MarkerClusterGroup>
-            {children}
-        </MarkerClusterGroup>
+        {children}
     </HistoricalMap>
 }

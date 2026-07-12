@@ -1,28 +1,48 @@
 'use client';
 
-import {Marker} from 'react-leaflet';
+import { memo, useEffect, useRef, useState } from 'react';
+import { Marker } from 'react-leaflet';
+import type { Marker as LeafletMarker } from 'leaflet';
 
-import {PLACE_MARKER_ICON} from './constants';
+import { CatalogDataset, MarkerIndexItem } from '../types';
+import { PLACE_MARKER_ICON } from './constants';
 import PlaceMarkerPopup from './PlaceMarkerPopup';
-import {PlaceMarkerProps} from './types';
 
-const PlaceMarker = ({hit}: PlaceMarkerProps) => {
-    const lat = hit._geoloc?.lat;
-    const lng = hit._geoloc?.lng;
+interface PlaceMarkerProps {
+    item: MarkerIndexItem;
+    dataset: CatalogDataset;
+}
 
-    if (!lat || !lng) {
-        return null;
-    }
+const PlaceMarker = ({ item, dataset }: PlaceMarkerProps) => {
+    const markerRef = useRef<LeafletMarker>(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    useEffect(() => {
+        if (isPopupOpen) {
+            markerRef.current?.openPopup();
+        }
+    }, [isPopupOpen]);
 
     return (
         <Marker
-            title={hit.title2}
+            ref={markerRef}
+            title={item.title2}
             icon={PLACE_MARKER_ICON}
-            position={[lat, lng]}
+            position={[item.lat, item.lng]}
+            eventHandlers={{
+                click: () => setIsPopupOpen(true),
+                popupclose: () => setIsPopupOpen(false),
+            }}
         >
-            <PlaceMarkerPopup hit={hit} />
+            {isPopupOpen && (
+                <PlaceMarkerPopup
+                    naId={item.naId}
+                    dataset={dataset}
+                    title2={item.title2}
+                />
+            )}
         </Marker>
     );
 };
 
-export default PlaceMarker;
+export default memo(PlaceMarker);

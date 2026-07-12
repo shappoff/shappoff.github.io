@@ -2,12 +2,14 @@
 
 import { useMemo } from 'react';
 
+import { CatalogDataset, MarkerIndexItem } from '@/components/featured/catalogarchivesgov/types';
+
 import MarkersBoundsLayer from './MarkersBoundsLayer';
 import MarkersLayer from './MarkersLayer';
-import { MarkerItem, MarkersItemsListProps } from './types';
+import { MarkersItemsListProps } from './types';
 
-const MarkersItemsList = ({ items = [] }: MarkersItemsListProps) => {
-    const markerItems = useMemo<MarkerItem[]>(() => {
+const MarkersItemsList = ({ items = [], dataset }: MarkersItemsListProps) => {
+    const markerItems = useMemo<MarkerIndexItem[]>(() => {
         return Array.isArray(items) ? items : [];
     }, [items]);
 
@@ -18,7 +20,7 @@ const MarkersItemsList = ({ items = [] }: MarkersItemsListProps) => {
     return (
         <>
             <MarkersBoundsLayer items={markerItems} />
-            <MarkersLayer items={markerItems} />
+            <MarkersLayer items={markerItems} dataset={dataset} />
         </>
     );
 };

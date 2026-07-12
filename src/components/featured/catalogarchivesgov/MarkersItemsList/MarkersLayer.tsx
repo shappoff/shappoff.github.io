@@ -1,32 +1,57 @@
 'use client';
 
-import PlaceMarker from '@/components/featured/catalogarchivesgov/PlaceMarker';
+import { memo } from 'react';
 
-import { MarkerItem } from './types';
+import ClusterMarker from '@/components/featured/catalogarchivesgov/ClusterMarker/ClusterMarker';
+import PlaceMarker from '@/components/featured/catalogarchivesgov/PlaceMarker';
+import { useClusteredMarkers } from '@/components/featured/catalogarchivesgov/hooks/useClusteredMarkers';
+import { CatalogDataset, MarkerIndexItem } from '@/components/featured/catalogarchivesgov/types';
 
 interface MarkersLayerProps {
-    items: MarkerItem[];
+    items: MarkerIndexItem[];
+    dataset: CatalogDataset;
 }
 
-const getMarkerKey = (item: MarkerItem, index: number) => {
-    if (item.naId !== undefined && item.naId !== null) {
-        return `${item.naId}-${index}`;
-    }
+const isPointFeature = (
+    cluster: ReturnType<typeof useClusteredMarkers>['clusters'][number],
+): cluster is Extract<
+    ReturnType<typeof useClusteredMarkers>['clusters'][number],
+    { properties: { naId: string | number } }
+> => !('cluster' in cluster.properties);
 
-    return `marker-${index}`;
-};
+const MarkersLayer = ({ items, dataset }: MarkersLayerProps) => {
+    const { clusters, getClusterExpansionZoom } = useClusteredMarkers(items);
 
-const MarkersLayer = ({ items }: MarkersLayerProps) => {
     return (
         <>
-            {items.map((item, index) => (
-                <PlaceMarker
-                    key={getMarkerKey(item, index)}
-                    hit={item}
-                />
-            ))}
+            {clusters.map((cluster) => {
+                if ('cluster' in cluster.properties && cluster.properties.cluster) {
+                    return (
+                        <ClusterMarker
+                            key={`cluster-${cluster.id}`}
+                            cluster={cluster}
+                            getClusterExpansionZoom={getClusterExpansionZoom}
+                        />
+                    );
+                }
+
+                if (!isPointFeature(cluster)) {
+                    return null;
+                }
+
+                const { naId, title2 } = cluster.properties;
+                const [lng, lat] = cluster.geometry.coordinates;
+
+                return (
+                    <PlaceMarker
+                        key={String(naId)}
+                        item={{ naId, lat, lng, title2 }}
+                        dataset={dataset}
+                    />
+                );
+            })}
         </>
     );
 };
 
-export default MarkersLayer;
+export default memo(MarkersLayer);
