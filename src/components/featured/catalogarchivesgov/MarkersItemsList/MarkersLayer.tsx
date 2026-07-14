@@ -8,6 +8,7 @@ import { useClusteredMarkers } from '@/components/featured/catalogarchivesgov/ho
 import { CatalogDataset, MarkerIndexItem } from '@/components/featured/catalogarchivesgov/types';
 import { toMarkerIndexItem } from '@/components/featured/catalogarchivesgov/utils/cluster';
 import { isClusterFeature, isPointFeature } from '@/components/shared/leaflet/supercluster/clusterFeatureGuards';
+import '@/components/shared/leaflet/supercluster/clusterMarkers.css';
 
 interface MarkersLayerProps {
     items: MarkerIndexItem[];

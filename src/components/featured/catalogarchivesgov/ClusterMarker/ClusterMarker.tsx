@@ -32,6 +32,16 @@ const getClusterIcon = (pointCount: number, abbreviated: string | number) => {
     });
 };
 
+const getExpandFlyOptions = (fromZoom: number, toZoom: number) => {
+    const zoomDelta = Math.abs(toZoom - fromZoom);
+
+    return {
+        // Longer, softer flight — duration scales with how far the cluster expands.
+        duration: Math.min(1.35, Math.max(0.65, zoomDelta * 0.22)),
+        easeLinearity: 0.12,
+    };
+};
+
 const ClusterMarker = ({ cluster, getClusterExpansionZoom }: ClusterMarkerProps) => {
     const map = useMap();
     const [lng, lat] = cluster.geometry.coordinates;
@@ -45,7 +55,7 @@ const ClusterMarker = ({ cluster, getClusterExpansionZoom }: ClusterMarkerProps)
             eventHandlers={{
                 click: () => {
                     const expansionZoom = getClusterExpansionZoom(clusterId);
-                    map.flyTo([lat, lng], expansionZoom, { duration: 0.45 });
+                    map.flyTo([lat, lng], expansionZoom, getExpandFlyOptions(map.getZoom(), expansionZoom));
                 },
             }}
         />
