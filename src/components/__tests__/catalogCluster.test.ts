@@ -35,9 +35,14 @@ describe('catalogarchivesgov cluster utils', () => {
             getSouth: () => 20,
             getEast: () => 30,
             getNorth: () => 40,
-        };
+        } as Pick<
+            import('leaflet').LatLngBounds,
+            'getWest' | 'getSouth' | 'getEast' | 'getNorth'
+        >;
 
-        expect(getPaddedMapBoundingBox(bounds as any, 0.25)).toEqual([5, 15, 35, 45]);
+        expect(getPaddedMapBoundingBox(bounds as import('leaflet').LatLngBounds, 0.25)).toEqual([
+            5, 15, 35, 45,
+        ]);
     });
 
     it('classifies cluster size tiers for icon caching', () => {

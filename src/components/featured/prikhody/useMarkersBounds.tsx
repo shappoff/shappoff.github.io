@@ -1,15 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { latLngBounds } from 'leaflet';
 
 import { resolveMapHitCoordinates } from './resolveMapHitCoordinates';
 
 const useMarkersBounds = (mapHits: unknown[]) => {
-    const [currentBounds, setCurrentBounds] = useState<ReturnType<typeof latLngBounds> | undefined>();
-
-    useEffect(() => {
+    return useMemo(() => {
         if (!mapHits.length) {
-            setCurrentBounds(undefined);
-            return;
+            return undefined;
         }
 
         const bounds = latLngBounds([]);
@@ -22,10 +19,8 @@ const useMarkersBounds = (mapHits: unknown[]) => {
             }
         });
 
-        setCurrentBounds(bounds);
+        return bounds.isValid() ? bounds : undefined;
     }, [mapHits]);
-
-    return currentBounds;
 };
 
 export default useMarkersBounds;

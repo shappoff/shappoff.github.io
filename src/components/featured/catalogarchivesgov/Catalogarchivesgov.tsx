@@ -1,10 +1,12 @@
 'use client'
 
+import type { ReactNode } from 'react';
+
 import HistoricalMap from "@/components/shared/HistoricalMap";
 
 const attribution = '<div>Немецкие аэрофотоснимки Беларуси времен ВОВ. С сайта <a target="_blank" href="https://catalog.archives.gov/">catalog.archives.gov</a>.</div>';
 
-export default function Catalogarchivesgov({children}: any) {
+export default function Catalogarchivesgov({ children }: { children?: ReactNode }) {
     return <HistoricalMap
         minZoom={4}
         maxZoom={20}

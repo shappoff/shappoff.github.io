@@ -1,5 +1,6 @@
 'use client'
 
+import type { ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 
 import Spinner from "@/components/shared/Spinner";
@@ -9,7 +10,7 @@ const Catalogarchivesgov = dynamic(() => import('@/components/featured/catalogar
 });
 
 
-const MapWrapper = ({children}: any) => {
+const MapWrapper = ({ children }: { children?: ReactNode }) => {
     return <Catalogarchivesgov>{children}</Catalogarchivesgov>
 };
 

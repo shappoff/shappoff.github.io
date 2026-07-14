@@ -1,7 +1,5 @@
 'use client';
 
-import { MarkerIndexItem } from '@/components/featured/catalogarchivesgov/types';
-
 import MarkersBoundsLayer from './MarkersBoundsLayer';
 import MarkersLayer from './MarkersLayer';
 import { MarkersItemsListProps } from './types';

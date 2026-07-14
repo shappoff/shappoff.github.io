@@ -21,6 +21,10 @@ const toFiniteNumber = (value: string | number | undefined): number | null => {
 };
 
 export const resolveMapHitCoordinates = (item: unknown): [number, number] | null => {
+    if (item == null) {
+        return null;
+    }
+
     if (Array.isArray(item) && item.length) {
         const [, , , , lat, lng] = item;
 
@@ -28,6 +32,10 @@ export const resolveMapHitCoordinates = (item: unknown): [number, number] | null
             return [lat, lng];
         }
 
+        return null;
+    }
+
+    if (typeof item !== 'object') {
         return null;
     }
 
