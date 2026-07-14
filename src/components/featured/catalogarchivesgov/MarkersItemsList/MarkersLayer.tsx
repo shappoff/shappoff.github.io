@@ -1,32 +1,50 @@
 'use client';
 
-import PlaceMarker from '@/components/featured/catalogarchivesgov/PlaceMarker';
+import { memo } from 'react';
 
-import { MarkerItem } from './types';
+import ClusterMarker from '@/components/featured/catalogarchivesgov/ClusterMarker/ClusterMarker';
+import PlaceMarker from '@/components/featured/catalogarchivesgov/PlaceMarker';
+import { useClusteredMarkers } from '@/components/featured/catalogarchivesgov/hooks/useClusteredMarkers';
+import { CatalogDataset, MarkerIndexItem } from '@/components/featured/catalogarchivesgov/types';
+import { toMarkerIndexItem } from '@/components/featured/catalogarchivesgov/utils/cluster';
+import { isClusterFeature, isPointFeature } from '@/components/shared/leaflet/supercluster/clusterFeatureGuards';
+import '@/components/shared/leaflet/supercluster/clusterMarkers.css';
 
 interface MarkersLayerProps {
-    items: MarkerItem[];
+    items: MarkerIndexItem[];
+    dataset: CatalogDataset;
 }
 
-const getMarkerKey = (item: MarkerItem, index: number) => {
-    if (item.naId !== undefined && item.naId !== null) {
-        return `${item.naId}-${index}`;
-    }
+const MarkersLayer = ({ items, dataset }: MarkersLayerProps) => {
+    const { clusters, getClusterExpansionZoom } = useClusteredMarkers(items);
 
-    return `marker-${index}`;
-};
-
-const MarkersLayer = ({ items }: MarkersLayerProps) => {
     return (
         <>
-            {items.map((item, index) => (
-                <PlaceMarker
-                    key={getMarkerKey(item, index)}
-                    hit={item}
-                />
-            ))}
+            {clusters.map((feature) => {
+                if (isClusterFeature(feature)) {
+                    return (
+                        <ClusterMarker
+                            key={`cluster-${feature.id}`}
+                            cluster={feature}
+                            getClusterExpansionZoom={getClusterExpansionZoom}
+                        />
+                    );
+                }
+
+                if (!isPointFeature(feature)) {
+                    return null;
+                }
+
+                return (
+                    <PlaceMarker
+                        key={String(feature.properties.naId)}
+                        item={toMarkerIndexItem(feature)}
+                        dataset={dataset}
+                    />
+                );
+            })}
         </>
     );
 };
 
-export default MarkersLayer;
+export default memo(MarkersLayer);

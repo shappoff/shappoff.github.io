@@ -1,62 +1,29 @@
 'use client';
 
-import {Popup} from 'react-leaflet';
+import { Popup } from 'react-leaflet';
 
-import {EXTERNAL_LINK_REL} from './constants';
-import {CatalogArchiveHit, ProductionDate} from './types';
+import { useCatalogMarkerDetails } from '../hooks/useCatalogMarkerDetails';
+import { CatalogDataset } from '../types';
+import PlaceMarkerPopupContent from './PlaceMarkerPopupContent';
 
 interface PlaceMarkerPopupProps {
-    hit: CatalogArchiveHit;
+    naId: string | number;
+    dataset: CatalogDataset;
+    title2?: string;
 }
 
-const formatProductionDate = ({day, month, year}: ProductionDate): string =>
-    [day, month, year].filter(Boolean).join('.');
-
-const PlaceMarkerPopup = ({hit}: PlaceMarkerPopupProps) => {
-    const digitalObjects = hit.digitalObjects ?? [];
-    const productionDates = hit.productionDates ?? [];
+const PlaceMarkerPopup = ({ naId, dataset, title2 }: PlaceMarkerPopupProps) => {
+    const { details, isLoading } = useCatalogMarkerDetails(dataset, naId);
 
     return (
         <Popup closeButton closeOnClick closeOnEscapeKey>
             <div>
-                <div><b>{hit.title2}</b></div>
-                <div><b>{hit.title}</b></div>
-                <div>
-                    <a
-                        href={`https://catalog.archives.gov/id/${hit.naId}`}
-                        target="_blank"
-                        rel={EXTERNAL_LINK_REL}
-                    >
-                        {`https://catalog.archives.gov/id/${hit.naId}`}
-                    </a>
-                </div>
-
-                {digitalObjects.length > 0 && (
-                    <>
-                        <br />
-                        {digitalObjects.map(({objectFilename, objectUrl}) => (
-                            <div key={`${objectFilename}-${objectUrl}`}>
-                                <a href={objectUrl} target="_blank" rel={EXTERNAL_LINK_REL}>
-                                    {objectFilename}
-                                </a>
-                            </div>
-                        ))}
-                    </>
-                )}
-
-                {productionDates.length > 0 && (
-                    <>
-                        <br />
-                        <hr />
-                        <footer>
-                            {productionDates.map((dateItem, index) => (
-                                <div key={`${formatProductionDate(dateItem)}-${index}`}>
-                                    {formatProductionDate(dateItem)}
-                                </div>
-                            ))}
-                        </footer>
-                    </>
-                )}
+                <PlaceMarkerPopupContent
+                    naId={naId}
+                    title2={title2}
+                    details={details}
+                    isLoading={isLoading}
+                />
             </div>
         </Popup>
     );

@@ -1,24 +1,20 @@
 'use client';
 
-import { useMemo } from 'react';
+import { MarkerIndexItem } from '@/components/featured/catalogarchivesgov/types';
 
 import MarkersBoundsLayer from './MarkersBoundsLayer';
 import MarkersLayer from './MarkersLayer';
-import { MarkerItem, MarkersItemsListProps } from './types';
+import { MarkersItemsListProps } from './types';
 
-const MarkersItemsList = ({ items = [] }: MarkersItemsListProps) => {
-    const markerItems = useMemo<MarkerItem[]>(() => {
-        return Array.isArray(items) ? items : [];
-    }, [items]);
-
-    if (!markerItems.length) {
+const MarkersItemsList = ({ items = [], dataset }: MarkersItemsListProps) => {
+    if (!items.length) {
         return null;
     }
 
     return (
         <>
-            <MarkersBoundsLayer items={markerItems} />
-            <MarkersLayer items={markerItems} />
+            <MarkersBoundsLayer items={items} />
+            <MarkersLayer items={items} dataset={dataset} />
         </>
     );
 };

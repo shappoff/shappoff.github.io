@@ -1,0 +1,10 @@
+/* Reset Leaflet DivIcon defaults; no enter animations (they jank with many markers). */
+.marker-cluster-icon,
+.marker-div-icon {
+    background: transparent !important;
+    border: none !important;
+}
+
+.marker-div-icon svg {
+    display: block;
+}
