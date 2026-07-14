@@ -1,45 +1,29 @@
-import React from "react";
-import {latLngBounds} from 'leaflet'
+import { useEffect, useState } from 'react';
+import { latLngBounds } from 'leaflet';
 
-// Define type for mapHits
-interface MapHit {
-    coords?: [number, number];
-    length?: number;
-    [key: string]: any;
-}
+import { resolveMapHitCoordinates } from './resolveMapHitCoordinates';
 
-const useMarkersBounds = (mapHits: Array<MapHit>) => {
+const useMarkersBounds = (mapHits: unknown[]) => {
+    const [currentBounds, setCurrentBounds] = useState<ReturnType<typeof latLngBounds> | undefined>();
 
-    const [currentBounds, setCurrentBounds] = React.useState<ReturnType<typeof latLngBounds> | undefined>();
+    useEffect(() => {
+        if (!mapHits.length) {
+            setCurrentBounds(undefined);
+            return;
+        }
 
-    React.useEffect(() => {
-        const bounds = latLngBounds([])
-        mapHits && mapHits.length && [...mapHits].forEach((item: MapHit) => {
-            if (item?.coords?.length) {
-                const [lat, lng] = item.coords;
-                if (!lat || !lng) {
-                    return;
-                }
-                bounds.extend([lat, lng]);
-            }
-            if (item?._geoloc?.lat && item?._geoloc?.lng) {
-                const {lat, lng} = item._geoloc;
-                if (!lat || !lng) {
-                    return;
-                }
-                bounds.extend([lat, lng]);
-            }
-            if (Array.isArray(item) && item.length) {
-                const [,,,,lat, lng] = item;
-                if (!lat || !lng) {
-                    return;
-                }
-                bounds.extend([lat, lng]);
+        const bounds = latLngBounds([]);
+
+        mapHits.forEach((item) => {
+            const coordinates = resolveMapHitCoordinates(item);
+
+            if (coordinates) {
+                bounds.extend(coordinates);
             }
         });
 
-        mapHits.length && setCurrentBounds(bounds);
-    }, [mapHits, mapHits.length]);
+        setCurrentBounds(bounds);
+    }, [mapHits]);
 
     return currentBounds;
 };

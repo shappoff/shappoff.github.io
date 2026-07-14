@@ -1,7 +1,6 @@
-import { CatalogArchiveHit } from '@/components/featured/catalogarchivesgov/PlaceMarker';
-
-export type MarkerItem = CatalogArchiveHit;
+import { CatalogDataset, MarkerIndexItem } from '@/components/featured/catalogarchivesgov/types';
 
 export interface MarkersItemsListProps {
-    items?: MarkerItem[];
+    items?: MarkerIndexItem[];
+    dataset: CatalogDataset;
 }
