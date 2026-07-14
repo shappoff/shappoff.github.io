@@ -20,8 +20,8 @@ export type MarkerPointFeature = ClusterPointFeature<MarkerProperties>;
 
 /** Tuned for dense WWII aerial coverage over Belarus (~6k points). */
 export const CLUSTER_OPTIONS: Supercluster.Options<MarkerProperties, ClusterProperties> = {
-    radius: 60,
-    maxZoom: 16,
+    radius: 80,
+    maxZoom: 15,
     minZoom: 0,
     minPoints: 2,
 };

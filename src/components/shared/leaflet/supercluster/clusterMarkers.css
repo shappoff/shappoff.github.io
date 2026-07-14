@@ -1,34 +1,10 @@
-@keyframes leaflet-marker-appear {
-    from {
-        opacity: 0;
-        transform: scale(0.4);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
+/* Reset Leaflet DivIcon defaults; no enter animations (they jank with many markers). */
 .marker-cluster-icon,
 .marker-div-icon {
     background: transparent !important;
     border: none !important;
 }
 
-.marker-cluster-icon > div,
-.marker-div-icon svg {
-    transform-origin: center center;
-    animation: leaflet-marker-appear 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
 .marker-div-icon svg {
     display: block;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .marker-cluster-icon > div,
-    .marker-div-icon svg {
-        animation: none;
-    }
 }

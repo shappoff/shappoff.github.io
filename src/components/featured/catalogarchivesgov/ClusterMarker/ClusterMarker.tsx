@@ -36,9 +36,9 @@ const getExpandFlyOptions = (fromZoom: number, toZoom: number) => {
     const zoomDelta = Math.abs(toZoom - fromZoom);
 
     return {
-        // Longer, softer flight — duration scales with how far the cluster expands.
-        duration: Math.min(1.35, Math.max(0.65, zoomDelta * 0.22)),
-        easeLinearity: 0.12,
+        // Soft flight without mid-animation React updates (clusters refresh on moveend).
+        duration: Math.min(0.9, Math.max(0.45, zoomDelta * 0.16)),
+        easeLinearity: 0.2,
     };
 };
 

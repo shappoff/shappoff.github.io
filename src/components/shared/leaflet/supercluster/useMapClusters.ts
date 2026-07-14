@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type Supercluster from 'supercluster';
 import { useMap } from 'react-leaflet';
 
@@ -29,7 +29,7 @@ export interface UseMapClustersResult<P extends GeoJsonProperties, C extends Geo
 
 /**
  * Keeps a Supercluster index in sync with the Leaflet viewport.
- * Updates on moveend and on integer zoom steps so cluster expand feels progressive.
+ * Updates on moveend only so fly/zoom stays smooth (no React re-renders mid-flight).
  */
 export const useMapClusters = <P extends GeoJsonProperties, C extends GeoJsonProperties>({
     points,
@@ -38,7 +38,6 @@ export const useMapClusters = <P extends GeoJsonProperties, C extends GeoJsonPro
 }: UseMapClustersOptions<P, C>): UseMapClustersResult<P, C> => {
     const map = useMap();
     const [clusters, setClusters] = useState<Array<ClusterOrPointFeature<P, C>>>([]);
-    const lastZoomFloorRef = useRef<number | null>(null);
 
     const index = useMemo(
         () => createSuperclusterIndex(points, clusterOptions),
@@ -48,23 +47,12 @@ export const useMapClusters = <P extends GeoJsonProperties, C extends GeoJsonPro
     const updateClusters = useCallback(() => {
         const bbox = getMapBoundingBox(map.getBounds(), bboxPaddingRatio);
         const zoom = Math.floor(map.getZoom());
-        lastZoomFloorRef.current = zoom;
         const nextClusters = index.getClusters(bbox, zoom) as Array<ClusterOrPointFeature<P, C>>;
 
         setClusters((previous) =>
             areClusterSetsEqual(previous, nextClusters) ? previous : nextClusters,
         );
     }, [bboxPaddingRatio, index, map]);
-
-    const updateClustersOnZoomStep = useCallback(() => {
-        const zoom = Math.floor(map.getZoom());
-
-        if (lastZoomFloorRef.current === zoom) {
-            return;
-        }
-
-        updateClusters();
-    }, [map, updateClusters]);
 
     const getClusterExpansionZoom = useCallback(
         (clusterId: number) => {
@@ -79,17 +67,14 @@ export const useMapClusters = <P extends GeoJsonProperties, C extends GeoJsonPro
     );
 
     useEffect(() => {
-        lastZoomFloorRef.current = null;
         updateClusters();
 
         map.on('moveend', updateClusters);
-        map.on('zoom', updateClustersOnZoomStep);
 
         return () => {
             map.off('moveend', updateClusters);
-            map.off('zoom', updateClustersOnZoomStep);
         };
-    }, [map, updateClusters, updateClustersOnZoomStep]);
+    }, [map, updateClusters]);
 
     return { clusters, index, getClusterExpansionZoom };
 };
