@@ -1,5 +1,6 @@
-import type { LatLngBounds } from 'leaflet';
-import Supercluster from 'supercluster';
+import type Supercluster from 'supercluster';
+
+import type { ClusterFeature, ClusterPointFeature } from '@/components/shared/leaflet/supercluster';
 
 import { MarkerIndexItem } from '../types';
 
@@ -8,30 +9,22 @@ export type MarkerProperties = {
     title2?: string;
 };
 
-export type ClusterProperties = {
-    cluster: true;
-    point_count: number;
-    point_count_abbreviated: string | number;
-};
+export type ClusterProperties = Supercluster.AnyProps;
 
 export type MarkerClusterPoint =
-    | Supercluster.PointFeature<MarkerProperties>
-    | Supercluster.ClusterFeature<ClusterProperties>;
+    | ClusterPointFeature<MarkerProperties>
+    | ClusterFeature<ClusterProperties>;
 
-export type MarkerClusterFeature = Supercluster.ClusterFeature<ClusterProperties>;
-export type MarkerPointFeature = Supercluster.PointFeature<MarkerProperties>;
+export type MarkerClusterFeature = ClusterFeature<ClusterProperties>;
+export type MarkerPointFeature = ClusterPointFeature<MarkerProperties>;
 
+/** Tuned for dense WWII aerial coverage over Belarus (~6k points). */
 export const CLUSTER_OPTIONS: Supercluster.Options<MarkerProperties, ClusterProperties> = {
     radius: 60,
-    maxZoom: 14,
+    maxZoom: 16,
     minZoom: 0,
+    minPoints: 2,
 };
-
-export const isClusterFeature = (point: MarkerClusterPoint): point is MarkerClusterFeature =>
-    'cluster' in point.properties && point.properties.cluster === true;
-
-export const isPointFeature = (point: MarkerClusterPoint): point is MarkerPointFeature =>
-    !isClusterFeature(point);
 
 export const toMarkerIndexItem = (point: MarkerPointFeature): MarkerIndexItem => {
     const [lng, lat] = point.geometry.coordinates;
@@ -44,7 +37,9 @@ export const toMarkerIndexItem = (point: MarkerPointFeature): MarkerIndexItem =>
     };
 };
 
-export const toSuperclusterPoints = (items: MarkerIndexItem[]) =>
+export const toSuperclusterPoints = (
+    items: MarkerIndexItem[],
+): Array<ClusterPointFeature<MarkerProperties>> =>
     items.map((item) => ({
         type: 'Feature' as const,
         properties: {
@@ -56,10 +51,3 @@ export const toSuperclusterPoints = (items: MarkerIndexItem[]) =>
             coordinates: [item.lng, item.lat] as [number, number],
         },
     }));
-
-export const getMapBoundingBox = (bounds: LatLngBounds): [number, number, number, number] => [
-    bounds.getWest(),
-    bounds.getSouth(),
-    bounds.getEast(),
-    bounds.getNorth(),
-];

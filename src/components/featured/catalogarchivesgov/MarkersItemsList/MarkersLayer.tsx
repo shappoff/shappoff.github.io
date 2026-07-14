@@ -6,7 +6,8 @@ import ClusterMarker from '@/components/featured/catalogarchivesgov/ClusterMarke
 import PlaceMarker from '@/components/featured/catalogarchivesgov/PlaceMarker';
 import { useClusteredMarkers } from '@/components/featured/catalogarchivesgov/hooks/useClusteredMarkers';
 import { CatalogDataset, MarkerIndexItem } from '@/components/featured/catalogarchivesgov/types';
-import { isClusterFeature, isPointFeature, toMarkerIndexItem } from '@/components/featured/catalogarchivesgov/utils/cluster';
+import { toMarkerIndexItem } from '@/components/featured/catalogarchivesgov/utils/cluster';
+import { isClusterFeature, isPointFeature } from '@/components/shared/leaflet/supercluster/clusterFeatureGuards';
 
 interface MarkersLayerProps {
     items: MarkerIndexItem[];
@@ -18,25 +19,25 @@ const MarkersLayer = ({ items, dataset }: MarkersLayerProps) => {
 
     return (
         <>
-            {clusters.map((cluster) => {
-                if (isClusterFeature(cluster)) {
+            {clusters.map((feature) => {
+                if (isClusterFeature(feature)) {
                     return (
                         <ClusterMarker
-                            key={`cluster-${cluster.id}`}
-                            cluster={cluster}
+                            key={`cluster-${feature.id}`}
+                            cluster={feature}
                             getClusterExpansionZoom={getClusterExpansionZoom}
                         />
                     );
                 }
 
-                if (!isPointFeature(cluster)) {
+                if (!isPointFeature(feature)) {
                     return null;
                 }
 
                 return (
                     <PlaceMarker
-                        key={String(cluster.properties.naId)}
-                        item={toMarkerIndexItem(cluster)}
+                        key={String(feature.properties.naId)}
+                        item={toMarkerIndexItem(feature)}
                         dataset={dataset}
                     />
                 );
