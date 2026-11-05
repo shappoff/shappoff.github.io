@@ -15,6 +15,7 @@ export default function robots(): MetadataRoute.Robots {
             `${SITE_URL}/sitemap.xml`,
             `${SITE_URL}/prikhody/sitemap.xml`,
             `${SITE_URL}/catalogarchivesgov/sitemap.xml`,
+            `${SITE_URL}/atd/sitemap.xml`,
         ],
         host: SITE_URL,
     }
